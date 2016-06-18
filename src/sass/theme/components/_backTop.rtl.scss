@@ -1,0 +1,7 @@
+$height: 52px;
+
+body.flip {
+  .back-top {
+    left: (180px - $height) / 2;
+  }
+}

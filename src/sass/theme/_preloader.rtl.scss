@@ -1,0 +1,7 @@
+#preloader {
+  left: 0;
+  & > div {
+    right: 50%;
+    margin: -75px -75px 0 0;
+  }
+}

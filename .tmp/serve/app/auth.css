@@ -1,0 +1,14 @@
+body.signin.flip .al-main {
+  margin-right: 0; }
+
+.auth-main button.btn-auth {
+  float: left; }
+
+.auth-main a.forgot-pass {
+  text-align: left;
+  float: left; }
+
+.auth-main .al-share-auth .al-share li {
+  margin-right: 24px; }
+  .auth-main .al-share-auth .al-share li:first-child {
+    margin-right: 0; }

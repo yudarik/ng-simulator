@@ -1,0 +1,13 @@
+body.flip {
+
+  label.custom-checkbox > span,
+  label.custom-radio > span {
+      padding-right: 22px;
+      padding-left: 0;
+
+      &:before {
+        float: right;
+        margin: 0 -22px 0 6px;
+      }
+  }
+}

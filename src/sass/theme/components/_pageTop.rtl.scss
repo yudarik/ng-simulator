@@ -1,0 +1,62 @@
+body.flip {
+  .page-top {
+    box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.5);
+    padding: 0 40px 0 32px;
+  }
+
+  a.al-logo {
+    float: right;
+  }
+
+  .user-profile {
+    float: left;
+  }
+
+  .al-user-profile {
+    float: left;
+    margin-left: 12px;
+  }
+
+  a.refresh-data {
+    float: left;
+    margin-left: 26px;
+  }
+
+  a.collapse-menu-link {
+    float: right;
+    margin: 11px 25px 0 0px;
+  }
+
+  .al-skin-dropdown {
+    float: left;
+    margin-left: 26px;
+  }
+
+  .search {
+    float: right;
+    margin: 20px 30px 0 0px;
+
+    i {
+      padding-right: 1px;
+      margin-left: 13px;
+    }
+    input {
+      margin: 0 -3px 0;
+    }
+  }
+
+  @media screen and (max-width: $resXS) {
+    .page-top {
+      padding: 0 20px;
+    }
+  }
+
+  @media (max-width: $resXXS) {
+    a.refresh-data {
+      margin-left: 10px;
+    }
+    a.collapse-menu-link {
+      margin-right: 10px;
+    }
+  }
+}
