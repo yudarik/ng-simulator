@@ -2,7 +2,9 @@
 <div class="panel col-md-10" ng-show="fullExam.questionInDisplay">
     <div class="panel-body">
         <exam-question question="fullExam.questionInDisplay"></exam-question>
+        <!--<pre>{{fullExam.examConfig|json}}</pre>-->
     </div>
 </div>
 <exam-remote exam="fullExam.exam" class="col-md-2" switch="fullExam.switchQuestion(question)"></exam-remote>
-<!--<pre>{{fullExam.examConfig|json}}</pre>-->
+
+<exam-timeframe timeframe="fullExam.timeframeConfig"></exam-timeframe>

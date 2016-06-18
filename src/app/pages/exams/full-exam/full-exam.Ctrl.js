@@ -8,6 +8,7 @@
     function fullExamCtrl($timeout, examConfig) {
 
         this.examConfig = examConfig;
+        this.timeframeConfig = examConfig.timePerQuestion * examConfig.questions.length;
 
         this.exam = _.map(examConfig.questions, (question, index)=>{
             return _.assign({}, question, {

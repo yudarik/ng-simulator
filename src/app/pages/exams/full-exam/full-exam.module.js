@@ -25,7 +25,7 @@
                         return examService.getExam(config);
                     }
                 },
-                title: 'Full Exam',
+                title: 'תרגול כללי',
                 sidebarMeta: {
                     order: 300,
                 }
