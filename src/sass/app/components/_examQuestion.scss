@@ -1,3 +1,15 @@
+.question-area {
+
+  width: 66%;
+  top: 140px;
+  position: fixed!important;
+  bottom: 30px;
+}
+.menu-collapsed {
+  .question-area {
+    width: 74%;
+  }
+}
 .exam-question {
 
   .question-option {

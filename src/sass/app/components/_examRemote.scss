@@ -1,34 +1,72 @@
 .exam-remote {
-  position: fixed!important;
+  position: fixed !important;
   top: 140px;
-  bottom: 0;
-  overflow-y: scroll;
-  //height: 600px;
+  bottom: 30px;
+  left: 0;
+  width: 160px;
+  overflow: hidden;
+  direction: ltr;
 
-  .circle {
-    font-size: 14px;
-    margin: 5px;
-    padding: 5px;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    text-align: center;
-    vertical-align: middle;
-    display: inline-block;
-    background: transparent;
-    border: 1px solid $border;
-    color: $default-text;
+  &.panel > .panel-body {
+    padding: 15px;
+  }
+
+  .exam-nav.buttons {
+    position: absolute;
+    margin: 0 auto;
+    width: 130px;
+    right: 0;
+    overflow-y: scroll;
+    left: 0;
+    height: 100%;
+    padding-bottom: 80px;
+  }
+
+  .remote-btn-small {
+    margin: 3px;
+    width: 35px;
+    height: 35px;
+    padding: 0px;
 
     &:hover {
       cursor: pointer;
     }
 
     &.active {
-      border: 1px solid $success;
+      //border: 1px solid $success;
+      transform: scale(1.2);
+      -webkit-transform: scale(1.2);
     }
-    &.answered {
+    &.answered,
+    &.answered:hover,
+    &.answered.active,
+    &.answered.active:hover {
+
       background: $success;
       color: $default;
+      border: 1px solid $success;
+    }
+  }
+
+  .arrows {
+    background: #fff;
+    width: 150px;
+    text-align: center;
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    .btn {
+
+      i {
+        //font-size: 18px;
+      }
+    }
+
+    .invisible {
+      visibility: hidden;
     }
   }
 }

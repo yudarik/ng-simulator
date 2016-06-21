@@ -6,6 +6,11 @@ body.flip {
   margin-right: $_right_-space;
   margin-left: 0;
 }
+.menu-collapsed {
+  .al-main {
+    margin-right: 50px;
+  }
+}
 
 .al-footer {
   padding: 0px $_right_-space 0 18px;

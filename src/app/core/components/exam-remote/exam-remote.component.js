@@ -7,25 +7,34 @@
     angular.module('Simulator.components')
         .component('examRemote', {
             bindings: {
-                exam: '=',
-                switch: '&'
+                remote: '=',
+                switch: '&',
+                prev: '&',
+                next: '&'
             },
+            transclude: true,
             controller: examRemoteCtrl,
             template: [
                 '<div class="panel exam-remote">',
                     '<div class="panel-body">',
-                        '<span class="circle badge label-default" ',
+                        '<div class="exam-nav buttons">',
+                        '<button class="btn btn-info remote-btn-small"',
                         'ng-class="{active: res.active, answered: res.userAnswer}" ',
-                        'ng-repeat="res in $ctrl.exam track by $index"',
+                        'ng-repeat="res in $ctrl.remote track by $index"',
                         'ng-click="$ctrl.navigateToQuestion(res)">',
                         '{{res.index}}',
-                        '</span>',
+                        '</button>',
+                        '</div>',
+                        '<div class="arrows">',
+                            '<button id="remote-prev" class="btn btn-danger" ng-click="$ctrl.prev()"><i class="fa fa-arrow-left" aria-invisible="true"></i></button>',
+                            '<button class="btn btn-warning invisible"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>',
+                            '<button id="remote-next" class="btn btn-danger" ng-click="$ctrl.next()"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>',
+                        '</div>',
                     '</div>',
                 '</div>'].join('')
         });
 
     function examRemoteCtrl () {
-        this.examRes = this.exam;
 
         this.navigateToQuestion = (question) => {
             this.switch({question: question});

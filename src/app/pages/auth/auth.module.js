@@ -9,6 +9,15 @@
 
     function routeConfig($stateProvider) {
         $stateProvider
+            .state('auth', {
+                abstract: true,
+                template: '<div ui-view></div>',
+                resolve: {
+                    user: function(userAuthService) {
+                        return userAuthService.getUser();
+                    }
+                }
+            })
             .state('signin', {
                 url: '/signin',
                 templateUrl: 'app/pages/auth/auth.html',

@@ -32,7 +32,7 @@
 
                     if (!$rootScope.currentUser) {
 
-                        Restangular.setDefaultHttpFields({'withCredentials':true});
+                        Restangular.setDefaultHttpFields({'withCredentials': true});
 
                         return auth.customGET('').then(function(user){
                             return $rootScope.currentUser = user;

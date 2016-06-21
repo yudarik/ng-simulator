@@ -13,16 +13,21 @@
         $stateProvider
             .state('exams.full-exam', {
                 url: '/full-exam',
+                parent: 'exams',
                 params: {
                     examParams: {}
                 },
                 templateUrl: 'app/pages/exams/full-exam/full-exam.html',
                 controller: 'fullExamCtrl as fullExam',
                 resolve: {
-                    examConfig: function($stateParams, examService) {
+                    examConfig: function($state, $stateParams, examService) {
                         var config = $stateParams.examParams;
 
-                        return examService.getExam(config);
+                        return examService.getExam(config)
+                            .then(res => res)
+                            .catch(err => {
+                                $state.go('exams.distribution');
+                            })
                     }
                 },
                 title: 'תרגול כללי',

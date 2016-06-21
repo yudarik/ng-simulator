@@ -1,9 +1,16 @@
-.exam-timeframe.panel {
+.exam-timeframe {
   position: fixed;
-  bottom: 0;
-  width: 68%;
+  bottom: 15px;
+  right: 180px;
+  left: 0px;
+  margin: 0 25px 0 15px;
 
   .progress {
     margin-bottom: 0;
+  }
+}
+.menu-collapsed {
+  .exam-timeframe {
+    right: 50px;
   }
 }

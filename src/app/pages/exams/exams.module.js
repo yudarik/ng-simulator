@@ -15,14 +15,15 @@
   function routeConfig($stateProvider) {
     $stateProvider
         .state('exams', {
-          url: '/exams',
-          abstract: true,
-          template: '<div ui-view></div>',
-          title: 'Exams',
-          sidebarMeta: {
-            icon: 'ion-stats-bars',
-            order: 150,
-          },
+            url: '/exams',
+            parent: 'auth',
+            abstract: true,
+            template: '<div ui-view></div>',
+            title: 'Exams',
+            sidebarMeta: {
+                icon: 'ion-stats-bars',
+                order: 150
+            }
         });
   }
 

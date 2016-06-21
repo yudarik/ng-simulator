@@ -13,6 +13,7 @@
         $stateProvider
             .state('exams.distribution', {
                 url: '/distribution',
+                parent: 'exams',
                 templateUrl: 'app/pages/exams/distribution/distribution.html',
                 //template: `<pre>{{distribution.config|json}}</pre>`,
                 controller: 'distributionCtrl as distribution',
