@@ -2,6 +2,7 @@
 
 var path = require('path');
 var gulp = require('gulp');
+var babel = require('gulp-babel');
 var conf = require('./conf');
 
 var $ = require('gulp-load-plugins')({
@@ -19,7 +20,7 @@ gulp.task('partials', function () {
       quotes: true
     }))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
-      module: 'BlurAdmin',
+      module: 'Simulator',
       root: 'app'
     }))
     .pipe(gulp.dest(conf.paths.tmp + '/partials/'));

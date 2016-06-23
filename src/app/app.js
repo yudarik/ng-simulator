@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('BlurAdmin', [
+angular.module('BlurAdmin', []);
+angular.module('Simulator', [
   'ngAnimate',
   'ngCookies',
-  //'ngResource',
   'restangular',
   'ui.bootstrap',
   'ui.sortable',
