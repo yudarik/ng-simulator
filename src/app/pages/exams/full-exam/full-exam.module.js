@@ -30,7 +30,7 @@
                             })
                     }
                 },
-                title: 'תרגול כללי',
+                title: 'EXAMS.TYPES.GENERAL_PRACTICE',
                 sidebarMeta: {
                     order: 300,
                 }

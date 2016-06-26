@@ -11,8 +11,7 @@
         this.exam = _.map(examConfig.questions, (question, index)=>{
             return _.assign({}, question, {
                 index: index,
-                active: false,
-                answered: false
+                active: false
             });
         });
     }

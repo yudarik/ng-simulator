@@ -4,6 +4,10 @@
   top: 140px;
   position: fixed!important;
   bottom: 30px;
+
+  .panel-body {
+    overflow: auto;
+  }
 }
 .menu-collapsed {
   .question-area {

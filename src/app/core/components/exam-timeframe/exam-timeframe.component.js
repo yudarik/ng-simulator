@@ -9,9 +9,9 @@
             bindings: {
                 timeframe: '='
             },
-            controller: function($interval) {
+            controller: function($scope, $interval) {
 
-                this.totalTimeframe = this.timeframe;
+                this.totalTimeframe = angular.copy(this.timeframe);
 
                 this.progress = 0;
 
@@ -22,6 +22,11 @@
                     }
                     if (this.timeframe > 0) {
                         this.timeframe--;
+                    } else {
+                        $scope.$root.$broadcast('timeOver', {
+                            totalTimeSecs: this.totalTimeframe,
+                            elapsedTimeSecs: this.progress
+                        });
                     }
                 }, 1000)
             },

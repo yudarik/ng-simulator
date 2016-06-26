@@ -24,10 +24,6 @@
                     distribution: function(examService) {
                         return examService.getDistribution();
                     }
-                },
-                title: 'Distribution',
-                sidebarMeta: {
-                    order: 300,
                 }
             });
     }

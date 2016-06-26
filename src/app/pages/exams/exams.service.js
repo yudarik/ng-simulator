@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.pages.exams').factory('examService', function(Restangular){
+    angular.module('Simulator.pages.exams').factory('examService', function($state, Restangular){
 
         var categories = Restangular.all('/categories'),
             practices = Restangular.all('/practices');
@@ -22,10 +22,19 @@
             return practices.get('practiceToPerform', params);
         }
 
+        function submitExam(examResult) {
+            return practices.customPOST(examResult, 'computePracticeResult').then((res)=>{
+                $state.go('exams.practice-summary', {examSummary: res});
+            }, (err) => {
+                console.log(err);
+            })
+        }
+
         return {
             listCategories,
             getDistribution,
-            getExam
+            getExam,
+            submitExam
         };
     });
 })();

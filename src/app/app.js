@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('BlurAdmin', []);
-angular.module('Simulator', [
+angular.module('BlurAdmin', [
+  'pascalprecht.translate',
   'ngAnimate',
   'ngCookies',
   'restangular',
@@ -15,11 +15,10 @@ angular.module('Simulator', [
   'ui.slimscroll',
   'ngJsTree',
   'angular-progress-button-styles',
-
   'BlurAdmin.theme',
   //'BlurAdmin.pages',
   'Simulator.core',
   'Simulator.pages',
-  'Simulator.components',
+  'Simulator.components'
   //'Simulator.services'
 ]);

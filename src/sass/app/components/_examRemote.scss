@@ -19,7 +19,7 @@
     overflow-y: scroll;
     left: 0;
     height: 100%;
-    padding-bottom: 80px;
+    padding-bottom: 130px;
   }
 
   .remote-btn-small {
@@ -67,6 +67,10 @@
 
     .invisible {
       visibility: hidden;
+    }
+
+    .nav, .finish {
+        margin-bottom: 15px;
     }
   }
 }

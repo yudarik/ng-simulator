@@ -7,10 +7,11 @@
     angular.module('Simulator.components')
         .component('examRemote', {
             bindings: {
-                remote: '=',
-                switch: '&',
-                prev: '&',
-                next: '&'
+                remoteMap: '=',
+                onSwitch: '&',
+                onPrev: '&',
+                onNext: '&',
+                onFinish: '&'
             },
             transclude: true,
             controller: examRemoteCtrl,
@@ -19,17 +20,23 @@
                     '<div class="panel-body">',
                         '<div class="exam-nav buttons">',
                         '<button class="btn btn-info remote-btn-small"',
-                        'ng-class="{active: res.active, answered: res.userAnswer}" ',
-                        'ng-repeat="res in $ctrl.remote track by $index"',
-                        'ng-click="$ctrl.navigateToQuestion(res)">',
-                        '{{res.index}}',
+                        'ng-class="{active: question.active, answered: question.userAnswer}" ',
+                        'ng-repeat="question in $ctrl.remoteMap track by $index"',
+                        'ng-click="$ctrl.navigateToQuestion(question)">',
+                        '{{question.index + 1}}',
                         '</button>',
                         '</div>',
                         '<div class="arrows">',
-                            '<button id="remote-prev" class="btn btn-danger" ng-click="$ctrl.prev()"><i class="fa fa-arrow-left" aria-invisible="true"></i></button>',
-                            '<button class="btn btn-warning invisible"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>',
-                            '<button id="remote-next" class="btn btn-danger" ng-click="$ctrl.next()"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>',
+                            '<div class="nav">',
+                                '<button id="remote-prev" class="btn btn-danger" ng-click="$ctrl.onPrev()"><i class="fa fa-arrow-left" aria-invisible="true"></i></button>',
+                                '<button class="btn btn-warning invisible"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>',
+                                '<button id="remote-next" class="btn btn-danger" ng-click="$ctrl.onNext()"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>',
+                            '</div>',
+                            '<div class="finish">',
+                                '<button class="btn btn-success col-md-12" ng-disabled="!$ctrl.isFinishEnabled()" ng-click="$ctrl.onFinish()">Finish</button>',
+                            '</div>',
                         '</div>',
+
                     '</div>',
                 '</div>'].join('')
         });
@@ -37,7 +44,11 @@
     function examRemoteCtrl () {
 
         this.navigateToQuestion = (question) => {
-            this.switch({question: question});
+            this.onSwitch({question: question});
+        };
+
+        this.isFinishEnabled = () => {
+            return true;//_.every(this.remote, {userAnswer: !'' && !null && !undefined});
         };
     }
 })();

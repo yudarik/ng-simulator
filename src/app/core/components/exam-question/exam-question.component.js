@@ -12,30 +12,9 @@
             },
             controller: function($scope) {
 
-                this.init = () =>{
-
-                    this.answerOptions = [];
-
-                    _.forEach(_.pick(this.question, ['ans1', 'ans2', 'ans3', 'ans4', 'ans5']), (value, key) => {
-                        if (value) {
-                            this.answerOptions.push({
-                                key: key,
-                                value: value
-                            });
-                        }
-                    })
-                };
-                this.init();
-
-                $scope.$watch(()=> {
-                    return this.question;
-                }, (oldVal, newVal)=>{
-                    if (oldVal === newVal) return;
-                    else {
-
-                        this.init();
-                    }
-                })
+                /**
+                 * Exam Question Component Controller
+                 */
             },
             template: [
                     '<div class="exam-question">',
@@ -49,7 +28,7 @@
                       '     <div class="col-md-12">                                                   ',
                       '         <form name="options">                                                 ',
                       '             <div class="form-group">                                          ',
-                      '                 <div class="col-md-12 question-option" ng-repeat="option in $ctrl.answerOptions">',
+                      '                 <div class="col-md-12 question-option" ng-repeat="option in $ctrl.question.answerOptions">',
                       '                     <label class="radio-inline custom-radio nowrap">          ',
                       '                         <input type="radio" name="question" ng-model="$ctrl.question.userAnswer" ng-value="option.key"> ',
                       '                         <span>{{option.value}}</span>                                  ',

@@ -57,7 +57,9 @@
     "angular-resource": "^1.5.6",
     "restangular": "^1.5.2",
     "angular-bootstrap-switch": "^0.5.1",
-    "angular-cookies": "^1.5.6"
+    "angular-cookies": "^1.5.6",
+    "angular-translate": "^2.11.0",
+    "angular-translate-loader-static-files": "^2.11.0"
   },
   "overrides": {
     "amcharts": {
@@ -102,5 +104,8 @@
   },
   "resolutions": {
     "angular": "~1.x"
+  },
+  "devDependencies": {
+    "angular-translate": "^2.11.0"
   }
 }

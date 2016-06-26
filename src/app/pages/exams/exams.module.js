@@ -7,7 +7,8 @@
 
   angular.module('Simulator.pages.exams',[
       'Simulator.pages.exams.full-exam',
-      'Simulator.pages.exams.distribution'
+      'Simulator.pages.exams.distribution',
+      'Simulator.pages.exams.practice-summary'
   ])
       .config(routeConfig);
 
@@ -19,7 +20,7 @@
             parent: 'auth',
             abstract: true,
             template: '<div ui-view></div>',
-            title: 'Exams',
+            title: 'EXAMS.TYPES.TITLE',
             sidebarMeta: {
                 icon: 'ion-stats-bars',
                 order: 150

@@ -21,11 +21,7 @@
             .state('signin', {
                 url: '/signin',
                 templateUrl: 'app/pages/auth/auth.html',
-                controller: 'signinController as signin',
-                title: 'Sign In',
-                sidebarMeta: {
-                    order: 300
-                }
+                controller: 'signinController as signin'
             })
             .state('signout', {
                 url: '/signout',

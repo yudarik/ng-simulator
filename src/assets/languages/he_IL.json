@@ -1,0 +1,30 @@
+{
+  "HOME": "עמוד הבית",
+  "SIGNIN": {
+    "SIMULATOR_SIGNIN": "כניסה לסימולטור",
+    "NEW_ACCOUNT_REGISTER": "לקוח חדש? הירשם",
+    "EMAIL": "שם משתמש (דוא'ל)",
+    "PASSWORD": "סיסמא",
+    "FORGOT_PASSWORD": "שככתי את הסיסמא",
+    "LOGIN_BTN": "כניסה"
+  },
+  "EXAMS": {
+    "TYPES": {
+      "TITLE": "סוגי תרגול",
+      "GENERAL_PRACTICE": "תרגול כללי",
+      "PRACTICE_SUMMARY": "סיכום וניתוח תוצאות"
+    },
+    "EXAM_FINISH_ARE_YOU_SURE": "עדיין נותר לך זמן, האם את/ה מעוניין/נת לסיים כעת בכל זאת ?",
+    "SUMMARY": {
+      "FINAL_GRADE": "ציון סופי",
+      "TOTAL_TIME": "זמן כולל",
+      "AVERAGE_TIME_FOR_QUESTION": "זמן ממוצע לשאלה",
+      "QUESTION_DISTRIBUTION": "התפלגות שאלות על פיי קטגוריות",
+      "CATEGORY": "קטגוריה",
+      "QUESTIONS_COUNT": "מס' שאלות",
+      "CORRECT_ANSWERS_COUNT": "מס' תשובות נכונות",
+      "GRADE": "ציון",
+      "LABEL": "סיכום"
+    }
+  }
+}
