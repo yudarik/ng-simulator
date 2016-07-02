@@ -1,78 +1,83 @@
 <div class="row">
-    <div class="col-md-offset-1 col-md-10 text-right"
+    <div class="col-md-12 text-right"
          ba-panel
-         ba-panel-title="חלוקת שאלות לפי קטגוריות:"
+         ba-panel-title="{{::'EXAMS.DISTRIBUTION.TITLE'|translate}}"
          ba-panel-class="">
 
         <form class="form-horizontal text-right" name="exam-distribution" ng-submit="distribution.startExam()" ng-model="distribution.examParams">
             <div class="row">
-                <div class="form-group col-md-offset-1 col-md-5 pull-right" ng-repeat="category in distribution.config.categories track by category.id">
+                <div class="form-group form-group-xs col-md-4 pull-right" ng-repeat="category in distribution.config.categories track by category.id">
                     <label for class="col-sm-8 control-label pull-right">{{category.name}}:</label>
                     <div class="col-sm-4">
                         <input type="number" class="form-control" ng-model="category.questionDistribution" min="0" max="{{::category.questionDistribution}}" name="category.id">
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-5 pull-right">
-                    <label for class="col-sm-8 control-label pull-right">סה"כ שאלות:</label>
+                <div class="form-group col-md-4 pull-right">
+                    <label for class="col-sm-8 control-label pull-right"><b ng-bind="::'EXAMS.DISTRIBUTION.TOTAL_QUESTIONS'|translate"></b></label>
                     <div class="col-sm-4">
                         <input type="number" class="form-control" ng-model="distribution.examParams.totalQuestion" min="0" max="{{::distribution.examParams.totalQuestion}}" ng-change="distribution.initQuestionDistribution()">
                     </div>
                 </div>
             </div>
 
+
             <div class="row">
-                <div class="form-group col-md-12 pull-right">
-                    <label for class="col-sm-3 control-label pull-right">רמת קושי:</label>
-                    <div class="col-sm-3">
-                        <label class="radio-inline custom-radio nowrap">
-                            <input type="radio" name="difficulty" value="EASY" ng-model="distribution.examParams.difficulty"
-                                   ng-checked="distribution.examParams.difficulty === 'EASY'"><span>קל</span>
-                        </label>
-                    </div>
-                    <div class="col-sm-3">
-                        <label class="radio-inline custom-radio nowrap">
-                            <input type="radio" name="difficulty" value="MEDIUM" ng-model="distribution.examParams.difficulty"
-                                   ng-checked="distribution.examParams.difficulty === 'MEDIUM'"><span>בינוני</span>
-                        </label>
-                    </div>
-                    <div class="col-sm-3">
-                        <label class="radio-inline custom-radio nowrap">
-                            <input type="radio" name="difficulty" value="HARD" ng-model="distribution.examParams.difficulty"
-                                   ng-checked="distribution.examParams.difficulty === 'HARD'"
-                            ><span>קשה</span>
-                        </label>
+                <div class="form-group col-md-4 pull-right">
+                    <label for class="col-sm-8 control-label pull-right">{{::'EXAMS.DISTRIBUTION.LEVEL.TITLE'|translate}}</label>
+                    <div class="col-md-4">
+                        <div class="pull-right">
+                            <label class="radio-inline custom-radio nowrap">
+                                <input type="radio" name="difficulty" value="EASY" ng-model="distribution.examParams.difficulty"
+                                       ng-checked="distribution.examParams.difficulty === 'EASY'"><span>{{::'EXAMS.DISTRIBUTION.LEVEL.EASY'|translate}}</span>
+                            </label>
+                        </div>
+                        <div class="pull-right">
+                            <label class="radio-inline custom-radio nowrap">
+                                <input type="radio" name="difficulty" value="MEDIUM" ng-model="distribution.examParams.difficulty"
+                                       ng-checked="distribution.examParams.difficulty === 'MEDIUM'"><span>{{::'EXAMS.DISTRIBUTION.LEVEL.MEDIUM'|translate}}</span>
+                            </label>
+                        </div>
+                        <div class="pull-right">
+                            <label class="radio-inline custom-radio nowrap">
+                                <input type="radio" name="difficulty" value="HARD" ng-model="distribution.examParams.difficulty"
+                                       ng-checked="distribution.examParams.difficulty === 'HARD'"
+                                ><span>{{::'EXAMS.DISTRIBUTION.LEVEL.HARD'|translate}}</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-12 pull-right">
-                    <label for class="col-sm-3 control-label pull-right">זמן לבחינה:</label>
-                    <div class="col-sm-3 pull-right">
-                        <label class="radio-inline custom-radio nowrap">
-                            <input type="radio" name="timeFrame" value="UNLIMITED" ng-model="distribution.examParams.timeFrame"
-                                   ng-checked="distribution.examParams.timeFrame === 'UNLIMITED'"><span>ללא מגבלת זמן</span>
-                        </label>
+                <div class="form-group col-md-4 pull-right">
+                    <label for class="col-sm-8 control-label pull-right">זמן לבחינה:</label>
+                    <div class="col-md-4">
+                        <div class="pull-right">
+                            <label class="radio-inline custom-radio nowrap">
+                                <input type="radio" name="timeFrame" value="UNLIMITED" ng-model="distribution.examParams.timeFrame"
+                                       ng-checked="distribution.examParams.timeFrame === 'UNLIMITED'"><span>ללא מגבלת זמן</span>
+                            </label>
+                        </div>
+                        <div class="pull-right">
+                            <label class="radio-inline custom-radio nowrap">
+                                <input type="radio" name="timeFrame" value="NORMAL" ng-model="distribution.examParams.timeFrame"
+                                       ng-checked="distribution.examParams.timeFrame === 'NORMAL'"><span>רגיל</span>
+                            </label>
+                        </div>
+                        <div class="pull-right">
+                            <label class="radio-inline custom-radio nowrap">
+                                <input type="radio" name="timeFrame" value="EXTENDED" ng-model="distribution.examParams.timeFrame"
+                                       ng-checked="distribution.examParams.timeFrame === 'EXTENDED'"><span>הערכת זמן</span>
+                            </label>
+                        </div>
                     </div>
-                    <div class="col-sm-3 pull-right">
-                        <label class="radio-inline custom-radio nowrap">
-                            <input type="radio" name="timeFrame" value="NORMAL" ng-model="distribution.examParams.timeFrame"
-                                   ng-checked="distribution.examParams.timeFrame === 'NORMAL'"><span>רגיל</span>
-                        </label>
-                    </div>
-                    <div class="col-sm-3 pull-right">
-                        <label class="radio-inline custom-radio nowrap">
-                            <input type="radio" name="timeFrame" value="EXTENDED" ng-model="distribution.examParams.timeFrame"
-                                   ng-checked="distribution.examParams.timeFrame === 'EXTENDED'"><span>הערכת זמן</span>
-                        </label>
-                    </div>
-
                 </div>
+                <div class="form-group col-md-4 pull-right">
+                    <br>
+                    <br>
+                    <br>
+                    <input type="submit" class="btn btn-success btn-md pull-left" value="{{::'EXAMS.DISTRIBUTION.LEVEL.START'|translate}}">
+                </div>
+
             </div>
 
-            <input type="submit" class="btn btn-success" value="התחל תרגול">
 
         </form>
         <!--<pre>{{distribution.config|json}}</pre>-->

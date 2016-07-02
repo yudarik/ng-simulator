@@ -15,7 +15,16 @@
         }
 
         function getDistribution() {
-            return categories.customGET('distribution');
+            return categories.customGET('distribution')
+                .then((res)=>{
+                    return res;
+                })
+                .catch(err => {
+                    if (err.data && err.data.description) {
+                        alert(err.data.description);
+                    }
+                    return err;
+                })
         }
 
         function getExam(params) {

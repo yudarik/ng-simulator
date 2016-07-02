@@ -24,7 +24,20 @@
       "QUESTIONS_COUNT": "מס' שאלות",
       "CORRECT_ANSWERS_COUNT": "מס' תשובות נכונות",
       "GRADE": "ציון",
-      "LABEL": "סיכום"
+      "LABEL": "סיכום",
+      "PRACTICE_SOLUTION": "פתרון התרגול",
+      "TIPS_FOR_SUCCESS": "טיפים להצלחה בבחינה"
+    },
+    "DISTRIBUTION": {
+      "TITLE": "חלוקת שאלות לפי קטגוריות:",
+      "TOTAL_QUESTIONS": "סה'כ שאלות:",
+      "LEVEL": {
+        "TITLE": "רמת קושי:",
+        "EASY": "קל",
+        "MEDIUM": "בינוני",
+        "HARD": "קשה",
+        "START": "התחל תרגול"
+      }
     }
   }
 }

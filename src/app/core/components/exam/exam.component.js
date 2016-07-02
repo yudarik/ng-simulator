@@ -49,9 +49,13 @@
 
         this.init = () =>{
 
-            _.forEach(this.questions, (question) => {
+            _.forEach(this.questions, (question, index) => {
 
-                question.answerOptions = [];
+                _.assign(question, {
+                    index: index,
+                    active: false,
+                    answerOptions: []
+                });
 
                 _.forEach(_.pick(question, ['ans1', 'ans2', 'ans3', 'ans4', 'ans5', 'ans6']), (value, key) => {
                     if (value) {

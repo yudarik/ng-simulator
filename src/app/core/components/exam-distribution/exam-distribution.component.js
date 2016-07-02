@@ -1,13 +1,23 @@
 /**
- * Created by arikyudin on 31/05/16.
+ * Created by arikyudin on 26/06/16.
  */
 
 (function () {
     'use strict';
 
-    function distributionCtrl($state, distribution) {
+    angular.module('Simulator.components')
+        .component('examDistribution', {
+            bindings: {
+                categories: '@',
+                distribution: '@'
+            },
+            templateUrl: 'app/pages/exams/distribution/distribution.html',
+            controller: distributionCtrl
+        })
+
+    function distributionCtrl($state) {
         this.examParams = {
-            totalQuestion: distribution.questionsInExam,
+            totalQuestion: this.distribution.questionsInExam,
             questionDistribution: [],
             difficulty: 'MEDIUM',
             timeFrame: 'NORMAL'
@@ -17,7 +27,7 @@
 
             var total = this.examParams.totalQuestion;
 
-            var distMap = _.map(distribution.categories, (category, index)=>{
+            var distMap = _.map(this.categories, (category, index)=>{
 
                 if (index < this.examParams.totalQuestion) {
                     category.questionDistribution = 1;
@@ -44,17 +54,11 @@
                 _.map(this.config.categories, 'questionDistribution')
             );
 
-            $state.go('exams.full-exam', {examParams: this.examParams});
+            $state.go('exams.full-exam', {examParams: this.examParams})
         };
 
         this.config = {};
         this.config.categories = this.initQuestionDistribution();
-
-
     }
 
-
-
-    angular.module('Simulator.pages.exams.distribution')
-        .controller('distributionCtrl', distributionCtrl);
 })();

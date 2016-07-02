@@ -6,7 +6,9 @@
     'use strict';
 
     angular.module('Simulator.pages.auth')
-        .controller('signinController', function($scope, userAuthService, $state){
+        .controller('signinController', function($scope, simulator_config, userAuthService, $state){
+
+            this.simulator_config = simulator_config;
 
             this.user = {};
 

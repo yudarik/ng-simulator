@@ -15,12 +15,11 @@
                 url: '/distribution',
                 parent: 'exams',
                 templateUrl: 'app/pages/exams/distribution/distribution.html',
-                //template: `<pre>{{distribution.config|json}}</pre>`,
                 controller: 'distributionCtrl as distribution',
                 resolve: {
-                    categories: function(examService) {
-                        return examService.listCategories();
-                    },
+                    //categories: function(examService) {
+                    //    return examService.listCategories();
+                    //},
                     distribution: function(examService) {
                         return examService.getDistribution();
                     }

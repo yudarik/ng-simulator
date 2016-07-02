@@ -13,7 +13,6 @@
                 onNext: '&',
                 onFinish: '&'
             },
-            transclude: true,
             controller: examRemoteCtrl,
             template: [
                 '<div class="panel exam-remote">',

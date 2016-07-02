@@ -12,7 +12,11 @@
   function pageTop() {
     return {
       restrict: 'E',
-      templateUrl: 'app/theme/components/pageTop/pageTop.html'
+      templateUrl: 'app/theme/components/pageTop/pageTop.html',
+      controller: function(simulator_config) {
+        this.config = simulator_config;
+      },
+      controllerAs: 'pageTop'
     };
   }
 

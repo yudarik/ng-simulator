@@ -5,15 +5,9 @@
 (function () {
     'use strict';
 
-    function fullExamCtrl($timeout, examConfig) {
+    function fullExamCtrl(examConfig) {
         this.timeframe = examConfig.timePerQuestion * examConfig.questions.length;
-
-        this.exam = _.map(examConfig.questions, (question, index)=>{
-            return _.assign({}, question, {
-                index: index,
-                active: false
-            });
-        });
+        this.questions = examConfig.questions;
     }
 
     angular.module('Simulator.pages.exams.full-exam')

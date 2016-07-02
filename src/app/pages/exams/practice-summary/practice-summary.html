@@ -2,8 +2,8 @@
 <div class="panel">
     <div class="panel-body">
         <h4>{{::'EXAMS.SUMMARY.FINAL_GRADE'|translate}}: {{practiceSummary.summary.grade|translate}}</h4>
-        <h4>{{::'EXAMS.SUMMARY.TOTAL_TIME'|translate}}: {{practiceSummary.summary.elapsedTimeSecs|translate}}</h4>
-        <h4>{{::'EXAMS.SUMMARY.AVERAGE_TIME_FOR_QUESTION'|translate}}: {{practiceSummary.summary.elapsedTimeSecs / practiceSummary.summary.questions.length |translate}}</h4>
+        <h4>{{::'EXAMS.SUMMARY.TOTAL_TIME'|translate}}: {{practiceSummary.summary.elapsedTimeSecs|timeframe}}</h4>
+        <h4>{{::'EXAMS.SUMMARY.AVERAGE_TIME_FOR_QUESTION'|translate}}: {{practiceSummary.summary.elapsedTimeSecs / practiceSummary.summary.questions.length |timeframe}}</h4>
 
         <h3 class="text-center">{{::'EXAMS.SUMMARY.QUESTION_DISTRIBUTION'|translate}}</h3>
 
@@ -29,5 +29,12 @@
                 </tr>
             </tbody>
         </table>
+        <!--<pre style="direction:ltr">{{::practiceSummary.summary|json}}</pre>-->
+        <div class="row text-center">
+            <div class="col-md-offset-3 col-md-6">
+                <a class="btn btn-default" ui-sref="exams.practice-solution({practiceSolution: practiceSummary.summary.questions})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>
+                <a class="btn btn-default" ui-sref="">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</a>
+            </div>
+        </div>
     </div>
 </div>

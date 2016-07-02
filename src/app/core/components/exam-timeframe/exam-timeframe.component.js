@@ -11,24 +11,33 @@
             },
             controller: function($scope, $interval) {
 
+                var timeInterval;
+
                 this.totalTimeframe = angular.copy(this.timeframe);
 
                 this.progress = 0;
 
-                $interval(()=>{
+                if (this.totalTimeframe) {
+                    timeInterval = $interval(()=>{
 
-                    if (this.progress < this.totalTimeframe) {
-                        this.progress++;
-                    }
-                    if (this.timeframe > 0) {
-                        this.timeframe--;
-                    } else {
-                        $scope.$root.$broadcast('timeOver', {
-                            totalTimeSecs: this.totalTimeframe,
-                            elapsedTimeSecs: this.progress
-                        });
-                    }
-                }, 1000)
+                        if (this.progress < this.totalTimeframe) {
+                            this.progress++;
+                        }
+                        if (this.timeframe > 0) {
+                            this.timeframe--;
+                        } else {
+                            $scope.$root.$broadcast('timeOver', {
+                                totalTimeSecs: this.totalTimeframe,
+                                elapsedTimeSecs: this.progress
+                            });
+                            $interval.cancel(timeInterval);
+                        }
+                    }, 1000);
+                }
+
+                $scope.on('$destroy', function(){
+                    $interval.cancel(timeInterval);
+                })
             },
             template: [
                 '<div class="exam-timeframe">',

@@ -143,6 +143,8 @@
 <script src="../bower_components/restangular/dist/restangular.js"></script>
 <script src="../bower_components/angular-bootstrap-switch/dist/angular-bootstrap-switch.js"></script>
 <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="../bower_components/angular-translate/angular-translate.js"></script>
+<script src="../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -159,7 +161,8 @@
 <script src="app/theme/components/components.module.js"></script>
 <script src="app/theme/pages/pages.module.js"></script>
 <script src="app/pages/exams/distribution/distribution.module.js"></script>
-<script src="app/pages/exams/full-exam/full-exam.module.js"></script>
+<script src="app/pages/exams/practice/practice.module.js"></script>
+<script src="app/pages/exams/practice-summary/practice-summary.module.js"></script>
 <script src="app/theme/pages/charts/charts.module.js"></script>
 <script src="app/theme/pages/components/components.module.js"></script>
 <script src="app/theme/pages/dashboard/dashboard.module.js"></script>
@@ -213,12 +216,14 @@
 <script src="app/theme/services/preloader.js"></script>
 <script src="app/theme/services/stopableInterval.js"></script>
 <script src="app/core/components/exam/exam.component.js"></script>
+<script src="app/core/components/exam-distribution/exam-distribution.component.js"></script>
 <script src="app/core/components/exam-question/exam-question.component.js"></script>
 <script src="app/core/components/exam-remote/exam-remote.component.js"></script>
 <script src="app/core/components/exam-timeframe/exam-time.filter.js"></script>
 <script src="app/core/components/exam-timeframe/exam-timeframe.component.js"></script>
 <script src="app/pages/exams/distribution/distribution.Ctrl.js"></script>
-<script src="app/pages/exams/full-exam/full-exam.Ctrl.js"></script>
+<script src="app/pages/exams/practice/full-exam.Ctrl.js"></script>
+<script src="app/pages/exams/practice-summary/practice-summary.Ctrl.js"></script>
 <script src="app/theme/components/baPanel/baPanel.directive.js"></script>
 <script src="app/theme/components/baPanel/baPanel.service.js"></script>
 <script src="app/theme/components/baPanel/baPanelBlur.directive.js"></script>
@@ -282,10 +287,10 @@
 <script src="app/theme/pages/ui/icons/IconsPageCtrl.js"></script>
 <script src="app/theme/pages/ui/modals/ModalsPageCtrl.js"></script>
 <script src="app/theme/pages/ui/notifications/NotificationsPageCtrl.js"></script>
-<script src="app/theme/pages/charts/amCharts/areaChart/AreaChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/barChart/BarChartCtrl.js"></script>
-<script src="app/theme/pages/charts/amCharts/combinedChart/combinedChartCtrl.js"></script>
+<script src="app/theme/pages/charts/amCharts/areaChart/AreaChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/funnelChart/FunnelChartCtrl.js"></script>
+<script src="app/theme/pages/charts/amCharts/combinedChart/combinedChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/ganttChart/ganttChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/lineChart/LineChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/pieChart/PieChartCtrl.js"></script>
