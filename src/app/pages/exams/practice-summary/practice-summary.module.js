@@ -4,7 +4,7 @@
 
 (function () {
     'use strict';
-    angular.module('Simulator.pages.exams.practice-summary', [])
+    angular.module('Simulator.pages.exams.practice-summary', ['Simulator.pages.stats'])
         .config(routeConfig);
 
     /** @ngInject */

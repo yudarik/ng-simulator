@@ -44,7 +44,7 @@
                 _.map(this.config.categories, 'questionDistribution')
             );
 
-            $state.go('exams.full-exam', {examParams: this.examParams});
+            $state.go('exams.general-practice', {examParams: this.examParams});
         };
 
         this.config = {};

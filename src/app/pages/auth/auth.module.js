@@ -5,7 +5,8 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.pages.auth', ['ngResource']).config(routeConfig);
+    angular.module('Simulator.pages.auth', [])
+        .config(routeConfig);
 
     function routeConfig($stateProvider) {
         $stateProvider

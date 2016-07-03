@@ -6,9 +6,10 @@
   'use strict';
 
   angular.module('Simulator.pages.exams',[
-      'Simulator.pages.exams.full-exam',
+      'Simulator.pages.exams.practice',
       'Simulator.pages.exams.distribution',
-      'Simulator.pages.exams.practice-summary'
+      'Simulator.pages.exams.practice-summary',
+      'Simulator.pages.stats'
   ])
       .config(routeConfig);
 

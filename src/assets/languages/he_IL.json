@@ -12,7 +12,8 @@
     "TYPES": {
       "TITLE": "סוגי תרגול",
       "GENERAL_PRACTICE": "תרגול כללי",
-      "PRACTICE_SUMMARY": "סיכום וניתוח תוצאות"
+      "PRACTICE_SUMMARY": "סיכום וניתוח תוצאות",
+      "WEAK_AREAS": "תרגול בנקודות חולשה"
     },
     "EXAM_FINISH_ARE_YOU_SURE": "עדיין נותר לך זמן, האם את/ה מעוניין/נת לסיים כעת בכל זאת ?",
     "SUMMARY": {
@@ -38,6 +39,9 @@
         "HARD": "קשה",
         "START": "התחל תרגול"
       }
+    },
+    "BUTTONS": {
+      "CONTINUE": "המשך"
     }
   }
 }

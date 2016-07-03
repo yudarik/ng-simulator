@@ -35,7 +35,7 @@
                     }, 1000);
                 }
 
-                $scope.on('$destroy', function(){
+                $scope.$on('$destroy', function(){
                     $interval.cancel(timeInterval);
                 })
             },

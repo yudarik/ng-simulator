@@ -10,6 +10,24 @@
     border-left-width: 0;
     border-right-width: 5px;
   }
+  .bs-callout-default {
+    border-right-color: #777;
+  }
+  .bs-callout-primary {
+    border-right-color: #428bca;
+  }
+  .bs-callout-success {
+    border-right-color: #5cb85c;
+  }
+  .bs-callout-danger {
+    border-right-color: #d9534f;
+  }
+  .bs-callout-warning {
+    border-right-color: #f0ad4e;
+  }
+  .bs-callout-info {
+    border-right-color: #5bc0de;
+  }
 }
 .bs-callout h4 {
   margin-top: 0;

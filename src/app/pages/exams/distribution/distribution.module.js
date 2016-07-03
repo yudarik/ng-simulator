@@ -13,15 +13,15 @@
         $stateProvider
             .state('exams.distribution', {
                 url: '/distribution',
+                params: {
+                    distribution: {}
+                },
                 parent: 'exams',
                 templateUrl: 'app/pages/exams/distribution/distribution.html',
                 controller: 'distributionCtrl as distribution',
                 resolve: {
-                    //categories: function(examService) {
-                    //    return examService.listCategories();
-                    //},
-                    distribution: function(examService) {
-                        return examService.getDistribution();
+                    distribution: function($stateParams, examService) {
+                        return $stateParams.distribution || examService.getDistribution();
                     }
                 }
             });

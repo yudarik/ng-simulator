@@ -5,20 +5,20 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.pages.exams.full-exam', ['Simulator.components'])
+    angular.module('Simulator.pages.exams.practice', ['Simulator.components'])
         .config(routeConfig);
 
     /** @ngInject */
     function routeConfig($stateProvider) {
         $stateProvider
-            .state('exams.full-exam', {
-                url: '/full-exam',
+            .state('exams.general-practice', {
+                url: '/general-practice',
                 parent: 'exams',
                 params: {
                     examParams: {}
                 },
-                template: '<exam questions="fullExam.questions" timeframe="fullExam.timeframe" tabindex="1"></exam>',
-                controller: 'fullExamCtrl as fullExam',
+                template: '<exam questions="general.questions" timeframe="general.timeframe" tabindex="1"></exam>',
+                controller: 'generalPracticeCtrl as general',
                 resolve: {
 
                     examConfig: function($state, $stateParams, $q, examService) {
@@ -31,7 +31,7 @@
 
                                     alert(err.data.description);
                                 }
-                                return $q.reject(err.data.description);
+                                return $q.reject(err);
                             })
                     }
                 },
@@ -56,6 +56,48 @@
                     this.practiceSolution = practiceSolution;
                 },
                 controllerAs: 'solutionCtrl'
+            })
+            .state('exams.weak-areas', {
+                url: '/weak-areas',
+                parent: 'exams',
+                template: ['<div class="panel col-md-offset-4 col-md-4">',
+                                '<div class="panel-body">',
+                                    '<h3>{{::\'\'|translate}}</h3>',
+                                    '<ol>',
+                                        '<li ng-repeat="item in weakAreas.practiceConfig">',
+                                            '{{::item.category.name}}',
+                                        '</li>',
+                                    '</ol>',
+                                    '<div class="col-md-12">',
+,                                        '<a class="btn btn-default" ui-sref="exams.distribution({distribution: weakAreas.getDistribution()})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>',
+                                    '</div>',
+                                '</div>',
+                            '</div>'
+                ].join(''),
+                resolve: {
+                    practiceConfig: function(customerStatsService) {
+                        return customerStatsService.getCategories();
+                    }
+                },
+                controller: function($filter, practiceConfig) {
+                    this.practiceConfig = $filter('orderBy')(practiceConfig, (item)=>{
+                        return item.totalQuestionsAskedInCategory - item.questionIDsCorrectlyAnswered.length;
+                    }, true);
+
+                    this.getDistribution = () => {
+                        return {
+                            categories: _.map(this.practiceConfig, (item)=> {
+                                return item.category;
+                            }),
+                            questionsInExam: this.practiceConfig.length
+                        };
+                    }
+                },
+                controllerAs: 'weakAreas',
+                title: 'EXAMS.TYPES.WEAK_AREAS',
+                sidebarMeta: {
+                    order: 400
+                }
             })
     }
 })();
