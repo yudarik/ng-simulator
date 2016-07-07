@@ -31,6 +31,10 @@
             return practices.get('practiceToPerform', params);
         }
 
+        function getPostCreditExam(params) {
+            return practices.get('getPostCreditPracticeToPerform', params);
+        }
+
         function submitExam(examResult) {
             return practices.customPOST(examResult, 'computePracticeResult').then((res)=>{
                 $state.go('exams.practice-summary', {examSummary: res});
@@ -43,6 +47,7 @@
             listCategories,
             getDistribution,
             getExam,
+            getPostCreditExam,
             submitExam
         };
     });

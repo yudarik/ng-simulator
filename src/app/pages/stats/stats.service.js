@@ -8,6 +8,7 @@
     angular.module('Simulator.pages.stats')
         .factory('customerStatsService', function(Restangular){
             var customerStats = Restangular.all('/stats/customer/');
+            var customersQuota = Restangular.all('/customers/');
 
             function getRank() {
                 return customerStats.get('rank');
@@ -17,7 +18,11 @@
                 return customerStats.get('categories');
             }
 
-            return {getRank, getCategories};
+            function getQuota() {
+                return customersQuota.get('quota');
+            }
+
+            return {getRank, getCategories, getQuota};
         })
         .factory('candidateStatsService', function(Restangular){
             var candidateStats = Restangular.all('/stats/candidate/');

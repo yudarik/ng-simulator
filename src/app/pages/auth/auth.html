@@ -21,11 +21,16 @@
           <input type="password" class="form-control" id="inputPassword3" placeholder="{{::'SIGNIN.PASSWORD'|translate}}" ng-model="signin.user.password">
         </div>
       </div>
+
+      <div class="form-group" ng-if="signin.message">
+        <div class="col-sm-offset-4 col-sm-8">
+            <span class="text-danger" ng-bind="signin.message"></span>
+        </div>
+      </div>
       <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
           <button type="submit" class="btn btn-default btn-auth">{{::'SIGNIN.LOGIN_BTN'|translate}}</button>
           <a href class="forgot-pass">{{::'SIGNIN.FORGOT_PASSWORD'|translate}}</a>
-          <div class="alert alert-danger" ng-if="signin.message" ng-bind="signin.message"></div>
         </div>
       </div>
 

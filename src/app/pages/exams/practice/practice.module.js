@@ -34,10 +34,6 @@
                                 return $q.reject(err);
                             })
                     }
-                },
-                title: 'EXAMS.TYPES.GENERAL_PRACTICE',
-                sidebarMeta: {
-                    order: 300,
                 }
             })
             .state('exams.practice-solution', {
@@ -73,7 +69,7 @@
                                     '</div>',
                                 '</div>',
                             '</div>'
-                ].join(''),
+                        ].join(''),
                 resolve: {
                     practiceConfig: function(customerStatsService) {
                         return customerStatsService.getCategories();
@@ -95,6 +91,39 @@
                 },
                 controllerAs: 'weakAreas',
                 title: 'EXAMS.TYPES.WEAK_AREAS',
+                sidebarMeta: {
+                    order: 400
+                }
+            })
+            .state('exams.full-exam', {
+                url: '/full-exam',
+                parent: 'exams',
+                params: {
+                    examParams: {}
+                },
+                template: '<exam questions="general.questions" timeframe="general.timeframe" tabindex="1"></exam>',
+                controller: function() {
+
+                },
+                resolve: {
+
+                }
+            })
+            .state('exams.post-credit', {
+                url: '/post-credit',
+                parent: 'exams',
+                //template: '<exam questions="general.questions" timeframe="general.timeframe" tabindex="1"></exam>',
+                template: '<pre style="direction: ltr">{{::postCredit.quota | json}}</pre>',
+                controller: function(quota) {
+                    this.quota = quota;
+                },
+                controllerAs: 'postCredit',
+                resolve: {
+                    quota: function(customerStatsService) {
+                        return customerStatsService.getQuota();
+                    }
+                },
+                title: 'EXAMS.TYPES.SDSD',
                 sidebarMeta: {
                     order: 400
                 }

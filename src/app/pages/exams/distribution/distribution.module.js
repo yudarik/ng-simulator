@@ -13,9 +13,6 @@
         $stateProvider
             .state('exams.distribution', {
                 url: '/distribution',
-                params: {
-                    distribution: {}
-                },
                 parent: 'exams',
                 templateUrl: 'app/pages/exams/distribution/distribution.html',
                 controller: 'distributionCtrl as distribution',
@@ -23,6 +20,10 @@
                     distribution: function($stateParams, examService) {
                         return $stateParams.distribution || examService.getDistribution();
                     }
+                },
+                title: 'EXAMS.TYPES.GENERAL_PRACTICE',
+                sidebarMeta: {
+                    order: 300,
                 }
             });
     }

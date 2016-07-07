@@ -6,7 +6,7 @@
     'use strict';
 
     angular.module('Simulator.pages.auth')
-        .controller('signinController', function($scope, simulator_config, userAuthService, $state){
+        .controller('signinController', function($scope, $translate, simulator_config, userAuthService, $state){
 
             this.simulator_config = simulator_config;
 
@@ -21,14 +21,23 @@
                 userAuthService.signin(this.user)
                     .then((user)=>{
                         if (user){
-                            //$state.go('profile');
-                            $state.go('exams.distribution');
+                            if (!user || user.errorMessage) {
+                                this.message = $translate.instant('SIGNIN.'+user.errorMessage.toUpperCase());
+                            } else {
+                                $state.go('exams.distribution');
+                            }
+
                         } else {
                             this.message = 'Username or password is incorrect, please try again';
                         }
 
                     }).catch((err)=>{
-                        this.message = err;
+                        if (err.status === -1) {
+                            this.message = $translate.instant('SIGNIN.USER_PASSWARD_INCORRECT');
+                        } else {
+                            this.message = err.data;
+                        }
+
                     });
             }
         })

@@ -6,7 +6,9 @@
     "EMAIL": "שם משתמש (דוא'ל)",
     "PASSWORD": "סיסמא",
     "FORGOT_PASSWORD": "שככתי את הסיסמא",
-    "LOGIN_BTN": "כניסה"
+    "LOGIN_BTN": "כניסה",
+    "USER_PASSWARD_INCORRECT": "שם המשתמש או הסיסמא שגויים",
+    "INVALID CREDENTIALS": "שם המשתמש או הסיסמא שגויים"
   },
   "EXAMS": {
     "TYPES": {
