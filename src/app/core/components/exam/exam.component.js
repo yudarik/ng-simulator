@@ -26,7 +26,9 @@
             ].join('').trim()
         });
 
-    function examCtrl($scope, $uibModal, examService) {
+    function examCtrl($scope, $uibModal, $interval, examService, simulatorService) {
+
+        var ping;
 
         var submitExam = () => {
 
@@ -47,6 +49,21 @@
             return examService.submitExam(practiseResult);
         };
 
+        var keydownEventHandler = (e) => {
+
+            e.stopPropagation();
+            switch (e.which) {
+                case 37:
+                    this.prevBtn.click();
+                    break;
+                case 39:
+                    this.nextBtn.click();
+                    break;
+                default: return;
+            }
+            e.preventDefault();
+        };
+
         this.init = () =>{
 
             _.forEach(this.questions, (question, index) => {
@@ -60,12 +77,16 @@
                 _.forEach(_.pick(question, ['ans1', 'ans2', 'ans3', 'ans4', 'ans5', 'ans6']), (value, key) => {
                     if (value) {
                         question.answerOptions.push({
-                            key: key,
+                            key: parseInt(key.replace('ans','')),
                             value: value
                         });
                     }
                 });
             });
+
+            ping = $interval(()=>{
+                simulatorService.ping();
+            }, 10000);
         };
 
         this.init();
@@ -106,27 +127,18 @@
         this.nextBtn = $('#remote-next');
 
 
-        $(document).keydown((e)=>{
-
-            e.stopPropagation();
-            switch (e.which) {
-                case 37:
-                    this.prevBtn.click();
-                    break;
-                case 39:
-                    this.nextBtn.click();
-                    break;
-                default: return;
-            }
-            e.preventDefault();
-        });
+        $(document).keydown(keydownEventHandler);
 
         $scope.$on('timeOver', this.finishExam);
+        $scope.$on('$destroy', ()=>{
+            $interval.cancel(ping);
+            $(document).off('keydown', keydownEventHandler)
+        })
     }
 
     function getUserAnswer(question) {
-        var userAnswer = (typeof question.userAnswer !== 'undefined')? question.userAnswer : getRandomAnswer(question);
-        return parseInt(userAnswer.replace('ans',''));
+        var chosenAns = (typeof question.chosenAns !== 'undefined')? question.chosenAns : getRandomAnswer(question);
+        return parseInt(chosenAns);
     }
 
     function getRandomAnswer(question) {

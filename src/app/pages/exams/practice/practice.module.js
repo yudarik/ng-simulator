@@ -34,7 +34,8 @@
                                 return $q.reject(err);
                             })
                     }
-                }
+                },
+                title: 'EXAMS.TYPES.GENERAL_PRACTICE'
             })
             .state('exams.practice-solution', {
                 url: '/practice-solution',
@@ -51,7 +52,8 @@
                 controller: function(practiceSolution) {
                     this.practiceSolution = practiceSolution;
                 },
-                controllerAs: 'solutionCtrl'
+                controllerAs: 'solutionCtrl',
+                title: 'EXAMS.TYPES.PRACTICE_SOLUTION'
             })
             .state('exams.weak-areas', {
                 url: '/weak-areas',
@@ -123,7 +125,7 @@
                         return customerStatsService.getQuota();
                     }
                 },
-                title: 'EXAMS.TYPES.SDSD',
+                title: 'Post Credit',
                 sidebarMeta: {
                     order: 400
                 }

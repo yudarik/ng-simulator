@@ -21,21 +21,14 @@
                 userAuthService.signin(this.user)
                     .then((user)=>{
                         if (user){
-                            if (!user || user.errorMessage) {
-                                this.message = $translate.instant('SIGNIN.'+user.errorMessage.toUpperCase());
-                            } else {
-                                $state.go('exams.distribution');
-                            }
-
-                        } else {
-                            this.message = 'Username or password is incorrect, please try again';
+                            $state.go('exams.distribution');
                         }
 
                     }).catch((err)=>{
-                        if (err.status === -1) {
-                            this.message = $translate.instant('SIGNIN.USER_PASSWARD_INCORRECT');
+                        if (err.status === 401) {
+                            this.message = $translate.instant('SIGNIN.'+err.data.errorMessage.toUpperCase());
                         } else {
-                            this.message = err.data;
+                            this.message = err.data.errorMessage
                         }
 
                     });

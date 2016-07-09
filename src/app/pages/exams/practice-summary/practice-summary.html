@@ -19,7 +19,7 @@
                     <td>{{::dist[0].category.categoryName}}</td>
                     <td>{{::dist.length}}</td>
                     <td>{{::practiceSummary.getCorrectAnswers(dist)}}</td>
-                    <td>{{::practiceSummary.getGradeForDistribution(dist)}}</td>
+                    <td>{{::practiceSummary.getGradeForDistribution(dist) | number:2}}%</td>
                 </tr>
                 <tr>
                     <td>{{::'EXAMS.SUMMARY.LABEL'|translate}}</td>
@@ -33,7 +33,7 @@
         <div class="row text-center">
             <div class="col-md-offset-3 col-md-6">
                 <a class="btn btn-default" ui-sref="exams.practice-solution({practiceSolution: practiceSummary.summary.questions})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>
-                <a class="btn btn-default" ui-sref="">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</a>
+                <a class="btn btn-default">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</a>
             </div>
         </div>
     </div>

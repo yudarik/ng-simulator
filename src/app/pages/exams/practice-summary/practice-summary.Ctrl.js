@@ -11,13 +11,16 @@
         this.questionsDistribution = _.groupBy(this.summary.questions, 'category.categoryID');
 
         this.getCorrectAnswers = (distribution) => {
-            return _.countBy(distribution, (question)=>{
-                return question.chosenAnswer === question.correctAnswer;
+            var correctAnswers = _.countBy(distribution, (question)=>{
+                return !_.isNil(question.correctAns) && !_.isNil(question.chosenAns) &&
+                    question.correctAns === question.chosenAns;
             }).true;
+
+            return correctAnswers || 0;
         };
 
         this.getGradeForDistribution = (distribution) => {
-            return '??';
+            return this.getCorrectAnswers(distribution) / distribution.length * 100;
         };
     }
 

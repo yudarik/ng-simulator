@@ -40,7 +40,7 @@
                 })
             },
             template: [
-                '<div class="exam-timeframe">',
+                '<div class="exam-timeframe" ng-if="$ctrl.totalTimeframe">',
                 '   <div class="">',
                 '         <uib-progressbar value="$ctrl.progress" type="success" max="$ctrl.totalTimeframe"><span class="text-danger">{{$ctrl.timeframe|timeframe}}</span></uib-progressbar>',
                 '   </div>',

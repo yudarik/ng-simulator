@@ -19,8 +19,9 @@
                     '<div class="panel-body">',
                         '<div class="exam-nav buttons">',
                         '<button class="btn btn-info remote-btn-small"',
-                        'ng-class="{active: question.active, answered: question.userAnswer}" ',
                         'ng-repeat="question in $ctrl.remoteMap track by $index"',
+                        'ng-class="{active: question.active, answered: question.chosenAns,',
+                        '\'incorrect\': question.correctAns > -1 && question.chosenAns !== question.correctAns}"',
                         'ng-click="$ctrl.navigateToQuestion(question)">',
                         '{{question.index + 1}}',
                         '</button>',
@@ -47,7 +48,7 @@
         };
 
         this.isFinishEnabled = () => {
-            return true;//_.every(this.remote, {userAnswer: !'' && !null && !undefined});
+            return true;//_.every(this.remote, {chosenAns: !'' && !null && !undefined});
         };
     }
 })();

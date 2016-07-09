@@ -22,6 +22,10 @@
     label {
       white-space: normal;
     }
+    label.custom-checkbox > input:disabled + span,
+    label.custom-radio > input:disabled + span {
+      color: $default-text;
+    }
   }
 
   i.help {

@@ -152,18 +152,15 @@
 <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
 <!-- inject:js -->
 <script src="app/core/core.module.js"></script>
-<script src="app/pages/pages.module.js"></script>
 <script src="app/theme/theme.module.js"></script>
+<script src="app/pages/pages.module.js"></script>
 <script src="app/core/components/core.components.module.js"></script>
+<script src="app/theme/components/components.module.js"></script>
+<script src="app/theme/pages/pages.module.js"></script>
 <script src="app/pages/auth/auth.module.js"></script>
 <script src="app/pages/exams/exams.module.js"></script>
 <script src="app/pages/profile/profile.module.js"></script>
 <script src="app/pages/stats/stats.module.js"></script>
-<script src="app/theme/components/components.module.js"></script>
-<script src="app/theme/pages/pages.module.js"></script>
-<script src="app/pages/exams/distribution/distribution.module.js"></script>
-<script src="app/pages/exams/practice/practice.module.js"></script>
-<script src="app/pages/exams/practice-summary/practice-summary.module.js"></script>
 <script src="app/theme/pages/charts/charts.module.js"></script>
 <script src="app/theme/pages/components/components.module.js"></script>
 <script src="app/theme/pages/dashboard/dashboard.module.js"></script>
@@ -172,12 +169,15 @@
 <script src="app/theme/pages/profile/profile.module.js"></script>
 <script src="app/theme/pages/tables/tables.module.js"></script>
 <script src="app/theme/pages/ui/ui.module.js"></script>
+<script src="app/pages/exams/distribution/distribution.module.js"></script>
+<script src="app/pages/exams/practice/practice.module.js"></script>
+<script src="app/pages/exams/practice-summary/practice-summary.module.js"></script>
 <script src="app/theme/pages/charts/amCharts/amCharts.module.js"></script>
 <script src="app/theme/pages/charts/chartJs/chartJs.module.js"></script>
 <script src="app/theme/pages/charts/chartist/chartist.module.js"></script>
 <script src="app/theme/pages/charts/morris/morris.module.js"></script>
-<script src="app/theme/pages/components/timeline/timeline.module.js"></script>
 <script src="app/theme/pages/components/mail/mail.module.js"></script>
+<script src="app/theme/pages/components/timeline/timeline.module.js"></script>
 <script src="app/theme/pages/components/tree/tree.module.js"></script>
 <script src="app/theme/pages/ui/alerts/alerts.module.js"></script>
 <script src="app/theme/pages/ui/buttons/buttons.module.js"></script>
@@ -196,13 +196,7 @@
 <script src="app/theme/theme.constants.js"></script>
 <script src="app/theme/theme.run.js"></script>
 <script src="app/theme/theme.service.js"></script>
-<script src="app/pages/auth/auth.service.js"></script>
-<script src="app/pages/auth/signin.Ctrl.js"></script>
-<script src="app/pages/auth/signup.Ctrl.js"></script>
-<script src="app/pages/exams/exams.service.js"></script>
-<script src="app/pages/profile/ProfileModalCtrl.js"></script>
-<script src="app/pages/profile/ProfilePageCtrl.js"></script>
-<script src="app/pages/stats/stats.service.js"></script>
+<script src="app/core/services/simulator.service.js"></script>
 <script src="app/theme/components/toastrLibConfig.js"></script>
 <script src="app/theme/directives/animatedChange.js"></script>
 <script src="app/theme/directives/autoExpand.js"></script>
@@ -217,15 +211,19 @@
 <script src="app/theme/services/fileReader.js"></script>
 <script src="app/theme/services/preloader.js"></script>
 <script src="app/theme/services/stopableInterval.js"></script>
+<script src="app/pages/auth/auth.service.js"></script>
+<script src="app/pages/auth/signin.Ctrl.js"></script>
+<script src="app/pages/auth/signup.Ctrl.js"></script>
+<script src="app/pages/exams/exams.service.js"></script>
+<script src="app/pages/profile/ProfileModalCtrl.js"></script>
+<script src="app/pages/profile/ProfilePageCtrl.js"></script>
+<script src="app/pages/stats/stats.service.js"></script>
 <script src="app/core/components/exam/exam.component.js"></script>
 <script src="app/core/components/exam-distribution/exam-distribution.component.js"></script>
 <script src="app/core/components/exam-question/exam-question.component.js"></script>
 <script src="app/core/components/exam-remote/exam-remote.component.js"></script>
 <script src="app/core/components/exam-timeframe/exam-time.filter.js"></script>
 <script src="app/core/components/exam-timeframe/exam-timeframe.component.js"></script>
-<script src="app/pages/exams/distribution/distribution.Ctrl.js"></script>
-<script src="app/pages/exams/practice/general-practice.Ctrl.js"></script>
-<script src="app/pages/exams/practice-summary/practice-summary.Ctrl.js"></script>
 <script src="app/theme/components/baPanel/baPanel.directive.js"></script>
 <script src="app/theme/components/baPanel/baPanel.service.js"></script>
 <script src="app/theme/components/baPanel/baPanelBlur.directive.js"></script>
@@ -251,15 +249,18 @@
 <script src="app/theme/pages/profile/ProfileModalCtrl.js"></script>
 <script src="app/theme/pages/profile/ProfilePageCtrl.js"></script>
 <script src="app/theme/pages/tables/TablesPageCtrl.js"></script>
+<script src="app/pages/exams/distribution/distribution.Ctrl.js"></script>
+<script src="app/pages/exams/practice/general-practice.Ctrl.js"></script>
+<script src="app/pages/exams/practice-summary/practice-summary.Ctrl.js"></script>
 <script src="app/theme/components/backTop/lib/jquery.backTop.min.js"></script>
 <script src="app/theme/pages/charts/chartJs/chartJs1DCtrl.js"></script>
 <script src="app/theme/pages/charts/chartJs/chartJs2DCtrl.js"></script>
 <script src="app/theme/pages/charts/chartJs/chartJsWaveCtrl.js"></script>
 <script src="app/theme/pages/charts/chartist/chartistCtrl.js"></script>
 <script src="app/theme/pages/charts/morris/morrisCtrl.js"></script>
-<script src="app/theme/pages/components/timeline/TimelineCtrl.js"></script>
 <script src="app/theme/pages/components/mail/MailTabCtrl.js"></script>
 <script src="app/theme/pages/components/mail/mailMessages.js"></script>
+<script src="app/theme/pages/components/timeline/TimelineCtrl.js"></script>
 <script src="app/theme/pages/components/tree/treeCtrl.js"></script>
 <script src="app/theme/pages/dashboard/blurFeed/BlurFeedCtrl.js"></script>
 <script src="app/theme/pages/dashboard/blurFeed/blurFeed.directive.js"></script>
@@ -303,8 +304,8 @@
 <script src="app/theme/pages/ui/modals/notifications/NotificationsCtrl.js"></script>
 <script src="app/theme/pages/form/inputs/widgets/select/SelectpickerPanelCtrl.js"></script>
 <script src="app/theme/pages/form/inputs/widgets/select/selectpicker.directive.js"></script>
-<script src="app/theme/pages/form/inputs/widgets/switch/switch.directive.js"></script>
 <script src="app/theme/pages/form/inputs/widgets/tagsInput/tagsInput.directive.js"></script>
+<script src="app/theme/pages/form/inputs/widgets/switch/switch.directive.js"></script>
 <!-- endinject -->
 
 <!-- inject:partials -->

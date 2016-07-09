@@ -46,6 +46,16 @@
       color: $default;
       border: 1px solid $success;
     }
+
+    &.incorrect,
+    &.incorrect:hover,
+    &.incorrect.active,
+    &.incorrect.active:hover {
+      background: $danger;
+      color: $default;
+      border: 1px solid $danger;
+    }
+
   }
 
   .arrows {

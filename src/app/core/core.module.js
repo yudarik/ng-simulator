@@ -39,10 +39,8 @@
             postCreditModeEnabled:                  null,
             sendingLastChanceToEnrollEmail:         null
         })
-        .run(function(simulator_config, Restangular){
-            var simulators = Restangular.all('simulators');
-
-            simulators.get('status').then(config => {
+        .run(function(simulator_config, simulatorService){
+            simulatorService.getStatus().then(config => {
                 _.assign(simulator_config, config);
             })
         })

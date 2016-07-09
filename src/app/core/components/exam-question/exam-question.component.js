@@ -15,6 +15,27 @@
                 /**
                  * Exam Question Component Controller
                  */
+                this.getClass = (option)=>{
+                    if (_.isNil(this.question.correctAns)) {
+                        return '';
+                    }
+                    if (this.getKey(option) === this.question.correctAns) {
+                        return 'bg-success';
+                    }
+                    if (this.getKey(option) === this.question.chosenAns) {
+                       if (this.question.chosenAns === this.question.correctAns) {
+                           return 'bg-success';
+                       } else {
+                           return 'bg-danger';
+                       }
+                    } else {
+                        return '';
+                    }
+                };
+
+                this.getKey = (option) => {
+                    return parseInt(option.key);
+                };
             },
             template: [
                     '<div class="exam-question">',
@@ -31,18 +52,15 @@
                       '                 <div class="col-md-12 question-option" ng-repeat="option in $ctrl.question.answerOptions">',
                       '                     <label class="radio-inline custom-radio nowrap">',
                       '                         <input type="radio" name="question"',
-                                                        'ng-class="{\'bg-success\': $ctrl.question.correctAnswer > -1 && $ctrl.question.correctAnswer === $ctrl.question.chosenAnswer,',
-                                                        '\'bg-danger\': $ctrl.question.correctAnswer > -1 && $ctrl.question.chosenAnswer !== $ctrl.question.correctAnswer}"',
-                                                        'ng-model="$ctrl.question.userAnswer"',
+                                                        'ng-model="$ctrl.question.chosenAns"',
                                                         'ng-value="option.key"',
-                                                        'ng-disabled="$ctrl.question.correctAnswer > -1"',
-                                                        'ng-chosen="option.key === $ctrl.question.chosenAnswer">',
-                      '                         <span>{{option.value}}</span>                                  ',
+                                                        'ng-disabled="$ctrl.question.correctAns > -1">',
+                      '                         <span ng-class="$ctrl.getClass(option)">{{option.value}}</span>                             ',
                       '                     </label>                                                  ',
                       '                 </div>                                                        ',
-                                        '<div class="bs-callout bs-callout-warning col-md-12" ng-if="::$ctrl.question.help">',
-                                        '<h4>{{::$ctrl.question.help}}</h5>',
-                                        '<p>{{::$ctrl.question.detailedHelp}}</p>',
+                                        '<div class="bs-callout bs-callout-warning col-md-12" ng-if="$ctrl.question.help">',
+                                        '<h4>{{$ctrl.question.help}}</h5>',
+                                        '<p>{{$ctrl.question.detailedHelp}}</p>',
                                         '</div>',
                       '             </div>                                                            ',
                       '         </form>                                                               ',
