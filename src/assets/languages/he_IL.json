@@ -47,5 +47,23 @@
     "BUTTONS": {
       "CONTINUE": "המשך"
     }
+  },
+  "STATS": {
+    "ACCOUNT": {
+      "TITLE": "מצב חשבון",
+      "TOTAL_NEW_QUESTIONS_QUOTA": "סה\"כ שאלות חדשות",
+      "LEFT_NEW_QUESTIONS_QUOTA": "יתרת שאלות חדשות",
+      "EXAMS_PERFORMED": "כמות מבחנים שבוצעו",
+      "GENERAL_PRACTICES_PERFORMED": "סה\"כ תרגולים כלללים שבוצעו",
+      "SUGGESTED_PRACTICES_PERFORMED": "Suggested practices performed",
+      "PREDEFINED_EXAMS_PERFORMED": "Predefined practices performed",
+      "TOTAL_POST_CREDIT_QUESTIONS_QUOTA": "סה\"כ שאלות בתרגול חוזר",
+      "LEFT_POST_CREDIT_QUESTIONS_QUOTA": "יתרת שאלות לתרגול חוזר",
+      "SINGLE_PREDEFINED_EXAMS_QUOTA": "",
+      "PREDEFINED_EXAMS_WITH_QUOTAS_LIST": "",
+      "PACKAGES_CURRENCY": "ש\"ח",
+      "PURCHASED_PRODUCTS": "חבילות שנרכשו",
+      "CANCELED_PRODUCTS": "חבילות שבוטלו"
+    }
   }
 }
