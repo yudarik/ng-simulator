@@ -11,14 +11,14 @@
     /** @ngInject */
     function routeConfig($stateProvider) {
         $stateProvider
-            .state('exams.general-practice', {
-                url: '/general-practice',
+            .state('exams.practice', {
+                url: '/practice',
                 parent: 'exams',
                 params: {
                     examParams: {}
                 },
-                template: '<exam questions="general.questions" timeframe="general.timeframe" tabindex="1"></exam>',
-                controller: 'generalPracticeCtrl as general',
+                template: '<exam questions="practice.questions" timeframe="practice.timeframe" tabindex="1"></exam>',
+                controller: 'practiceCtrl as practice',
                 resolve: {
 
                     examConfig: function($state, $stateParams, $q, examService) {
@@ -67,7 +67,7 @@
                                         '</li>',
                                     '</ol>',
                                     '<div class="col-md-12">',
-,                                        '<a class="btn btn-default" ui-sref="exams.distribution({distribution: weakAreas.getDistribution()})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>',
+,                                        '<a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.getDistribution()})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>',
                                     '</div>',
                                 '</div>',
                             '</div>'
@@ -95,20 +95,6 @@
                 title: 'EXAMS.TYPES.WEAK_AREAS',
                 sidebarMeta: {
                     order: 400
-                }
-            })
-            .state('exams.full-exam', {
-                url: '/full-exam',
-                parent: 'exams',
-                params: {
-                    examParams: {}
-                },
-                template: '<exam questions="general.questions" timeframe="general.timeframe" tabindex="1"></exam>',
-                controller: function() {
-
-                },
-                resolve: {
-
                 }
             })
             .state('exams.post-credit', {

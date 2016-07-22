@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-md-12 text-right"
          ba-panel
-         ba-panel-title="{{::'EXAMS.DISTRIBUTION.TITLE'|translate}}"
+         ba-panel-title="{{::(distribution.distributionType !== 'full-exam')? 'EXAMS.DISTRIBUTION.TITLE':''|translate}}"
          ba-panel-class="">
 
         <form class="form-horizontal text-right" name="exam-distribution" ng-submit="distribution.startExam()" ng-model="distribution.examParams">
-            <div class="row">
+            <div class="row" ng-if="distribution.distributionType !== 'full-exam'">
                 <div class="form-group form-group-xs col-md-4 pull-right" ng-repeat="category in distribution.config.categories track by category.id">
                     <label for class="col-sm-8 control-label pull-right">{{category.name}}:</label>
                     <div class="col-sm-4">

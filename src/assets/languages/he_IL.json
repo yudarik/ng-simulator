@@ -13,6 +13,7 @@
   "EXAMS": {
     "TYPES": {
       "TITLE": "סוגי תרגול",
+      "FULL_EXAM": "בחינה מלאה",
       "GENERAL_PRACTICE": "תרגול כללי",
       "PRACTICE_SUMMARY": "סיכום וניתוח תוצאות",
       "WEAK_AREAS": "תרגול בנקודות חולשה",
@@ -65,5 +66,13 @@
       "PURCHASED_PRODUCTS": "חבילות שנרכשו",
       "CANCELED_PRODUCTS": "חבילות שבוטלו"
     }
+  },
+  "MANUALS": {
+    "TITLE": "עזרי לימוד",
+    "TABLE_HEADS": {
+      "DOC_NAME": "שם המסמך",
+      "DOC_LINK": "קישור למסמך"
+    },
+    "DISPLAY":  "הצג"
   }
 }

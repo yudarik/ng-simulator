@@ -13,15 +13,15 @@
             this.user = {};
 
             userAuthService.getUser().then(()=>{
-                //$state.go('profile');
-                $state.go('exams.distribution');
+                $state.go('profile');
+                //$state.go('exams.distribution');
             });
 
             this.submit = ()=>{
                 userAuthService.signin(this.user)
                     .then((user)=>{
                         if (user){
-                            $state.go('exams.distribution');
+                            $state.go('profile');
                         }
 
                     }).catch((err)=>{

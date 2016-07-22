@@ -23,7 +23,8 @@
     'frapontillo.bootstrap-switch',
     'Simulator.pages.exams',
     'Simulator.pages.auth',
-    'Simulator.pages.profile'
+    'Simulator.pages.profile',
+    'Simulator.pages.manuals'
   ])
       .config(routeConfig);
 

@@ -5,7 +5,10 @@
 (function () {
     'use strict';
 
-    function distributionCtrl($state, distribution) {
+    function distributionCtrl($state, distribution, distributionType) {
+
+        this.distributionType = distributionType;
+
         this.examParams = {
             totalQuestion: distribution.questionsInExam,
             questionDistribution: [],
@@ -39,18 +42,16 @@
 
         this.startExam = function() {
 
-            this.examParams.questionDistribution = _.zipObject(
+            this.examParams.questionDistribution = (distributionType !== 'full-exam')? _.zipObject(
                 _.map(this.config.categories, 'id'),
                 _.map(this.config.categories, 'questionDistribution')
-            );
+            ) : [];
 
-            $state.go('exams.general-practice', {examParams: this.examParams});
+            $state.go('exams.practice', {examParams: this.examParams});
         };
 
         this.config = {};
-        this.config.categories = this.initQuestionDistribution();
-
-
+        this.config.categories = (distributionType !== 'full-exam')? this.initQuestionDistribution() : [];
     }
 
 

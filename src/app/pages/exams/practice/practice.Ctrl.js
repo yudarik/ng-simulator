@@ -5,11 +5,11 @@
 (function () {
     'use strict';
 
-    function generalPracticeCtrl(examConfig) {
+    function practiceCtrl(examConfig) {
         this.timeframe = examConfig.timePerQuestion * examConfig.questions.length;
         this.questions = examConfig.questions;
     }
 
     angular.module('Simulator.pages.exams.practice')
-        .controller('generalPracticeCtrl', generalPracticeCtrl);
+        .controller('practiceCtrl', practiceCtrl);
 })();

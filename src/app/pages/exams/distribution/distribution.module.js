@@ -11,19 +11,40 @@
     /** @ngInject */
     function routeConfig($stateProvider) {
         $stateProvider
-            .state('exams.distribution', {
-                url: '/distribution',
+            .state('exams.distribution-general', {
+                url: '/general-distribution',
                 parent: 'exams',
                 templateUrl: 'app/pages/exams/distribution/distribution.html',
                 controller: 'distributionCtrl as distribution',
                 resolve: {
                     distribution: function($stateParams, examService) {
                         return $stateParams.distribution || examService.getDistribution();
+                    },
+                    distributionType: function() {
+                        return 'general-practice'
                     }
                 },
                 title: 'EXAMS.TYPES.GENERAL_PRACTICE',
                 sidebarMeta: {
                     order: 300,
+                }
+            })
+            .state('exams.distribution-full', {
+                url: '/full-exam-distribution',
+                parent: 'exams',
+                templateUrl: 'app/pages/exams/distribution/distribution.html',
+                controller: 'distributionCtrl as distribution',
+                resolve: {
+                    distribution: function($stateParams, examService) {
+                        return $stateParams.distribution || examService.getDistribution();
+                    },
+                    distributionType: function() {
+                        return 'full-exam'
+                    }
+                },
+                title: 'EXAMS.TYPES.FULL_EXAM',
+                sidebarMeta: {
+                    order: 100,
                 }
             });
     }
