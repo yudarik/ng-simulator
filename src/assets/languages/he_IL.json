@@ -65,6 +65,16 @@
       "PACKAGES_CURRENCY": "ש\"ח",
       "PURCHASED_PRODUCTS": "חבילות שנרכשו",
       "CANCELED_PRODUCTS": "חבילות שבוטלו"
+    },
+    "DASHBOARD": {
+      "TITLE": "סטטיסטיקת תרגולים",
+      "CHARTS": {
+        "GRADES_RADAR": {
+          "TITLE": "התפלגות ציונים לפי קטגוריה",
+          "GRADE": "ציון"
+        }
+      }
+
     }
   },
   "MANUALS": {

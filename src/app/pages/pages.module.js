@@ -5,18 +5,17 @@
 (function () {
   'use strict';
 
-  //angular.module('BlurAdmin.pages', [
-  //  //'ui.router',
-  ////
-  ////  'BlurAdmin.pages.dashboard',
-  ////  'BlurAdmin.pages.ui',
-  ////  'BlurAdmin.pages.components',
-  ////  'BlurAdmin.pages.form',
-  ////  'BlurAdmin.pages.tables',
-  ////  'BlurAdmin.pages.charts',
-  ////  'BlurAdmin.pages.maps',
-  ////  'BlurAdmin.pages.profile'
-  //]);
+  angular.module('BlurAdmin.pages', [
+  'ui.router',
+  //'BlurAdmin.pages.dashboard',
+  //'BlurAdmin.pages.ui',
+  //'BlurAdmin.pages.components',
+  //'BlurAdmin.pages.form',
+  //'BlurAdmin.pages.tables',
+  'BlurAdmin.pages.charts'
+  //'BlurAdmin.pages.maps',
+  //'BlurAdmin.pages.profile'
+  ]);
 
   angular.module('Simulator.pages', [
     'ui.router',
@@ -33,7 +32,7 @@
     //$urlRouterProvider.otherwise('/');
     $urlRouterProvider.otherwise('/signin');
 
-    baSidebarServiceProvider.addStaticItem({
+    /*baSidebarServiceProvider.addStaticItem({
       title: 'Pages',
       icon: 'ion-document',
       subMenu: [{
@@ -52,7 +51,7 @@
         fixedHref: '404.html',
         blank: true
       }]
-    });
+    });*/
   }
 
 })();

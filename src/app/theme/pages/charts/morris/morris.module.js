@@ -19,7 +19,7 @@
     $stateProvider
         .state('charts.morris', {
           url: '/morris',
-          templateUrl: 'app/pages/charts/morris/morris.html',
+          templateUrl: 'app/theme/pages/charts/morris/morris.html',
           title: 'Morris',
           sidebarMeta: {
             order: 300,

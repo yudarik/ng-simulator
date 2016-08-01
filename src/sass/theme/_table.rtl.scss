@@ -8,6 +8,9 @@ body.flip {
           &:last-child {
             padding-right: 16px;
           }
+          &:first-child {
+            text-align: right;
+          }
         }
       }
     }
@@ -17,6 +20,9 @@ body.flip {
         & > td {
           &:last-child {
             padding-right: 16px !important;
+          }
+          &:first-child {
+            text-align: right;
           }
         }
       }

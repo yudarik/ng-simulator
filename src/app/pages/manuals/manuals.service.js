@@ -14,7 +14,7 @@
             }
 
             function get (id) {
-                return onlineManuals.get(id.toString());
+                return onlineManuals.getRequestedUrl(id);
             }
 
             return {list, get};

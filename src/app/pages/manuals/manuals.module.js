@@ -19,7 +19,9 @@
                 controllerAs: 'manualsCtrl',
                 resolve: {
                     manuals: function(manualsService){
-                        return manualsService.list();
+                        return manualsService.list().then(list=>{
+                            return _.sortBy(list, 'order');
+                        });
                     }
                 },
                 title: 'MANUALS.TITLE',

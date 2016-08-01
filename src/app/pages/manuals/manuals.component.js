@@ -15,7 +15,7 @@
                 '   <div class="panel">',
                 '       <div class="panel-body">',
                 '           <div class="row">',
-                '               <table class="table table-hover">',
+                '               <table class="table table-hover" direction="rtl">',
                 '                   <thead>',
                 '                       <tr>',
                 '                           <th>{{::\'MANUALS.TABLE_HEADS.DOC_NAME\'|translate}}</th>',
@@ -24,8 +24,8 @@
                 '                   </thead>',
                 '                   <tbody>',
                 '                       <tr ng-repeat="manual in $ctrl.manuals">',
-                '                           <td class="text-right">{{manual.displayName}}</td>',
-                '                           <td><a ng-click="$ctrl.getLink(manual.id)">{{::\'MANUALS.DISPLAY\'|translate}}</td>',
+                '                           <td>{{manual.displayName}}</td>',
+                '                           <td><a href="{{$ctrl.getUrl(manual.id)}}" target="_blank">{{::\'MANUALS.DISPLAY\'|translate}}</td>',
                 '                       </tr>',
                 '                   </tbody>',
                 '               </table>',
@@ -37,11 +37,10 @@
 
         });
 
-        function manualsCtrl (manualsService) {
-            this.getLink = (id)=>{
-                return manualsService.get(id).then(link=>{
-                    return link;
-                });
+        function manualsCtrl ($window, manualsService) {
+
+            this.getUrl = (id)=>{
+                return manualsService.get(id);
             }
         }
 })();
