@@ -21,7 +21,7 @@
                 userAuthService.signin(this.user)
                     .then((user)=>{
                         if (user){
-                            $state.go('profile');
+                            $state.go('dashboard');
                         }
 
                     }).catch((err)=>{

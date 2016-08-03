@@ -43,12 +43,17 @@
             })
         }
 
+        function getStats() {
+            return practices.get('');
+        }
+
         return {
             listCategories,
             getDistribution,
             getExam,
             getPostCreditExam,
-            submitExam
+            submitExam,
+            getStats
         };
     });
 })();

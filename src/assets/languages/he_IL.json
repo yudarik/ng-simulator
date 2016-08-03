@@ -18,6 +18,7 @@
       "PRACTICE_SUMMARY": "סיכום וניתוח תוצאות",
       "WEAK_AREAS": "תרגול בנקודות חולשה",
       "PRACTICE": "תרגול",
+      "EXAM": "מבחן",
       "PRACTICE_SOLUTION": "פתרון התרגול"
     },
     "EXAM_FINISH_ARE_YOU_SURE": "עדיין נותר לך זמן, האם את/ה מעוניין/נת לסיים כעת בכל זאת ?",
@@ -72,6 +73,21 @@
         "GRADES_RADAR": {
           "TITLE": "התפלגות ציונים לפי קטגוריה",
           "GRADE": "ציון"
+        },
+        "USERS_RANK": {
+          "TITLE": "ממוצע ציונים משוקלל",
+          "RANK": "מקום",
+          "YOU": "אתה",
+          "ANONYMOUS": "משתמש אנונימי"
+        },
+        "PRACTICES_GRADE": {
+          "TITLE": "התפלגות ציונים לפי סוג תרגול"
+        },
+        "CATEGORIES_LINE": {
+          "TITLE": "התפלגות בין תשובות נכונות ללא נכונות לפי קטגוריה",
+          "CORRECT": "נכון",
+          "INCORRECT": "לא נכון",
+          "TOTAL_ASKED": "סך שאלות שנשאלו"
         }
       }
 

@@ -11,7 +11,7 @@
             var customersQuota = Restangular.all('/customers/');
 
             function getRank() {
-                return customerStats.get('rank');
+                return customerStats.get('rank', {ever: true});
             }
 
             function getCategories() {

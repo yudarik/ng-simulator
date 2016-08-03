@@ -14,12 +14,6 @@
                       'chart-series="categories.radar.series"'+
                       'chart-options="categories.radar.options">'+
                       '</canvas>'+
-                      '<canvas id="pie" class="chart chart-polar-area"'+
-                      'chart-data="categories.polar.dataSets.data" '+
-                      'chart-labels="categories.chart.labels" '+
-                      'chart-dataset-override="categories.polar.dataSets"'+
-                      'chart-options="categories.polar.options">'+
-                      '</canvas>'+
                       '</div>'
         })
         .controller('CategoriesChartsCtrl', CategoriesChartsCtrl);
@@ -40,18 +34,6 @@
                 }
             }
         };
-        this.polar = {
-            dataSets: {
-                data: [],
-                label: 'totalQuestionsAskedInCategory'
-            },
-            options: {
-                legend: {
-                    display: false,
-                    position: 'bottom'
-                }
-            }
-        };
 
         function getGrade4Category(cat) {
             return ((cat.questionIDsCorrectlyAnswered.length / cat.totalQuestionsAskedInCategory) * 100);
@@ -63,7 +45,6 @@
             this.radar.series[0] = $translate.instant('STATS.DASHBOARD.CHARTS.GRADES_RADAR.GRADE');
 
             this.radar.data.push(_.map(categoriesStats, getGrade4Category));
-            this.polar.dataSets.data.push(_.map(categoriesStats, 'totalQuestionsAskedInCategory'));
         });
     }
 
