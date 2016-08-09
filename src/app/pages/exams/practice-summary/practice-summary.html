@@ -3,14 +3,36 @@
 -->
 <div class="panel">
     <div class="panel-body">
-        <h4><label>{{::'EXAMS.SUMMARY.ID'|translate}}:</label> <span class="label label-info">{{::practiceSummary.summary.practiceID}}</span>&nbsp;&nbsp;&nbsp;<label>{{::'EXAMS.SUMMARY.DATE'|translate}}:</label> <span class="label label-info">{{::practiceSummary.summary.date|date: 'dd/mm/yyyy hh:mm'}}</span></h4>
-        <h4><label>{{::'EXAMS.SUMMARY.FINAL_GRADE'|translate}}:</label> <span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.summary.grade)">{{practiceSummary.summary.grade|translate}}</span></h4>
-        <h4><label>{{::'EXAMS.SUMMARY.TOTAL_TIME'|translate}}:</label> {{practiceSummary.summary.elapsedTimeSecs|timeframe}}</h4>
-        <h4><label>{{::'EXAMS.SUMMARY.AVERAGE_TIME_FOR_QUESTION'|translate}}:</label> {{practiceSummary.summary.elapsedTimeSecs / practiceSummary.summary.questions.length |timeframe}}</h4>
+        <h5 class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>{{::'EXAMS.SUMMARY.DATE'|translate}}:</label>
+                <ins>{{::practiceSummary.summary.date|date: 'dd/mm/yyyy hh:mm'}}</ins>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <label>{{::'EXAMS.SUMMARY.ID'|translate}}:</label>
+                <ins>{{::practiceSummary.summary.practiceID}}</ins>
+            </div>
+        </h5>
+        <hr>
+        <h5 class="row">
+            <div class="col-xs-12 col-md-3">
+                <label>{{::'EXAMS.SUMMARY.FINAL_GRADE'|translate}}:</label>
+                <span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.summary.grade)">{{practiceSummary.summary.grade|number}}</span>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <label>{{::'EXAMS.SUMMARY.TOTAL_TIME'|translate}}:</label>
+                {{practiceSummary.summary.elapsedTimeSecs|timeframe}}
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <label>{{::'EXAMS.SUMMARY.AVERAGE_TIME_FOR_QUESTION'|translate}}:</label>
+                {{practiceSummary.summary.elapsedTimeSecs / practiceSummary.summary.questions.length |timeframe}}
+            </div>
+        </h5>
+        <hr>
 
-        <h3 class="text-center">{{::'EXAMS.SUMMARY.QUESTION_DISTRIBUTION'|translate}}</h3>
+        <h3 class="row text-center">{{::'EXAMS.SUMMARY.QUESTION_DISTRIBUTION'|translate}}</h3>
 
-        <table class="table table-hover">
+        <table class="table table-condensed col-xs-12 col-md-6">
             <thead>
                 <th>{{::'EXAMS.SUMMARY.CATEGORY'|translate}}</th>
                 <th>{{::'EXAMS.SUMMARY.QUESTIONS_COUNT'|translate}}</th>
@@ -24,15 +46,21 @@
                     <td>{{::practiceSummary.getCorrectAnswers(dist)}}</td>
                     <td><span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.getGradeForDistribution(dist))">{{::practiceSummary.getGradeForDistribution(dist) | number}}%</span></td>
                 </tr>
-                <tr>
+                <tr class="info">
                     <td>{{::'EXAMS.SUMMARY.LABEL'|translate}}</td>
                     <td>{{::practiceSummary.summary.questions.length}}</td>
                     <td>{{::practiceSummary.getCorrectAnswers(practiceSummary.summary.questions)}}</td>
-                    <td>{{::practiceSummary.summary.grade}}</td>
+                        <td><span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.summary.grade)">{{practiceSummary.summary.grade|number}}</span></td>
                 </tr>
             </tbody>
         </table>
+
+        <div class="col-xs-12 col-md-6" ng-if="practiceSummary.categoriesStats.length > 0">
+            <categories-grade-radar categories-stats="practiceSummary.categoriesStats"></categories-grade-radar>
+        </div>
+
         <!--<pre style="direction:ltr">{{::practiceSummary.summary|json}}</pre>-->
+        <div class="row"><br/></div>
         <div class="row text-center">
             <div class="col-md-offset-3 col-md-6">
                 <a class="btn btn-default" ui-sref="exams.practice-solution({practiceSolution: practiceSummary.summary.questions})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>

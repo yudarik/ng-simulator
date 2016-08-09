@@ -7,6 +7,9 @@
 
     angular.module('Simulator.components')
         .component('categoriesGradeRadar', {
+            bindings: {
+                categoriesStats: '='
+            },
             template: '<div ng-controller="CategoriesChartsCtrl as categories">'+
                       '<canvas id="pie" class="chart chart-radar"'+
                       'chart-data="categories.radar.data" '+
@@ -19,7 +22,7 @@
         .controller('CategoriesChartsCtrl', CategoriesChartsCtrl);
 
     /** @ngInject */
-    function CategoriesChartsCtrl($translate, customerStatsService) {
+    function CategoriesChartsCtrl($scope, $translate, customerStatsService) {
 
         this.chart = {
             labels: []
@@ -35,17 +38,30 @@
             }
         };
 
+        var init = (categoriesStats) => {
+            this.chart.labels = _.map(categoriesStats, 'category.name');
+            this.radar.series[0] = $translate.instant('STATS.DASHBOARD.CHARTS.GRADES_RADAR.GRADE');
+            this.radar.data.push(_.map(categoriesStats, getGrade4Category));
+        };
+
         function getGrade4Category(cat) {
             return ((cat.questionIDsCorrectlyAnswered.length / cat.totalQuestionsAskedInCategory) * 100);
         }
 
-        customerStatsService.getCategories().then(categoriesStats => {
+        if (!this.categoriesStats) {
 
-            this.chart.labels = _.map(categoriesStats, 'category.name');
-            this.radar.series[0] = $translate.instant('STATS.DASHBOARD.CHARTS.GRADES_RADAR.GRADE');
+            customerStatsService.getCategories().then(init);
+        } else {
+            init(this.categoriesStats);
+        }
 
-            this.radar.data.push(_.map(categoriesStats, getGrade4Category));
-        });
+        $scope.$watch(()=>{
+            return this.categoriesStats;
+        }, (oldVal, newVal) =>{
+            if (oldVal === newVal) return;
+
+            init(this.categoriesStats);
+        })
     }
 
 })();

@@ -7,6 +7,7 @@
 
     function practiceSummaryCtrl(summary) {
         this.summary = summary;
+        this.categoriesStats = [];
 
         this.questionsDistribution = _.groupBy(this.summary.questions, 'category.categoryID');
 
@@ -18,6 +19,25 @@
 
             return correctAnswers || 0;
         };
+
+        _.forEach(this.questionsDistribution, (questions, categoryId)=>{
+            var obj = {
+                category: questions[0].category,
+                totalQuestionsAskedInCategory: questions.length,
+                questionIDsCorrectlyAnswered: [],
+                questionIDsIncorrectlyAnswered: []
+            };
+
+            questions.forEach(question => {
+                if (question.chosenAns === question.corectAns) {
+                    obj.questionIDsCorrectlyAnswered.push(question.questionID);
+                } else {
+                    obj.questionIDsIncorrectlyAnswered.push(question.questionID);
+                }
+            });
+
+            this.categoriesStats.push(obj);
+        });
 
         this.getGradeForDistribution = (distribution) => {
             return this.getCorrectAnswers(distribution) / distribution.length * 100;
