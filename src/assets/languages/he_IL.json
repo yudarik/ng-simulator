@@ -31,6 +31,8 @@
       "QUESTIONS_COUNT": "מס' שאלות",
       "CORRECT_ANSWERS_COUNT": "מס' תשובות נכונות",
       "GRADE": "ציון",
+      "DATE": "תאריך",
+      "ID": "מס' סידורי",
       "LABEL": "סיכום",
       "PRACTICE_SOLUTION": "פתרון התרגול",
       "TIPS_FOR_SUCCESS": "טיפים להצלחה בבחינה"
@@ -70,6 +72,11 @@
     "DASHBOARD": {
       "TITLE": "סטטיסטיקת תרגולים",
       "CHARTS": {
+        "GENERAL": {
+          "GRADE": "ציון",
+          "TYPE": "סוג",
+          "TIME_SPENT": "זמן לפתרון (דקות):"
+        },
         "GRADES_RADAR": {
           "TITLE": "התפלגות ציונים לפי קטגוריה",
           "GRADE": "ציון"

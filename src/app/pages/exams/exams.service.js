@@ -47,13 +47,18 @@
             return practices.get('');
         }
 
+        function getPracticeInfo(id) {
+            return practices.get(id);
+        }
+
         return {
             listCategories,
             getDistribution,
             getExam,
             getPostCreditExam,
             submitExam,
-            getStats
+            getStats,
+            getPracticeInfo
         };
     });
 })();

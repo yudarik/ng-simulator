@@ -9,7 +9,8 @@
         .component('exam', {
             bindings: {
                 questions: '=',
-                timeframe: '<'
+                timeframe: '<',
+                type: '<'
             },
             controller: examCtrl,
             template: [
@@ -39,7 +40,7 @@
             });
 
             let practiseResult = {
-                practiceType: "PRACTICE",
+                practiceType: this.type,
                 predefinedExamId: "0",
                 totalTimeSecs: this.totalTimeFrame,
                 elapsedTimeSecs: this.totalTimeFrame - this.timeframe,

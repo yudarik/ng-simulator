@@ -15,9 +15,10 @@
                 url: '/practice',
                 parent: 'exams',
                 params: {
-                    examParams: {}
+                    examParams: {},
+                    practiceType: ''
                 },
-                template: '<exam questions="practice.questions" timeframe="practice.timeframe" tabindex="1"></exam>',
+                template: '<exam type="practice.practiceType" questions="practice.questions" timeframe="practice.timeframe" tabindex="1"></exam>',
                 controller: 'practiceCtrl as practice',
                 resolve: {
 
@@ -33,6 +34,9 @@
                                 }
                                 return $q.reject(err);
                             })
+                    },
+                    practiceType: function($stateParams) {
+                        return $stateParams.practiceType;
                     }
                 },
                 title: 'EXAMS.TYPES.GENERAL_PRACTICE'

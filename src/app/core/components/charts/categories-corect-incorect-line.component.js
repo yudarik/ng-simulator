@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.pages.stats')
+    angular.module('Simulator.components')
         .component('categoriesCorrectIncorrectLine', {
             template: '<div ng-controller="CorrectIncorrectCtrl as categories">'+
                       '<canvas id="pie" class="chart chart-line"'+

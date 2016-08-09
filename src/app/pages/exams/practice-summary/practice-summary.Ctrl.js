@@ -22,6 +22,13 @@
         this.getGradeForDistribution = (distribution) => {
             return this.getCorrectAnswers(distribution) / distribution.length * 100;
         };
+
+        this.getLabelClass = (num) => {
+            if (num <= 50) return 'label-danger';
+            if (num <= 75) return 'label-warning';
+            if (num <= 100) return 'label-success';
+            else return 'label-default';
+        }
     }
 
     angular.module('Simulator.pages.exams.practice-summary')

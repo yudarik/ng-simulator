@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.pages.stats')
+    angular.module('Simulator.components')
         .component('userRank', {
             template: '<div ng-controller="userRankCtrl as rank">'+
                       '<canvas id="pie" class="chart chart-horizontal-bar"'+

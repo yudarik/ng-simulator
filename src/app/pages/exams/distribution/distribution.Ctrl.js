@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    function distributionCtrl($state, distribution, distributionType) {
+    function distributionCtrl($state, distribution, distributionType, practiceType) {
 
         this.distributionType = distributionType;
 
@@ -47,14 +47,12 @@
                 _.map(this.config.categories, 'questionDistribution')
             ) : [];
 
-            $state.go('exams.practice', {examParams: this.examParams});
+            $state.go('exams.practice', {examParams: this.examParams, practiceType: practiceType});
         };
 
         this.config = {};
         this.config.categories = (distributionType !== 'full-exam')? this.initQuestionDistribution() : [];
     }
-
-
 
     angular.module('Simulator.pages.exams.distribution')
         .controller('distributionCtrl', distributionCtrl);

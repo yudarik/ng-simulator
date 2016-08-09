@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.pages.stats')
+    angular.module('Simulator.components')
         .component('categoriesGradeRadar', {
             template: '<div ng-controller="CategoriesChartsCtrl as categories">'+
                       '<canvas id="pie" class="chart chart-radar"'+

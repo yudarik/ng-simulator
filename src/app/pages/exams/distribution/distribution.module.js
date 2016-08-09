@@ -22,6 +22,9 @@
                     },
                     distributionType: function() {
                         return 'general-practice'
+                    },
+                    practiceType: function() {
+                        return 'PRACTICE';
                     }
                 },
                 title: 'EXAMS.TYPES.GENERAL_PRACTICE',
@@ -40,6 +43,9 @@
                     },
                     distributionType: function() {
                         return 'full-exam'
+                    },
+                    practiceType: function() {
+                        return 'EXAM';
                     }
                 },
                 title: 'EXAMS.TYPES.FULL_EXAM',
