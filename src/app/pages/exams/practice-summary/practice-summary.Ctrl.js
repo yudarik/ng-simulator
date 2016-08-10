@@ -20,16 +20,19 @@
             return correctAnswers || 0;
         };
 
-        _.forEach(this.questionsDistribution, (questions, categoryId)=>{
+        _.forEach(this.questionsDistribution, (questions)=>{
             var obj = {
-                category: questions[0].category,
+                category: {
+                    name: questions[0].category.categoryName,
+                    id: questions[0].category.categoryID
+                },
                 totalQuestionsAskedInCategory: questions.length,
                 questionIDsCorrectlyAnswered: [],
                 questionIDsIncorrectlyAnswered: []
             };
 
             questions.forEach(question => {
-                if (question.chosenAns === question.corectAns) {
+                if (question.chosenAns === question.correctAns) {
                     obj.questionIDsCorrectlyAnswered.push(question.questionID);
                 } else {
                     obj.questionIDsIncorrectlyAnswered.push(question.questionID);
@@ -44,7 +47,7 @@
         };
 
         this.getLabelClass = (num) => {
-            if (num <= 50) return 'label-danger';
+            if (num <= 55) return 'label-danger';
             if (num <= 75) return 'label-warning';
             if (num <= 100) return 'label-success';
             else return 'label-default';

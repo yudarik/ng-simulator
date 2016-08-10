@@ -7,16 +7,16 @@
 
     angular.module('Simulator.components')
         .component('userRank', {
-            template: '<div ng-controller="userRankCtrl as rank">'+
+            template: '<div>'+
                       '<canvas id="pie" class="chart chart-horizontal-bar"'+
-                      'chart-data="rank.data" '+
-                      'chart-labels="rank.labels" '+
-                      'chart-series="rank.series"'+
-                      'chart-options="rank.options">'+
+                      'chart-data="$ctrl.data" '+
+                      'chart-labels="$ctrl.labels" '+
+                      'chart-series="$ctrl.series"'+
+                      'chart-options="$ctrl.options">'+
                       '</canvas>'+
-                      '</div>'
-        })
-        .controller('userRankCtrl', userRankCtrl);
+                      '</div>',
+            controller: userRankCtrl
+        });
 
     /** @ngInject */
     function userRankCtrl($translate, customerStatsService) {

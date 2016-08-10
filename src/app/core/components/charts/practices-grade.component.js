@@ -7,16 +7,16 @@
 
     angular.module('Simulator.components')
         .component('practicesGrade', {
-            template: '<div ng-controller="practicesGradeCtrl as grade">'+
+            template: '<div>'+
                       '<canvas id="practices_grade" class="chart chart-bar"'+
-                      'chart-data="grade.data" '+
-                      'chart-labels="grade.labels" '+
-                      'chart-options="grade.options"'+
-                      'chart-click="grade.onClick">'+
+                      'chart-data="$ctrl.data" '+
+                      'chart-labels="$ctrl.labels" '+
+                      'chart-options="$ctrl.options"'+
+                      'chart-click="$ctrl.onClick">'+
                       '</canvas>'+
-                      '</div>'
-        })
-        .controller('practicesGradeCtrl', practicesGradeCtrl);
+                      '</div>',
+            controller: practicesGradeCtrl
+        });
 
     /** @ngInject */
     function practicesGradeCtrl($translate, $filter, $state, examService) {

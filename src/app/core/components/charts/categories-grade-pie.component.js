@@ -8,24 +8,26 @@
     angular.module('Simulator.components')
         .component('categoriesGradeRadar', {
             bindings: {
-                categoriesStats: '='
+                stats: '='
             },
-            template: '<div ng-controller="CategoriesChartsCtrl as categories">'+
+            template: '<div>'+
                       '<canvas id="pie" class="chart chart-radar"'+
-                      'chart-data="categories.radar.data" '+
-                      'chart-labels="categories.chart.labels" '+
-                      'chart-series="categories.radar.series"'+
-                      'chart-options="categories.radar.options">'+
+                      'chart-data="$ctrl.radar.data" '+
+                      'chart-colors="$ctrl.chart.colors" '+
+                      'chart-labels="$ctrl.chart.labels" '+
+                      'chart-series="$ctrl.radar.series"'+
+                      'chart-options="$ctrl.radar.options">'+
                       '</canvas>'+
-                      '</div>'
-        })
-        .controller('CategoriesChartsCtrl', CategoriesChartsCtrl);
+                      '</div>',
+            controller: CategoriesChartsCtrl
+        });
 
     /** @ngInject */
-    function CategoriesChartsCtrl($scope, $translate, customerStatsService) {
+    function CategoriesChartsCtrl($translate, customerStatsService) {
 
         this.chart = {
-            labels: []
+            labels: [],
+            colors: ['#45b7cd', '#ff6384', '#ff8e72']
         };
         this.radar = {
             data: [],
@@ -48,20 +50,25 @@
             return ((cat.questionIDsCorrectlyAnswered.length / cat.totalQuestionsAskedInCategory) * 100);
         }
 
-        if (!this.categoriesStats) {
+        if (!this.stats) {
 
             customerStatsService.getCategories().then(init);
         } else {
-            init(this.categoriesStats);
+            init(this.stats);
         }
 
-        $scope.$watch(()=>{
-            return this.categoriesStats;
-        }, (oldVal, newVal) =>{
-            if (oldVal === newVal) return;
+        this.$onInit = () => {
+            console.log(this.stats);
+        };
 
-            init(this.categoriesStats);
-        })
+        this.$onChanges = (changes) =>  {
+
+            if (changes && changes.stats){
+                this.stats = changes.stats.newValue;
+
+                init(this.stats);
+            }
+        };
     }
 
 })();

@@ -19,7 +19,10 @@
                 controller: 'practiceSummaryCtrl as practiceSummary',
                 templateUrl: 'app/pages/exams/practice-summary/practice-summary.html',
                 resolve: {
-                    summary: function($stateParams) {
+                    summary: function($state, $stateParams) {
+                        if (!$stateParams.examSummary) {
+                            $state.go('dashboard')
+                        }
                         return $stateParams.examSummary;
                     }
                 },

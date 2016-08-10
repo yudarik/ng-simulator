@@ -7,16 +7,16 @@
 
     angular.module('Simulator.components')
         .component('categoriesCorrectIncorrectLine', {
-            template: '<div ng-controller="CorrectIncorrectCtrl as categories">'+
+            template: '<div>'+
                       '<canvas id="pie" class="chart chart-line"'+
-                      'chart-data="categories.chart.data" '+
-                      'chart-labels="categories.chart.labels" '+
-                      'chart-series="categories.chart.series"'+
-                      'chart-options="categories.chart.options">'+
+                      'chart-data="$ctrl.chart.data" '+
+                      'chart-labels="$ctrl.chart.labels" '+
+                      'chart-series="$ctrl.chart.series"'+
+                      'chart-options="$ctrl.chart.options">'+
                       '</canvas>'+
-                      '</div>'
-        })
-        .controller('CorrectIncorrectCtrl', CorrectIncorrectCtrl);
+                      '</div>',
+            controller: CorrectIncorrectCtrl
+        });
 
     /** @ngInject */
     function CorrectIncorrectCtrl($translate, customerStatsService) {

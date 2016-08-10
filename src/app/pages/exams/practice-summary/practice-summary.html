@@ -32,7 +32,7 @@
 
         <h3 class="row text-center">{{::'EXAMS.SUMMARY.QUESTION_DISTRIBUTION'|translate}}</h3>
 
-        <table class="table table-condensed col-xs-12 col-md-6">
+        <table class="table table-condensed col-xs-12 col-md-4">
             <thead>
                 <th>{{::'EXAMS.SUMMARY.CATEGORY'|translate}}</th>
                 <th>{{::'EXAMS.SUMMARY.QUESTIONS_COUNT'|translate}}</th>
@@ -44,28 +44,29 @@
                     <td>{{::dist[0].category.categoryName}}</td>
                     <td>{{::dist.length}}</td>
                     <td>{{::practiceSummary.getCorrectAnswers(dist)}}</td>
-                    <td><span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.getGradeForDistribution(dist))">{{::practiceSummary.getGradeForDistribution(dist) | number}}%</span></td>
+                    <td><span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.getGradeForDistribution(dist))">{{::practiceSummary.getGradeForDistribution(dist) | number:0}}%</span></td>
                 </tr>
                 <tr class="info">
                     <td>{{::'EXAMS.SUMMARY.LABEL'|translate}}</td>
                     <td>{{::practiceSummary.summary.questions.length}}</td>
                     <td>{{::practiceSummary.getCorrectAnswers(practiceSummary.summary.questions)}}</td>
-                        <td><span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.summary.grade)">{{practiceSummary.summary.grade|number}}</span></td>
+                    <td><span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.summary.grade)">{{practiceSummary.summary.grade|number:0}}</span></td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="col-xs-12 col-md-6" ng-if="practiceSummary.categoriesStats.length > 0">
-            <categories-grade-radar categories-stats="practiceSummary.categoriesStats"></categories-grade-radar>
-        </div>
-
-        <!--<pre style="direction:ltr">{{::practiceSummary.summary|json}}</pre>-->
-        <div class="row"><br/></div>
-        <div class="row text-center">
-            <div class="col-md-offset-3 col-md-6">
-                <a class="btn btn-default" ui-sref="exams.practice-solution({practiceSolution: practiceSummary.summary.questions})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>
-                <a class="btn btn-default">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</a>
+        <div class="graph vertical centered table-condensed col-xs-12 col-md-8">
+            <br><br><br>
+            <categories-grade-radar stats="practiceSummary.categoriesStats"></categories-grade-radar>
+            <div class="row text-center">
+                <br/>
+                <br>
+                <div class="col-xs-12">
+                    <a class="btn btn-default" ui-sref="exams.practice-solution({practiceSolution: practiceSummary.summary.questions})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>
+                    <a class="btn btn-default">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</a>
+                </div>
             </div>
         </div>
+
     </div>
 </div>
