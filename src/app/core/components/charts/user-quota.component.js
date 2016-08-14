@@ -7,22 +7,22 @@
 
     angular.module('Simulator.components')
         .component('userQuota', {
-            template: '<div class="col-xs-6">'+
+            template:
+                      '<div class="col-xs-12">'+
                           '<canvas class="chart chart-pie"'+
-                          'chart-data="$ctrl.questionsQuota.data" '+
-                          'chart-labels="$ctrl.questionsQuota.labels" '+
-                          'chart-series="$ctrl.questionsQuota.series"'+
-
+                          'chart-data="$ctrl.newQuestionsQuota.data" '+
+                          'chart-labels="$ctrl.newQuestionsQuota.labels" '+
                           'chart-options="$ctrl.options">'+
                           '</canvas>'+
                       '</div>'+
-                        '<div class="col-xs-6">'+
+                      '<div class="chartBottomMargin"></div>'+
+                      '<div class="col-xs-12">'+
                         '<canvas class="chart chart-pie"'+
-                        'chart-data="$ctrl.practicesPerformed.data" '+
-                        'chart-labels="$ctrl.practicesPerformed.labels" '+
+                        'chart-data="$ctrl.postCreditQuestionQuota.data" '+
+                        'chart-labels="$ctrl.postCreditQuestionQuota.labels" '+
                         'chart-options="$ctrl.options">'+
                         '</canvas>'+
-                        '</div>',
+                      '</div>',
             controller: userQuotaCtrl
         });
 
@@ -31,36 +31,33 @@
         this.options = {
             legend: {
                 display: true,
-                position: 'bottom'
+                position: 'right'
             }
         };
 
-        this.questionsQuota = {
+        this.newQuestionsQuota = {
             labels: [],
             data: []
         };
-        this.practicesPerformed = {
+        this.postCreditQuestionQuota = {
             labels: [],
             data: []
         };
-
         customerStatsService.getQuota().then((quota) => {
 
-            this.questionsQuota.data = [
+            this.newQuestionsQuota.data = [
                 quota['totalNewQuestionsQuota'] - quota['leftNewQuestionsQuota'],
                 quota['leftNewQuestionsQuota']
             ];
-            this.questionsQuota.labels[0] = $translate.instant('STATS.ACCOUNT.SPENTNEWQUESTIONSQUOTA');
-            this.questionsQuota.labels[1] = $translate.instant('STATS.ACCOUNT.LEFTNEWQUESTIONSQUOTA');
+            this.newQuestionsQuota.labels[0] = $translate.instant('STATS.ACCOUNT.SPENTNEWQUESTIONSQUOTA');
+            this.newQuestionsQuota.labels[1] = $translate.instant('STATS.ACCOUNT.LEFTNEWQUESTIONSQUOTA');
 
-            this.practicesPerformed.data = [
+            this.postCreditQuestionQuota.data = [
                 quota['totalPostCreditQuestionsQuota'] - quota['leftPostCreditQuestionsQuota'],
                 quota['leftPostCreditQuestionsQuota']
             ];
-            this.practicesPerformed.labels[0] = $translate.instant('STATS.ACCOUNT.SPENTPOSTCREDITQUESTIONSQUOTA');
-            this.practicesPerformed.labels[1] = $translate.instant('STATS.ACCOUNT.LEFTPOSTCREDITQUESTIONSQUOTA');
-
-
+            this.postCreditQuestionQuota.labels[0] = $translate.instant('STATS.ACCOUNT.SPENTPOSTCREDITQUESTIONSQUOTA');
+            this.postCreditQuestionQuota.labels[1] = $translate.instant('STATS.ACCOUNT.LEFTPOSTCREDITQUESTIONSQUOTA');
         });
     }
 

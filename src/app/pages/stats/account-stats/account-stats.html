@@ -1,58 +1,8 @@
 <!--<pre style="direction: ltr">{{::accountStats.quota | json}}</pre>-->
 <div class="row panel">
     <div class="col-md-12 panel-body">
-        <div class="row form-group">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.TOTAL_NEW_QUESTIONS_QUOTA'|translate}}:</label>
-            <div class="col-md-6" ng-bind="::accountStats.quota.totalNewQuestionsQuota"></div>
-        </div>
-        <div class="row form-group">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.LEFT_NEW_QUESTIONS_QUOTA'|translate}}:</label>
-            <div class="col-md-6" ng-bind="::accountStats.quota.leftNewQuestionsQuota"></div>
-        </div>
-        <div class="row form-group">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.EXAMS_PERFORMED'|translate}}:</label>
-            <div class="col-md-6" ng-bind="::accountStats.quota.examsPerformed"></div>
-        </div>
-        <div class="row form-group">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.GENERAL_PRACTICES_PERFORMED'|translate}}:</label>
-            <div class="col-md-6" ng-bind="::accountStats.quota.generalPracticesPerformed"></div>
-        </div>
-        <div class="row form-group">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.SUGGESTED_PRACTICES_PERFORMED'|translate}}:</label>
-            <div class="col-md-6" ng-bind="::accountStats.quota.suggestedPracticesPerformed"></div>
-        </div>
-        <div class="row form-group">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.PREDEFINED_EXAMS_PERFORMED'|translate}}:</label>
-            <div class="col-md-6" ng-bind="::accountStats.quota.predefinedExamsPerformed"></div>
-        </div>
-        <div class="row form-group">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.TOTAL_POST_CREDIT_QUESTIONS_QUOTA'|translate}}:</label>
-            <div class="col-md-6" ng-bind="::accountStats.quota.totalPostCreditQuestionsQuota"></div>
-        </div>
-        <div class="row form-group">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.LEFT_POST_CREDIT_QUESTIONS_QUOTA'|translate}}:</label>
-            <div class="col-md-6" ng-bind="::accountStats.quota.leftPostCreditQuestionsQuota"></div>
-        </div>
-        <div class="row form-group">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.PURCHASED_PRODUCTS'|translate}}:</label>
-            <ul class="col-md-6">
-                <li ng-repeat="product in ::accountStats.quota.purchasedProducts">
-                    <span>{{::product.dateOfPurchase|date: 'dd/MM/yyyy'}}</span> -
-                    <span>{{::product.productDisplayName}}</span> -
-                    <span>{{::product.paidAmount|currency: '&#8362;'}}</span>
-                </li>
-            </ul>
-        </div>
-        <div class="row form-group" ng-if="accountStats.quota.cancelledProducts.length">
-            <label class="control-label col-md-4 text-left">{{::'STATS.ACCOUNT.CANCELED_PRODUCTS'|translate}}:</label>
-            <ul class="col-md-6">
-                <li ng-repeat="product in ::accountStats.quota.cancelledProducts">
-                    <span>{{::product.dateOfPurchase|date: 'dd/MM/yyyy'}}</span> -
-                    <span>{{::product.productDisplayName}}</span> -
-                    <span>{{::product.paidAmount|currency: '&#8362;'}}</span>
-                </li>
-            </ul>
-        </div>
+
+        <pre class="" style="direction:ltr">{{accountStats.quota | json }}</pre>
 
     </div>
 </div>

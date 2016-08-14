@@ -4,7 +4,7 @@
 
 (function () {
     'use strict';
-    angular.module('Simulator.pages.manuals', [])
+    angular.module('Simulator.pages.manuals', ['ngTable'])
         .config(routeConfig);
 
     function routeConfig($stateProvider) {

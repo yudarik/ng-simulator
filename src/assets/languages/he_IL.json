@@ -58,8 +58,9 @@
       "TOTALNEWQUESTIONSQUOTA": "סה\"כ שאלות חדשות",
       "LEFTNEWQUESTIONSQUOTA": "יתרת שאלות חדשות",
       "SPENTNEWQUESTIONSQUOTA": "כמות שאלות חדשות שנוצלו",
+      "PRACTICESPERFORMED": "כמות תרגולים שבוצעו",
       "EXAMSPERFORMED": "כמות מבחנים שבוצעו",
-      "GENERALPRACTICESPERFORMED": "סה\"כ תרגולים כלללים שבוצעו",
+      "GENERALPRACTICESPERFORMED": "תרגולים כלללים שבוצעו",
       "SUGGESTEDPRACTICESPERFORMED": "Suggested practices performed",
       "PREDEFINEDEXAMSPERFORMED": "Predefined practices performed",
       "TOTALPOSTCREDITQUESTIONSQUOTA": "סה\"כ שאלות בתרגול חוזר",
@@ -97,6 +98,9 @@
           "CORRECT": "נכון",
           "INCORRECT": "לא נכון",
           "TOTAL_ASKED": "סך שאלות שנשאלו"
+        },
+        "PRACTICES_PERFORMED": {
+          "TITLE": "סטטיסטיקת תרגולים"
         }
       }
 
@@ -106,7 +110,10 @@
     "TITLE": "עזרי לימוד",
     "TABLE_HEADS": {
       "DOC_NAME": "שם המסמך",
-      "DOC_LINK": "קישור למסמך"
+      "DOC_LINK": "קישור למסמך",
+      "DOC_DESC": "תאור",
+      "CATEGORY": "קטגוריה",
+      "TYPE": "סוג"
     },
     "DISPLAY":  "הצג"
   }

@@ -10,37 +10,34 @@
 
     /** @ngInject */
     function routeConfig($stateProvider) {
-        $stateProvider
-            .state('exams.distribution-general', {
-                url: '/general-distribution',
-                parent: 'exams',
-                templateUrl: 'app/pages/exams/distribution/distribution.html',
-                controller: 'distributionCtrl as distribution',
-                resolve: {
-                    distribution: function($stateParams, examService) {
-                        return $stateParams.distribution || examService.getDistribution();
-                    },
-                    distributionType: function() {
-                        return 'general-practice'
-                    },
-                    practiceType: function() {
-                        return 'PRACTICE';
-                    }
+
+        var allStatesConfig = {
+            url: '/general-distribution',
+            parent: 'exams',
+            templateUrl: 'app/pages/exams/distribution/distribution.html',
+            controller: 'distributionCtrl as distribution',
+            resolve: {
+                distribution: function($stateParams, examService) {
+                    return $stateParams.distribution || examService.getDistribution();
                 },
-                title: 'EXAMS.TYPES.GENERAL_PRACTICE',
-                sidebarMeta: {
-                    order: 300,
+                distributionType: function() {
+                    return 'general-practice'
+                },
+                practiceType: function() {
+                    return 'PRACTICE';
                 }
-            })
-            .state('exams.distribution-full', {
+            },
+            title: 'EXAMS.TYPES.GENERAL_PRACTICE',
+            sidebarMeta: {
+                order: 300,
+            }
+        };
+
+        $stateProvider
+            .state('exams.distribution-general', allStatesConfig)
+            .state('exams.distribution-full', _.assign({}, allStatesConfig, {
                 url: '/full-exam-distribution',
-                parent: 'exams',
-                templateUrl: 'app/pages/exams/distribution/distribution.html',
-                controller: 'distributionCtrl as distribution',
                 resolve: {
-                    distribution: function($stateParams, examService) {
-                        return $stateParams.distribution || examService.getDistribution();
-                    },
                     distributionType: function() {
                         return 'full-exam'
                     },
@@ -48,10 +45,16 @@
                         return 'EXAM';
                     }
                 },
-                title: 'EXAMS.TYPES.FULL_EXAM',
-                sidebarMeta: {
-                    order: 100,
-                }
-            });
+                title: 'EXAMS.TYPES.FULL_EXAM'
+            }))
+            .state('exams.post-credit', _.assign({}, allStatesConfig, {
+                url: '/post-credit-distribution',
+                resolve: {
+                    practiceType: function() {
+                        return 'POST-CREDIT';
+                    }
+                },
+                title: 'EXAMS.TYPES.POST_CREDIT ',
+            }))
     }
 })();

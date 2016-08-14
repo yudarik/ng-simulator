@@ -101,11 +101,11 @@
                     order: 400
                 }
             })
-            .state('exams.post-credit', {
+            /*.state('exams.post-credit', {
                 url: '/post-credit',
                 parent: 'exams',
-                //template: '<exam questions="general.questions" timeframe="general.timeframe" tabindex="1"></exam>',
-                template: '<pre style="direction: ltr">{{::postCredit.quota | json}}</pre>',
+                template: '<exam questions="general.questions" timeframe="general.timeframe" tabindex="1"></exam>',
+                //template: '<pre style="direction: ltr">{{::postCredit.quota | json}}</pre>',
                 controller: function(quota) {
                     this.quota = quota;
                 },
@@ -119,6 +119,6 @@
                 sidebarMeta: {
                     order: 400
                 }
-            })
+            })*/
     }
 })();

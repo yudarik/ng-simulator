@@ -57,10 +57,6 @@
             init(this.stats);
         }
 
-        this.$onInit = () => {
-            console.log(this.stats);
-        };
-
         this.$onChanges = (changes) =>  {
 
             if (changes && changes.stats){
