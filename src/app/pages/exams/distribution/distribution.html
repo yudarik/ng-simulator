@@ -15,7 +15,7 @@
                 <div class="form-group col-md-4 pull-right">
                     <label for class="col-sm-8 control-label pull-right"><b ng-bind="::'EXAMS.DISTRIBUTION.TOTAL_QUESTIONS'|translate"></b></label>
                     <div class="col-sm-4">
-                        <input type="number" class="form-control" ng-model="distribution.examParams.totalQuestion" min="0" max="{{::distribution.examParams.totalQuestion}}" ng-change="distribution.initQuestionDistribution()">
+                        <input type="number" class="form-control" ng-model="distribution.examParams.totalQuestion" min="1" max="{{::distribution.examParams.totalQuestion}}" ng-change="distribution.initQuestionDistribution()">
                     </div>
                 </div>
             </div>
@@ -52,19 +52,19 @@
                         <div class="pull-right">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="timeFrame" value="UNLIMITED" ng-model="distribution.examParams.timeFrame"
-                                       ng-checked="distribution.examParams.timeFrame === 'UNLIMITED'"><span>ללא מגבלת זמן</span>
+                                       ng-checked="distribution.examParams.timeFrame === 'UNLIMITED'"><span>{{::'EXAMS.DISTRIBUTION.TIMEFRAME.UNLIMITED'|translate}}</span>
                             </label>
                         </div>
                         <div class="pull-right">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="timeFrame" value="NORMAL" ng-model="distribution.examParams.timeFrame"
-                                       ng-checked="distribution.examParams.timeFrame === 'NORMAL'"><span>רגיל</span>
+                                       ng-checked="distribution.examParams.timeFrame === 'NORMAL'"><span>{{::'EXAMS.DISTRIBUTION.TIMEFRAME.REGULAR'|translate}}</span>
                             </label>
                         </div>
                         <div class="pull-right">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="timeFrame" value="EXTENDED" ng-model="distribution.examParams.timeFrame"
-                                       ng-checked="distribution.examParams.timeFrame === 'EXTENDED'"><span>הערכת זמן</span>
+                                       ng-checked="distribution.examParams.timeFrame === 'EXTENDED'"><span>{{::'EXAMS.DISTRIBUTION.TIMEFRAME.EXTENDED'|translate}}</span>
                             </label>
                         </div>
                     </div>

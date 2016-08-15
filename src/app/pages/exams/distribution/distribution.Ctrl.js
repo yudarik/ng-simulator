@@ -5,12 +5,12 @@
 (function () {
     'use strict';
 
-    function distributionCtrl($state, distribution, distributionType, practiceType) {
+    function distributionCtrl($state, dist, distributionType, practiceType) {
 
         this.distributionType = distributionType;
 
         this.examParams = {
-            totalQuestion: distribution.questionsInExam,
+            totalQuestion: dist.questionsInExam,
             questionDistribution: [],
             difficulty: 'MEDIUM',
             timeFrame: 'NORMAL'
@@ -20,7 +20,7 @@
 
             var total = this.examParams.totalQuestion;
 
-            var distMap = _.map(distribution.categories, (category, index)=>{
+            var distMap = _.map(dist.categories, (category, index)=>{
 
                 if (index < this.examParams.totalQuestion) {
                     category.questionDistribution = 1;

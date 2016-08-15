@@ -11,33 +11,37 @@
     /** @ngInject */
     function routeConfig($stateProvider) {
 
-        var allStatesConfig = {
-            url: '/general-distribution',
-            parent: 'exams',
-            templateUrl: 'app/pages/exams/distribution/distribution.html',
-            controller: 'distributionCtrl as distribution',
-            resolve: {
-                distribution: function($stateParams, examService) {
-                    return $stateParams.distribution || examService.getDistribution();
-                },
-                distributionType: function() {
-                    return 'general-practice'
-                },
-                practiceType: function() {
-                    return 'PRACTICE';
-                }
-            },
-            title: 'EXAMS.TYPES.GENERAL_PRACTICE',
-            sidebarMeta: {
-                order: 300,
-            }
-        };
-
         $stateProvider
-            .state('exams.distribution-general', allStatesConfig)
-            .state('exams.distribution-full', _.assign({}, allStatesConfig, {
-                url: '/full-exam-distribution',
+            .state('exams.distribution-general', {
+                url: '/general-distribution',
+                parent: 'exams',
+                templateUrl: 'app/pages/exams/distribution/distribution.html',
+                controller: 'distributionCtrl as distribution',
                 resolve: {
+                    dist: function($stateParams, examService) {
+                        return $stateParams.distribution || examService.getDistribution();
+                    },
+                    distributionType: function() {
+                        return 'general-practice'
+                    },
+                    practiceType: function() {
+                        return 'PRACTICE';
+                    }
+                },
+                title: 'EXAMS.TYPES.GENERAL_PRACTICE',
+                sidebarMeta: {
+                    order: 300
+                }
+            })
+            .state('exams.distribution-full', {
+                url: '/full-exam-distribution',
+                parent: 'exams',
+                templateUrl: 'app/pages/exams/distribution/distribution.html',
+                controller: 'distributionCtrl as distribution',
+                resolve: {
+                    dist: function($stateParams, examService) {
+                        return $stateParams.distribution || examService.getDistribution();
+                    },
                     distributionType: function() {
                         return 'full-exam'
                     },
@@ -45,16 +49,31 @@
                         return 'EXAM';
                     }
                 },
-                title: 'EXAMS.TYPES.FULL_EXAM'
-            }))
-            .state('exams.post-credit', _.assign({}, allStatesConfig, {
+                title: 'EXAMS.TYPES.FULL_EXAM',
+                sidebarMeta: {
+                    order: 300
+                }
+            })
+            .state('exams.post-credit', {
                 url: '/post-credit-distribution',
+                parent: 'exams',
+                templateUrl: 'app/pages/exams/distribution/distribution.html',
+                controller: 'distributionCtrl as distribution',
                 resolve: {
+                    dist: function($stateParams, examService) {
+                        return $stateParams.distribution || examService.getDistribution();
+                    },
+                    distributionType: function() {
+                        return 'general-practice'
+                    },
                     practiceType: function() {
-                        return 'POST-CREDIT';
+                        return 'POST_CREDIT_PRACTICE';
                     }
                 },
-                title: 'EXAMS.TYPES.POST_CREDIT ',
-            }))
+                title: 'EXAMS.TYPES.POST_CREDIT_PRACTICE',
+                sidebarMeta: {
+                    order: 300
+                }
+            })
     }
 })();

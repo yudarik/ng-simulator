@@ -14,6 +14,7 @@
     "TYPES": {
       "TITLE": "סוגי תרגול",
       "FULL_EXAM": "בחינה מלאה",
+      "POST_CREDIT_PRACTICE": "תרגול חוזר",
       "GENERAL_PRACTICE": "תרגול כללי",
       "PRACTICE_SUMMARY": "סיכום וניתוח תוצאות",
       "WEAK_AREAS": "תרגול בנקודות חולשה",
@@ -46,6 +47,11 @@
         "MEDIUM": "בינוני",
         "HARD": "קשה",
         "START": "התחל תרגול"
+      },
+      "TIMEFRAME": {
+        "UNLIMITED": "ללא מגבלת זמן",
+        "REGULAR": "רגיל",
+        "EXTENDED": "הערכת זמן"
       }
     },
     "BUTTONS": {
@@ -113,7 +119,8 @@
       "DOC_LINK": "קישור למסמך",
       "DOC_DESC": "תאור",
       "CATEGORY": "קטגוריה",
-      "TYPE": "סוג"
+      "TYPE": "סוג",
+      "OTHER": "אחר"
     },
     "DISPLAY":  "הצג"
   }

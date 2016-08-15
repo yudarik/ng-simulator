@@ -1,3 +1,13 @@
 .table-panel {
   height: 295px;
 }
+.flip {
+  .table {
+    .ng-table-header {
+      text-align: right;
+    }
+    a {
+      cursor: pointer;
+    }
+  }
+}
