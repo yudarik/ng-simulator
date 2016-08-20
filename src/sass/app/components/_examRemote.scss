@@ -7,6 +7,8 @@
   overflow: hidden;
   direction: ltr;
 
+
+
   &.panel > .panel-body {
     padding: 15px;
   }
@@ -81,6 +83,48 @@
 
     .nav, .finish {
         margin-bottom: 15px;
+    }
+  }
+
+  @media all and (max-width: 768px) {
+    position: relative!important;
+    top: 0;
+    bottom: auto;
+    width: 100%;
+    height: 120px;
+
+    .exam-remote {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .exam-nav.buttons {
+      position: relative;
+      width: 100%;
+      float: right;
+      right: 0;
+      left: auto;
+      display: inline-flex;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      height: auto;
+      z-index: 0;
+    }
+    .arrows {
+      width: 35%;
+
+      .nav {
+        float: right;
+        margin-bottom: 0;
+        
+        .invisible {
+          display: none;
+        }
+      }
+      .finish {
+        float: left;
+        margin-bottom: 0;
+      }
     }
   }
 }

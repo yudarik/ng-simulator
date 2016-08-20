@@ -26,7 +26,8 @@
                 },
                 title: 'MANUALS.TITLE',
                 sidebarMeta: {
-
+                    icon: 'ion-university',
+                    order: '300'
                 }
             })
     }

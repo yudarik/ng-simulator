@@ -10,41 +10,37 @@
                 manuals: '='
             },
             controller: manualsCtrl,
-            template: [
-                '<div class="row">',
-                '   <div class="panel panel-default">',
-                '       <div class="panel-body">',
-                '           <div class="col-xs-12">',
-                '               <table class="table table-hover table-condensed flip" direction="rtl" ng-table="$ctrl.tableParams">',
-                '                   <colroup>',
-/*                '                       <col width="20%" />',*/
-                '                       <col width="40%" />',
-                '                       <col width="40%" />',
-                '                       <col width="20%" />',
-                '                   </colgroup>',
-            '                       <tr ng-repeat-start="group in $groups" class="ng-table-group flip">',
-                                        '<td colspan="3">',
-                                            '<a href="" ng-click="group.$hideRows = !group.$hideRows">',
-                '                               <span class="glyphicon" ng-class="{ \'glyphicon-chevron-left\': group.$hideRows, \'glyphicon-chevron-down\': !group.$hideRows }"></span>',
-                        '                       <strong>{{ (group.value !== null)? group.value : \'MANUALS.TABLE_HEADS.OTHER\'|translate }}</strong>',
-                '                           </a>',
-                    '                   </td>',
-                '                   </tr>',
-                '                   <tr ng-hide="group.$hideRows" ng-repeat="manual in group.data" ng-repeat-end>',
-                /*'                       <td sortable="\'category\'" data-title="$ctrl.tableHeads.category">{{manual.category}}</td>',*/
-                '                       <td sortable="\'displayName\'" data-title="$ctrl.tableHeads.displayName">{{manual.displayName}}</td>',
-                '                       <td sortable="\'description\'" data-title="$ctrl.tableHeads.description">{{manual.description}}</td>',
-                '                       <td sortable="\'docType\'" data-title="$ctrl.tableHeads.type">',
-                '                           <a href="{{::$ctrl.getUrl(manual.id)}}" target="_blank"><i class="fa {{$ctrl.getLinkClass(manual)}}">&nbsp;</i></a>',
-            '                           </td>',
-                '                   </tr>',
-                '               </table>',
-                '           </div>',
-                '       </div>',
-                '   </div>',
-                '</div>'
-            ].join('')
-
+            template:
+                `<div class="row">
+                   <div class="panel panel-default">
+                       <div class="panel-body">
+                           <div class="col-xs-12">
+                               <table class="table table-hover table-condensed flip" direction="rtl" ng-table="$ctrl.tableParams">
+                                   <colroup>
+                                       <col width="50%" />
+                                       <col width="40%" />
+                                       <col width="10%" />
+                                   </colgroup>
+                                   <tr ng-repeat-start="group in $groups" class="ng-table-group flip">
+                                        <td colspan="3">
+                                            <a href="" ng-click="group.$hideRows = !group.$hideRows">
+                                               <span class="glyphicon" ng-class="{ \"glyphicon-chevron-left\": group.$hideRows, \"glyphicon-chevron-down\": !group.$hideRows }"></span>
+                                               <strong>{{ (group.value !== null)? group.value : \"MANUALS.TABLE_HEADS.OTHER\"|translate }}</strong>
+                                           </a>
+                                       </td>
+                                   </tr>
+                                   <tr ng-hide="group.$hideRows" ng-repeat="manual in group.data" ng-repeat-end>
+                                       <td sortable="'displayName'" data-title="$ctrl.tableHeads.displayName">{{manual.displayName}}</td>
+                                       <td sortable="'description'" data-title="$ctrl.tableHeads.description">{{manual.description}}</td>
+                                       <td sortable="'docType'" data-title="$ctrl.tableHeads.type">
+                                           <a href="{{::$ctrl.getUrl(manual.id)}}" target="_blank"><i class="fa {{$ctrl.getLinkClass(manual)}}">&nbsp;</i></a>
+                                       </td>
+                                   </tr>
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+                </div>`,
         });
 
         function manualsCtrl ($translate, NgTableParams, manualsService) {

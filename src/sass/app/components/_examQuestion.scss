@@ -36,3 +36,12 @@
     float: left;
   }
 }
+@media all and (max-width: 768px) {
+
+  .question-area {
+    width: 100%!important;
+    position: relative!important;
+    top: 0;
+    bottom: auto;
+  }
+}

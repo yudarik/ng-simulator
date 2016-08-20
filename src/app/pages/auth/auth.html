@@ -1,8 +1,8 @@
-<p class="row text-center">
+<p class="row text-center hidden-xs">
   <img ng-src="{{signin.simulator_config.logoImageURL}}"/>
 </p>
-<main class="auth-main">
-  <div class="auth-block">
+<main class="auth-main panel">
+  <div class="auth-block panel-body">
     <h1>{{::'SIGNIN.SIMULATOR_SIGNIN'|translate}}</h1>
     <a href="reg.html" class="auth-link">{{::'SIGNIN.NEW_ACCOUNT_REGISTER'|translate}}</a>
 
@@ -29,7 +29,7 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-          <button type="submit" class="btn btn-default btn-auth">{{::'SIGNIN.LOGIN_BTN'|translate}}</button>
+          <button type="submit" class="btn btn-primary btn-auth">{{::'SIGNIN.LOGIN_BTN'|translate}}</button>
           <a href class="forgot-pass">{{::'SIGNIN.FORGOT_PASSWORD'|translate}}</a>
         </div>
       </div>

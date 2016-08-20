@@ -52,6 +52,10 @@ a.al-logo {
     height: 45px;
     border-radius: 50%;
   }
+  i.fa {
+    font-size: 24px;
+    margin: 10px;
+  }
 }
 
 a.refresh-data {
@@ -153,7 +157,7 @@ a.collapse-menu-link {
 
 @media (max-width: $resXXS) {
   .user-profile{
-    min-width: 136px;
+    min-width: 100px;
   }
   a.refresh-data {
     margin-right: 10px;

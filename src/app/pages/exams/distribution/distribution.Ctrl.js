@@ -42,16 +42,24 @@
 
         this.startExam = function() {
 
-            this.examParams.questionDistribution = (distributionType !== 'full-exam')? _.zipObject(
+            this.examParams.questionDistribution = (practiceType === 'PRACTICE')? _.zipObject(
                 _.map(this.config.categories, 'id'),
                 _.map(this.config.categories, 'questionDistribution')
             ) : [];
+
+            if (practiceType === 'POST_CREDIT_PRACTICE') {
+                this.examParams.questionNumber = this.examParams.totalQuestion;
+
+                delete this.examParams.difficulty;
+                delete this.examParams.questionDistribution;
+                delete this.examParams.totalQuestion;
+            }
 
             $state.go('exams.practice', {examParams: this.examParams, practiceType: practiceType});
         };
 
         this.config = {};
-        this.config.categories = (distributionType !== 'full-exam')? this.initQuestionDistribution() : [];
+        this.config.categories = (practiceType === 'PRACTICE')? this.initQuestionDistribution() : [];
     }
 
     angular.module('Simulator.pages.exams.distribution')

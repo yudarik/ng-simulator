@@ -44,12 +44,16 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)
+
     .pipe($.sourcemaps.init())
-    .pipe(babel({
-      presets: ['es2015']
-    }))
+
     .pipe($.ngAnnotate())
+/*    .pipe(babel({
+      presets: ['es2015'],
+      compact: true
+    }))*/
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+
     .pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)

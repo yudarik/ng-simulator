@@ -20,10 +20,11 @@
                 templateUrl: 'app/pages/stats/stats.html',
                 title: 'STATS.DASHBOARD.TITLE',
                 sidebarMeta: {
+                    icon: 'ion-speedometer',
                     order: 100
                 }
             })
-            .state('account-stats', {
+           /* .state('account-stats', {
                 url: '/account-stats',
                 parent: 'auth',
                 controller: 'accountStatsCtrl as accountStats',
@@ -37,7 +38,7 @@
                 sidebarMeta: {
                     order: 400
                 }
-            })
+            })*/
     }
     function chartJsConfig(ChartJsProvider, baConfigProvider) {
         var layoutColors = baConfigProvider.colors;

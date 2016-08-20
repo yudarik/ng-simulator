@@ -6,7 +6,7 @@
   'use strict';
 
   angular.module('BlurAdmin.pages', [
-    'ui.router',
+    'ui.router'
 
     //'BlurAdmin.pages.dashboard',
     //'BlurAdmin.pages.ui',
@@ -16,7 +16,7 @@
     //'BlurAdmin.pages.charts'
     //'BlurAdmin.pages.maps',
     //'BlurAdmin.pages.profile'
-  ])
+  ]);
      /* .config(routeConfig);
 
   /!** @ngInject *!/

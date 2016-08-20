@@ -8,8 +8,7 @@
   angular.module('Simulator.pages.exams',[
       'Simulator.pages.exams.practice',
       'Simulator.pages.exams.distribution',
-      'Simulator.pages.exams.practice-summary',
-      'Simulator.pages.stats'
+      'Simulator.pages.exams.practice-summary'
   ])
       .config(routeConfig);
 
@@ -23,7 +22,7 @@
             template: '<div ui-view></div>',
             title: 'EXAMS.TYPES.TITLE',
             sidebarMeta: {
-                icon: 'ion-stats-bars',
+                icon: 'ion-clipboard',
                 order: 150
             }
         });

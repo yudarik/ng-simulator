@@ -63,6 +63,16 @@ h3.with-line {
     }
   }
 }
+.flip {
+  .notification {
+    .form-group {
+      label {
+        padding-left: 0;
+        padding-right: 26px;
+      }
+    }
+  }
+}
 
 .userpic {
   border: 1px dashed #b8b8b8;

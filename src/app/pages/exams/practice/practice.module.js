@@ -23,9 +23,8 @@
                 resolve: {
 
                     examConfig: function($state, $stateParams, $q, examService) {
-                        var config = $stateParams.examParams;
 
-                        return examService.getExam(config)
+                        return examService.getExam($stateParams.practiceType, $stateParams.examParams)
                             .then(res => res)
                             .catch(err => {
                                 if (_.get(err.data, 'description')) {
@@ -62,20 +61,19 @@
             .state('exams.weak-areas', {
                 url: '/weak-areas',
                 parent: 'exams',
-                template: ['<div class="panel col-md-offset-4 col-md-4">',
-                                '<div class="panel-body">',
-                                    '<h3>{{::\'\'|translate}}</h3>',
-                                    '<ol>',
-                                        '<li ng-repeat="item in weakAreas.practiceConfig">',
-                                            '{{::item.category.name}}',
-                                        '</li>',
-                                    '</ol>',
-                                    '<div class="col-md-12">',
-,                                        '<a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.getDistribution()})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>',
-                                    '</div>',
-                                '</div>',
-                            '</div>'
-                        ].join(''),
+                template: `<div class="panel col-md-offset-4 col-md-4">
+                                <div class="panel-body">
+                                    <h3>{{::\'\'|translate}}</h3>
+                                    <ol>
+                                        <li ng-repeat="item in weakAreas.practiceConfig">
+                                            {{::item.category.name}}
+                                        </li>
+                                    </ol>
+                                    <div class="col-md-12">
+,                                        <a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.getDistribution()})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>
+                                    </div>
+                                </div>
+                            </div>`,
                 resolve: {
                     practiceConfig: function(customerStatsService) {
                         return customerStatsService.getCategories();
@@ -100,25 +98,6 @@
                 sidebarMeta: {
                     order: 400
                 }
-            })
-            /*.state('exams.post-credit', {
-                url: '/post-credit',
-                parent: 'exams',
-                template: '<exam questions="general.questions" timeframe="general.timeframe" tabindex="1"></exam>',
-                //template: '<pre style="direction: ltr">{{::postCredit.quota | json}}</pre>',
-                controller: function(quota) {
-                    this.quota = quota;
-                },
-                controllerAs: 'postCredit',
-                resolve: {
-                    quota: function(customerStatsService) {
-                        return customerStatsService.getQuota();
-                    }
-                },
-                title: 'Post Credit',
-                sidebarMeta: {
-                    order: 400
-                }
-            })*/
+            });
     }
 })();

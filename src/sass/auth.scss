@@ -17,6 +17,24 @@ body.signin {
     margin-left: 0;
   }
 
+  &.mobile {
+    .auth-main {
+      &.panel {
+        background: #fff;
+      }
+
+      .auth-block {
+        width: 100%;
+        background: inherit;
+        color: inherit;
+
+        .control-label {
+          color: inherit;
+        }
+      }
+    }
+  }
+
 }
 
 .auth-main {
@@ -27,6 +45,9 @@ body.signin {
 
   $text-color: #ffffff;
 
+  &.panel {
+    background: transparent;
+  }
 
   .auth-block {
     width: 540px;
@@ -152,4 +173,6 @@ body.signin {
   .btn-auth {
     color: #ffffff !important;
   }
+
+
 }

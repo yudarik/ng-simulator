@@ -12,7 +12,7 @@
   },
   "EXAMS": {
     "TYPES": {
-      "TITLE": "סוגי תרגול",
+      "TITLE": "תרגולים ובחינות",
       "FULL_EXAM": "בחינה מלאה",
       "POST_CREDIT_PRACTICE": "תרגול חוזר",
       "GENERAL_PRACTICE": "תרגול כללי",
@@ -123,5 +123,23 @@
       "OTHER": "אחר"
     },
     "DISPLAY":  "הצג"
+  },
+  "USER": {
+    "SIGNOUT": "התנתק",
+    "PROFILE": "פרופיל משתמש",
+    "PROFILE_PAGE": {
+      "GENERAL_INFO": "מידע כללי",
+      "FIRST_NAME": "שם פרטי",
+      "LAST_NAME": "שם משפחה",
+      "CHANGE_PASSWORD": "שינויי סיסמא",
+      "PASSWORD": "סיסמא חדשה",
+      "CONFIRM_PASSWORD": "אימות סיסמא",
+      "CONTACT_INFO": "דרכי תקשורת",
+      "EMAIL": "דוא\"ל",
+      "PHONE": "טלפון",
+      "SEND_EMAIL_NOTIFICATIONS": "מיייל פרסומי",
+      "UPDATE_PROFILE": "עדכן פרופיל",
+      "ACCEPT_COMERCIAL_MAIL": "מאשר קבלת מייל פרסומי"
+    }
   }
 }

@@ -35,7 +35,7 @@
             })
             .state('exams.distribution-full', {
                 url: '/full-exam-distribution',
-                parent: 'exams',
+                //parent: 'exams',
                 templateUrl: 'app/pages/exams/distribution/distribution.html',
                 controller: 'distributionCtrl as distribution',
                 resolve: {
@@ -51,7 +51,7 @@
                 },
                 title: 'EXAMS.TYPES.FULL_EXAM',
                 sidebarMeta: {
-                    order: 300
+                    order: 600
                 }
             })
             .state('exams.post-credit', {

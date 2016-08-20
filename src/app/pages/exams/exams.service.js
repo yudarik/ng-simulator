@@ -27,12 +27,22 @@
                 })
         }
 
-        function getExam(params) {
-            return practices.get('practiceToPerform', params);
-        }
+        function getExam(type, params) {
 
-        function getPostCreditExam(params) {
-            return practices.get('getPostCreditPracticeToPerform', params);
+            var api = 'practiceToPerform';
+
+            switch(type) {
+                case 'POST_CREDIT_PRACTICE':
+                    api = 'postCreditPracticeToPerform';
+                    break;
+                case 'PRACTICE':
+                    api = 'practiceToPerform';
+                    break;
+                default:
+                    api = 'practiceToPerform';
+            }
+
+            return practices.get(api, params);
         }
 
         function submitExam(examResult) {
@@ -55,7 +65,6 @@
             listCategories,
             getDistribution,
             getExam,
-            getPostCreditExam,
             submitExam,
             getStats,
             getPracticeInfo
