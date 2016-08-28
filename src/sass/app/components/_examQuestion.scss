@@ -9,11 +9,7 @@
     overflow: auto;
   }
 }
-.menu-collapsed {
-  .question-area {
-    width: 74%;
-  }
-}
+
 .exam-question {
 
   .question-option {
@@ -43,5 +39,38 @@
     position: relative!important;
     top: 0;
     bottom: auto;
+  }
+}
+@media all and (min-width: 769px) and (max-width: 1024px){
+
+  .question-area {
+    width: 67%!important;
+  }
+  .menu-collapsed {
+    .question-area {
+      width: 67%!important;
+    }
+  }
+}
+@media all and (min-width: 1025px) and (max-width: 1200px){
+
+  .question-area {
+    width: 75%!important;
+  }
+  .menu-collapsed {
+    .question-area {
+      width: 80%!important;
+    }
+  }
+}
+@media all and (min-width: 1201px) and (max-width: 1600px){
+
+  .question-area {
+    width: 70%!important;
+  }
+  .menu-collapsed {
+    .question-area {
+      width: 90%!important;
+    }
   }
 }

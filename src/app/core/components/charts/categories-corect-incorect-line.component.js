@@ -7,6 +7,9 @@
 
     angular.module('Simulator.components')
         .component('categoriesCorrectIncorrectLine', {
+            bindings: {
+                titleLabel: '<'
+            },
             template: '<div>'+
                       '<canvas id="pie" class="chart chart-line"'+
                       'chart-data="$ctrl.chart.data" '+
@@ -32,6 +35,11 @@
             data: [],
             series: [],
             options: {
+                title: {
+                    display: true,
+                    text: this.titleLabel,
+                    fontSize: 14
+                },
                 legend: {
                     display: true,
                     position: 'top'

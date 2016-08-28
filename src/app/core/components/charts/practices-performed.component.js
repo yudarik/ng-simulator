@@ -7,6 +7,9 @@
 
     angular.module('Simulator.components')
         .component('practicesPerformed', {
+            bindings: {
+                titleLabel: '<'
+            },
             template: '<div class="col-xs-12">'+
                       '<canvas class="chart chart-horizontal-bar"'+
                       'chart-data="$ctrl.practicesPerformed.data" '+
@@ -26,6 +29,11 @@
             labels: [],
             data: [],
             options: {
+                title: {
+                    display: true,
+                    text: this.titleLabel,
+                    fontSize: 14
+                },
                 legend: {
                     display: false,
                     position: 'top'

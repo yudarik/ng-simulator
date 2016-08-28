@@ -1155,6 +1155,14 @@ body.signin {
     z-index: -1; }
   body.signin .al-main {
     margin-left: 0; }
+  body.signin.mobile .auth-main.panel {
+    background: #fff; }
+  body.signin.mobile .auth-main .auth-block {
+    width: 100%;
+    background: inherit;
+    color: inherit; }
+    body.signin.mobile .auth-main .auth-block .control-label {
+      color: inherit; }
 
 .auth-main {
   display: -webkit-box;
@@ -1165,6 +1173,8 @@ body.signin {
           align-items: center;
   height: 100%;
   width: 100%; }
+  .auth-main.panel {
+    background: transparent; }
   .auth-main .auth-block {
     width: 540px;
     margin: 0 auto;

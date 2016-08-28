@@ -7,6 +7,9 @@
 
     angular.module('Simulator.components')
         .component('userQuota', {
+            bindings: {
+                titleLabel: '<'
+            },
             template:
                       '<div class="col-xs-12">'+
                           '<canvas class="chart chart-pie"'+
@@ -29,6 +32,11 @@
     /** @ngInject */
     function userQuotaCtrl($translate, customerStatsService) {
         this.options = {
+            title: {
+                display: true,
+                text: this.titleLabel,
+                fontSize: 14
+            },
             legend: {
                 display: true,
                 position: 'right'

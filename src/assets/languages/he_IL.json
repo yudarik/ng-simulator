@@ -84,7 +84,9 @@
         "GENERAL": {
           "GRADE": "ציון",
           "TYPE": "סוג",
-          "TIME_SPENT": "זמן לפתרון (דקות):"
+          "TIME_SPENT": "זמן לפתרון (דקות):",
+          "DATE": "תאריך",
+          "PRACTICEID": "מס' סידורי"
         },
         "GRADES_RADAR": {
           "TITLE": "התפלגות ציונים לפי קטגוריה",
@@ -107,6 +109,9 @@
         },
         "PRACTICES_PERFORMED": {
           "TITLE": "סטטיסטיקת תרגולים"
+        },
+        "PACKAGES_QUOTA": {
+          "TITLE": "חבילות שנרכשו"
         }
       }
 

@@ -8,7 +8,8 @@
     angular.module('Simulator.components')
         .component('categoriesGradeRadar', {
             bindings: {
-                stats: '='
+                stats: '=',
+                titleLabel: '<'
             },
             template: '<div>'+
                       '<canvas id="pie" class="chart chart-radar"'+
@@ -33,6 +34,11 @@
             data: [],
             series: [],
             options: {
+                title: {
+                    display: this.titleLabel,
+                    text: this.titleLabel,
+                    fontSize: 14
+                },
                 legend: {
                     display: true,
                     position: 'bottom'

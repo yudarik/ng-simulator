@@ -7,6 +7,9 @@
 
     angular.module('Simulator.components')
         .component('userRank', {
+            bindings: {
+                titleLabel: '<'
+            },
             template: '<div>'+
                       '<canvas id="pie" class="chart chart-horizontal-bar"'+
                       'chart-data="$ctrl.data" '+
@@ -25,6 +28,11 @@
         this.data = [];
         this.series = [];
         this.options = {
+            title: {
+                display: true,
+                text: this.titleLabel,
+                fontSize: 14
+            },
             legend: {
                 display: false,
                 position: 'top'

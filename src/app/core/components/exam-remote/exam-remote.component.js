@@ -27,9 +27,9 @@
                                 </div>
                                 <div class="arrows">
                                     <div class="nav">
-                                        <button id="remote-prev" class="btn btn-default" ng-click="$ctrl.onPrev()"><i class="fa fa-arrow-left" aria-invisible="true"></i></button>
+                                        <button id="remote-prev" class="btn btn-default pull-left" ng-click="$ctrl.onPrev()"><i class="fa fa-arrow-left" aria-invisible="true"></i></button>
                                         <button class="btn btn-warning invisible"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>
-                                        <button id="remote-next" class="btn btn-default" ng-click="$ctrl.onNext()"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>
+                                        <button id="remote-next" class="btn btn-default pull-right" ng-click="$ctrl.onNext()"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>
                                     </div>
                                     <div class="finish">
                                         <button class="btn btn-success col-md-12" ng-disabled="!$ctrl.isFinishEnabled()" ng-click="$ctrl.onFinish()">Finish</button>
@@ -47,7 +47,9 @@
         };
 
         this.isFinishEnabled = () => {
-            return true;//_.every(this.remote, {chosenAns: !'' && !null && !undefined});
+            return _.every(this.remoteMap, item => {
+                return (typeof item.chosenAns !== 'undefined') && (item.chosenAns !== null) && (item.chosenAns !== '');
+            });
         };
     }
 })();
