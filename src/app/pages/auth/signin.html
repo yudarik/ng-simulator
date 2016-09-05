@@ -1,24 +1,24 @@
 <p class="row text-center hidden-xs">
   <img ng-src="{{signin.simulator_config.logoImageURL}}"/>
 </p>
-<main class="auth-main panel">
+<main class="auth-main">
   <div class="auth-block panel-body">
-    <h1>{{::'SIGNIN.SIMULATOR_SIGNIN'|translate}}</h1>
-    <a href="reg.html" class="auth-link">{{::'SIGNIN.NEW_ACCOUNT_REGISTER'|translate}}</a>
+    <h1>{{::'AUTH.SIMULATOR_SIGNIN'|translate}}</h1>
+    <a ui-sref="signup" class="auth-link">{{::'AUTH.NEW_ACCOUNT_REGISTER'|translate}}</a>
 
     <form class="form-horizontal" ng-model="signin.user" ng-submit="signin.submit()">
       <div class="form-group">
-        <label for="inputEmail3" class="col-sm-4 control-label">{{::'SIGNIN.EMAIL'|translate}}</label>
+        <label for="inputEmail3" class="col-sm-4 control-label">{{::'AUTH.EMAIL'|translate}}</label>
 
         <div class="col-sm-8">
-          <input type="email" class="form-control" id="inputEmail3" placeholder="{{::'SIGNIN.EMAIL'|translate}}" ng-model="signin.user.username">
+          <input type="email" class="form-control" id="inputEmail3" placeholder="{{::'AUTH.EMAIL'|translate}}" ng-model="signin.user.username">
         </div>
       </div>
       <div class="form-group">
-        <label for="inputPassword3" class="col-sm-4 control-label">{{::'SIGNIN.PASSWORD'|translate}}</label>
+        <label for="inputPassword3" class="col-sm-4 control-label">{{::'AUTH.PASSWORD'|translate}}</label>
 
         <div class="col-sm-8">
-          <input type="password" class="form-control" id="inputPassword3" placeholder="{{::'SIGNIN.PASSWORD'|translate}}" ng-model="signin.user.password">
+          <input type="password" class="form-control" id="inputPassword3" placeholder="{{::'AUTH.PASSWORD'|translate}}" ng-model="signin.user.password">
         </div>
       </div>
 
@@ -29,8 +29,8 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-          <button type="submit" class="btn btn-primary btn-auth">{{::'SIGNIN.LOGIN_BTN'|translate}}</button>
-          <a href class="forgot-pass">{{::'SIGNIN.FORGOT_PASSWORD'|translate}}</a>
+          <button type="submit" class="btn btn-default btn-auth">{{::'AUTH.LOGIN_BTN'|translate}}</button>
+          <a href class="forgot-pass">{{::'AUTH.FORGOT_PASSWORD'|translate}}</a>
         </div>
       </div>
 

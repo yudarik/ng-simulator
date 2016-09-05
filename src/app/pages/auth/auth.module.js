@@ -21,8 +21,13 @@
             })
             .state('signin', {
                 url: '/signin',
-                templateUrl: 'app/pages/auth/auth.html',
+                templateUrl: 'app/pages/auth/signin.html',
                 controller: 'signinController as signin'
+            })
+            .state('signup', {
+                url: '/signup',
+                templateUrl: 'app/pages/auth/signup.html',
+                controller: 'signupController as signup'
             })
             .state('signout', {
                 url: '/signout',

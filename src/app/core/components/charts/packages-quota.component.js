@@ -43,18 +43,14 @@
         };
         customerStatsService.getQuota().then((quota) => {
 
-            /*var dateOfPurchase = _.uniq(_.map(quota, 'dateOfPurchase'));
-            this.package.labels = _.map(dateOfPurchase, date => {
-                return moment(date).format('DD/MM/YY').toString();
-            });*/
-
             _.forEach(quota.purchasedProducts, (item, index)=>{
                 //this.package.labels.push(moment(item.dateOfPurchase).format('DD/MM/YY').toString());
                 this.package.labels.push(item.productDisplayName);
+
+                //this.package.data[index] = [];
                 this.package.data.push(item.questionNumber);
             });
             //this.package.labels = _.uniq(this.package.labels);
-
         });
     }
 

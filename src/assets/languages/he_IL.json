@@ -1,14 +1,18 @@
 {
   "HOME": "עמוד הבית",
-  "SIGNIN": {
+  "AUTH": {
     "SIMULATOR_SIGNIN": "כניסה לסימולטור",
+    "SIMULATOR_REGISTER": "הרשמה לסימולטור",
     "NEW_ACCOUNT_REGISTER": "לקוח חדש? הירשם",
+    "EXISTING_USER": "משתמש רשום? התחבר",
     "EMAIL": "שם משתמש (דוא'ל)",
     "PASSWORD": "סיסמא",
     "FORGOT_PASSWORD": "שככתי את הסיסמא",
     "LOGIN_BTN": "כניסה",
+    "REGISTER_BTN": "הרשם",
     "USER_PASSWARD_INCORRECT": "שם המשתמש או הסיסמא שגויים",
-    "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים"
+    "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
+    "REGISTERED_SUCCESSFULLY": "נרשמתם בהצלחה, פרטי הכניסה נשלחו לכתובת הדוא\"ל איתה נרשמתם"
   },
   "EXAMS": {
     "TYPES": {

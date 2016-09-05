@@ -45,16 +45,16 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.rev())
     .pipe(jsFilter)
 
-    .pipe($.sourcemaps.init())
+    //.pipe($.sourcemaps.init())
 
     .pipe($.ngAnnotate())
-/*    .pipe(babel({
+    .pipe(babel({
       presets: ['es2015'],
       compact: true
-    }))*/
-    .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+    }))
+    //.pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
 
-    .pipe($.sourcemaps.write('maps'))
+    //.pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
     .pipe($.sourcemaps.init())

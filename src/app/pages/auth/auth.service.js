@@ -16,6 +16,9 @@
                     return auth.customPOST(userDetails, 'login');
 
                 },
+                signup: function(userDetails) {
+                    return Restangular.all('candidates').post({emailAddress: userDetails.email});
+                },
                 signout: function() {
 
                     $rootScope.currentUser = null;

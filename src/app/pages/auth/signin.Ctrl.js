@@ -6,7 +6,7 @@
     'use strict';
 
     angular.module('Simulator.pages.auth')
-        .controller('signinController', function($scope, $translate, simulator_config, userAuthService, $state){
+        .controller('signinController', function($translate, simulator_config, userAuthService, $state){
 
             this.simulator_config = simulator_config;
 
@@ -26,7 +26,7 @@
 
                     }).catch((err)=>{
                         if (err.status === 401) {
-                            this.message = $translate.instant('SIGNIN.'+err.data.errorMessage.toUpperCase());
+                            this.message = $translate.instant('AUTH.'+err.data.errorMessage.toUpperCase());
                         } else {
                             this.message = err.data.errorMessage
                         }
