@@ -2,7 +2,6 @@
 
 var path = require('path');
 var gulp = require('gulp');
-var babel = require('gulp-babel');
 var conf = require('./conf');
 
 var $ = require('gulp-load-plugins')({
@@ -40,41 +39,34 @@ gulp.task('html', ['inject', 'partials'], function () {
   var assets;
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
-    .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-    .pipe(assets = $.useref.assets())
-    .pipe($.rev())
-    .pipe(jsFilter)
-
-    //.pipe($.sourcemaps.init())
-
-    .pipe($.ngAnnotate())
-    .pipe(babel({
-      presets: ['es2015'],
-      compact: true
-    }))
-    //.pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
-
-    //.pipe($.sourcemaps.write('maps'))
-    .pipe(jsFilter.restore)
-    .pipe(cssFilter)
-    .pipe($.sourcemaps.init())
-    .pipe($.replace('../../bower_components/bootstrap-sass/assets/fonts/bootstrap/', '../fonts/'))
-    .pipe($.minifyCss({ processImport: false }))
-    .pipe($.sourcemaps.write('maps'))
-    .pipe(cssFilter.restore)
-    .pipe(assets.restore())
-    .pipe($.useref())
-    .pipe($.revReplace())
-    .pipe(htmlFilter)
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true,
-      conditionals: true
-    }))
-    .pipe(htmlFilter.restore)
-    .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
-    .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
+      .pipe($.inject(partialsInjectFile, partialsInjectOptions))
+      .pipe(assets = $.useref.assets())
+      .pipe($.rev())
+      .pipe(jsFilter)
+      .pipe($.sourcemaps.init())
+      .pipe($.ngAnnotate())
+      //.pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+      .pipe($.sourcemaps.write('maps'))
+      .pipe(jsFilter.restore)
+      .pipe(cssFilter)
+      .pipe($.sourcemaps.init())
+      .pipe($.replace('../../bower_components/bootstrap-sass/assets/fonts/bootstrap/', '../fonts/'))
+      .pipe($.minifyCss({ processImport: false }))
+      .pipe($.sourcemaps.write('maps'))
+      .pipe(cssFilter.restore)
+      .pipe(assets.restore())
+      .pipe($.useref())
+      .pipe($.revReplace())
+      .pipe(htmlFilter)
+      .pipe($.minifyHtml({
+        empty: true,
+        spare: true,
+        quotes: true,
+        conditionals: true
+      }))
+      .pipe(htmlFilter.restore)
+      .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
+      .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
   });
 
 // Only applies for fonts from bower dependencies
