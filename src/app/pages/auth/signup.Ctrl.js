@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Created by arikyudin on 05/06/16.
  */
@@ -5,35 +7,31 @@
 (function () {
     'use strict';
 
+    angular.module('Simulator.pages.auth').controller('signupController', ["$translate", "simulator_config", "userAuthService", "$state", function ($translate, simulator_config, userAuthService, $state) {
+        var _this = this;
 
-    angular.module('Simulator.pages.auth')
-        .controller('signupController', function($translate, simulator_config, userAuthService, $state){
+        this.simulator_config = simulator_config;
 
-            this.simulator_config = simulator_config;
+        this.user = {};
 
-            this.user = {};
+        /*userAuthService.getUser().then(()=>{
+            $state.go('profile');
+            //$state.go('exams.distribution');
+        });*/
 
-            /*userAuthService.getUser().then(()=>{
-                $state.go('profile');
-                //$state.go('exams.distribution');
-            });*/
-
-            this.submit = ()=>{
-                userAuthService.signup(this.user)
-                    .then((response)=>{
-                        if (response.status === 'success') {
-                            this.message = $translate.instant('AUTH.REGISTERED_SUCCESSFULLY');
-                        }
-                    });
-                    /*.catch((err)=>{
-                        if (err.status === 401) {
-                            this.message = $translate.instant('SIGNIN.'+err.data.errorMessage.toUpperCase());
-                        } else {
-                            this.message = err.data.errorMessage
-                        }
-
-                    });*/
-            }
-        })
-
+        this.submit = function () {
+            userAuthService.signup(_this.user).then(function (response) {
+                if (response.status === 'success') {
+                    _this.message = $translate.instant('AUTH.REGISTERED_SUCCESSFULLY');
+                }
+            });
+            /*.catch((err)=>{
+                if (err.status === 401) {
+                    this.message = $translate.instant('SIGNIN.'+err.data.errorMessage.toUpperCase());
+                } else {
+                    this.message = err.data.errorMessage
+                }
+             });*/
+        };
+    }]);
 })();

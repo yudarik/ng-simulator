@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Created by arikyudin on 25/06/16.
  */
@@ -5,22 +7,24 @@
 (function () {
     'use strict';
 
+    practiceSummaryCtrl.$inject = ["summary"];
     function practiceSummaryCtrl(summary) {
+        var _this = this;
+
         this.summary = summary;
         this.categoriesStats = [];
 
         this.questionsDistribution = _.groupBy(this.summary.questions, 'category.categoryID');
 
-        this.getCorrectAnswers = (distribution) => {
-            var correctAnswers = _.countBy(distribution, (question)=>{
-                return !_.isNil(question.correctAns) && !_.isNil(question.chosenAns) &&
-                    question.correctAns === question.chosenAns;
+        this.getCorrectAnswers = function (distribution) {
+            var correctAnswers = _.countBy(distribution, function (question) {
+                return !_.isNil(question.correctAns) && !_.isNil(question.chosenAns) && question.correctAns === question.chosenAns;
             }).true;
 
             return correctAnswers || 0;
         };
 
-        _.forEach(this.questionsDistribution, (questions)=>{
+        _.forEach(this.questionsDistribution, function (questions) {
             var obj = {
                 category: {
                     name: questions[0].category.categoryName,
@@ -31,7 +35,7 @@
                 questionIDsIncorrectlyAnswered: []
             };
 
-            questions.forEach(question => {
+            questions.forEach(function (question) {
                 if (question.chosenAns === question.correctAns) {
                     obj.questionIDsCorrectlyAnswered.push(question.questionID);
                 } else {
@@ -39,22 +43,19 @@
                 }
             });
 
-            this.categoriesStats.push(obj);
+            _this.categoriesStats.push(obj);
         });
 
-        this.getGradeForDistribution = (distribution) => {
-            return this.getCorrectAnswers(distribution) / distribution.length * 100;
+        this.getGradeForDistribution = function (distribution) {
+            return _this.getCorrectAnswers(distribution) / distribution.length * 100;
         };
 
-        this.getLabelClass = (num) => {
+        this.getLabelClass = function (num) {
             if (num <= 55) return 'label-danger';
             if (num <= 75) return 'label-warning';
-            if (num <= 100) return 'label-success';
-            else return 'label-default';
-        }
+            if (num <= 100) return 'label-success';else return 'label-default';
+        };
     }
 
-    angular.module('Simulator.pages.exams.practice-summary')
-        .controller('practiceSummaryCtrl', practiceSummaryCtrl);
-
+    angular.module('Simulator.pages.exams.practice-summary').controller('practiceSummaryCtrl', practiceSummaryCtrl);
 })();

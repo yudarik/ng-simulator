@@ -1,22 +1,24 @@
+'use strict';
+
 /**
  * Created by arikyudin on 20/07/16.
  */
 
 (function () {
     'use strict';
-    angular.module('Simulator.pages.manuals')
-        .factory('manualsService', function(Restangular){
 
-            var onlineManuals = Restangular.all('onlineManuals');
+    angular.module('Simulator.pages.manuals').factory('manualsService', ["Restangular", function (Restangular) {
 
-            function list () {
-                return onlineManuals.get('');
-            }
+        var onlineManuals = Restangular.all('onlineManuals');
 
-            function get (id) {
-                return onlineManuals.getRequestedUrl(id);
-            }
+        function list() {
+            return onlineManuals.get('');
+        }
 
-            return {list, get};
-        })
+        function get(id) {
+            return onlineManuals.getRequestedUrl(id);
+        }
+
+        return { list: list, get: get };
+    }]);
 })();

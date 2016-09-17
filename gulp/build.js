@@ -2,7 +2,6 @@
 
 var path = require('path');
 var gulp = require('gulp');
-var babel = require('gulp-babel');
 var conf = require('./conf');
 
 var $ = require('gulp-load-plugins')({
@@ -44,17 +43,10 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)
-
-    //.pipe($.sourcemaps.init())
-
+    .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
-    .pipe(babel({
-      presets: ['es2015'],
-      compact: true
-    }))
-    //.pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
-
-    //.pipe($.sourcemaps.write('maps'))
+    .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+    .pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
     .pipe($.sourcemaps.init())
@@ -104,4 +96,13 @@ gulp.task('clean', function () {
   return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build', ['es6','html', 'fonts', 'other']);
+
+gulp.task('es6', () => {
+  gulp.src(path.join(conf.paths.src, '/app/**/*.es6'))
+    .pipe($.ngAnnotate())
+    .pipe($.babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('./src/app'));
+});

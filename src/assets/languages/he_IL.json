@@ -59,7 +59,8 @@
       }
     },
     "BUTTONS": {
-      "CONTINUE": "המשך"
+      "CONTINUE": "המשך",
+      "FINISH": "סייים"
     }
   },
   "STATS": {

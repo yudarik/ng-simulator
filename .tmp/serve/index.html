@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="BlurAdmin">
+<html lang="en" ng-app="Simulator">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -152,6 +152,7 @@
 
 <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
 <!-- inject:js -->
+<script src="app/app.module.js"></script>
 <script src="app/core/core.module.js"></script>
 <script src="app/pages/pages.module.js"></script>
 <script src="app/theme/theme.module.js"></script>
@@ -174,13 +175,13 @@
 <script src="app/theme/pages/profile/profile.module.js"></script>
 <script src="app/theme/pages/tables/tables.module.js"></script>
 <script src="app/theme/pages/ui/ui.module.js"></script>
+<script src="app/theme/pages/charts/amCharts/amCharts.module.js"></script>
 <script src="app/theme/pages/charts/chartJs/chartJs.module.js"></script>
 <script src="app/theme/pages/charts/chartist/chartist.module.js"></script>
 <script src="app/theme/pages/charts/morris/morris.module.js"></script>
 <script src="app/theme/pages/components/mail/mail.module.js"></script>
 <script src="app/theme/pages/components/timeline/timeline.module.js"></script>
 <script src="app/theme/pages/components/tree/tree.module.js"></script>
-<script src="app/theme/pages/charts/amCharts/amCharts.module.js"></script>
 <script src="app/theme/pages/ui/alerts/alerts.module.js"></script>
 <script src="app/theme/pages/ui/buttons/buttons.module.js"></script>
 <script src="app/theme/pages/ui/grid/grid.module.js"></script>
@@ -192,7 +193,6 @@
 <script src="app/theme/pages/ui/slider/slider.module.js"></script>
 <script src="app/theme/pages/ui/tabs/tabs.module.js"></script>
 <script src="app/theme/pages/ui/typography/typography.module.js"></script>
-<script src="app/app.js"></script>
 <script src="app/theme/theme.config.js"></script>
 <script src="app/theme/theme.configProvider.js"></script>
 <script src="app/theme/theme.constants.js"></script>
@@ -205,8 +205,8 @@
 <script src="app/pages/exams/exams.service.js"></script>
 <script src="app/pages/manuals/manuals.component.js"></script>
 <script src="app/pages/manuals/manuals.service.js"></script>
-<script src="app/pages/profile/ProfileModalCtrl.js"></script>
-<script src="app/pages/profile/ProfilePageCtrl.js"></script>
+<script src="app/pages/profile/ProfileModal.Ctrl.js"></script>
+<script src="app/pages/profile/ProfilePage.Ctrl.js"></script>
 <script src="app/pages/stats/stats.service.js"></script>
 <script src="app/theme/components/toastrLibConfig.js"></script>
 <script src="app/theme/directives/animatedChange.js"></script>
@@ -222,13 +222,14 @@
 <script src="app/theme/services/fileReader.js"></script>
 <script src="app/theme/services/preloader.js"></script>
 <script src="app/theme/services/stopableInterval.js"></script>
-<script src="app/core/components/exam/exam.component.js"></script>
 <script src="app/core/components/charts/categories-corect-incorect-line.component.js"></script>
 <script src="app/core/components/charts/categories-grade-pie.component.js"></script>
+<script src="app/core/components/charts/packages-quota.component.js"></script>
 <script src="app/core/components/charts/practices-grade.component.js"></script>
 <script src="app/core/components/charts/practices-performed.component.js"></script>
 <script src="app/core/components/charts/user-quota.component.js"></script>
 <script src="app/core/components/charts/user-rank.component.js"></script>
+<script src="app/core/components/exam/exam.component.js"></script>
 <script src="app/core/components/exam-distribution/exam-distribution.component.js"></script>
 <script src="app/core/components/exam-question/exam-question.component.js"></script>
 <script src="app/core/components/exam-remote/exam-remote.component.js"></script>
@@ -243,14 +244,14 @@
 <script src="app/theme/components/baPanel/baPanelBlur.directive.js"></script>
 <script src="app/theme/components/baPanel/baPanelBlurHelper.service.js"></script>
 <script src="app/theme/components/baPanel/baPanelSelf.directive.js"></script>
-<script src="app/theme/components/baWizard/baWizard.directive.js"></script>
-<script src="app/theme/components/baWizard/baWizardCtrl.js"></script>
-<script src="app/theme/components/baWizard/baWizardStep.directive.js"></script>
-<script src="app/theme/components/backTop/backTop.directive.js"></script>
 <script src="app/theme/components/baSidebar/BaSidebarCtrl.js"></script>
 <script src="app/theme/components/baSidebar/baSidebar.directive.js"></script>
 <script src="app/theme/components/baSidebar/baSidebar.service.js"></script>
 <script src="app/theme/components/baSidebar/baSidebarHelpers.directive.js"></script>
+<script src="app/theme/components/baWizard/baWizard.directive.js"></script>
+<script src="app/theme/components/baWizard/baWizardCtrl.js"></script>
+<script src="app/theme/components/baWizard/baWizardStep.directive.js"></script>
+<script src="app/theme/components/backTop/backTop.directive.js"></script>
 <script src="app/theme/components/contentTop/contentTop.directive.js"></script>
 <script src="app/theme/components/msgCenter/MsgCenterCtrl.js"></script>
 <script src="app/theme/components/msgCenter/msgCenter.directive.js"></script>
@@ -301,10 +302,6 @@
 <script src="app/theme/pages/ui/icons/IconsPageCtrl.js"></script>
 <script src="app/theme/pages/ui/modals/ModalsPageCtrl.js"></script>
 <script src="app/theme/pages/ui/notifications/NotificationsPageCtrl.js"></script>
-<script src="app/theme/pages/components/mail/composeBox/composeBoxCtrl.js"></script>
-<script src="app/theme/pages/components/mail/composeBox/composeModal.js"></script>
-<script src="app/theme/pages/components/mail/detail/MailDetailCtrl.js"></script>
-<script src="app/theme/pages/components/mail/list/MailListCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/areaChart/AreaChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/barChart/BarChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/combinedChart/combinedChartCtrl.js"></script>
@@ -312,6 +309,10 @@
 <script src="app/theme/pages/charts/amCharts/ganttChart/ganttChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/lineChart/LineChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/pieChart/PieChartCtrl.js"></script>
+<script src="app/theme/pages/components/mail/composeBox/composeBoxCtrl.js"></script>
+<script src="app/theme/pages/components/mail/composeBox/composeModal.js"></script>
+<script src="app/theme/pages/components/mail/detail/MailDetailCtrl.js"></script>
+<script src="app/theme/pages/components/mail/list/MailListCtrl.js"></script>
 <script src="app/theme/pages/ui/modals/notifications/NotificationsCtrl.js"></script>
 <script src="app/theme/pages/form/inputs/widgets/select/SelectpickerPanelCtrl.js"></script>
 <script src="app/theme/pages/form/inputs/widgets/select/selectpicker.directive.js"></script>
