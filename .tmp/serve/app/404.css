@@ -1,3 +1,4 @@
+@import url(theme/bootstrap-rtl.min.css);
 html {
   position: relative;
   min-width: 320px; }

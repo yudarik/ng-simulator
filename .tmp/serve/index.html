@@ -43,9 +43,9 @@
   <!-- endbuild -->
 
   <!-- Load Bootstrap RTL theme from RawGit -->
-  <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
+  <!--<link rel="stylesheet" href="http://cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">-->
 </head>
-<body ng-class="{'signin': !currentUser}" class="flip">
+<body ng-class="{'signin': !currentUser}" class="flip" dir="rtl">
 <div class="body-bg"></div>
 <main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
 
@@ -274,8 +274,6 @@
 <script src="app/theme/pages/components/mail/mailMessages.js"></script>
 <script src="app/theme/pages/components/timeline/TimelineCtrl.js"></script>
 <script src="app/theme/pages/components/tree/treeCtrl.js"></script>
-<script src="app/theme/pages/dashboard/blurFeed/BlurFeedCtrl.js"></script>
-<script src="app/theme/pages/dashboard/blurFeed/blurFeed.directive.js"></script>
 <script src="app/theme/pages/dashboard/calendar/dashboardCalendar.js"></script>
 <script src="app/theme/pages/dashboard/dashboardCalendar/DashboardCalendarCtrl.js"></script>
 <script src="app/theme/pages/dashboard/dashboardCalendar/dashboardCalendar.directive.js"></script>
@@ -289,6 +287,8 @@
 <script src="app/theme/pages/dashboard/dashboardTodo/dashboardTodo.directive.js"></script>
 <script src="app/theme/pages/dashboard/pieCharts/dashboardPieChart.js"></script>
 <script src="app/theme/pages/dashboard/popularApp/popularApp.directive.js"></script>
+<script src="app/theme/pages/dashboard/blurFeed/BlurFeedCtrl.js"></script>
+<script src="app/theme/pages/dashboard/blurFeed/blurFeed.directive.js"></script>
 <script src="app/theme/pages/dashboard/trafficChart/TrafficChartCtrl.js"></script>
 <script src="app/theme/pages/dashboard/trafficChart/trafficChart.directive.js"></script>
 <script src="app/theme/pages/dashboard/weather/WeatherCtrl.js"></script>
@@ -309,9 +309,9 @@
 <script src="app/theme/pages/charts/amCharts/ganttChart/ganttChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/lineChart/LineChartCtrl.js"></script>
 <script src="app/theme/pages/charts/amCharts/pieChart/PieChartCtrl.js"></script>
+<script src="app/theme/pages/components/mail/detail/MailDetailCtrl.js"></script>
 <script src="app/theme/pages/components/mail/composeBox/composeBoxCtrl.js"></script>
 <script src="app/theme/pages/components/mail/composeBox/composeModal.js"></script>
-<script src="app/theme/pages/components/mail/detail/MailDetailCtrl.js"></script>
 <script src="app/theme/pages/components/mail/list/MailListCtrl.js"></script>
 <script src="app/theme/pages/ui/modals/notifications/NotificationsCtrl.js"></script>
 <script src="app/theme/pages/form/inputs/widgets/select/SelectpickerPanelCtrl.js"></script>

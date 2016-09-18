@@ -10,7 +10,7 @@
     angular.module('Simulator.core', []).config(["RestangularProvider", "$translateProvider", function (RestangularProvider, $translateProvider) {
 
         $translateProvider.useStaticFilesLoader({
-            prefix: '/assets/languages/',
+            prefix: 'assets/languages/',
             suffix: '.json'
         });
 
@@ -18,7 +18,7 @@
 
         RestangularProvider.setDefaultHeaders({
             'Content-Type': 'application/json'
-        }).setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+        }).setBaseUrl('rest'); //http://nadlanline.dnsalias.com:8080/BrokerExams/rest
     }]).constant('simulator_config', {
         companyLinkURL: null,
         logoImageURL: null,
