@@ -1,55 +1,44 @@
+'use strict';
+
 /**
  * Created by arikyudin on 31/05/16.
  */
 
 (function () {
     'use strict';
-    angular.module('Simulator.components')
-        .component('examRemote', {
-            bindings: {
-                remoteMap: '=',
-                onSwitch: '&',
-                onPrev: '&',
-                onNext: '&',
-                onFinish: '&'
-            },
-            controller: examRemoteCtrl,
-            template: `<div class="panel exam-remote">
-                            <div class="panel-body">
-                                <div class="exam-nav buttons">
-                                <button class="btn btn-info remote-btn-small"
-                                ng-repeat="question in $ctrl.remoteMap track by $index"
-                                ng-class="{'active': question.active, 'answered': question.chosenAns,
-                                'incorrect': question.correctAns > -1 && question.chosenAns !== question.correctAns}"
-                                ng-click="$ctrl.navigateToQuestion(question)">
-                                {{question.index + 1}}
-                                </button>
-                                </div>
-                                <div class="arrows">
-                                    <div class="nav">
-                                        <button id="remote-prev" class="btn btn-default pull-left" ng-click="$ctrl.onPrev()"><i class="fa fa-arrow-left" aria-invisible="true"></i></button>
-                                        <button class="btn btn-warning invisible"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>
-                                        <button id="remote-next" class="btn btn-default pull-right" ng-click="$ctrl.onNext()"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>
-                                    </div>
-                                    <div class="finish">
-                                        <button class="btn btn-success col-md-12" ng-disabled="!$ctrl.isFinishEnabled()" ng-click="$ctrl.onFinish()">Finish</button>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>`
-        });
+    angular.module('Simulator.components').component('examRemote', {
+        /**ngInject*/
+        bindings: {
+            remoteMap: '=',
+            onSwitch: '&',
+            onPrev: '&',
+            onNext: '&',
+            onFinish: '&'
+        },
+        template: '<div class="panel exam-remote">\n                            <div class="panel-body">\n                                <div class="exam-nav buttons">\n                                <button class="btn btn-info remote-btn-small"\n                                ng-repeat="question in $ctrl.remoteMap track by $index"\n                                ng-class="{\'active\': question.active, \'answered\': question.chosenAns,\n                                \'incorrect\': question.correctAns > -1 && question.chosenAns !== question.correctAns}"\n                                ng-click="$ctrl.navigateToQuestion(question)">\n                                {{question.index + 1}}\n                                </button>\n                                </div>\n                                <div class="arrows">\n                                    <div class="nav">\n                                        <button id="remote-prev" class="btn btn-default pull-left" ng-click="$ctrl.onPrev()"><i class="fa fa-arrow-left" aria-invisible="true"></i></button>\n                                        <button class="btn btn-warning invisible"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>\n                                        <button id="remote-next" class="btn btn-default pull-right" ng-click="$ctrl.onNext()"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>\n                                    </div>\n                                    <div class="finish">\n                                        <button class="btn btn-success col-md-12" ng-disabled="!$ctrl.isFinishEnabled()" ng-click="$ctrl.submit()">{{::\'EXAMS.BUTTONS.FINISH\'|translate}}</button>\n                                    </div>\n                                </div>\n\n                            </div>\n                        </div>',
+        controller: ["$scope", function ($scope) {
+            'ngInject';
 
-    function examRemoteCtrl () {
+            var _this = this;
 
-        this.navigateToQuestion = (question) => {
-            this.onSwitch({question: question});
-        };
+            this.navigateToQuestion = function (question) {
+                _this.onSwitch({ question: question });
+            };
 
-        this.isFinishEnabled = () => {
-            return _.every(this.remoteMap, item => {
-                return (typeof item.chosenAns !== 'undefined') && (item.chosenAns !== null) && (item.chosenAns !== '');
-            });
-        };
-    }
+            this.isFinishEnabled = function () {
+                return _.every(_this.remoteMap, function (item) {
+                    return typeof item.chosenAns !== 'undefined' && item.chosenAns !== null && item.chosenAns !== '';
+                });
+            };
+
+            this.submit = function () {
+
+                console.log('Finish clicked');
+                return _this.onFinish();
+                //$scope.$emit('finish-exam');
+            };
+        }]
+
+    });
 })();

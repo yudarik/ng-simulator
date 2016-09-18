@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Created by arikyudin on 21/06/16.
  */
@@ -5,170 +7,167 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components')
-        .component('exam', {
-            bindings: {
-                questions: '=',
-                timeframe: '<',
-                type: '<'
-            },
-            controller: examCtrl,
-            template: `<div class="row">
-                           <div class="panel question-area col-xs-12 col-md-10" ng-show="$ctrl.questionInDisplay">
-                               <div class="panel-body">
-                                   <exam-question question="$ctrl.questionInDisplay"></exam-question>
-                               </div>
-                           </div>
-                           <exam-remote remote-map="$ctrl.questions" class="col-xs-12 col-md-2" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()"></exam-remote>,
-                       </div>
-                       <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>`
-        });
+    angular.module('Simulator.components').component('exam', {
+        /**ngInject*/
+        bindings: {
+            questions: '=',
+            timeframe: '<',
+            type: '<'
+        },
+        template: '<div class="row">\n                           <div class="panel question-area col-xs-12 col-md-10" ng-show="$ctrl.questionInDisplay">\n                               <div class="panel-body">\n                                   <exam-question question="$ctrl.questionInDisplay"></exam-question>\n                               </div>\n                           </div>\n                           <exam-remote remote-map="$ctrl.questions" class="col-xs-12 col-md-2" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()"></exam-remote>,\n                       </div>\n                       <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>',
+        controller: ["$scope", "$uibModal", "$interval", "examService", "simulatorService", function ($scope, $uibModal, $interval, examService, simulatorService) {
+            'ngInject';
 
-    function examCtrl($scope, $uibModal, $interval, examService, simulatorService) {
+            var _this = this;
 
-        var ping;
+            var ping;
 
-        var submitExam = () => {
+            var submitExam = function submitExam() {
 
-            var questionIDtoChosenAnswerMapping = {};
+                console.log('Submit Exam clicked');
 
-            this.questions.forEach(question => {
-                questionIDtoChosenAnswerMapping[question.questionID] = getUserAnswer(question);
-            });
+                var questionIDtoChosenAnswerMapping = {};
 
-            let practiseResult = {
-                practiceType: this.type,
-                predefinedExamId: "0",
-                totalTimeSecs: this.totalTimeFrame,
-                elapsedTimeSecs: this.totalTimeFrame - this.timeframe,
-                questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
+                _this.questions.forEach(function (question) {
+                    questionIDtoChosenAnswerMapping[question.questionID] = getUserAnswer(question);
+                });
+
+                var practiseResult = {
+                    practiceType: _this.type,
+                    predefinedExamId: "0",
+                    totalTimeSecs: _this.totalTimeFrame,
+                    elapsedTimeSecs: _this.totalTimeFrame - _this.timeframe,
+                    questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
+                };
+
+                return examService.submitExam(practiseResult);
             };
 
-            return examService.submitExam(practiseResult);
-        };
+            var keydownEventHandler = function keydownEventHandler(event) {
 
-        var keydownEventHandler = (e) => {
+                console.log('Key pressed');
 
-            e.stopPropagation();
-            switch (e.which) {
-                case 37:
-                    this.prevBtn.click();
-                    break;
-                case 39:
-                    this.nextBtn.click();
-                    break;
-                default: return;
-            }
-            e.preventDefault();
-        };
+                if (!event) return;
 
-        this.init = () =>{
+                event.stopPropagation();
+                switch (event.which) {
+                    case 37:
+                        _this.prevBtn.click();
+                        break;
+                    case 39:
+                        _this.nextBtn.click();
+                        break;
+                    default:
+                        return;
+                }
+                event.preventDefault();
+            };
 
-            _.forEach(this.questions, (question, index) => {
-
-                _.assign(question, {
-                    index: index,
-                    active: false,
-                    answerOptions: []
-                });
-
-                _.forEach(_.pick(question, ['ans1', 'ans2', 'ans3', 'ans4', 'ans5', 'ans6']), (value, key) => {
-                    if (value) {
-                        question.answerOptions.push({
-                            key: parseInt(key.replace('ans','')),
-                            value: value
-                        });
-                    }
-                });
-            });
-
-            ping = $interval(()=>{
-                simulatorService.ping();
-            }, 10000);
-        };
-
-        this.init();
-
-        this.totalTimeFrame = angular.copy(this.timeframe);
-        this.questionInDisplay = this.questions[0];
-        this.questionInDisplay.active = true;
-
-        this.switchQuestion = (question) => {
-
-            if (!question) {
-                return;
+            function getUserAnswer(question) {
+                var chosenAns = typeof question.chosenAns !== 'undefined' ? question.chosenAns : getRandomAnswer(question);
+                return parseInt(chosenAns);
             }
 
-            this.questionInDisplay.active = !this.questionInDisplay.active;
-            this.questionInDisplay = question;
-            this.questionInDisplay.active = !this.questionInDisplay.active;
-        };
+            function getRandomAnswer(question) {
+                var random = Math.floor(Math.random() * question.answerOptions.length);
+                return question.answerOptions[random].key;
+            }
 
-        this.move = (count) =>{
-            this.switchQuestion(_.find(this.questions, {index: this.questionInDisplay.index + count}));
-        };
+            function timeframeModal($uibModal) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    template: ['<div class="panel"><div class="panel-body">', '<h3 class="text-center">{{::"EXAMS.EXAM_FINISH_ARE_YOU_SURE"|translate}}</h3>', '<br/>', '<br/>', '<p class="text-center ">', '<button class="btn btn-success btn-space" ng-click="ok()">אישור</button>', '<button class="btn btn-default" ng-click="cancel()">ביטול</button>', '</p>', '</div></div>'].join(''),
+                    controller: ["$uibModalInstance", "$scope", function ($uibModalInstance, $scope) {
+                        $scope.ok = function () {
+                            $uibModalInstance.close();
+                        };
 
-        this.finishExam = (e, params) => {
+                        $scope.cancel = function () {
+                            $uibModalInstance.dismiss('cancel');
+                        };
+                    }],
+                    size: 'small'
+                });
 
-            if (this.timeframe > 10) {
-                timeframeModal($uibModal).then(()=>{
+                return modalInstance.result;
+            }
+
+            this.init = function () {
+
+                _.forEach(_this.questions, function (question, index) {
+
+                    _.assign(question, {
+                        index: index,
+                        active: false,
+                        answerOptions: []
+                    });
+
+                    _.forEach(_.pick(question, ['ans1', 'ans2', 'ans3', 'ans4', 'ans5', 'ans6']), function (value, key) {
+                        if (value) {
+                            question.answerOptions.push({
+                                key: parseInt(key.replace('ans', '')),
+                                value: value
+                            });
+                        }
+                    });
+                });
+
+                ping = $interval(function () {
+                    simulatorService.ping();
+                }, 10000);
+            };
+
+            this.init();
+
+            this.totalTimeFrame = angular.copy(this.timeframe);
+            this.questionInDisplay = this.questions[0];
+            this.questionInDisplay.active = true;
+
+            this.switchQuestion = function (question) {
+
+                if (!question) {
+                    return;
+                }
+
+                _this.questionInDisplay.active = !_this.questionInDisplay.active;
+                _this.questionInDisplay = question;
+                _this.questionInDisplay.active = !_this.questionInDisplay.active;
+            };
+
+            this.move = function (count) {
+                _this.switchQuestion(_.find(_this.questions, { index: _this.questionInDisplay.index + count }));
+            };
+
+            this.finishExam = function () {
+
+                console.log('FinishExam reached');
+
+                if (_this.timeframe > 10) {
+                    timeframeModal($uibModal).then(function () {
+                        submitExam();
+                    }, function () {
+                        //dismiss
+                    });
+                } else {
                     submitExam();
-                }, ()=> {
-                    //dismiss
-                });
-            } else {
-                submitExam();
-            }
-        };
+                }
+            };
 
-        this.prevBtn = $('#remote-prev');
-        this.nextBtn = $('#remote-next');
+            this.prevBtn = $('#remote-prev');
+            this.nextBtn = $('#remote-next');
 
+            $(document).keydown(keydownEventHandler);
 
-        $(document).keydown(keydownEventHandler);
-
-        $scope.$on('timeOver', this.finishExam);
-        $scope.$on('$destroy', ()=>{
-            $interval.cancel(ping);
-            $(document).off('keydown', keydownEventHandler)
-        })
-    }
-
-    function getUserAnswer(question) {
-        var chosenAns = (typeof question.chosenAns !== 'undefined')? question.chosenAns : getRandomAnswer(question);
-        return parseInt(chosenAns);
-    }
-
-    function getRandomAnswer(question) {
-        let random = Math.floor(Math.random() * question.answerOptions.length);
-        return question.answerOptions[random].key;
-    }
-
-    function timeframeModal($uibModal) {
-        var modalInstance = $uibModal.open({
-            animation: true,
-            template: [ '<div class="panel"><div class="panel-body">',
-                        '<h3 class="text-center">{{::"EXAMS.EXAM_FINISH_ARE_YOU_SURE"|translate}}</h3>',
-                        '<br/>',
-                        '<br/>',
-                        '<p class="text-center ">',
-                        '<button class="btn btn-success btn-space" ng-click="ok()">אישור</button>',
-                        '<button class="btn btn-default" ng-click="cancel()">ביטול</button>',
-                        '</p>',
-                        '</div></div>'].join(''),
-            controller: function ($uibModalInstance, $scope) {
-                $scope.ok = function () {
-                    $uibModalInstance.close();
-                };
-
-                $scope.cancel = function () {
-                    $uibModalInstance.dismiss('cancel');
-                };
-            },
-            size: 'small'
-        });
-
-        return modalInstance.result;
-    }
-
+            $scope.$on('timeOver', this.finishExam);
+            $scope.$on('$destroy', function () {
+                $interval.cancel(ping);
+                $(document).off('keydown', keydownEventHandler);
+            });
+            /*
+                            $scope.$on('finish-exam', ()=>{
+                                console.log('On finish-exam event handled');
+                                this.finishExam();
+                            })*/
+        }]
+    });
 })();

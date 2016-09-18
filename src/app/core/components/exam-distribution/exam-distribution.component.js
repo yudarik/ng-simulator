@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Created by arikyudin on 26/06/16.
  */
@@ -5,60 +7,55 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components')
-        .component('examDistribution', {
-            bindings: {
-                categories: '@',
-                distribution: '@'
-            },
-            templateUrl: 'app/pages/exams/distribution/distribution.html',
-            controller: distributionCtrl
-        })
+    angular.module('Simulator.components').component('examDistribution', {
+        bindings: {
+            categories: '@',
+            distribution: '@'
+        },
+        templateUrl: 'app/pages/exams/distribution/distribution.html',
+        controller: /** @ngInject */
+        ["$state", function distributionCtrl($state) {
+            this.examParams = {
+                totalQuestion: this.distribution.questionsInExam,
+                questionDistribution: [],
+                difficulty: 'MEDIUM',
+                timeFrame: 'NORMAL'
+            };
 
-    function distributionCtrl($state) {
-        this.examParams = {
-            totalQuestion: this.distribution.questionsInExam,
-            questionDistribution: [],
-            difficulty: 'MEDIUM',
-            timeFrame: 'NORMAL'
-        };
+            this.initQuestionDistribution = function () {
+                var _this = this;
 
-        this.initQuestionDistribution = function() {
+                var total = this.examParams.totalQuestion;
 
-            var total = this.examParams.totalQuestion;
+                var distMap = _.map(this.categories, function (category, index) {
 
-            var distMap = _.map(this.categories, (category, index)=>{
+                    if (index < _this.examParams.totalQuestion) {
+                        category.questionDistribution = 1;
+                        total--;
+                    } else {
+                        category.questionDistribution = 0;
+                    }
 
-                if (index < this.examParams.totalQuestion) {
-                    category.questionDistribution = 1;
+                    return category;
+                });
+
+                while (total > 0) {
+                    distMap[parseInt(Math.random() * distMap.length)].questionDistribution++;
                     total--;
-                } else {
-                    category.questionDistribution = 0;
                 }
 
-                return category;
-            });
+                return distMap;
+            };
 
-            while (total > 0) {
-                distMap[parseInt(Math.random()*distMap.length)].questionDistribution++;
-                total--;
-            }
+            this.startExam = function () {
 
-            return distMap;
-        };
+                this.examParams.questionDistribution = _.zipObject(_.map(this.config.categories, 'id'), _.map(this.config.categories, 'questionDistribution'));
 
-        this.startExam = function() {
+                $state.go('exams.full-exam', { examParams: this.examParams });
+            };
 
-            this.examParams.questionDistribution = _.zipObject(
-                _.map(this.config.categories, 'id'),
-                _.map(this.config.categories, 'questionDistribution')
-            );
-
-            $state.go('exams.full-exam', {examParams: this.examParams})
-        };
-
-        this.config = {};
-        this.config.categories = this.initQuestionDistribution();
-    }
-
+            this.config = {};
+            this.config.categories = this.initQuestionDistribution();
+        }]
+    });
 })();
