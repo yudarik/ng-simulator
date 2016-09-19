@@ -5,7 +5,8 @@
 (function () {
     'use strict';
 
-    function practiceSummaryCtrl(summary) {
+    function practiceSummaryCtrl(summary, simulator_config) {
+        this.simulator_config = simulator_config;
         this.summary = summary;
         this.categoriesStats = [];
 

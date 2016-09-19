@@ -18,7 +18,7 @@
                 .setDefaultHeaders({
                     'Content-Type': 'application/json'
                 })
-                .setBaseUrl('rest'); //http://nadlanline.dnsalias.com:8080/BrokerExams/rest
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
         })
         .constant('simulator_config',{
             companyLinkURL:                         null,
@@ -39,9 +39,13 @@
             postCreditModeEnabled:                  null,
             sendingLastChanceToEnrollEmail:         null
         })
-        .run(function(simulator_config, simulatorService){
+        .run(function($rootScope, simulator_config, simulatorService){
+
+            $rootScope.appTitle = 'Loading...';
+
             simulatorService.getStatus().then(config => {
                 _.assign(simulator_config, config);
+                $rootScope.appTitle = simulator_config.applicationTitle;
             })
         })
 })();

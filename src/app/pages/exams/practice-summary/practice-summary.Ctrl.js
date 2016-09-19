@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Created by arikyudin on 25/06/16.
@@ -7,10 +7,11 @@
 (function () {
     'use strict';
 
-    practiceSummaryCtrl.$inject = ["summary"];
-    function practiceSummaryCtrl(summary) {
+    practiceSummaryCtrl.$inject = ["summary", "simulator_config"];
+    function practiceSummaryCtrl(summary, simulator_config) {
         var _this = this;
 
+        this.simulator_config = simulator_config;
         this.summary = summary;
         this.categoriesStats = [];
 

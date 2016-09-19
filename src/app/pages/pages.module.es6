@@ -21,27 +21,6 @@
   function routeConfig($urlRouterProvider, baSidebarServiceProvider) {
     //$urlRouterProvider.otherwise('/');
     $urlRouterProvider.otherwise('/signin');
-
-    /*baSidebarServiceProvider.addStaticItem({
-      title: 'Pages',
-      icon: 'ion-document',
-      subMenu: [{
-        title: 'Sign In',
-        fixedHref: 'auth.html',
-        blank: false
-      }, {
-        title: 'Sign Up',
-        fixedHref: 'reg.html',
-        blank: true
-      }, {
-        title: 'User Profile',
-        stateRef: 'profile'
-      }, {
-        title: '404 Page',
-        fixedHref: '404.html',
-        blank: true
-      }]
-    });*/
   }
 
 })();

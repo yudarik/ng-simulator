@@ -15,7 +15,7 @@ gulp.task('scripts-reload', function() {
     .pipe(browserSync.stream());
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', ['es6'], function() {
   return buildScripts();
 });
 

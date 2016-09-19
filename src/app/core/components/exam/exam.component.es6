@@ -22,7 +22,7 @@
                            <exam-remote remote-map="$ctrl.questions" class="col-xs-12 col-md-2" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()"></exam-remote>,
                        </div>
                        <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>`,
-            controller: function ($scope, $uibModal, $interval, examService, simulatorService) {
+            controller: function ($scope, $uibModal, $interval, examService, simulatorService, simulator_config) {
                 'ngInject';
 
                 var ping;
@@ -106,6 +106,12 @@
 
                 this.init = () =>{
 
+                    var answerArray = [];
+
+                    for (var i=1; i <= simulator_config.answersPerQuestionNumber; i++) {
+                        answerArray.push(`ans${i}`);
+                    }
+
                     _.forEach(this.questions, (question, index) => {
 
                         _.assign(question, {
@@ -114,7 +120,7 @@
                             answerOptions: []
                         });
 
-                        _.forEach(_.pick(question, ['ans1', 'ans2', 'ans3', 'ans4', 'ans5', 'ans6']), (value, key) => {
+                        _.forEach(_.pick(question, answerArray), (value, key) => {
                             if (value) {
                                 question.answerOptions.push({
                                     key: parseInt(key.replace('ans','')),
@@ -176,11 +182,6 @@
                     $interval.cancel(ping);
                     $(document).off('keydown', keydownEventHandler)
                 });
-/*
-                $scope.$on('finish-exam', ()=>{
-                    console.log('On finish-exam event handled');
-                    this.finishExam();
-                })*/
             }
         });
 
