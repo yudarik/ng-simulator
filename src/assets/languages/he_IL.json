@@ -142,8 +142,10 @@
       "FIRST_NAME": "שם פרטי",
       "LAST_NAME": "שם משפחה",
       "CHANGE_PASSWORD": "שינויי סיסמא",
+      "OLDPASSWORD": "סיסמא נוכחית",
       "PASSWORD": "סיסמא חדשה",
       "CONFIRM_PASSWORD": "אימות סיסמא",
+      "PASSWORD_DONOT_MATCH": "הסיסמאות אינן זהות",
       "CONTACT_INFO": "דרכי תקשורת",
       "EMAIL": "דוא\"ל",
       "PHONE": "טלפון",
@@ -151,5 +153,8 @@
       "UPDATE_PROFILE": "עדכן פרופיל",
       "ACCEPT_COMERCIAL_MAIL": "מאשר קבלת מייל פרסומי"
     }
+  },
+  "GENERAL": {
+    "REQUIRED": "שדה חובה"
   }
 }

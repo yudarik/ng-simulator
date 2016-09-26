@@ -11,11 +11,13 @@
                 question: '='
             },
             /** @ngInject */
-            controller: function() {
+            controller: function(simulator_config) {
 
                 /**
                  * Exam Question Component Controller
                  */
+                this.config = simulator_config;
+
                 this.getClass = (option)=>{
                     if (_.isNil(this.question.correctAns)) {
                         return '';
@@ -42,7 +44,7 @@
                           <div class="row">
                                <div class="col-xs-12">
                                    <h4>{{$ctrl.question.question}}</h4>
-                                   <sup>({{$ctrl.question.category.categoryName}})</sup>
+                                   <sup ng-if="$ctrl.config.showQuestionCategoryInAnswersPage">({{$ctrl.question.category.categoryName}})</sup>
                                </div>
                            </div>
                            <div class="row">

@@ -29,6 +29,8 @@
 
         function getExam(type, params) {
 
+            _.assign(params, {practiceType: type});
+
             var api = 'practiceToPerform';
 
             switch(type) {

@@ -26,15 +26,16 @@ gulp.task('watch', ['inject'], function () {
     }
   });
 
-  gulp.watch([
-    path.join(conf.paths.src, '/app/**/*.js'),
-    path.join(conf.paths.src, '/app/**/*.es6')
-  ], function(event) {
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.js'), function(event) {
     if(isOnlyChange(event)) {
       gulp.start('scripts-reload');
     } else {
       gulp.start('inject-reload');
     }
+  });
+
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.es6'), function(event) {
+    gulp.start('es6');
   });
 
   gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {

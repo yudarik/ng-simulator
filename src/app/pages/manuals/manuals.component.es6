@@ -61,7 +61,7 @@
                                        <col width="40%" />
                                        <col width="10%" />
                                    </colgroup>
-                                   <tr ng-repeat-start="group in $groups" class="ng-table-group flip">
+                                   <tr ng-repeat-start="group in $groups track by group.id" class="ng-table-group flip">
                                         <td colspan="3">
                                             <a href="" ng-click="group.$hideRows = !group.$hideRows">
                                                <span class="glyphicon" ng-class="{'glyphicon-chevron-left': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>

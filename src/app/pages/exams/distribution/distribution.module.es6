@@ -9,7 +9,7 @@
         .config(routeConfig);
 
     /** @ngInject */
-    function routeConfig($stateProvider) {
+    function routeConfig($stateProvider, simulator_config) {
 
         $stateProvider
             .state('exams.distribution-general', {

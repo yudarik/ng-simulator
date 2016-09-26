@@ -3,7 +3,7 @@
   <ul class="al-sidebar-list" slimscroll="{height: '{{menuHeight}}px'}" slimscroll-watch="menuHeight" >
     <li ng-repeat="item in ::menuItems" class="al-sidebar-list-item"
         ng-class="::{'with-sub-menu': item.subMenu}" ui-sref-active="selected"
-        ba-sidebar-toggling-item="item">
+        ba-sidebar-toggling-item="item" ng-if="!item.disabled">
 
       <a ng-mouseenter="hoverItem($event, item)" ui-state="item.stateRef || ''" ng-href="{{::(item.fixedHref ? item.fixedHref: '')}}" ng-if="::!item.subMenu" class="al-sidebar-list-link">
         <i class="{{ ::item.icon }}"></i><span>{{ ::item.title | translate }}</span>
@@ -20,7 +20,7 @@
           ng-class="{'slide-right': item.slideRight}"
           ba-ui-sref-toggling-submenu>
         <li ng-repeat="subitem in ::item.subMenu" ng-class="::{'with-sub-menu': subitem.subMenu}" ui-sref-active="selected"
-            ba-sidebar-toggling-item="subitem" class="ba-sidebar-sublist-item">
+            ba-sidebar-toggling-item="subitem" class="ba-sidebar-sublist-item" ng-if="!subitem.disabled">
           <a ng-mouseenter="hoverItem($event, item)" ng-if="::subitem.subMenu" ba-ui-sref-toggler
              class="al-sidebar-list-link subitem-submenu-link"><span>{{ ::subitem.title | translate }}</span>
             <b class="fa" ng-class="{'fa-angle-up': subitem.expanded, 'fa-angle-down': !subitem.expanded}"

@@ -22,7 +22,15 @@
                 return customersQuota.get('quota');
             }
 
-            return {getRank, getCategories, getQuota};
+            function getInfo() {
+                return customersQuota.get('info');
+            }
+
+            function putInfo(details) {
+                return customerStatsService.post('info', details);
+            }
+
+            return {getRank, getCategories, getQuota, getInfo};
         })
         .factory('candidateStatsService', function(Restangular){
             var candidateStats = Restangular.all('/stats/candidate/');

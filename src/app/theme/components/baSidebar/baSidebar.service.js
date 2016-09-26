@@ -77,6 +77,7 @@
                   order: meta.order,
                   icon: meta.icon,
                   stateRef: s.name,
+                  disabled: !!meta.disabled
                 };
               })
               .sort(function(a, b) {

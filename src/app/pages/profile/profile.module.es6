@@ -17,8 +17,8 @@
             templateUrl: 'app/pages/profile/profile.html',
             controller: 'ProfilePageCtrl as profile',
             resolve: {
-                    userProfile: function(userAuthService) {
-                    return userAuthService.getUser();
+                    userProfile: function(customerStatsService) {
+                    return customerStatsService.getInfo();
                 }
             }
         });

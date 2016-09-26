@@ -45,8 +45,8 @@
                     } else {
                         return $q.when($rootScope.currentUser);
                     }
+                },
 
-                }
             };
 
             return Srv;
