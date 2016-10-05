@@ -7,6 +7,11 @@
 
   .progress {
     margin-bottom: 0;
+
+    .progress-bar {
+      font-size: 14px;
+      font-weight:bold;
+    }
   }
 }
 .menu-collapsed {

@@ -27,10 +27,12 @@
             }
 
             function putInfo(details) {
-                return customerStatsService.post('info', details);
+                let params = $.param(details);
+
+                return customersQuota.customPOST(params, 'info', undefined, {'Content-Type': 'application/x-www-form-urlencoded'});
             }
 
-            return {getRank, getCategories, getQuota, getInfo};
+            return {getRank, getCategories, getQuota, getInfo, putInfo};
         })
         .factory('candidateStatsService', function(Restangular){
             var candidateStats = Restangular.all('/stats/candidate/');

@@ -7,6 +7,7 @@
 
   angular.module('Simulator.pages', [
     'ui.router',
+    'toaster',
 
     'frapontillo.bootstrap-switch',
     'Simulator.pages.exams',

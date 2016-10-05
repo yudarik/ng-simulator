@@ -30,6 +30,7 @@
 <body ng-class="{'signin': !currentUser}" class="flip" dir="rtl">
 <div class="body-bg"></div>
 <main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+  <toaster-container></toaster-container>
 
   <div ng-if="currentUser">
     <ba-sidebar ng-if="simulatorConfigLoaded"></ba-sidebar>

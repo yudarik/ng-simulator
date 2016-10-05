@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  angular.module('Simulator.pages.profile', [])
+  angular.module('Simulator.pages.profile', ['Simulator.pages.stats'])
       .config(routeConfig);
 
   /** @ngInject */
@@ -13,6 +13,7 @@
     $stateProvider
         .state('profile', {
             url: '/profile',
+            parent: 'auth',
             title: 'USER.PROFILE',
             templateUrl: 'app/pages/profile/profile.html',
             controller: 'ProfilePageCtrl as profile',
