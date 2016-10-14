@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components')
+    angular.module('Simulator.components.charts')
         .component('userQuota', {
             bindings: {
                 titleLabel: '<'
@@ -26,7 +26,7 @@
                         'chart-options="$ctrl.options">'+
                         '</canvas>'+
                       '</div>',
-            controller: function userQuotaCtrl($translate, customerStatsService) {
+            controller: function userQuotaCtrl($translate, customerService) {
                 'ngInject';
 
                 this.options = {
@@ -49,7 +49,7 @@
                     labels: [],
                     data: []
                 };
-                customerStatsService.getQuota().then((quota) => {
+                customerService.getQuota().then((quota) => {
 
                     this.newQuestionsQuota.data = [
                         quota['totalNewQuestionsQuota'] - quota['leftNewQuestionsQuota'],

@@ -65,7 +65,7 @@ a.al-sidebar-list-link {
   height: 42px;
   padding-left: 18px;
   text-shadow: none;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: none;
   color: $sidebar-text;
   line-height: 42px;
@@ -82,6 +82,13 @@ a.al-sidebar-list-link {
     margin-right: 18px;
     width: 16px;
     display: inline-block;
+    color: $warning;
+    font-size: 18px;
+
+    &:before {
+      position: relative;
+      top: 3px
+    }
   }
   b {
     display: block;
@@ -134,7 +141,7 @@ a.al-sidebar-list-link {
     a {
       display: block;
       text-shadow: none;
-      font-size: 13px;
+      font-size: 14px;
       text-decoration: none;
       color: $sidebar-text;
       padding-left: 52px;

@@ -1,7 +1,7 @@
 .exam-timeframe {
   position: fixed;
   bottom: 15px;
-  right: 180px;
+  right: 194px;
   left: 0px;
   margin: 0 25px 0 15px;
 
@@ -11,6 +11,12 @@
     .progress-bar {
       font-size: 14px;
       font-weight:bold;
+
+      .text-danger {
+        position: absolute;
+        left: 0;
+        right: 0;
+      }
     }
   }
 }

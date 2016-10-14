@@ -7,13 +7,13 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components').component('packageQuota', {
+    angular.module('Simulator.components.charts').component('packageQuota', {
         bindings: {
             titleLabel: '<'
         },
         template: '<div class="col-xs-12">\n                          <canvas class="chart chart-pie"\n                          chart-data="$ctrl.package.data"\n                          chart-labels="$ctrl.package.labels"\n                          chart-series="$ctrl.package.series"\n                          chart-options="$ctrl.options">\n                          </canvas>\n                      </div>',
         controller: /** @ngInject */
-        ["$translate", "$filter", "customerStatsService", function packageQuotaCtrl($translate, $filter, customerStatsService) {
+        ["$translate", "$filter", "customerService", function packageQuotaCtrl($translate, $filter, customerService) {
             var _this = this;
 
             this.options = {
@@ -33,7 +33,7 @@
                 labels: [],
                 data: []
             };
-            customerStatsService.getQuota().then(function (quota) {
+            customerService.getQuota().then(function (quota) {
 
                 _.forEach(quota.purchasedProducts, function (item, index) {
                     //this.package.labels.push(moment(item.dateOfPurchase).format('DD/MM/YY').toString());

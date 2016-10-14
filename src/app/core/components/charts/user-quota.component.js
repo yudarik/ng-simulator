@@ -7,12 +7,12 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components').component('userQuota', {
+    angular.module('Simulator.components.charts').component('userQuota', {
         bindings: {
             titleLabel: '<'
         },
         template: '<div class="col-xs-12">' + '<canvas class="chart chart-pie"' + 'chart-data="$ctrl.newQuestionsQuota.data" ' + 'chart-labels="$ctrl.newQuestionsQuota.labels" ' + 'chart-options="$ctrl.options">' + '</canvas>' + '</div>' + '<div class="chartBottomMargin"></div>' + '<div class="col-xs-12">' + '<canvas class="chart chart-pie"' + 'chart-data="$ctrl.postCreditQuestionQuota.data" ' + 'chart-labels="$ctrl.postCreditQuestionQuota.labels" ' + 'chart-options="$ctrl.options">' + '</canvas>' + '</div>',
-        controller: ["$translate", "customerStatsService", function userQuotaCtrl($translate, customerStatsService) {
+        controller: ["$translate", "customerService", function userQuotaCtrl($translate, customerService) {
             'ngInject';
 
             var _this = this;
@@ -37,7 +37,7 @@
                 labels: [],
                 data: []
             };
-            customerStatsService.getQuota().then(function (quota) {
+            customerService.getQuota().then(function (quota) {
 
                 _this.newQuestionsQuota.data = [quota['totalNewQuestionsQuota'] - quota['leftNewQuestionsQuota'], quota['leftNewQuestionsQuota']];
                 _this.newQuestionsQuota.labels[0] = $translate.instant('STATS.ACCOUNT.SPENTNEWQUESTIONSQUOTA');

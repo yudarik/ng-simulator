@@ -7,13 +7,13 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components').component('practicesPerformed', {
+    angular.module('Simulator.components.charts').component('practicesPerformed', {
         bindings: {
             titleLabel: '<'
         },
         template: '<div class="col-xs-12">' + '<canvas class="chart chart-horizontal-bar"' + 'chart-data="$ctrl.practicesPerformed.data" ' + 'chart-labels="$ctrl.practicesPerformed.labels" ' + 'chart-series="$ctrl.practicesPerformed.series" ' + 'chart-options="$ctrl.practicesPerformed.options">' + '</canvas>' + '</div>',
         controller: /** @ngInject */
-        ["$translate", "customerStatsService", function practicesPerformedCtrl($translate, customerStatsService) {
+        ["$translate", "customerService", function practicesPerformedCtrl($translate, customerService) {
             var _this = this;
 
             this.practicesPerformed = {
@@ -33,7 +33,7 @@
                 }
             };
 
-            customerStatsService.getQuota().then(function (quota) {
+            customerService.getQuota().then(function (quota) {
 
                 _this.practicesPerformed.labels = ['examsPerformed', 'generalPracticesPerformed', 'suggestedPracticesPerformed', 'predefinedExamsPerformed'].map(function (key) {
                     return $translate.instant('STATS.ACCOUNT.' + key.toUpperCase());

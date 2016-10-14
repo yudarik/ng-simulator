@@ -37,6 +37,7 @@
                 .setDefaultHeaders({
                     'Content-Type': 'application/json'
                 })
+                //.setBaseUrl('rest');
                 .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
         })
         .run(function($rootScope, $state, simulator_config, simulatorService){

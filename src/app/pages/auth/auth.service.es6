@@ -12,14 +12,14 @@
 
             var Srv = {
 
-                signin: function(userDetails) {
+                signin: (userDetails) => {
                     return auth.customPOST(userDetails, 'login');
 
                 },
-                signup: function(userDetails) {
+                signup: (userDetails) => {
                     return Restangular.all('candidates').post({emailAddress: userDetails.email});
                 },
-                signout: function() {
+                signout: () => {
 
                     $rootScope.currentUser = null;
 
@@ -31,7 +31,7 @@
                            $state.go('signin');
                         })
                 },
-                getUser: function() {
+                getUser: () => {
 
                     if (!$rootScope.currentUser) {
 
@@ -45,11 +45,34 @@
                     } else {
                         return $q.when($rootScope.currentUser);
                     }
-                },
-
+                }
             };
 
             return Srv;
+        })
+
+        .factory('customerService', (Restangular) => {
+            var customers = Restangular.all('/customers/');
+
+            function getQuota() {
+                return customers.get('quota');
+            }
+
+            function getInfo() {
+                return customers.get('info');
+            }
+
+            function putInfo(details) {
+                let params = $.param(details);
+
+                return customers.customPOST(params, 'info', undefined, {'Content-Type': 'application/x-www-form-urlencoded'});
+            }
+
+            function resetPassword(email) {
+                return customers.customPUT(email, 'password', undefined, {ContentType: 'application/json'});
+            }
+
+            return {getQuota, getInfo, putInfo, resetPassword};
         })
 
 })();

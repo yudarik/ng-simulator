@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components')
+    angular.module('Simulator.components.charts')
         .component('practicesPerformed', {
             bindings: {
                 titleLabel: '<'
@@ -19,7 +19,7 @@
                       '</canvas>'+
                       '</div>',
             controller: /** @ngInject */
-                function practicesPerformedCtrl($translate, customerStatsService) {
+                function practicesPerformedCtrl($translate, customerService) {
 
                 this.practicesPerformed = {
                     series: [],
@@ -38,7 +38,7 @@
                     }
                 };
 
-                customerStatsService.getQuota().then((quota) => {
+                customerService.getQuota().then((quota) => {
 
                     this.practicesPerformed.labels = [
                         'examsPerformed',

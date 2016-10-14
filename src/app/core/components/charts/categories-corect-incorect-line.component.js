@@ -7,7 +7,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components').component('categoriesCorrectIncorrectLine', {
+    angular.module('Simulator.components.charts').component('categoriesCorrectIncorrectLine', {
         bindings: {
             titleLabel: '<'
         },
@@ -31,7 +31,8 @@
                     },
                     legend: {
                         display: true,
-                        position: 'top'
+                        position: 'top',
+                        fontSize: 14
                     }
                 }
             };

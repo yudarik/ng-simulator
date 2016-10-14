@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components')
+    angular.module('Simulator.components.charts')
         .component('categoriesGradeRadar', {
             bindings: {
                 stats: '=',

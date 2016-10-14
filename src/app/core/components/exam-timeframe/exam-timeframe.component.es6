@@ -36,6 +36,18 @@
                     }, 1000);
                 }
 
+                this.getValue = () => {
+                    return 100*(this.totalTimeframe - this.progress)/this.totalTimeframe;
+                };
+
+                this.getType = () => {
+                    if (this.getValue() < 25) {
+                        return 'danger';
+                    } else if (this.getValue() < 50) {
+                        return 'warning';
+                    } else return 'success';
+                };
+
                 $scope.$on('$destroy', function(){
                     $interval.cancel(timeInterval);
                 })
@@ -43,7 +55,7 @@
             template: [
                 '<div class="exam-timeframe" ng-if="$ctrl.totalTimeframe">',
                 '   <div class="">',
-                '         <uib-progressbar value="$ctrl.totalTimeframe - $ctrl.progress" type="success" max="$ctrl.totalTimeframe"><span class="text-danger">{{$ctrl.timeframe|timeframe}}</span></uib-progressbar>',
+                '         <uib-progressbar class="progress-striped" value="$ctrl.getValue()" type="{{$ctrl.getType()}}"><span class="text-danger">{{$ctrl.timeframe|timeframe}}</span></uib-progressbar>',
                 '   </div>',
                 '</div>'
             ].join('')

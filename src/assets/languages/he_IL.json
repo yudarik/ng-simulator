@@ -8,11 +8,14 @@
     "EMAIL": "שם משתמש (דוא'ל)",
     "PASSWORD": "סיסמא",
     "FORGOT_PASSWORD": "שככתי את הסיסמא",
+    "REMEMBER_PASSWORD": "זוכר את הסיסמא? התחבר",
+    "RESET_PASSWORD_BTN": "אפס סיסמא",
     "LOGIN_BTN": "כניסה",
     "REGISTER_BTN": "הרשם",
     "USER_PASSWARD_INCORRECT": "שם המשתמש או הסיסמא שגויים",
     "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
-    "REGISTERED_SUCCESSFULLY": "נרשמתם בהצלחה, פרטי הכניסה נשלחו לכתובת הדוא\"ל איתה נרשמתם"
+    "REGISTERED_SUCCESSFULLY": "נרשמתם בהצלחה, פרטי הכניסה נשלחו לכתובת הדוא\"ל איתה נרשמתם",
+    "PASSWORD_RESET_EMAIL_SENT": "הנחיות לאיפוס הסיסמא נשלחו לכתובת הדוא\"ל"
   },
   "EXAMS": {
     "TYPES": {
@@ -61,6 +64,10 @@
     "BUTTONS": {
       "CONTINUE": "המשך",
       "FINISH": "סייים"
+    },
+    "PRACTICE": {
+      "QUESTION_LABEL": "שאלה",
+      "ANSWERS_LABEL": "תשובות"
     }
   },
   "STATS": {
@@ -156,7 +163,8 @@
       "UPDATE_PROFILE": "עדכן פרופיל",
       "ACCEPT_COMERCIAL_MAIL": "מאשר קבלת מייל פרסומי",
       "UPCOMING_EXAM": "מועד בחינה מתוכנן",
-      "SELECT_EXAM_DATE": "בחר מועד"
+      "SELECT_EXAM_DATE": "בחר מועד",
+      "DETAILS_UPDATED_SUCCESS": "הפרטים עודכנו בהצלחה"
     }
   },
   "GENERAL": {

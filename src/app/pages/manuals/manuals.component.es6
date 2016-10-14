@@ -12,6 +12,10 @@
             controller: function manualsCtrl ($translate, NgTableParams, manualsService) {
                 'ngInject';
 
+                this.search = {
+                    pattern: undefined
+                };
+
                 this.tableParams = new NgTableParams({
                     group: 'category'
                 }, {
@@ -54,14 +58,17 @@
                 `<div class="row">
                    <div class="panel panel-default">
                        <div class="panel-body">
+                           <div class="row"></div>
                            <div class="col-xs-12">
                                <table class="table table-hover table-condensed flip" direction="rtl" ng-table="$ctrl.tableParams">
+
                                    <colroup>
                                        <col width="50%" />
                                        <col width="40%" />
                                        <col width="10%" />
                                    </colgroup>
-                                   <tr ng-repeat-start="group in $groups track by group.id" class="ng-table-group flip">
+
+                                   <tr ng-repeat-start="group in $groups track by $index" class="ng-table-group flip">
                                         <td colspan="3">
                                             <a href="" ng-click="group.$hideRows = !group.$hideRows">
                                                <span class="glyphicon" ng-class="{'glyphicon-chevron-left': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
@@ -69,9 +76,9 @@
                                            </a>
                                        </td>
                                    </tr>
-                                   <tr ng-hide="group.$hideRows" ng-repeat="manual in group.data" ng-repeat-end>
-                                       <td sortable="'displayName'" data-title="$ctrl.tableHeads.displayName">{{manual.displayName}}</td>
-                                       <td sortable="'description'" data-title="$ctrl.tableHeads.description">{{manual.description}}</td>
+                                   <tr ng-hide="group.$hideRows" ng-repeat="manual in group.data track by manual.id" ng-repeat-end>
+                                       <td sortable="'displayName'" data-title="$ctrl.tableHeads.displayName" filter="{displayName: 'text'}" filter-placeholder="search">{{manual.displayName}}</td>
+                                       <td sortable="'description'" data-title="$ctrl.tableHeads.description" filter="{description: 'text'}">{{manual.description}}</td>
                                        <td sortable="'docType'" data-title="$ctrl.tableHeads.type">
                                            <a href="{{::$ctrl.getUrl(manual.id)}}" target="_blank"><i class="fa {{$ctrl.getLinkClass(manual)}}">&nbsp;</i></a>
                                        </td>

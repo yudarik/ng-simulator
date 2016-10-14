@@ -9,7 +9,7 @@
     .controller('ProfilePageCtrl', ProfilePageCtrl);
 
   /** @ngInject */
-  function ProfilePageCtrl($scope, toaster, $uibModal, userProfile, customerStatsService, simulator_config) {
+  function ProfilePageCtrl($scope, toaster, $uibModal, $translate, userProfile, customerService, simulator_config) {
 
     this.userProfileForm = {};
     this.upcomingExamEventDates = simulator_config.upcomingExamEventDates;
@@ -36,8 +36,8 @@
         }
       });
 
-      customerStatsService.putInfo(params).then(()=>{
-        toaster.pop('success','','User profile updated successfully');
+      customerService.putInfo(params).then(()=>{
+        toaster.pop('success','',$translate.instant('USER.PROFILE_PAGE.DETAILS_UPDATED_SUCCESS'));
       }).catch(err =>{
 
         if (err.data) {

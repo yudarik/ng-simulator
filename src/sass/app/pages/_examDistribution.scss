@@ -1,0 +1,12 @@
+.exam-distribution {
+  .form-group {
+    ul {
+      display: inline;
+      list-style-type: none;
+
+      > li {
+        width: 100%;
+      }
+    }
+  }
+}

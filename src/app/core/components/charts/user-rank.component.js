@@ -7,7 +7,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components').component('userRank', {
+    angular.module('Simulator.components.charts').component('userRank', {
         bindings: {
             titleLabel: '<'
         },

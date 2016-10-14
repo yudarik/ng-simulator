@@ -7,10 +7,11 @@
 (function () {
     'use strict';
 
-    distributionCtrl.$inject = ["$state", "dist", "distributionType", "practiceType"];
-    function distributionCtrl($state, dist, distributionType, practiceType) {
+    distributionCtrl.$inject = ["$state", "dist", "distributionType", "practiceType", "totalQuota"];
+    function distributionCtrl($state, dist, distributionType, practiceType, totalQuota) {
 
         this.distributionType = distributionType;
+        this.totalQuota = totalQuota;
 
         this.examParams = {
             totalQuestion: dist.questionsInExam,

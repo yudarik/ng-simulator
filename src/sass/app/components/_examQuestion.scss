@@ -13,7 +13,7 @@
 .exam-question {
 
   .question-option {
-    margin-bottom:5px;
+    margin-bottom:10px;
 
     label {
       white-space: normal;
@@ -30,6 +30,13 @@
   }
   .bs-callout {
     float: left;
+  }
+  .questionID {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 22px 44px;
+    color: lightgray;
   }
 }
 @media all and (max-width: 768px) {

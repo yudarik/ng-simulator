@@ -6,5 +6,6 @@
     'use strict';
 
     angular.module('Simulator.components', [
+        'Simulator.components.charts'
     ])
 })();

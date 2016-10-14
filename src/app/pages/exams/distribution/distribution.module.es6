@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.pages.exams.distribution', [])
+    angular.module('Simulator.pages.exams.distribution', ['Simulator.pages.auth'])
         .config(routeConfig);
 
     /** @ngInject */
@@ -26,6 +26,11 @@
                     },
                     practiceType: function() {
                         return 'PRACTICE';
+                    },
+                    totalQuota: function(customerService) {
+                        return customerService.getQuota().then(quota=>{
+                            return quota.leftNewQuestionsQuota;
+                        })
                     }
                 },
                 title: 'EXAMS.TYPES.GENERAL_PRACTICE',

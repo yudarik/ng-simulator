@@ -13,14 +13,12 @@
                 timeframe: '<',
                 type: '<'
             },
-            template: `<div class="row">
-                           <div class="panel question-area col-xs-12 col-md-10" ng-show="$ctrl.questionInDisplay">
-                               <div class="panel-body">
-                                   <exam-question question="$ctrl.questionInDisplay"></exam-question>
-                               </div>
+            template: `<div class="panel question-area col-xs-12 col-md-10" ng-show="$ctrl.questionInDisplay">
+                           <div class="panel-body">
+                               <exam-question question="$ctrl.questionInDisplay"></exam-question>
                            </div>
-                           <exam-remote remote-map="$ctrl.questions" class="col-xs-12 col-md-2" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()"></exam-remote>,
                        </div>
+                       <exam-remote remote-map="$ctrl.questions" class="col-xs-12 col-md-2" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()"></exam-remote>
                        <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>`,
             controller: function ($scope, $uibModal, $interval, examService, simulatorService, simulator_config) {
                 'ngInject';
@@ -62,6 +60,15 @@
                         case 39:
                             this.nextBtn.click();
                             break;
+                        case 49:
+                        case 50:
+                        case 51:
+                        case 52:
+                        case 53:
+                        case 54:
+                            this.numPadKeys(event.which);
+                            break;
+
                         default: return;
                     }
                     event.preventDefault();
@@ -173,7 +180,9 @@
 
                 this.prevBtn = $('#remote-prev');
                 this.nextBtn = $('#remote-next');
-
+                this.numPadKeys = (keyNumber) => {
+                    $scope.$broadcast('numKeyPadSelect', {answer: keyNumber - 48});
+                };
 
                 $(document).keydown(keydownEventHandler);
 

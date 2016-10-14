@@ -12,13 +12,15 @@
             question: '='
         },
         /** @ngInject */
-        controller: ["simulator_config", function (simulator_config) {
+        controller: ["$scope", "simulator_config", function ($scope, simulator_config) {
             var _this = this;
 
             /**
              * Exam Question Component Controller
              */
             this.config = simulator_config;
+
+            this.solvedExamMode = !!(this.question.correctAns > -1);
 
             this.getClass = function (option) {
                 if (_.isNil(_this.question.correctAns)) {
@@ -41,8 +43,32 @@
             this.getKey = function (option) {
                 return parseInt(option.key);
             };
+
+            this.toggleAnswer = function (value) {
+
+                if (!_this.solvedExamMode) {
+
+                    if (_this.question.chosenAns !== value) {
+                        _this.question.chosenAns = value;
+                    } else {
+                        _this.question.chosenAns = undefined;
+                    }
+                }
+
+                $('.exam-question input[type=checkbox]').each(function (index, elem) {
+                    elem.checked = _this.question.chosenAns && value === index + 1;
+                });
+            };
+
+            $scope.$on('numKeyPadSelect', function (event, data) {
+
+                if (data && data.answer <= _this.question.answerOptions.length) {
+
+                    _this.toggleAnswer(data.answer);
+                }
+            });
         }],
-        template: '<div class="exam-question">\n                          <div class="row">\n                               <div class="col-xs-12">\n                                   <h4>{{$ctrl.question.question}}</h4>\n                                   <sup ng-if="$ctrl.config.showQuestionCategoryInAnswersPage">({{$ctrl.question.category.categoryName}})</sup>\n                               </div>\n                           </div>\n                           <div class="row">\n                               <div class="col-xs-12">\n                                   <form name="options">\n                                       <div class="form-group">\n                                           <div class="col-md-12 question-option" ng-repeat="option in $ctrl.question.answerOptions">\n                                               <label class="radio-inline custom-radio nowrap">\n                                                   <input type="radio" name="question"\n                                                            ng-model="$ctrl.question.chosenAns"\n                                                            ng-value="option.key"\n                                                            ng-disabled="$ctrl.question.correctAns > -1">\n                                                   <span ng-class="$ctrl.getClass(option)">{{option.value}}</span>\n                                               </label>\n                                           </div>\n                                            <div class="bs-callout bs-callout-warning col-md-12" ng-if="$ctrl.question.help">\n                                            <h4>{{$ctrl.question.help}}</h5>\n                                            <p>{{$ctrl.question.detailedHelp}}</p>\n                                            </div>\n                                       </div>\n                                   </form>\n                               </div>\n                           </div>\n                        </div>'
+        template: '<div class="exam-question">\n                          <div class="row">\n                               <div class="col-xs-12">\n                                   <div class="text-left category-label" ng-if="$ctrl.config.showQuestionCategoryInAnswersPage && $ctrl.solvedExamMode">\n                                        <img src="/assets/img/app/category-icon.png" width="25" height="25"/>\n                                        <label>{{$ctrl.question.category.categoryName}}</label>\n                                   </div>\n\n                                   <label>{{::\'EXAMS.PRACTICE.QUESTION_LABEL\'|translate}}:</label>\n                                   <h4>{{$ctrl.question.question}}</h4>\n                               </div>\n                           </div>\n                           <div class="row">\n                               <div class="col-xs-12">\n                                   <label>{{::\'EXAMS.PRACTICE.ANSWERS_LABEL\'|translate}}:</label>\n                                   <form name="$ctrl.options">\n                                       <div class="form-group">\n                                           <ol>\n                                               <li class="col-md-12 question-option" ng-repeat="option in $ctrl.question.answerOptions">\n                                                   <label class="checkbox-inline custom-checkbox nowrap">\n                                                       <input type="checkbox" name="question{{option.key}}"\n                                                                ng-init="$ctrl.toggleAnswer($ctrl.question.chosenAns)"\n\n                                                                ng-click="$ctrl.toggleAnswer(option.key, $event)"\n                                                                ng-value="option.key"\n                                                                ng-disabled="$ctrl.solvedExamMode">\n                                                       <span ng-class="$ctrl.getClass(option)">\n                                                            {{option.value}}\n                                                       </span>\n                                                   </label>\n                                               </li>\n                                           </ol>\n                                            <div class="bs-callout bs-callout-warning col-md-12" ng-if="$ctrl.question.help">\n                                            <h4>{{$ctrl.question.help}}</h5>\n                                            <p>{{$ctrl.question.detailedHelp}}</p>\n                                            </div>\n                                       </div>\n                                   </form>\n                               </div>\n                               <span class="pull-left text-left col-sm-4 questionID">{{$ctrl.question.questionID}}</span>\n                           </div>\n                        </div>'
 
     });
 })();

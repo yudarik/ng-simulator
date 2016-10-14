@@ -30,8 +30,8 @@
                 controller: 'accountStatsCtrl as accountStats',
                 templateUrl: 'app/pages/stats/account-stats/account-stats.html',
                 resolve: {
-                    quota: function(customerStatsService) {
-                        return customerStatsService.getQuota();
+                    quota: function(customerService) {
+                        return customerService.getQuota();
                     }
                 },
                 title: 'STATS.ACCOUNT.TITLE',

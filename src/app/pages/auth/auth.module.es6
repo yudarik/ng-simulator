@@ -35,6 +35,11 @@
                     userAuthService.signout();
                 }
             })
+            .state('forgotPassword', {
+                url: '/password-forgot',
+                templateUrl: 'app/pages/auth/forgot_password.html',
+                controller: 'forgotController as forgot'
+            })
     }
 
 

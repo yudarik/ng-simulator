@@ -20,7 +20,7 @@
                 resolve: {
                     manuals: function(manualsService){
                         return manualsService.list().then(list=>{
-                            return _.sortBy(list, 'order');
+                            return _.sortBy(list.onlineManualBeans, 'order');
                         });
                     }
                 },

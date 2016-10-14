@@ -7,7 +7,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components').component('categoriesGradeRadar', {
+    angular.module('Simulator.components.charts').component('categoriesGradeRadar', {
         bindings: {
             stats: '=',
             titleLabel: '<'
