@@ -11,7 +11,7 @@
                 question: '='
             },
             /** @ngInject */
-            controller: function($scope, $timeout, simulator_config) {
+            controller: function($scope, $timeout, simulator_config, examService) {
 
                 /**
                  * Exam Question Component Controller
@@ -65,6 +65,22 @@
                     return this.question.chosenAns === value;
                 };
 
+                this.getImage = () => {
+                    return examService.getQuestionImage(this.question.questionID);
+                };
+/*
+                this.$onInit = () => {
+                    if (this.question.hasImage) {
+                        this.question.imageUrl = this.getImage();
+                    }
+                };
+
+                $scope.$watch('$ctrl.question.questionID', (newVal, oldVal)=>{
+                    if (newVal === oldVal) return;
+
+                    this.$onInit();
+                });*/
+
                 $scope.$on('numKeyPadSelect', (event, data)=>{
 
                     if (data && data.answer <= this.question.answerOptions.length) {
@@ -105,6 +121,9 @@
                                                    </label>
                                                </li>
                                            </ol>
+                                           <div class="col-xs-12" ng-if="$ctrl.question.hasImage">
+                                                <img ng-src="{{$ctrl.getImage()}}"/>
+                                           </div>
                                             <div class="bs-callout bs-callout-warning col-md-12" ng-if="$ctrl.question.help">
                                             <h4>{{$ctrl.question.help}}</h5>
                                             <p>{{$ctrl.question.detailedHelp}}</p>

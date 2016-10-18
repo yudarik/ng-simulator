@@ -67,13 +67,19 @@
             return practices.get(id);
         }
 
+        function getQuestionImage(id) {
+            return `getQuestionImage?questionID=${id}`;
+            //return `http://nadlanline.dnsalias.com:8080/BiologyExams/getQuestionImage?questionID=${id}`;
+        }
+
         return {
             listCategories,
             getDistribution,
             getExam,
             submitExam,
             getStats,
-            getPracticeInfo
+            getPracticeInfo,
+            getQuestionImage
         };
     });
 })();
