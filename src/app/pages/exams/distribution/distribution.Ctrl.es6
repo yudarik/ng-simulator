@@ -23,16 +23,17 @@
 
             var distMap = _.map(dist.categories, (category, index)=>{
 
-                if (index < this.examParams.totalQuestion) {
+                if (index < total) {
                     category.questionDistribution = 1;
                     total--;
                 } else {
                     category.questionDistribution = 0;
                 }
 
+                //category.questionDistribution = Math.floor(total * dist.questionsPercentagePerCategoryId[category.id]);
+
                 return category;
             });
-
             while (total > 0) {
                 distMap[parseInt(Math.random()*distMap.length)].questionDistribution++;
                 total--;

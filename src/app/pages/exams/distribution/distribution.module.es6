@@ -52,6 +52,11 @@
                     },
                     practiceType: function() {
                         return 'EXAM';
+                    },
+                    totalQuota: function(customerService) {
+                        return customerService.getQuota().then(quota=>{
+                            return quota.leftNewQuestionsQuota;
+                        })
                     }
                 },
                 title: 'EXAMS.TYPES.FULL_EXAM',
@@ -73,6 +78,11 @@
                     },
                     practiceType: function() {
                         return 'POST_CREDIT_PRACTICE';
+                    },
+                    totalQuota: function(customerService) {
+                        return customerService.getQuota().then(quota=>{
+                            return quota.leftPostCreditQuestionsQuota;
+                        })
                     }
                 },
                 title: 'EXAMS.TYPES.POST_CREDIT_PRACTICE',

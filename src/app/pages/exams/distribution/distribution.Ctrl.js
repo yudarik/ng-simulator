@@ -21,22 +21,22 @@
         };
 
         this.initQuestionDistribution = function () {
-            var _this = this;
 
             var total = this.examParams.totalQuestion;
 
             var distMap = _.map(dist.categories, function (category, index) {
 
-                if (index < _this.examParams.totalQuestion) {
+                if (index < total) {
                     category.questionDistribution = 1;
                     total--;
                 } else {
                     category.questionDistribution = 0;
                 }
 
+                //category.questionDistribution = Math.floor(total * dist.questionsPercentagePerCategoryId[category.id]);
+
                 return category;
             });
-
             while (total > 0) {
                 distMap[parseInt(Math.random() * distMap.length)].questionDistribution++;
                 total--;

@@ -11,7 +11,7 @@
                 question: '='
             },
             /** @ngInject */
-            controller: function($scope, simulator_config) {
+            controller: function($scope, $timeout, simulator_config) {
 
                 /**
                  * Exam Question Component Controller
@@ -42,27 +42,34 @@
                     return parseInt(option.key);
                 };
 
-                this.toggleAnswer = (value) => {
+                this.toggleAnswer = (value, event) => {
 
                     if (!this.solvedExamMode) {
 
                         if (this.question.chosenAns !== value) {
                             this.question.chosenAns = value;
-                        } else {
+                        } else if (event && event.type === 'click' && !event.target.checked){
+                            this.question.chosenAns = undefined;
+                        } else if (event && event.name === "numKeyPadSelect" && $(`.exam-question input:nth-child(${value - 1})[type=checkbox]`)) {
                             this.question.chosenAns = undefined;
                         }
                     }
-
-                    $('.exam-question input[type=checkbox]').each((index,elem) => {
-                        elem.checked = (this.question.chosenAns && value === index+1);
+                    $timeout(()=>{
+                        $('.exam-question input[type=checkbox]').each((index,elem) => {
+                            elem.checked = (this.question.chosenAns && value === index+1);
+                        });
                     });
+                };
+
+                this.isChecked = (value) => {
+                    return this.question.chosenAns === value;
                 };
 
                 $scope.$on('numKeyPadSelect', (event, data)=>{
 
                     if (data && data.answer <= this.question.answerOptions.length) {
 
-                        this.toggleAnswer(data.answer);
+                        this.toggleAnswer(data.answer, event);
                     }
 
                 });
@@ -88,8 +95,7 @@
                                                <li class="col-md-12 question-option" ng-repeat="option in $ctrl.question.answerOptions">
                                                    <label class="checkbox-inline custom-checkbox nowrap">
                                                        <input type="checkbox" name="question{{option.key}}"
-                                                                ng-init="$ctrl.toggleAnswer($ctrl.question.chosenAns)"
-
+                                                                ng-checked="$ctrl.isChecked(option.key)"
                                                                 ng-click="$ctrl.toggleAnswer(option.key, $event)"
                                                                 ng-value="option.key"
                                                                 ng-disabled="$ctrl.solvedExamMode">
