@@ -54,8 +54,8 @@
             },
             template: [
                 '<div class="exam-timeframe" ng-if="$ctrl.totalTimeframe">',
-                '   <div class="">',
-                '         <uib-progressbar class="progress-striped" value="$ctrl.getValue()" type="{{$ctrl.getType()}}"><span class="text-danger">{{$ctrl.timeframe|timeframe}}</span></uib-progressbar>',
+                '   <div class="animate">',
+                '         <uib-progressbar class="progress-striped active" value="$ctrl.getValue()" type="{{$ctrl.getType()}}"><span class="text-danger">{{$ctrl.timeframe|timeframe}}</span></uib-progressbar>',
                 '   </div>',
                 '</div>'
             ].join('')
