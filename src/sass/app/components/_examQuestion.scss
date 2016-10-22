@@ -1,9 +1,12 @@
-.question-area {
 
-  width: 66%;
+.question-area {
+  position: absolute!important;
   top: 140px;
-  position: fixed!important;
   bottom: 30px;
+  margin-left: 0;
+  display: inline-block;
+  left: 0;
+  right: 0;
 
   .panel-body {
     overflow: auto;
@@ -42,13 +45,11 @@
 @media all and (max-width: 768px) {
 
   .question-area {
-    width: 100%!important;
-    position: relative!important;
-    top: 0;
-    bottom: auto;
+    bottom: 110px;
+    top: 120px;
   }
 }
-@media all and (min-width: 769px) and (max-width: 1024px){
+/*@media all and (min-width: 769px) and (max-width: 1024px){
 
   .question-area {
     width: 67%!important;
@@ -58,7 +59,8 @@
       width: 67%!important;
     }
   }
-}
+}*/
+/*
 @media all and (min-width: 1025px) and (max-width: 1200px){
 
   .question-area {
@@ -81,3 +83,4 @@
     }
   }
 }
+*/

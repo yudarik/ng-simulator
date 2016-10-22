@@ -1,4 +1,4 @@
-$sidebar-width: 180px;
+$sidebar-width: 240px;
 
 body.flip {
   .al-sidebar {
@@ -15,7 +15,7 @@ body.flip {
 
     i {
       margin-right: 0px;
-      margin-left: 20px;
+      margin-left: 18px;
     }
     b {
 
@@ -58,7 +58,7 @@ body.flip {
 
   .sidebar-hover-elem {
 
-    right: 176px;
+    right: 236px;
   }
 
   @mixin sidebar-collapsed() {

@@ -4,7 +4,9 @@
 
 (function () {
     'use strict';
-    angular.module('Simulator.core').factory('simulatorService', function(Restangular){
+    angular.module('Simulator.core.services', []);
+    angular.module('Simulator.core.services')
+        .factory('simulatorService', function(Restangular){
 
         var simulators = Restangular.all('simulators');
 

@@ -13,12 +13,12 @@
                 timeframe: '<',
                 type: '<'
             },
-            template: `<div class="panel question-area col-xs-12 col-md-10" ng-show="$ctrl.questionInDisplay">
+            template: `<div class="panel question-area col-xs-12" ng-show="$ctrl.questionInDisplay">
                            <div class="panel-body">
                                <exam-question question="$ctrl.questionInDisplay"></exam-question>
                            </div>
                        </div>
-                       <exam-remote remote-map="$ctrl.questions" class="col-xs-12 col-md-2" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()"></exam-remote>
+                       <exam-remote remote-map="$ctrl.questions" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()"></exam-remote>
                        <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>`,
             controller: function ($scope, $uibModal, $interval, examService, simulatorService, simulator_config) {
                 'ngInject';

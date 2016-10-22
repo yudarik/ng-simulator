@@ -96,6 +96,9 @@
           $element.addClass('ba-sidebar-item-expanded');
         }
       });
+
+      /* Default is all menus expanded*/
+      vm.$expand();
     }
 
     function _isState(state) {

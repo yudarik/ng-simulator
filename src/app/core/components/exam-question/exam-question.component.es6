@@ -68,18 +68,12 @@
                 this.getImage = () => {
                     return examService.getQuestionImage(this.question.questionID);
                 };
-/*
-                this.$onInit = () => {
-                    if (this.question.hasImage) {
-                        this.question.imageUrl = this.getImage();
-                    }
+
+                this.imageLoading = true;
+
+                this.onImageLoad = (event) => {
+                    this.imageLoading = false;
                 };
-
-                $scope.$watch('$ctrl.question.questionID', (newVal, oldVal)=>{
-                    if (newVal === oldVal) return;
-
-                    this.$onInit();
-                });*/
 
                 $scope.$on('numKeyPadSelect', (event, data)=>{
 
@@ -100,6 +94,10 @@
 
                                    <label>{{::'EXAMS.PRACTICE.QUESTION_LABEL'|translate}}:</label>
                                    <h4>{{$ctrl.question.question}}</h4>
+                                   <div class="col-xs-12" ng-if="$ctrl.question.hasImage">
+                                        <i class="fa fa-spinner fa-spin" ng-if="$ctrl.imageLoading" style="font-size:24px"></i>
+                                        <img ng-src="{{$ctrl.getImage()}}" image-on-load="$ctrl.onImageLoad($event)"/>
+                                   </div>
                                </div>
                            </div>
                            <div class="row">
@@ -121,9 +119,6 @@
                                                    </label>
                                                </li>
                                            </ol>
-                                           <div class="col-xs-12" ng-if="$ctrl.question.hasImage">
-                                                <img ng-src="{{$ctrl.getImage()}}"/>
-                                           </div>
                                             <div class="bs-callout bs-callout-warning col-md-12" ng-if="$ctrl.question.help">
                                             <h4>{{$ctrl.question.help}}</h5>
                                             <p>{{$ctrl.question.detailedHelp}}</p>

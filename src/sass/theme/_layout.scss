@@ -1,4 +1,4 @@
-$left-space: 180px;
+$left-space: 240px;
 
 @include scrollbars(.5em, #d9d9d9, rgba(0,0,0,0));
 
@@ -145,12 +145,16 @@ a {
 }
 
 .al-content {
-  padding: 8px 32px 8px 40px;
+  padding: 8px 20px;
 }
 
-@media screen and (max-width: $resXS) {
+@media screen and (max-width: $resM) {
   .al-content {
     padding: 8px 20px;
+  }
+  .content-top {
+    padding-top: 0px!important;
+    padding-bottom: 12px!important;
   }
 }
 

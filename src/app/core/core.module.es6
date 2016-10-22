@@ -4,7 +4,11 @@
 
 (function () {
     'use strict';
-    angular.module('Simulator.core', [])
+    angular.module('Simulator.core', [
+            'Simulator.core.directives',
+            'Simulator.core.services',
+            'Simulator.components'
+    ])
         .constant('simulator_config',{
             companyLinkURL:                         null,
             logoImageURL:                           null,
