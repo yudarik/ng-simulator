@@ -6,10 +6,10 @@
   'use strict';
 
   angular.module('BlurAdmin.pages.charts', [
-      'BlurAdmin.pages.charts.amCharts',
-      'BlurAdmin.pages.charts.chartJs',
+      'BlurAdmin.pages.charts.amCharts'
+/*      'BlurAdmin.pages.charts.chartJs',
       'BlurAdmin.pages.charts.chartist',
-      'BlurAdmin.pages.charts.morris'
+      'BlurAdmin.pages.charts.morris'*/
   ])
       .config(routeConfig);
 

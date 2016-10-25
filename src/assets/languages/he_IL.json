@@ -117,10 +117,12 @@
           "TITLE": "התפלגות בין תשובות נכונות ללא נכונות לפי קטגוריה",
           "CORRECT": "נכון",
           "INCORRECT": "לא נכון",
-          "TOTAL_ASKED": "סך שאלות שנשאלו"
+          "TOTAL_ASKED": "סך שאלות שנשאלו",
+          "XAXIS_TITLE": "כמות שאלות שנשאלו"
         },
         "PRACTICES_PERFORMED": {
-          "TITLE": "סטטיסטיקת תרגולים"
+          "TITLE": "התפלגות תרגולים",
+          "XAXIS_TITLE": "כמות שאלות שבוצעו"
         },
         "PACKAGES_QUOTA": {
           "TITLE": "חבילות שנרכשו"

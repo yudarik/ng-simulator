@@ -44,6 +44,21 @@
                 //.setBaseUrl('rest');
                 .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
+
+            RestangularProvider.setErrorInterceptor(
+                function ( response ) {
+                    if ( response.status === 401 || response.status === 403) {
+                        window.location = '#/signin';
+                    }
+                    else {
+                        // Some other unknown Error.
+                        console.log( response );
+                        //toaster.error('error', '',"An unknown error has occurred.<br>Details: " + response.data);
+                    }
+                    // Stop the promise chain.
+                    return false;
+                }
+            );
         })
         .run(function($rootScope, $state, simulator_config, simulatorService){
 

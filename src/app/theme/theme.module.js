@@ -12,6 +12,7 @@
       'angular.morris-chart',
       'textAngular',
       'BlurAdmin.theme.components'
+      //'BlurAdmin.pages'
   ]);
 
 })();

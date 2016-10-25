@@ -17,9 +17,6 @@
   "dependencies": {
     "Chart.js": "~2.1.0 ",
     "Ionicons": "ionicons#~2.0.1",
-    "amcharts": "~3.15.2",
-    "amcharts-stock": "*",
-    "ammap": "~3.14.5",
     "angular": "~1.4.8",
     "angular-route": "~1.4.6",
     "angular-slimscroll": "~1.1.5",
@@ -64,25 +61,7 @@
     "AngularJS-Toaster": "angularjs-toaster#^2.0.0"
   },
   "overrides": {
-    "amcharts": {
-      "main": [
-        "./dist/amcharts/amcharts.js",
-        "./dist/amcharts/plugins/responsive/responsive.min.js",
-        "./dist/amcharts/serial.js",
-        "./dist/amcharts/funnel.js",
-        "./dist/amcharts/pie.js",
-        "./dist/amcharts/gantt.js"
-      ]
-    },
-    "amcharts-stock": {
-      "main": "./dist/amcharts/amstock.js"
-    },
-    "ammap": {
-      "main": [
-        "./dist/ammap/ammap.js",
-        "./dist/ammap/maps/js/worldLow.js"
-      ]
-    },
+
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.css",

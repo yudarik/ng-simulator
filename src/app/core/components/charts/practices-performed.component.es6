@@ -10,53 +10,90 @@
             bindings: {
                 titleLabel: '<'
             },
-            template: '<div class="col-xs-12">'+
-                      '<canvas class="chart chart-horizontal-bar"'+
-                      'chart-data="$ctrl.practicesPerformed.data" '+
-                      'chart-labels="$ctrl.practicesPerformed.labels" '+
-                      'chart-series="$ctrl.practicesPerformed.series" '+
-                      'chart-options="$ctrl.practicesPerformed.options">'+
-                      '</canvas>'+
-                      '</div>',
-            controller: /** @ngInject */
-                function practicesPerformedCtrl($translate, customerService) {
+            template: `<div class="col-xs-12">
+                            <div id="practiceTypeGrades" class="amChart"></div>
+                      </div>`,
+            controller: function practicesPerformedCtrl($translate, baConfig, customerService) {
+                'ngInject';
 
-                this.practicesPerformed = {
-                    series: [],
-                    labels: [],
-                    data: [],
-                    options: {
-                        title: {
-                            display: true,
-                            text: this.titleLabel,
-                            fontSize: 14
-                        },
-                        legend: {
-                            display: false,
-                            position: 'top'
+                var layoutColors = baConfig.colors;
+
+                var chartColors = _.values(layoutColors.dashboard);
+
+                var chartConf = {
+                    titles: [{text: this.titleLabel, size: 18}],
+                    type: 'serial',
+                    theme: 'default',
+                    color: layoutColors.defaultText,
+                    dataProvider: [],
+                    valueAxes: [
+                        {
+                            axisAlpha: 0,
+                            position: 'left',
+                            title: $translate.instant('STATS.DASHBOARD.CHARTS.PRACTICES_PERFORMED.XAXIS_TITLE'),
+                            titleFontSize: 14,
+                            gridAlpha: 0.5,
+                            gridColor: layoutColors.border,
                         }
+                    ],
+                    startDuration: 1,
+                    graphs: [
+                        {
+                            balloonText: '<b>[[category]]: [[value]]</b>',
+                            fillColorsField: 'color',
+                            fillAlphas: 0.7,
+                            lineAlpha: 0.2,
+                            type: 'column',
+                            valueField: 'questions'
+                        }
+                    ],
+                    chartCursor: {
+                        categoryBalloonEnabled: false,
+                        cursorAlpha: 0,
+                        zoomable: false
+                    },
+                    categoryField: 'type',
+                    categoryAxis: {
+                        gridPosition: 'start',
+                        labelRotation: 0,
+                        gridAlpha: 0.5,
+                        gridColor: layoutColors.border,
+                        fontSize: 14
+                    },
+                    export: {
+                        enabled: true
                     }
                 };
 
-                customerService.getQuota().then((quota) => {
+                this.getData = () => {
 
-                    this.practicesPerformed.labels = [
-                        'examsPerformed',
-                        'generalPracticesPerformed',
-                        'suggestedPracticesPerformed',
-                        'predefinedExamsPerformed'
-                    ].map(key => $translate.instant('STATS.ACCOUNT.'+key.toUpperCase()));
+                    return customerService.getQuota().then((quota) => {
 
-                    this.practicesPerformed.data = [
-                        'examsPerformed',
-                        'generalPracticesPerformed',
-                        'suggestedPracticesPerformed',
-                        'predefinedExamsPerformed'
-                    ].map(key => quota[key]);
-                });
+                        return _.compact([
+                            'examsPerformed',
+                            'generalPracticesPerformed',
+                            'suggestedPracticesPerformed',
+                            'predefinedExamsPerformed'
+                        ].map((key,index) => {
+                            if (quota[key] > 0) {
+                                return {
+                                    type: $translate.instant('STATS.ACCOUNT.'+key.toUpperCase()),
+                                    questions: quota[key],
+                                    color: chartColors[index]
+                                };
+                            } else return false;
+
+                        }));
+                    });
+                };
+
+                this.$onInit = ()=>{
+                    this.getData().then(data => {
+                        chartConf.dataProvider = data;
+                        AmCharts.makeChart('practiceTypeGrades',chartConf);
+                    })
+                };
             }
         });
-
-
 
 })();

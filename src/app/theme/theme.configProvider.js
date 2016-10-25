@@ -22,12 +22,20 @@
   };
 
   // dashboard colors for charts
-  var dashboardColors = {
+  /*var dashboardColors = {
     blueStone: '#005562',
     surfieGreen: '#0e8174',
     silverTree: '#6eba8c',
     gossip: '#b9f2a1',
     white: '#10c4b5',
+  };*/
+  var dashboardColors = {
+    green: '#008000',
+    blue: '#0000ff',
+    yellow: '#ffff00',
+    red: '#ff0000',
+    orange: '#ffa500',
+    aqua: '#00ffff'
   };
 
   angular.module('BlurAdmin.theme')
@@ -63,13 +71,14 @@
         warningDark: colorHelper.shade(colorScheme.warning, 15),
         dangerDark: colorHelper.shade(colorScheme.danger, 15),
 
-        dashboard: {
+        /*dashboard: {
           blueStone: dashboardColors.blueStone,
           surfieGreen: dashboardColors.surfieGreen,
           silverTree: dashboardColors.silverTree,
           gossip: dashboardColors.gossip,
-          white: dashboardColors.white,
-        },
+          white: dashboardColors.white
+        },*/
+        dashboard: dashboardColors
       }
     };
 
