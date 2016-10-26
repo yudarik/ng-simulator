@@ -40,6 +40,9 @@
                 case 'PRACTICE':
                     api = 'practiceToPerform';
                     break;
+                case 'REPEAT':
+                    api = 'repeatPractice';
+                    break;
                 default:
                     api = 'practiceToPerform';
             }
@@ -68,8 +71,8 @@
         }
 
         function getQuestionImage(id) {
-            return `getQuestionImage?questionID=${id}`;
-            //return `http://nadlanline.dnsalias.com:8080/BiologyExams/getQuestionImage?questionID=${id}`;
+            //return `getQuestionImage?questionID=${id}`;
+            return `http://nadlanline.dnsalias.com:8080/BiologyExams/getQuestionImage?questionID=${id}`;
         }
 
         return {

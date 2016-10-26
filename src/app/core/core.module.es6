@@ -42,8 +42,8 @@
                     'Content-Type': 'application/json'
                 })
                 //.setBaseUrl('rest');
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
-                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
+                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
             RestangularProvider.setErrorInterceptor(
                 function ( response ) {

@@ -9,6 +9,7 @@
             /**ngInject*/
             bindings: {
                 remoteMap: '=',
+                isSolution: '=',
                 onSwitch: '&',
                 onPrev: '&',
                 onNext: '&',
@@ -32,7 +33,8 @@
                                         <button id="remote-next" class="btn btn-default pull-right" ng-click="$ctrl.onNext()"><i class="fa fa-arrow-right" aria-invisible="true"></i></button>
                                     </div>
                                     <div class="finish">
-                                        <button class="btn btn-success col-md-12" ng-disabled="!$ctrl.isFinishEnabled()" ng-click="$ctrl.submit()">{{::'EXAMS.BUTTONS.FINISH'|translate}}</button>
+                                        <button class="btn btn-success col-md-12" ng-if="!$ctrl.isSolution" ng-disabled="!$ctrl.isFinishEnabled()" ng-click="$ctrl.submit()">{{::'EXAMS.BUTTONS.FINISH'|translate}}</button>
+                                        <button class="btn btn-success col-md-12" ng-if="$ctrl.isSolution" ng-click="$ctrl.return()">{{::'EXAMS.BUTTONS.RETURN'|translate}}</button>
                                     </div>
                                 </div>
 

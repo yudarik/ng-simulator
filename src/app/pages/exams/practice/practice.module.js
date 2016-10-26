@@ -19,7 +19,7 @@
                 examParams: {},
                 practiceType: ''
             },
-            template: '<exam type="practice.practiceType" questions="practice.questions" timeframe="practice.timeframe" tabindex="1"></exam>',
+            template: '<exam config="practice.examConfig" tabindex="1"></exam>',
             controller: 'practiceCtrl as practice',
             resolve: {
 
@@ -46,7 +46,7 @@
             params: {
                 practiceSolution: {}
             },
-            template: '<exam questions="solutionCtrl.practiceSolution"></exam>',
+            template: '<exam practice-solution="solutionCtrl.practiceSolution"></exam>',
             resolve: {
                 practiceSolution: ["$stateParams", function ($stateParams) {
                     return $stateParams.practiceSolution;

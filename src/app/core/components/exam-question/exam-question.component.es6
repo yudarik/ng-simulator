@@ -94,10 +94,10 @@
 
                                    <label>{{::'EXAMS.PRACTICE.QUESTION_LABEL'|translate}}:</label>
                                    <h4>{{$ctrl.question.question}}</h4>
-                                   <div class="col-xs-12" ng-if="$ctrl.question.hasImage">
-                                        <i class="fa fa-spinner fa-spin" ng-if="$ctrl.imageLoading" style="font-size:24px"></i>
+                                   <span class="spinner-wrapper" ng-if="$ctrl.question.hasImage">
+                                        <i class="fa fa-spinner fa-spin"  style="font-size:24px" ng-if="$ctrl.imageLoading"></i>
                                         <img ng-src="{{$ctrl.getImage()}}" image-on-load="$ctrl.onImageLoad($event)"/>
-                                   </div>
+                                   </span>
                                </div>
                            </div>
                            <div class="row">
