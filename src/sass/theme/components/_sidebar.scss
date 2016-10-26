@@ -37,7 +37,8 @@ $angle-right: "\f101";
   padding: 0;
   &.selected:not(.with-sub-menu) {
     background-color: $primary;
-    a.al-sidebar-list-link {
+    a.al-sidebar-list-link,
+    span.al-sidebar-list-link {
       color: $sidebar-text;
       b {
         color: $sidebar-text;
@@ -60,7 +61,8 @@ $angle-right: "\f101";
   }
 }
 
-a.al-sidebar-list-link {
+a.al-sidebar-list-link,
+span.al-sidebar-list-link {
   display: block;
   height: 42px;
   padding-left: 18px;
@@ -105,6 +107,12 @@ a.al-sidebar-list-link {
     text-align: center;
     color: $sidebar-text;
     transition: transform 0.2s linear;
+  }
+}
+span.al-sidebar-list-link {
+  cursor: default;
+  &:hover {
+    color: $sidebar-text;
   }
 }
 

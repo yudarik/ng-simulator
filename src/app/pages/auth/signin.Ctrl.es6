@@ -12,10 +12,14 @@
 
             this.user = {};
 
-            userAuthService.getUser().then(()=>{
+            /*userAuthService.getUser().then(()=>{
                 $state.go('profile');
                 //$state.go('exams.distribution');
-            });
+            });*/
+
+            if (userAuthService.isLoggedIn()) {
+                $state.go('profile');
+            }
 
             this.submit = ()=>{
                 userAuthService.signin(this.user)
@@ -31,6 +35,14 @@
                             this.message = err.data.errorMessage
                         }
 
+                        switch(err.status) {
+                            case 401:
+                            case 403:
+                                this.message = $translate.instant('AUTH.ERROR.'+err.data.errorMessage.toUpperCase());
+                                break;
+
+
+                        }
                     });
             }
         })

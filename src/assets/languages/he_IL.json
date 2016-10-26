@@ -13,9 +13,12 @@
     "LOGIN_BTN": "כניסה",
     "REGISTER_BTN": "הרשם",
     "USER_PASSWARD_INCORRECT": "שם המשתמש או הסיסמא שגויים",
-    "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
     "REGISTERED_SUCCESSFULLY": "נרשמתם בהצלחה, פרטי הכניסה נשלחו לכתובת הדוא\"ל איתה נרשמתם",
-    "PASSWORD_RESET_EMAIL_SENT": "הנחיות לאיפוס הסיסמא נשלחו לכתובת הדוא\"ל"
+    "PASSWORD_RESET_EMAIL_SENT": "הנחיות לאיפוס הסיסמא נשלחו לכתובת הדוא\"ל",
+    "ERROR": {
+      "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
+      "ACCOUNT.EXPIRED": "פג תוקפו של חשבון המשתמש, אנא פנה למנהל האתר"
+    }
   },
   "EXAMS": {
     "TYPES": {
@@ -88,7 +91,11 @@
       "PREDEFINEDEXAMSWITHQUOTASLIST": "Predefined Exams With Quotas list",
       "PACKAGESCURRENCY": "ש\"ח",
       "PURCHASEDPRODUCTS": "חבילות שנרכשו",
-      "CANCELEDPRODUCTS": "חבילות שבוטלו"
+      "CANCELEDPRODUCTS": "חבילות שבוטלו",
+      "PRACTICE": "תרגול כללי",
+      "EXAM": "מבחן",
+      "WEAK_AREAS_PRACTICE": "תרגול בנקודות חולשה",
+      "POST_CREDIT_PRACTICE": "תרגול לאחר גמר כל האשראי"
     },
     "DASHBOARD": {
       "TITLE": "סטטיסטיקת תרגולים",

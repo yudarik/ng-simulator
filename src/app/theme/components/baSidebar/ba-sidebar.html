@@ -9,20 +9,26 @@
         <i class="{{ ::item.icon }}"></i><span>{{ ::item.title | translate }}</span>
       </a>
 
-      <a ng-mouseenter="hoverItem($event, item)" ng-if="::item.subMenu"
+      <!--<a ng-mouseenter="hoverItem($event, item)" ng-if="::item.subMenu"
          class="al-sidebar-list-link" ba-ui-sref-toggler>
         <i class="{{ ::item.icon }}"></i><span>{{ ::item.title | translate }}</span>
         <b class="fa fa-angle-down" ui-sref-active="fa-angle-up"
            ng-if="::item.subMenu"></b>
-      </a>
+      </a>-->
+      <span ng-if="::item.subMenu"
+         class="al-sidebar-list-link">
+        <i class="{{ ::item.icon }}"></i><span>{{ ::item.title | translate }}</span>
+      </span>
+
 
       <ul ng-if="::item.subMenu" class="al-sidebar-sublist"
-          ng-class="{'slide-right': item.slideRight}"
-          ba-ui-sref-toggling-submenu>
+          ng-class="{'slide-right': item.slideRight}">
         <li ng-repeat="subitem in ::item.subMenu" ng-class="::{'with-sub-menu': subitem.subMenu}" ui-sref-active="selected"
             ba-sidebar-toggling-item="subitem" class="ba-sidebar-sublist-item" ng-if="!subitem.disabled">
           <a ng-mouseenter="hoverItem($event, item)" ng-if="::subitem.subMenu" ba-ui-sref-toggler
-             class="al-sidebar-list-link subitem-submenu-link"><span>{{ ::subitem.title | translate }}</span>
+             class="al-sidebar-list-link subitem-submenu-link">
+
+            <span>{{ ::subitem.title | translate }}</span>
             <b class="fa" ng-class="{'fa-angle-up': subitem.expanded, 'fa-angle-down': !subitem.expanded}"
                ng-if="::subitem.subMenu"></b>
           </a>
@@ -44,11 +50,12 @@
           <a ng-mouseenter="hoverItem($event, item)" href ng-if="::(!subitem.subMenu && subitem.disabled)" class="al-sidebar-list-link">
             {{ ::subitem.title | translate }}
           </a>
-          <a ng-mouseenter="hoverItem($event, item)" target="{{::(subitem.blank ? '_blank' : '_self')}}"
+          <a ng-mouseenter="hoverItem($event, item)" class="al-sidebar-list-link"
+             target="{{::(subitem.blank ? '_blank' : '_self')}}"
              ng-if="::(!subitem.subMenu && !subitem.disabled)"
              ui-state="subitem.stateRef || ''"
              ng-href="{{::(subitem.fixedHref ? subitem.fixedHref: '')}}">
-            {{ ::subitem.title | translate}}
+            <i class="{{ ::subitem.icon }}"></i><span>{{ ::subitem.title | translate}}</span>
           </a>
         </li>
       </ul>

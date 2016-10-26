@@ -45,6 +45,9 @@
                     } else {
                         return $q.when($rootScope.currentUser);
                     }
+                },
+                isLoggedIn: () => {
+                    return !!$rootScope.currentUser;
                 }
             };
 
