@@ -10,10 +10,8 @@
             bindings: {
                 titleLabel: '<'
             },
-            template: `<div class="col-xs-12">
-                            <div id="practiceTypeGrades" class="amChart"></div>
-                      </div>`,
-            controller: function practicesPerformedCtrl($translate, baConfig, customerService) {
+            template: `<div id="practiceTypeGrades" class="amChart"></div>`,
+            controller: function practicesPerformedCtrl($translate, baConfig, customerService, examService) {
                 'ngInject';
 
                 var layoutColors = baConfig.colors;
@@ -39,12 +37,23 @@
                     startDuration: 1,
                     graphs: [
                         {
-                            balloonText: '<b>[[category]]: [[value]]</b>',
-                            fillColorsField: 'color',
-                            fillAlphas: 0.7,
-                            lineAlpha: 0.2,
-                            type: 'column',
-                            valueField: 'questions'
+                            "accessibleLabel": "[[category]] [[value]]",
+                            "balloonText": "[[category]]\n שאלות:[[value]], תרגולים:[[practices]]",
+                            "columnWidth": 0.6,
+                            "dashLength": 70,
+                            "fillAlphas": 1,
+                            "fillColors": "#008000",
+                            "fillColorsField": "color",
+                            "fixedColumnWidth": 80,
+                            "id": "AmGraph-1",
+                            "legendValueText": "",
+                            "lineAlpha": 0,
+                            "lineColor": "#008000",
+                            "lineThickness": 0,
+                            "title": "graph 1",
+                            "type": "column",
+                            "valueField": "questions",
+                            "visibleInLegend": false
                         }
                     ],
                     chartCursor: {
@@ -60,30 +69,36 @@
                         gridColor: layoutColors.border,
                         fontSize: 14
                     },
+                    "legend": {
+                        "enabled": false,
+                        "useGraphSettings": true
+                    },
                     export: {
                         enabled: true
                     }
                 };
+                this.getQuestionsSum = (allPractices) => {
+                    return _.sumBy(allPractices, 'questionNumber');
+                };
 
                 this.getData = () => {
 
-                    return customerService.getQuota().then((quota) => {
+                    return examService.getStats().then((quota) => {
 
-                        return _.compact([
-                            'examsPerformed',
-                            'generalPracticesPerformed',
-                            'suggestedPracticesPerformed',
-                            'predefinedExamsPerformed'
-                        ].map((key,index) => {
-                            if (quota[key] > 0) {
+                        var grouped = _.groupBy(quota, 'practiceType');
+                        var practiceTypesPerformed = _.keys(grouped);
+
+                        return practiceTypesPerformed.map((key,index) => {
+                            if (grouped[key].length > 0) {
                                 return {
                                     type: $translate.instant('STATS.ACCOUNT.'+key.toUpperCase()),
-                                    questions: quota[key],
+                                    questions: this.getQuestionsSum(grouped[key]),
+                                    practices: grouped[key].length,
                                     color: chartColors[index]
                                 };
                             } else return false;
 
-                        }));
+                        });
                     });
                 };
 

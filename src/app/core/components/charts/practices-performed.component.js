@@ -11,8 +11,8 @@
         bindings: {
             titleLabel: '<'
         },
-        template: '<div class="col-xs-12">\n                            <div id="practiceTypeGrades" class="amChart"></div>\n                      </div>',
-        controller: ["$translate", "baConfig", "customerService", function practicesPerformedCtrl($translate, baConfig, customerService) {
+        template: '<div id="practiceTypeGrades" class="amChart"></div>',
+        controller: ["$translate", "baConfig", "customerService", "examService", function practicesPerformedCtrl($translate, baConfig, customerService, examService) {
             'ngInject';
 
             var _this = this;
@@ -37,12 +37,23 @@
                 }],
                 startDuration: 1,
                 graphs: [{
-                    balloonText: '<b>[[category]]: [[value]]</b>',
-                    fillColorsField: 'color',
-                    fillAlphas: 0.7,
-                    lineAlpha: 0.2,
-                    type: 'column',
-                    valueField: 'questions'
+                    "accessibleLabel": "[[category]] [[value]]",
+                    "balloonText": "[[category]]\n שאלות:[[value]], תרגולים:[[practices]]",
+                    "columnWidth": 0.6,
+                    "dashLength": 70,
+                    "fillAlphas": 1,
+                    "fillColors": "#008000",
+                    "fillColorsField": "color",
+                    "fixedColumnWidth": 80,
+                    "id": "AmGraph-1",
+                    "legendValueText": "",
+                    "lineAlpha": 0,
+                    "lineColor": "#008000",
+                    "lineThickness": 0,
+                    "title": "graph 1",
+                    "type": "column",
+                    "valueField": "questions",
+                    "visibleInLegend": false
                 }],
                 chartCursor: {
                     categoryBalloonEnabled: false,
@@ -57,24 +68,35 @@
                     gridColor: layoutColors.border,
                     fontSize: 14
                 },
+                "legend": {
+                    "enabled": false,
+                    "useGraphSettings": true
+                },
                 export: {
                     enabled: true
                 }
             };
+            this.getQuestionsSum = function (allPractices) {
+                return _.sumBy(allPractices, 'questionNumber');
+            };
 
             this.getData = function () {
 
-                return customerService.getQuota().then(function (quota) {
+                return examService.getStats().then(function (quota) {
 
-                    return _.compact(['examsPerformed', 'generalPracticesPerformed', 'suggestedPracticesPerformed', 'predefinedExamsPerformed'].map(function (key, index) {
-                        if (quota[key] > 0) {
+                    var grouped = _.groupBy(quota, 'practiceType');
+                    var practiceTypesPerformed = _.keys(grouped);
+
+                    return practiceTypesPerformed.map(function (key, index) {
+                        if (grouped[key].length > 0) {
                             return {
                                 type: $translate.instant('STATS.ACCOUNT.' + key.toUpperCase()),
-                                questions: quota[key],
+                                questions: _this.getQuestionsSum(grouped[key]),
+                                practices: grouped[key].length,
                                 color: chartColors[index]
                             };
                         } else return false;
-                    }));
+                    });
                 });
             };
 

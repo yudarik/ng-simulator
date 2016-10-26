@@ -11,7 +11,7 @@
         bindings: {
             titleLabel: '<'
         },
-        template: '<div class="col-xs-12">\n                            <div id="categoriesCorectIncorect" class="amChart"></div>\n                      </div>',
+        template: '<div id="categoriesCorectIncorect" class="amChart"></div>\n                        <div id="categoriesCorectIncorectLegend"></div>',
         controller: ["$translate", "baConfig", "customerStatsService", function CorrectIncorrectCtrl($translate, baConfig, customerStatsService) {
             'ngInject';
 
@@ -41,7 +41,8 @@
                 "theme": "default",
                 "categoryAxis": {
                     "gridPosition": "start",
-                    "labelRotation": 45
+                    labelRotation: 25,
+                    fontSize: 14
                 },
                 "trendLines": [],
                 "graphs": [{
@@ -52,7 +53,7 @@
                     "lineColor": "#008000",
                     "title": series.correct,
                     "valueField": "Correctly Answered",
-                    "type": "line"
+                    "visibleInLegend": true
                 }, {
                     "balloonText": "[[title]] of [[category]]:[[value]]",
                     "fillAlphas": 0.7,
@@ -60,8 +61,7 @@
                     "lineAlpha": 0,
                     "lineColor": "#CC0000",
                     "title": series.incorrect,
-                    "valueField": "Incorrectly Answered",
-                    "type": "line"
+                    "valueField": "Incorrectly Answered"
                 }, {
                     "columnWidth": 0.47,
                     "dashLength": 1,
@@ -71,21 +71,25 @@
                     "lineColor": "#0000FF",
                     "lineThickness": 2,
                     "title": series.total,
-                    "valueField": "Total",
-                    "type": "line"
+                    "valueField": "Total"
                 }],
                 "guides": [],
                 "valueAxes": [{
+                    "id": "ValueAxis-1",
                     "title": series.xaxis
                 }],
                 "allLabels": [],
-                "balloon": {
-                    enabled: true
-                },
+                "balloon": {},
                 "legend": {
-                    "enabled": true
+                    "enabled": true,
+                    "forceWidth": true,
+                    "divId": "categoriesCorectIncorectLegend",
+                    "position": "bottom",
+                    "align": "right",
+                    "right": 0
                 },
                 "titles": [{
+                    "id": "Title-1",
                     "size": 15,
                     "text": series.title
                 }],
