@@ -69,11 +69,17 @@
                     return examService.getQuestionImage(this.question.questionID);
                 };
 
-                this.imageLoading = true;
-
                 this.onImageLoad = (event) => {
                     this.imageLoading = false;
                 };
+
+                this.imageLoading = true;
+
+                $scope.$watch('$ctrl.question.questionID', (newVal,oldVal)=>{
+                    if (newVal === oldVal) return;
+
+                    this.imageLoading = true;
+                });
 
                 $scope.$on('numKeyPadSelect', (event, data)=>{
 
@@ -95,7 +101,7 @@
                                    <label>{{::'EXAMS.PRACTICE.QUESTION_LABEL'|translate}}:</label>
                                    <h4>{{$ctrl.question.question}}</h4>
                                    <span class="spinner-wrapper" ng-if="$ctrl.question.hasImage">
-                                        <i class="fa fa-spinner fa-spin"  style="font-size:24px" ng-if="$ctrl.imageLoading"></i>
+                                        <span ng-if="$ctrl.imageLoading" class="text-left align-left"><i class="fa fa-spinner fa-spin"  style="font-size:24px"></i></span>
                                         <img ng-src="{{$ctrl.getImage()}}" image-on-load="$ctrl.onImageLoad($event)"/>
                                    </span>
                                </div>

@@ -4,7 +4,7 @@ exam {
   left: 0;
   right: 0;
   bottom: 0;
-  margin: 0 260px 0 200px;
+  margin: 0 ($sidebar-width + 20) 0 200px;
 }
 .menu-collapsed {
   exam {

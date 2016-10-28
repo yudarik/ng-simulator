@@ -42,8 +42,8 @@
                     'Content-Type': 'application/json'
                 })
                 //.setBaseUrl('rest');
-                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
             RestangularProvider.setErrorInterceptor(
                 function ( response ) {
@@ -60,7 +60,7 @@
                 }
             );
         })
-        .run(function($rootScope, $state, simulator_config, simulatorService){
+        .run(function($rootScope, $state, $uibModal, simulator_config, simulatorService){
 
             $rootScope.appTitle = 'Loading...';
 
@@ -77,6 +77,62 @@
 
                 if ($state.get('manuals'))
                     $state.get('manuals').sidebarMeta.disabled = !simulator_config.trainingDocumentsEnabled;
-            })
+            });
+
+            function registerStateChangeListener() {
+                var onRouteChangeOff = $rootScope.$on('$stateChangeStart',
+                    function(event, toState, toParams, fromState, fromParams){
+                        console.log(fromState.name + ' > '+ toState.name);
+
+                        if (fromState.name === 'exams.practice' && toState.name !== 'exams.practice-summary') {
+                            event.preventDefault();
+
+                            redirectModal().then(()=>{
+                                onRouteChangeOff();
+                                $state.transitionTo(toState, toParams);
+                            }, ()=>{
+                                //dismiss
+                            })
+                        }
+                    });
+            }
+            registerStateChangeListener();
+
+            $rootScope.$on('$stateChangeSuccess',
+                function(event, toState, toParams, fromState, fromParams){
+
+                    if (fromState.name === 'exams.practice') {
+                        registerStateChangeListener();
+                    }
+                });
+
+
+            function redirectModal() {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    template: [ '<div class="panel"><div class="panel-body">',
+                        '<h3 class="text-center">{{::"EXAMS.EXAM_CANCEL_ARE_YOU_SURE"|translate}}</h3>',
+                        '<br/>',
+                        '<br/>',
+                        '<p class="text-center ">',
+                        '<button class="btn btn-success btn-space" ng-click="ok()">אישור</button>',
+                        '<button class="btn btn-default" ng-click="cancel()">ביטול</button>',
+                        '</p>',
+                        '</div></div>'].join(''),
+                    controller: function ($uibModalInstance, $scope) {
+                        $scope.ok = function () {
+                            $uibModalInstance.close();
+                        };
+
+                        $scope.cancel = function () {
+                            $uibModalInstance.dismiss('cancel');
+                        };
+                    },
+                    size: 'small'
+                });
+
+                return modalInstance.result;
+            }
+
         })
 })();

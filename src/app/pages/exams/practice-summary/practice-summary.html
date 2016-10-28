@@ -62,7 +62,7 @@
                 <br/>
                 <br>
                 <div class="col-xs-12">
-                    <a class="btn btn-default" ui-sref="exams.practice-solution({practiceSolution: practiceSummary.summary.questions})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>
+                    <a class="btn btn-default" ui-sref="exams.practice-solution({practiceSummary: practiceSummary.summary})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>
                     <a class="btn btn-default" ui-sref="exams.practice({practiceType: 'REPEAT', examParams: {practiceId: practiceSummary.summary.practiceID, timeFrame: 'NORMAL'}})">{{::'EXAMS.SUMMARY.REPEAT_PRACTICE'|translate}}</a>
                     <a class="btn btn-default" ng-href="{{practiceSummary.simulator_config.tipsForSuccessLinkURL}}" target="_blank">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</a>
                 </div>

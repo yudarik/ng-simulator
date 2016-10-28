@@ -44,16 +44,16 @@
                 url: '/practice-solution',
                 parent: 'exams',
                 params: {
-                    practiceSolution: {}
+                    practiceSummary: {}
                 },
-                template: '<exam practice-solution="solutionCtrl.practiceSolution"></exam>',
+                template: '<exam config="solutionCtrl.examConfig"></exam>',
                 resolve: {
-                    practiceSolution: function($stateParams) {
-                        return $stateParams.practiceSolution;
+                    practiceSummary: function($stateParams) {
+                        return $stateParams.practiceSummary;
                     }
                 },
-                controller: function(practiceSolution) {
-                    this.practiceSolution = practiceSolution;
+                controller: function(practiceSummary) {
+                    this.examConfig = practiceSummary;
                 },
                 controllerAs: 'solutionCtrl',
                 title: 'EXAMS.TYPES.PRACTICE_SOLUTION'
