@@ -152,7 +152,7 @@
 
                 ping = $interval(function () {
                     simulatorService.ping();
-                }, 10000);
+                }, 30000);
             };
 
             this.init();

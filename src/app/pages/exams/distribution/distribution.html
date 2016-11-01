@@ -6,14 +6,14 @@
 
         <form class="form-horizontal text-right" name="exam-distribution" ng-submit="distribution.startExam()" ng-model="distribution.examParams">
             <div class="row" ng-if="distribution.distributionType !== 'full-exam'">
-                <div class="form-group form-group-xs col-md-4 pull-right" ng-repeat="category in distribution.config.categories track by category.id">
-                    <label for class="col-sm-6 control-label pull-right">{{category.name}}:</label>
+                <div class="form-group form-group-xs col-md-4 pull-left" ng-repeat="category in distribution.config.categories track by category.id">
+                    <label for class="col-sm-6 control-label pull-left">{{category.name}}:</label>
                     <div class="col-sm-4">
                         <input type="number" class="form-control" ng-model="category.questionDistribution" min="0" max="{{::distribution.examParams.totalQuestion}}" name="category.id">
                     </div>
                 </div>
-                <div class="form-group col-md-4 pull-right">
-                    <label for class="col-sm-6 control-label pull-right"><b ng-bind="::'EXAMS.DISTRIBUTION.TOTAL_QUESTIONS'|translate"></b></label>
+                <div class="form-group col-md-4 pull-left">
+                    <label for class="col-sm-6 control-label pull-left"><b ng-bind="::'EXAMS.DISTRIBUTION.TOTAL_QUESTIONS'|translate"></b></label>
                     <div class="col-sm-4">
                         <input type="number" class="form-control" ng-model="distribution.examParams.totalQuestion" min="1" max="{{::distribution.totalQuota}}" ng-change="distribution.initQuestionDistribution()">
                     </div>
@@ -22,22 +22,22 @@
 
 
             <div class="row">
-                <div class="form-group col-md-4 pull-right">
-                    <label for class="col-sm-6 control-label pull-right">{{::'EXAMS.DISTRIBUTION.LEVEL.TITLE'|translate}}</label>
+                <div class="form-group col-md-4 pull-left">
+                    <label for class="col-sm-6 control-label pull-left">{{::'EXAMS.DISTRIBUTION.LEVEL.TITLE'|translate}}</label>
                     <ul class="col-md-4">
-                        <li class="pull-right">
+                        <li class="pull-left">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="difficulty" value="EASY" ng-model="distribution.examParams.difficulty"
                                        ng-checked="distribution.examParams.difficulty === 'EASY'"><span>{{::'EXAMS.DISTRIBUTION.LEVEL.EASY'|translate}}</span>
                             </label>
                         </li>
-                        <li class="pull-right">
+                        <li class="pull-left">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="difficulty" value="MEDIUM" ng-model="distribution.examParams.difficulty"
                                        ng-checked="distribution.examParams.difficulty === 'MEDIUM'"><span>{{::'EXAMS.DISTRIBUTION.LEVEL.MEDIUM'|translate}}</span>
                             </label>
                         </li>
-                        <li class="pull-right">
+                        <li class="pull-left">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="difficulty" value="HARD" ng-model="distribution.examParams.difficulty"
                                        ng-checked="distribution.examParams.difficulty === 'HARD'"
@@ -46,22 +46,22 @@
                         </li>
                     </ul>
                 </div>
-                <div class="form-group col-md-4 pull-right">
-                    <label for class="col-sm-6 control-label pull-right">זמן לבחינה:</label>
+                <div class="form-group col-md-4 pull-left">
+                    <label for class="col-sm-6 control-label pull-left">זמן לבחינה:</label>
                     <ul class="col-md-4">
-                        <li class="pull-right">
+                        <li class="pull-left">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="timeFrame" value="UNLIMITED" ng-model="distribution.examParams.timeFrame"
                                        ng-checked="distribution.examParams.timeFrame === 'UNLIMITED'"><span>{{::'EXAMS.DISTRIBUTION.TIMEFRAME.UNLIMITED'|translate}}</span>
                             </label>
                         </li>
-                        <li class="pull-right">
+                        <li class="pull-left">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="timeFrame" value="NORMAL" ng-model="distribution.examParams.timeFrame"
                                        ng-checked="distribution.examParams.timeFrame === 'NORMAL'"><span>{{::'EXAMS.DISTRIBUTION.TIMEFRAME.REGULAR'|translate}}</span>
                             </label>
                         </li>
-                        <li class="pull-right">
+                        <li class="pull-left">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="timeFrame" value="EXTENDED" ng-model="distribution.examParams.timeFrame"
                                        ng-checked="distribution.examParams.timeFrame === 'EXTENDED'"><span>{{::'EXAMS.DISTRIBUTION.TIMEFRAME.EXTENDED'|translate}}</span>
@@ -69,11 +69,11 @@
                         </li>
                     </ul>
                 </div>
-                <div class="form-group col-md-4 pull-right">
+                <div class="form-group col-md-4 pull-left">
                     <br>
                     <br>
                     <br>
-                    <input type="submit" class="btn btn-success btn-md pull-left" value="{{::'EXAMS.DISTRIBUTION.LEVEL.START'|translate}}">
+                    <input type="submit" class="btn btn-success btn-md pull-right" value="{{::'EXAMS.DISTRIBUTION.LEVEL.START'|translate}}">
                 </div>
 
             </div>

@@ -28,14 +28,19 @@
             postCreditModeEnabled:                  null,
             sendingLastChanceToEnrollEmail:         null
         })
+
         .config(function(RestangularProvider, $translateProvider){
 
             $translateProvider.useStaticFilesLoader({
                 prefix: 'assets/languages/',
                 suffix: '.json'
             });
+            $translateProvider.registerAvailableLanguageKeys(['en_US', 'he_IL'], {
+                'iw_IL': 'he_IL'
+            });
 
-            $translateProvider.preferredLanguage('he_IL');
+            $translateProvider.preferredLanguage('en_US');
+            //$translateProvider.use('he_IL');
 
             RestangularProvider
                 .setDefaultHeaders({
@@ -43,6 +48,7 @@
                 })
                 //.setBaseUrl('rest');
                 .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
             RestangularProvider.setErrorInterceptor(
@@ -60,7 +66,7 @@
                 }
             );
         })
-        .run(function($rootScope, $state, $uibModal, simulator_config, simulatorService){
+        .run(function($rootScope, $state, $uibModal, $translate, simulator_config, simulatorService){
 
             $rootScope.appTitle = 'Loading...';
 
@@ -68,6 +74,7 @@
                 _.assign(simulator_config, config);
                 $rootScope.appTitle = simulator_config.applicationTitle;
                 $rootScope.simulatorConfigLoaded = true;
+                $rootScope.appLayout = simulator_config.layout.toLowerCase();
 
                 if ($state.get('exams.post-credit'))
                     $state.get('exams.post-credit').sidebarMeta.disabled = !simulator_config.postCreditModeEnabled;

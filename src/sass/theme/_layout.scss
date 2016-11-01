@@ -19,6 +19,7 @@ body {
   &.blur-theme {
     @include main-background();
   }
+  direction: ltr!important;
 }
 
 body.mobile{

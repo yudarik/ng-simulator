@@ -1,8 +1,8 @@
 .exam-timeframe {
   position: fixed;
   bottom: 15px;
-  right: $sidebar-width;
-  left: 0px;
+  left: 240px;
+  right: 0px;
   margin: 0 20px;
 
   .progress {
@@ -22,6 +22,6 @@
 }
 .menu-collapsed {
   .exam-timeframe {
-    right: 50px;
+    left: 50px;
   }
 }
