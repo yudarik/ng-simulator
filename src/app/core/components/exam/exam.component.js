@@ -105,25 +105,6 @@
                 return modalInstance.result;
             }
 
-            function cancelModal($uibModal) {
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    template: ['<div class="panel"><div class="panel-body">', '<h3 class="text-center">{{::"EXAMS.EXAM_CANCEL_ARE_YOU_SURE"|translate}}</h3>', '<br/>', '<br/>', '<p class="text-center ">', '<button class="btn btn-success btn-space" ng-click="ok()">אישור</button>', '<button class="btn btn-default" ng-click="cancel()">ביטול</button>', '</p>', '</div></div>'].join(''),
-                    controller: ["$uibModalInstance", "$scope", function ($uibModalInstance, $scope) {
-                        $scope.ok = function () {
-                            $uibModalInstance.close();
-                        };
-
-                        $scope.cancel = function () {
-                            $uibModalInstance.dismiss('cancel');
-                        };
-                    }],
-                    size: 'small'
-                });
-
-                return modalInstance.result;
-            }
-
             this.init = function () {
 
                 var answerArray = [];
@@ -191,14 +172,6 @@
                 }
             };
 
-            this.cancelExam = function () {
-                cancelModal($uibModal).then(function () {
-                    $state.go('dashboard');
-                }, function () {
-                    //dismiss
-                });
-            };
-
             this.return = function () {
 
                 if (_this.isSolution) {
@@ -206,7 +179,7 @@
                         $state.go('exams.practice-summary', { examSummary: solution });
                     });
                 } else {
-                    _this.cancelExam();
+                    $state.go('dashboard');
                 }
             };
 

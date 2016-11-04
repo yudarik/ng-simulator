@@ -7,8 +7,8 @@
 (function () {
     'use strict';
 
-    practiceCtrl.$inject = ["examConfig", "practiceType"];
-    function practiceCtrl(examConfig, practiceType) {
+    practiceCtrl.$inject = ["$rootScope", "examConfig", "practiceType"];
+    function practiceCtrl($rootScope, examConfig, practiceType) {
         /*this.timeframe = examConfig.timePerQuestion * examConfig.questions.length;
         this.questions = examConfig.questions;
         this.practiceType = examConfig.practiceType;*/

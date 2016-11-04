@@ -18,6 +18,11 @@
     "ERROR": {
       "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
       "ACCOUNT.EXPIRED": "פג תוקפו של חשבון המשתמש, אנא פנה למנהל האתר"
+    },
+    "WELCOME": {
+      "MESSAGE": {
+        "OK_BTN": "תודה"
+      }
     }
   },
   "EXAMS": {

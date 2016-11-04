@@ -8,7 +8,7 @@
     angular.module('Simulator.pages.stats')
         .controller('accountStatsCtrl', accountStatsCtrl);
 
-    function accountStatsCtrl(quota) {
+    function accountStatsCtrl(quota, $uibModal) {
 
         this.quota = quota;
     }

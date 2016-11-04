@@ -37,7 +37,7 @@
                                     <div class="finish">
                                         <button class="btn btn-success col-md-12 finishExam" ng-if="!$ctrl.isSolution" ng-disabled="!$ctrl.isFinishEnabled()" ng-click="$ctrl.submit()">{{::'EXAMS.BUTTONS.FINISH'|translate}}</button>
                                         <button class="btn btn-success col-md-12" ng-click="$ctrl.onReturn()" style="font-size: 14px">{{::'EXAMS.BUTTONS.RETURN'|translate}}</button>
-                                        <a class="btn btn-success col-md-12 pull-left xs-hiden export" ng-if="$ctrl.isSolution" target="_blank"
+                                        <a class="btn btn-success col-md-12 pull-left xs-hiden export" ng-if="$ctrl.showSavePracticeButton()" target="_blank"
                                             ng-href="DownloadPracticeHTMLFile?practiceID={{$ctrl.practiceId}}""
                                             tooltip="{{::'EXAMS.BUTTONS.DOWNLOAD'|translate}}" tooltip-placement="top">
                                             <i class="fa fa-download" aria-hidden="true"></i>&nbsp;{{::'EXAMS.BUTTONS.DOWNLOAD'|translate}}
@@ -51,7 +51,6 @@
                 'ngInject';
 
                     this.config = simulator_config;
-
 
                     this.navigateToQuestion = (question) => {
                         this.onSwitch({question: question});
@@ -68,7 +67,11 @@
                         console.log('Finish clicked');
                         return this.onFinish();
                         //$scope.$emit('finish-exam');
-                    }
+                    };
+
+                    this.showSavePracticeButton = () => {
+                        return this.isSolution && this.config.showSavePracticeButton;
+                    };
                 }
 
         });

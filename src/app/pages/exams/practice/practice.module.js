@@ -8,7 +8,51 @@
     'use strict';
 
     routeConfig.$inject = ["$stateProvider"];
-    angular.module('Simulator.pages.exams.practice', ['Simulator.components']).config(routeConfig);
+    angular.module('Simulator.pages.exams.practice', ['Simulator.components']).config(routeConfig).run(function ($rootScope, $uibModal, $state) {
+
+        function registerStateChangeListener() {
+            var onRouteChangeOff = $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+                console.log(fromState.name + ' > ' + toState.name);
+
+                if (fromState.name === 'exams.practice' && toState.name !== 'exams.practice-summary') {
+                    event.preventDefault();
+
+                    redirectModal().then(function () {
+                        onRouteChangeOff();
+                        $state.transitionTo(toState, toParams);
+                    }, function () {
+                        //dismiss
+                    });
+                }
+            });
+        }
+        function redirectModal() {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                template: ['<div class="panel"><div class="panel-body">', '<h3 class="text-center">{{::"EXAMS.EXAM_CANCEL_ARE_YOU_SURE"|translate}}</h3>', '<br/>', '<br/>', '<p class="text-center ">', '<button class="btn btn-success btn-space" ng-click="ok()">אישור</button>', '<button class="btn btn-default" ng-click="cancel()">ביטול</button>', '</p>', '</div></div>'].join(''),
+                controller: function controller($uibModalInstance, $scope) {
+                    $scope.ok = function () {
+                        $uibModalInstance.close();
+                    };
+
+                    $scope.cancel = function () {
+                        $uibModalInstance.dismiss('cancel');
+                    };
+                },
+                size: 'small'
+            });
+
+            return modalInstance.result;
+        }
+        registerStateChangeListener();
+
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+
+            if (fromState.name === 'exams.practice') {
+                registerStateChangeListener();
+            }
+        });
+    });
 
     /** @ngInject */
     function routeConfig($stateProvider) {

@@ -15,14 +15,46 @@
             url: '/profile',
             parent: 'auth',
             title: 'USER.PROFILE',
-            templateUrl: 'app/pages/profile/profile.html',
-            controller: 'ProfilePageCtrl as profile',
+            template: '<profile-page user-profile="$ctrl.userProfile"></profile-page>',
+            controller: function(userProfile) {
+                this.userProfile = userProfile;
+            },
+            controllerAs: '$ctrl',
             resolve: {
                     userProfile: function(customerService) {
                     return customerService.getInfo();
                 }
             }
-        });
+        })
+        .state('profileModal', {
+            url: '/profile-modal',
+            parent: 'auth',
+            controller: ($uibModal, userProfile) =>{
+
+                var showModal = function (item) {
+                    $uibModal.open({
+                        animation: false,
+                        controller: /** @ngInject */
+                            ($uibModalInstance) => {
+                            this.ok = function () {
+                                $uibModalInstance.close($scope.link);
+                            };
+                            this.userProfile = userProfile;
+                        },
+                        template: '<profile-page user-profile="$ctrl.userProfile"></profile-page>',
+                    }).result.then(function (link) {
+                        item.href = link;
+                    });
+                };
+
+                showModal();
+            },
+            resolve: {
+                userProfile: function(customerService) {
+                    return customerService.getInfo();
+                }
+            }
+        })
   }
 
 })();

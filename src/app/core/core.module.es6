@@ -28,7 +28,6 @@
             postCreditModeEnabled:                  null,
             sendingLastChanceToEnrollEmail:         null
         })
-
         .config(function(RestangularProvider, $translateProvider){
 
             $translateProvider.useStaticFilesLoader({
@@ -39,8 +38,8 @@
                 'iw_IL': 'he_IL'
             });
 
-            $translateProvider.preferredLanguage('en_US');
-            //$translateProvider.use('he_IL');
+            //$translateProvider.preferredLanguage('en_US');
+            $translateProvider.use('he_IL');
 
             RestangularProvider
                 .setDefaultHeaders({
@@ -75,6 +74,7 @@
                 $rootScope.appTitle = simulator_config.applicationTitle;
                 $rootScope.simulatorConfigLoaded = true;
                 $rootScope.appLayout = simulator_config.layout.toLowerCase();
+                $rootScope.simulatorConfig = simulator_config;
 
                 if ($state.get('exams.post-credit'))
                     $state.get('exams.post-credit').sidebarMeta.disabled = !simulator_config.postCreditModeEnabled;
@@ -85,61 +85,5 @@
                 if ($state.get('manuals'))
                     $state.get('manuals').sidebarMeta.disabled = !simulator_config.trainingDocumentsEnabled;
             });
-
-            function registerStateChangeListener() {
-                var onRouteChangeOff = $rootScope.$on('$stateChangeStart',
-                    function(event, toState, toParams, fromState, fromParams){
-                        console.log(fromState.name + ' > '+ toState.name);
-
-                        if (fromState.name === 'exams.practice' && toState.name !== 'exams.practice-summary') {
-                            event.preventDefault();
-
-                            redirectModal().then(()=>{
-                                onRouteChangeOff();
-                                $state.transitionTo(toState, toParams);
-                            }, ()=>{
-                                //dismiss
-                            })
-                        }
-                    });
-            }
-            registerStateChangeListener();
-
-            $rootScope.$on('$stateChangeSuccess',
-                function(event, toState, toParams, fromState, fromParams){
-
-                    if (fromState.name === 'exams.practice') {
-                        registerStateChangeListener();
-                    }
-                });
-
-
-            function redirectModal() {
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    template: [ '<div class="panel"><div class="panel-body">',
-                        '<h3 class="text-center">{{::"EXAMS.EXAM_CANCEL_ARE_YOU_SURE"|translate}}</h3>',
-                        '<br/>',
-                        '<br/>',
-                        '<p class="text-center ">',
-                        '<button class="btn btn-success btn-space" ng-click="ok()">אישור</button>',
-                        '<button class="btn btn-default" ng-click="cancel()">ביטול</button>',
-                        '</p>',
-                        '</div></div>'].join(''),
-                    controller: function ($uibModalInstance, $scope) {
-                        $scope.ok = function () {
-                            $uibModalInstance.close();
-                        };
-
-                        $scope.cancel = function () {
-                            $uibModalInstance.dismiss('cancel');
-                        };
-                    },
-                    size: 'small'
-                });
-
-                return modalInstance.result;
-            }
-
         })
 })();
