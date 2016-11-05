@@ -75,7 +75,11 @@
                 return customers.customPUT(email, 'password', undefined, {ContentType: 'application/json'});
             }
 
-            return {getQuota, getInfo, putInfo, resetPassword};
+            function changePassword(user) {
+                return customers.customPOST(user, 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded'})
+            }
+
+            return {getQuota, getInfo, putInfo, resetPassword, changePassword};
         })
 
 })();

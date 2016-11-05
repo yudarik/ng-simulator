@@ -242,4 +242,16 @@ a.sn-link {
     }
   }
 }
+.profile-modal {
+  &.modal-content {
+    padding:10px;
+
+    h3 {
+      padding-top: 0;
+    }
+    .alert {
+      margin-bottom:0;
+    }
+  }
+}
 

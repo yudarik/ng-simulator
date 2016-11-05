@@ -170,6 +170,7 @@
       "PASSWORD": "סיסמא חדשה",
       "CONFIRM_PASSWORD": "אימות סיסמא",
       "PASSWORD_DONOT_MATCH": "הסיסמאות אינן זהות",
+      "UPDATE_PASSWORD": "עדכן סיסמא",
       "CONTACT_INFO": "דרכי התקשרות",
       "EMAIL": "דוא\"ל",
       "PHONE": "טלפון",
@@ -181,7 +182,9 @@
       "ACCEPT_COMERCIAL_MAIL": "מאשר קבלת מייל פרסומי",
       "UPCOMING_EXAM": "מועד בחינה מתוכנן",
       "SELECT_EXAM_DATE": "בחר מועד",
-      "DETAILS_UPDATED_SUCCESS": "הפרטים עודכנו בהצלחה"
+      "DETAILS_UPDATED_SUCCESS": "הפרטים עודכנו בהצלחה",
+      "NEXT": "הבא",
+      "PREV": "הקורדם"
     }
   },
   "GENERAL": {

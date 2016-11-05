@@ -1,0 +1,15 @@
+<h3 class="with-line text-right">{{::'USER.PROFILE_PAGE.UPCOMING_EXAM'|translate}}</h3>
+<div class="row">
+    <div class="col-xs-12 col-md-6 pull-left">
+        <div class="form-group row clearfix">
+            <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.SELECT_EXAM_DATE'|translate}}</label>
+
+            <div class="col-sm-9">
+                <select class="form-control" ng-model="profile.user.examEventDate" theme="bootstrap">
+                    <option ng-repeat="event in profile.upcomingExamEvents" selected="event.date === profile.user.examEventDate">{{event.date}}</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+</div>
