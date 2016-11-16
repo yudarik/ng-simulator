@@ -3,9 +3,10 @@
   <ul class="al-sidebar-list" slimscroll="{height: '{{menuHeight}}px'}" slimscroll-watch="menuHeight" >
     <li ng-repeat="item in ::menuItems" class="al-sidebar-list-item"
         ng-class="::{'with-sub-menu': item.subMenu}" ui-sref-active="selected"
-        ba-sidebar-toggling-item="item" ng-if="!item.disabled">
+        ba-sidebar-toggling-item="item" ng-if="!item.hiden">
 
-      <a ng-mouseenter="hoverItem($event, item)" ui-state="item.stateRef || ''" ng-href="{{::(item.fixedHref ? item.fixedHref: '')}}" ng-if="::!item.subMenu" class="al-sidebar-list-link">
+      <a ng-mouseenter="hoverItem($event, item)" ui-state="item.stateRef || ''"
+         ng-href="{{::(item.fixedHref ? item.fixedHref: '')}}" ng-if="::!item.subMenu" class="al-sidebar-list-link">
         <i class="{{ ::item.icon }}"></i><span>{{ ::item.title | translate }}</span>
       </a>
 
@@ -24,7 +25,8 @@
       <ul ng-if="::item.subMenu" class="al-sidebar-sublist"
           ng-class="{'slide-right': item.slideRight}">
         <li ng-repeat="subitem in ::item.subMenu" ng-class="::{'with-sub-menu': subitem.subMenu}" ui-sref-active="selected"
-            ba-sidebar-toggling-item="subitem" class="ba-sidebar-sublist-item" ng-if="!subitem.disabled">
+            ba-sidebar-toggling-item="subitem" class="ba-sidebar-sublist-item" ng-if="!subitem.hiden"
+            tooltip="{{::subitem.tooltip|translate}}" tooltip-placement="bottom">
           <a ng-mouseenter="hoverItem($event, item)" ng-if="::subitem.subMenu" ba-ui-sref-toggler
              class="al-sidebar-list-link subitem-submenu-link">
 
@@ -36,25 +38,26 @@
               ng-class="{expanded: subitem.expanded, 'slide-right': subitem.slideRight}"
               ba-ui-sref-toggling-submenu>
             <li ng-mouseenter="hoverItem($event, item)" ng-repeat="subSubitem in ::subitem.subMenu" ui-sref-active="selected">
-              <a ng-mouseenter="hoverItem($event, item)" href ng-if="::subSubitem.disabled" class="al-sidebar-list-link">
+              <a ng-mouseenter="hoverItem($event, item)" href ng-if="::subSubitem.hiden" class="al-sidebar-list-link">
                 {{ ::item.title | translate }}
               </a>
               <a ng-mouseenter="hoverItem($event, item)"
                  ui-state="subSubitem.stateRef || ''"
-                 ng-if="::!subSubitem.disabled"
+                 ng-if="::!subSubitem.hiden"
                  ng-href="{{::(subSubitem.fixedHref ? subSubitem.fixedHref: '')}}">
                 {{::subSubitem.title | translate }}
               </a>
             </li>
           </ul>
-          <a ng-mouseenter="hoverItem($event, item)" href ng-if="::(!subitem.subMenu && subitem.disabled)" class="al-sidebar-list-link">
+          <a ng-mouseenter="hoverItem($event, item)" href ng-if="::(!subitem.subMenu && subitem.hiden)" class="al-sidebar-list-link">
             {{ ::subitem.title | translate }}
           </a>
           <a ng-mouseenter="hoverItem($event, item)" class="al-sidebar-list-link"
              target="{{::(subitem.blank ? '_blank' : '_self')}}"
-             ng-if="::(!subitem.subMenu && !subitem.disabled)"
+             ng-if="::(!subitem.subMenu && !subitem.hiden)"
              ui-state="subitem.stateRef || ''"
-             ng-href="{{::(subitem.fixedHref ? subitem.fixedHref: '')}}">
+             ng-href="{{::(subitem.fixedHref ? subitem.fixedHref: '')}}"
+             ng-class="{'disabled':subitem.disabled}">
             <i class="{{ ::subitem.icon }}"></i><span>{{ ::subitem.title | translate}}</span>
           </a>
         </li>

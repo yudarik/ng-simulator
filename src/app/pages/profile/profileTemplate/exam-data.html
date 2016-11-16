@@ -5,9 +5,22 @@
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.SELECT_EXAM_DATE'|translate}}</label>
 
             <div class="col-sm-9">
-                <select class="form-control" ng-model="profile.user.examEventDate" theme="bootstrap">
-                    <option ng-repeat="event in profile.upcomingExamEvents" selected="event.date === profile.user.examEventDate">{{event.date}}</option>
-                </select>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="datePicker.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    <select class="form-control" uib-datepicker-popup
+                            alt-input-formats="['dd/MM/yyyy']"
+                            ng-model="profile.user.examEventDate | date: 'dd/MM/yyyy'"
+                            is-open="datePicker.opened"
+                            close-on-date-selection="true"
+                            show-button-bar="false"
+                            close-text="Close" theme="bootstrap">
+                        <option value="{{undefined}}">{{::'USER.PROFILE_PAGE.SELECT_DATE'|translate}}</option>
+                        <option ng-repeat="event in profile.upcomingExamEventDates" selected="event.date === profile.user.examEventDate" value="{{event}}">{{event}}</option>
+                    </select>
+
+                </div>
             </div>
 
         </div>

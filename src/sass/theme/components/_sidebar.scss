@@ -60,7 +60,11 @@ $angle-right: "\f101";
     }
   }
 }
-
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.3;
+}
 a.al-sidebar-list-link,
 span.al-sidebar-list-link {
   display: block;

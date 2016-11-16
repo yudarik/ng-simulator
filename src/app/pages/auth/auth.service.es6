@@ -31,14 +31,14 @@
                            $state.go('signin');
                         })
                 },
-                getUser: () => {
+                getUser: (resetPassword) => {
 
                     if (!$rootScope.currentUser) {
 
                         Restangular.setDefaultHttpFields({'withCredentials': true});
 
                         return auth.customGET('').then(function(user){
-                            return $rootScope.currentUser = user;
+                            return (!resetPassword)? $rootScope.currentUser = user : angular.noop;
                         }, function(reason){
                             return $state.go('signin');
                         });
@@ -76,7 +76,8 @@
             }
 
             function changePassword(user) {
-                return customers.customPOST(user, 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded'})
+                let params = $.param(user);
+                return customers.customPOST(params, 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded'})
             }
 
             return {getQuota, getInfo, putInfo, resetPassword, changePassword};

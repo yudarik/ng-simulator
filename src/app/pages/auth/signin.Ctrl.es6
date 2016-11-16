@@ -24,7 +24,9 @@
             this.submit = ()=>{
                 userAuthService.signin(this.user)
                     .then((user)=>{
-                        if (user){
+                        if (user && user.tempPassword) {
+                            $state.go('changePassword');
+                        } else {
                             $state.go('dashboard');
                         }
 

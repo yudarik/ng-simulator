@@ -20,7 +20,7 @@
                        </div>
                        <exam-remote practice-id="$ctrl.config.practiceID" remote-map="$ctrl.questions" is-solution="$ctrl.isSolution" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()" on-return="$ctrl.return()"></exam-remote>
                        <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>`,
-            controller: function ($scope, $uibModal, $interval, $state, examService, simulatorService, simulator_config) {
+            controller: function ($scope, $uibModal, $interval, $state, examService, simulatorService, baSidebarService, simulator_config) {
                 'ngInject';
                 this.timeframe = (this.config && this.config.timePerQuestion)? this.config.timePerQuestion * this.config.questions.length : undefined;
                 this.isSolution = !(this.timeframe);
@@ -118,6 +118,11 @@
 
                 this.init = () =>{
 
+
+                    if (!baSidebarService.isMenuCollapsed()) {
+                        baSidebarService.toggleMenuCollapsed();
+                    }
+
                     var answerArray = [];
 
                     for (var i=1; i <= simulator_config.answersPerQuestionNumber; i++) {
@@ -146,7 +151,6 @@
                         simulatorService.ping();
                     }, 30000);
                 };
-
                 this.init();
 
                 this.totalTimeFrame = angular.copy(this.timeframe);

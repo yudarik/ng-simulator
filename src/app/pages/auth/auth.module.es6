@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.pages.auth', [])
+    angular.module('Simulator.pages.auth', ['ngMessages'])
         .config(routeConfig);
 
     function routeConfig($stateProvider) {
@@ -59,6 +59,43 @@
                 parent: 'setup',
                 templateUrl: 'app/pages/auth/forgot_password.html',
                 controller: 'forgotController as forgot'
+            })
+            .state('changePassword', {
+                url: '/changePassword',
+                controllerAs: 'passChange',
+                templateUrl: 'app/pages/auth/passwordChange.html',
+                controller: function($uibModal, $translate, $timeout, $state, customerService) {
+                    this.passwordResetForm = {};
+                    this.user = {};
+
+                    this.changePassword = () =>{
+
+                        customerService.changePassword(this.user).then(()=>{
+                            this.alert = {
+                                type: 'success',
+                                msg: $translate.instant('USER.PROFILE_PAGE.DETAILS_UPDATED_SUCCESS')
+                            };
+                            $timeout(()=>{
+                                $state.go('signout');
+                            },1000);
+
+                        }).catch(err =>{
+
+                            if (err.data) {
+                                this.alert = {
+                                    type: 'danger',
+                                    msg: (err.data.description === "password validation failed")?
+                                        $translate.instant('AUTH.ERROR.PASSWORD_VALIDATION_FAILED') : err.data.description
+                                };
+                            }
+                        })
+                    };
+                },
+                resolve: {
+                    user: (userAuthService) => {
+                        return userAuthService.getUser('reset');
+                    }
+                }
             })
     }
 

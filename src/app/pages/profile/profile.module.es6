@@ -101,16 +101,16 @@
                 }
             }
         })
-        .state('chantePassword', {
-            url: '/changePassword',
+        .state('changePasswordModal', {
+            url: '/changePasswordModal',
             parent: 'auth',
             controller: function($uibModal, $translate, $timeout, customerService) {
+                this.passwordResetForm = {};
+
                 var showModal = function () {
                     $uibModal.open({
                         animation: true,
                         controller: function($uibModalInstance) {
-
-                            this.alert;
                             this.user = {};
 
                             this.changePassword = () =>{
@@ -127,10 +127,10 @@
                                 }).catch(err =>{
 
                                     if (err.data) {
-                                        this.error = err.data.description;
                                         this.alert = {
                                             type: 'danger',
-                                            msg: err.data.description
+                                            msg: (err.data.description === "password validation failed")?
+                                                $translate.instant('AUTH.ERROR.PASSWORD_VALIDATION_FAILED') : err.data.description
                                         };
                                     }
                                 })
@@ -144,7 +144,7 @@
                 };
                 showModal();
             }
-        })
+        });
   }
 
 })();

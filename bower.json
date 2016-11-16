@@ -63,7 +63,9 @@
     "ng-table": "^1.0.0",
     "AngularJS-Toaster": "angularjs-toaster#^2.0.0",
     "bootstrap-rtl": "^3.4.0",
-    "angular-ui-select": "^0.19.6"
+    "angular-ui-select": "^0.19.6",
+    "angular-messages": "^1.5.8",
+    "angular-i18n": "^1.5.8"
   },
   "overrides": {
     "amcharts": {

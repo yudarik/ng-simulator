@@ -10,6 +10,7 @@
     "FORGOT_PASSWORD": "שככתי את הסיסמא",
     "REMEMBER_PASSWORD": "זוכר את הסיסמא? התחבר",
     "RESET_PASSWORD_BTN": "אפס סיסמא",
+    "CHANGE_PASSWORD": "שינויי סיסמא",
     "LOGIN_BTN": "כניסה",
     "REGISTER_BTN": "הרשם",
     "USER_PASSWARD_INCORRECT": "שם המשתמש או הסיסמא שגויים",
@@ -17,7 +18,8 @@
     "PASSWORD_RESET_EMAIL_SENT": "הנחיות לאיפוס הסיסמא נשלחו לכתובת הדוא\"ל",
     "ERROR": {
       "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
-      "ACCOUNT.EXPIRED": "פג תוקפו של חשבון המשתמש, אנא פנה למנהל האתר"
+      "ACCOUNT.EXPIRED": "פג תוקפו של חשבון המשתמש, אנא פנה למנהל האתר",
+      "PASSWORD_VALIDATION_FAILED": "סיסמא נוכחית אינה נכונה"
     },
     "WELCOME": {
       "MESSAGE": {
@@ -81,6 +83,9 @@
     "PRACTICE": {
       "QUESTION_LABEL": "שאלה",
       "ANSWERS_LABEL": "תשובות"
+    },
+    "TOOLTIPS": {
+      "POSTCREDIT_DISABLED": "תרגול זה אינו זמין כל עוד יש בחשבונך שאלות חדשות"
     }
   },
   "STATS": {
@@ -184,7 +189,8 @@
       "SELECT_EXAM_DATE": "בחר מועד",
       "DETAILS_UPDATED_SUCCESS": "הפרטים עודכנו בהצלחה",
       "NEXT": "הבא",
-      "PREV": "הקורדם"
+      "PREV": "הקורדם",
+      "SELECT_DATE": "בחר מועד בחינה"
     }
   },
   "GENERAL": {

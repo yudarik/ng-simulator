@@ -25,8 +25,6 @@ angular.module('Simulator.components')
                         !this.config.welcomeMessageForCandidatesOnly)) {
                         showWelcome();
                     }
-
-                    showWelcome();
                 }
             };
 

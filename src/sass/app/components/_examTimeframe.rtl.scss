@@ -1,10 +1,12 @@
-.exam-timeframe {
-
-  right: 240px;
-  left: 0px;
-}
-.menu-collapsed {
+body.flip {
   .exam-timeframe {
-    right: 50px;
+
+    right: 240px;
+    left: 0px;
+  }
+  .menu-collapsed {
+    .exam-timeframe {
+      right: 50px;
+    }
   }
 }

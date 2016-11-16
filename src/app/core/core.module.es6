@@ -76,11 +76,15 @@
                 $rootScope.appLayout = simulator_config.layout.toLowerCase();
                 $rootScope.simulatorConfig = simulator_config;
 
-                if ($state.get('exams.post-credit'))
-                    $state.get('exams.post-credit').sidebarMeta.disabled = !simulator_config.postCreditModeEnabled;
+                if ($state.get('exams.post-credit')) {
+                    $state.get('exams.post-credit').sidebarMeta.hidden = !simulator_config.postCreditModeEnabled;
+                    $state.get('exams.post-credit').sidebarMeta.disabled = !simulator_config.postCreditModeNow;
+
+                }
+
 
                 if ($state.get('exams.predefined'))
-                    $state.get('exams.predefined').sidebarMeta.disabled = !simulator_config.predefinedExamsEnabled;
+                    $state.get('exams.predefined').sidebarMeta.hidden = !simulator_config.predefinedExamsEnabled;
 
                 if ($state.get('manuals'))
                     $state.get('manuals').sidebarMeta.disabled = !simulator_config.trainingDocumentsEnabled;

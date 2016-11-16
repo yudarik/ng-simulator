@@ -73,11 +73,13 @@
                 return {
                   name: s.name,
                   title: s.title,
+                  tooltip: s.tooltip,
                   level: (s.name.match(/\./g) || []).length,
                   order: meta.order,
                   icon: meta.icon,
                   stateRef: s.name,
-                  disabled: !!meta.disabled
+                  disabled: !!meta.disabled,
+                  hidden: !!meta.hidden
                 };
               })
               .sort(function(a, b) {
