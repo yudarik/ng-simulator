@@ -171,6 +171,7 @@
       "FIRST_NAME": "שם פרטי",
       "LAST_NAME": "שם משפחה",
       "CHANGE_PASSWORD": "שינויי סיסמא",
+      "CHANGE_PASSWORD_BTN": "שנה סיסמא",
       "OLDPASSWORD": "סיסמא נוכחית",
       "PASSWORD": "סיסמא חדשה",
       "CONFIRM_PASSWORD": "אימות סיסמא",

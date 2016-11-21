@@ -104,46 +104,7 @@
         .state('changePasswordModal', {
             url: '/changePasswordModal',
             parent: 'auth',
-            controller: function($uibModal, $translate, $timeout, customerService) {
-                this.passwordResetForm = {};
-
-                var showModal = function () {
-                    $uibModal.open({
-                        animation: true,
-                        controller: function($uibModalInstance) {
-                            this.user = {};
-
-                            this.changePassword = () =>{
-
-                                customerService.changePassword(this.user).then(()=>{
-                                    this.alert = {
-                                        type: 'success',
-                                        msg: $translate.instant('USER.PROFILE_PAGE.DETAILS_UPDATED_SUCCESS')
-                                    };
-                                    $timeout(()=>{
-                                        $uibModalInstance.close();
-                                    },1000);
-
-                                }).catch(err =>{
-
-                                    if (err.data) {
-                                        this.alert = {
-                                            type: 'danger',
-                                            msg: (err.data.description === "password validation failed")?
-                                                $translate.instant('AUTH.ERROR.PASSWORD_VALIDATION_FAILED') : err.data.description
-                                        };
-                                    }
-                                })
-                            }
-                        },
-                        controllerAs: 'passwordModal',
-                        templateUrl: 'app/pages/profile/passwordModal.html'
-                    }).result.then(function (link) {
-                        item.href = link;
-                    });
-                };
-                showModal();
-            }
+            template: `<change-password></change-password>`
         });
   }
 

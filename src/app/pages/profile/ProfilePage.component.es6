@@ -22,16 +22,19 @@
             return moment(date).format('DD/MM/YYYY').toString();
           });
           this.user = angular.copy(this.userProfile);
-          this.user.examEventDate = new Date();
 
           this.updateProfile = () =>{
 
             let params = this.user.plain();
 
-            _.forEach(params, (val, key)=>{
+            if (this.user.examEventDate && typeof this.user.examEventDate === "object") {
+              params.examEventDate = moment(this.user.examEventDate).format('DD/MM/YYYY').toString();
+            }
 
-              if (_.isEmpty(params[key])) {
-                params = _.omit(params, key);
+            _.forEach(this.user, (val, key)=>{
+
+              if (_.isNil(val)) {
+                this.user = _.omit(this.user, key);
               }
             });
 
@@ -44,6 +47,10 @@
               }
             })
           }
+
+          this.togglePasswordChange = () => {
+            this.showChangePassword = !this.showChangePassword;
+          };
         },
         controllerAs: 'profile'
     });
