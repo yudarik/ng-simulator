@@ -51,7 +51,7 @@
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
             RestangularProvider.setErrorInterceptor(
-                function ( response ) {
+                (response) => {
                     if ( response.status === 401 || response.status === 403) {
                         window.location = '#/signin';
                     }
@@ -81,7 +81,6 @@
                     $state.get('exams.post-credit').sidebarMeta.disabled = !simulator_config.postCreditModeNow;
 
                 }
-
 
                 if ($state.get('exams.predefined'))
                     $state.get('exams.predefined').sidebarMeta.hidden = !simulator_config.predefinedExamsEnabled;

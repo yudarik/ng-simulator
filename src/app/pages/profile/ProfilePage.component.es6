@@ -17,8 +17,12 @@
         controller: function (toaster, $uibModal, $translate, customerService, simulator_config) {
 
           this.userProfileForm = {};
-          this.upcomingExamEventDates = simulator_config.upcomingExamEventDates;
-          this.user = this.userProfile;
+
+          this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
+            return moment(date).format('DD/MM/YYYY').toString();
+          });
+          this.user = angular.copy(this.userProfile);
+          this.user.examEventDate = new Date();
 
           this.updateProfile = () =>{
 

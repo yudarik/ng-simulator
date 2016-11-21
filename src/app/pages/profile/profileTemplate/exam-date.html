@@ -1,0 +1,45 @@
+<h3 class="with-line text-right">{{::'USER.PROFILE_PAGE.UPCOMING_EXAM'|translate}}</h3>
+<div class="row">
+    <div class="col-xs-12 col-md-6 pull-left">
+        <div class="form-group row clearfix">
+            <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.SELECT_EXAM_DATE'|translate}}</label>
+
+            <div class="col-sm-9">
+                <!--<div class="input-group">
+                    &lt;!&ndash;<span class="input-group-btn" uib-datepicker-popup="dd/MM/yyyy"
+                                                datepicker-append-to-body="false"
+                                                ng-model="profile.user.examEventDate"
+                                                is-open="datePicker.opened"
+                                                show-button-bar="false"
+                                                close-text="Close" theme="bootstrap">
+
+                        <button type="button" class="btn btn-default" ng-click="datePicker.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>&ndash;&gt;
+
+
+                </div>-->
+                <ui-select class="" ng-model="profile.user.examEventDate">
+                    <ui-select-match placeholder="{{::'USER.PROFILE_PAGE.SELECT_EXAM_DATE'|translate}}">{{$select.selected}}</ui-select-match>
+                    <ui-select-choices repeat="event in profile.upcomingExamEventDates">{{event}}</ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+   <!-- <div class="col-xs-12 col-md-6 pull-left">
+        <div class="form-group row clearfix">
+            <label class="col-sm-2 control-label text-left">{{::'USER.PROFILE_PAGE.OR_SELECT_OTHER_DATE'|translate}}</label>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-focus="datePicker.opened = true"
+                           ng-model="profile.user.examEventDate"
+                           is-open="datePicker.opened"
+                           show-button-bar="false"
+                           close-text="Close" theme="bootstrap"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="datePicker.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>

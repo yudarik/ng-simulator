@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  angular.module('Simulator.pages.profile', ['Simulator.pages.stats'])
+  angular.module('Simulator.pages.profile', ['Simulator.pages.stats', 'ui.select'])
       .config(routeConfig);
 
   /** @ngInject */

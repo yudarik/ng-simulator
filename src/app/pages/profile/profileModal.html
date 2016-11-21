@@ -2,7 +2,7 @@
   <form name="userProfileForm" ng-submit="profile.updateProfile(userProfileForm)" novalidate>
       <div ng-include="'app/pages/profile/profileTemplate/general-info.html'" ng-show="profile.currentPage===1"></div>
       <div ng-include="'app/pages/profile/profileTemplate/contact.html'" ng-show="profile.currentPage===2"></div>
-      <div ng-include="'app/pages/profile/profileTemplate/exam-data.html'" ng-show="profile.currentPage===3"></div>
+      <div ng-include="'app/pages/profile/profileTemplate/exam-date.html'" ng-show="profile.currentPage===3"></div>
 
     <ul uib-pager total-items="3" ng-model="profile.currentPage"
         items-per-page="1"
