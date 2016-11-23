@@ -46,7 +46,7 @@
                     'Content-Type': 'application/json'
                 })
                 //.setBaseUrl('rest');
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams5/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
@@ -75,6 +75,11 @@
                 $rootScope.simulatorConfigLoaded = true;
                 $rootScope.appLayout = simulator_config.layout.toLowerCase();
                 $rootScope.simulatorConfig = simulator_config;
+
+                if (simulator_config.trainingDocumentsOnly) {
+                    $state.get('exams').sidebarMeta.hidden = true;
+                    $state.get('dashboard').sidebarMeta.hidden = true;
+                }
 
                 if ($state.get('exams.post-credit')) {
                     $state.get('exams.post-credit').sidebarMeta.hidden = !simulator_config.postCreditModeEnabled;

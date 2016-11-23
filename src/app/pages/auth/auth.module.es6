@@ -25,6 +25,18 @@
                             return false;
                         });
                     }
+                },
+                controller: function ($rootScope, $state, userAuthService) {
+
+                    $rootScope.currentUser = null;
+
+                    userAuthService.getUser().then(user => {
+                        if (user.role === "Customer") {
+                            $state.go('dashboard');
+                        } else {
+                            $state.go('profile');
+                        }
+                    });
                 }
             })
             .state('auth', {
@@ -39,13 +51,13 @@
             .state('signin', {
                 url: '/signin',
                 parent: 'setup',
-                templateUrl: 'app/pages/auth/signin.html',
+                templateUrl: 'app/pages/auth/signin/signin.html',
                 controller: 'signinController as signin'
             })
             .state('signup', {
                 url: '/signup',
                 parent: 'setup',
-                templateUrl: 'app/pages/auth/signup.html',
+                templateUrl: 'app/pages/auth/signup/signup.html',
                 controller: 'signupController as signup'
             })
             .state('signout', {
@@ -57,40 +69,14 @@
             .state('forgotPassword', {
                 url: '/password-forgot',
                 parent: 'setup',
-                templateUrl: 'app/pages/auth/forgot_password.html',
+                templateUrl: 'app/pages/auth/forgotPassword/forgot_password.html',
                 controller: 'forgotController as forgot'
             })
             .state('changePassword', {
                 url: '/changePassword',
                 controllerAs: 'passChange',
-                templateUrl: 'app/pages/auth/passwordChange.html',
-                controller: function($uibModal, $translate, $timeout, $state, customerService) {
-                    this.passwordResetForm = {};
-                    this.user = {};
-
-                    this.changePassword = () =>{
-
-                        customerService.changePassword(this.user).then(()=>{
-                            this.alert = {
-                                type: 'success',
-                                msg: $translate.instant('USER.PROFILE_PAGE.DETAILS_UPDATED_SUCCESS')
-                            };
-                            $timeout(()=>{
-                                $state.go('signout');
-                            },1000);
-
-                        }).catch(err =>{
-
-                            if (err.data) {
-                                this.alert = {
-                                    type: 'danger',
-                                    msg: (err.data.description === "password validation failed")?
-                                        $translate.instant('AUTH.ERROR.PASSWORD_VALIDATION_FAILED') : err.data.description
-                                };
-                            }
-                        })
-                    };
-                },
+                templateUrl: 'app/pages/auth/changePassword/passwordChange.html',
+                controller: 'changePasswordCtrl as passChange',
                 resolve: {
                     user: (userAuthService) => {
                         return userAuthService.getUser('reset');

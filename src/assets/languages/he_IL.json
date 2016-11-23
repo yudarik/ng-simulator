@@ -38,7 +38,8 @@
       "WEAK_AREAS": "תרגול בנקודות חולשה",
       "PRACTICE": "תרגול",
       "EXAM": "מבחן",
-      "PRACTICE_SOLUTION": "פתרון התרגול"
+      "PRACTICE_SOLUTION": "פתרון התרגול",
+      "PREDEFINED_EXAM": "מבחני הסמכה"
     },
     "EXAM_FINISH_ARE_YOU_SURE": "עדיין נותר לך זמן, האם את/ה מעוניין/נת לסיים כעת בכל זאת ?",
     "EXAM_CANCEL_ARE_YOU_SURE": "הינך בטוח שברצונך לבטל את התרגול/בחינה?",
@@ -78,7 +79,8 @@
       "CONTINUE": "המשך",
       "FINISH": "סייים",
       "RETURN": "יציאה",
-      "DOWNLOAD": "שמור תרגול"
+      "DOWNLOAD": "שמור תרגול",
+      "START": "התחל בחינה"
     },
     "PRACTICE": {
       "QUESTION_LABEL": "שאלה",
@@ -86,6 +88,14 @@
     },
     "TOOLTIPS": {
       "POSTCREDIT_DISABLED": "תרגול זה אינו זמין כל עוד יש בחשבונך שאלות חדשות"
+    },
+    "PREDEFINED": {
+      "NUMOFQUEST": "כמות שאלות",
+      "TIME": "הגבלת זמן לבחינה",
+      "MINUTE": "דקות",
+      "TIME_EXTENDED": "הגבלת זמן עם הארכה",
+      "UNLIMITED_TIME": "בחינה ללא הגבלת זמן",
+      "PACKAGESTOBUY": "מוגבל ברכישת חבילות"
     }
   },
   "STATS": {

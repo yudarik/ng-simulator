@@ -153,6 +153,61 @@
                 sidebarMeta: {
                     order: 400
                 }
-            });
+            })
+            .state('exams.predefined', {
+                url: '/predefined',
+                parent: 'exams',
+                template: `<div class="col-xs-12 col-md-4" ng-repeat="exam in $ctrl.exams.predefinedExamBeans">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <span class="text-white">{{::exam.displayName}}</span>
+                                    <a class="label label-info pull-right" ui-sref="exams.practice({'practiceType': 'PREDEFINED_EXAM'})">{{::'EXAMS.BUTTONS.START'|translate}}</a>
+                                </div>
+                                <div class="panel-body">
+                                    <p><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; 
+                                        <label>{{::exam.description}}</label>
+                                    </p>
+                                    <p><i class="fa fa-list-ol" aria-hidden="true"></i>&nbsp;
+                                        {{::'EXAMS.PREDEFINED.NUMOFQUEST'|translate}}:&nbsp;
+                                        <span class="label label-warning">{{::exam.numberOfQuestionsInExam}}</span>
+                                    </p>
+                                    <p><i class="fa fa-clock-o"></i>:&nbsp;
+                                        {{::'EXAMS.PREDEFINED.TIME'|translate}}:&nbsp;
+                                        <span class="label label-warning">{{::exam.time/60|number:2}} ({{::'EXAMS.PREDEFINED.MINUTE'|translate}})</span>
+                                    </p>
+                                    <p><i class="fa fa-clock-o"></i>&nbsp;
+                                        {{::'EXAMS.PREDEFINED.TIME_EXTENDED'|translate}}:&nbsp;
+                                        <span class="label label-warning">{{::exam.extendedTime/60|number:2}} ({{::'EXAMS.PREDEFINED.MINUTE'|translate}})</span>
+                                    </p>
+                                    <p><i class="fa fa-clock-o"></i>&nbsp;
+                                        {{::'EXAMS.PREDEFINED.UNLIMITED_TIME'|translate}}:&nbsp;
+                                        <span ng-if="::exam.allowUnlimitedTime">
+                                            <i class="fa fa-check text-success" aria-hidden="true"></i>
+                                        </span>
+                                        <span ng-if="::!exam.allowUnlimitedTime">
+                                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                                        </span>                                        
+                                    </p>
+                                    <p ng-if="::exam.packagesToBuy"><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;
+                                        {{::'EXAMS.PREDEFINED.PACKAGESTOBUY'|translate}}:&nbsp;
+                                        <span>{{::exam.packagesToBuy}}</span>
+                                    </p>                                    
+                                </div>
+                            </div>
+                          </div>`,
+                controller: function(exams){
+                    this.exams = exams;
+                },
+                controllerAs: '$ctrl',
+                resolve: {
+                    exams: function(examService) {
+                        return examService.listPredefined();
+                    }
+                },
+                title: 'EXAMS.TYPES.PREDEFINED_EXAM',
+                sidebarMeta: {
+                    order: 400
+                }
+            })
     }
 })();

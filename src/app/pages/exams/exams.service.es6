@@ -14,6 +14,10 @@
             return categories.get('');
         }
 
+        function listPredefined() {
+            return practices.get('predefinedExams');
+        }
+
         function getDistribution() {
             return categories.customGET('distribution')
                 .then((res)=>{
@@ -50,6 +54,11 @@
             return practices.get(api, params);
         }
 
+        function getPredefinedExam(params) {
+            var api = 'predefinedExams/predefinedExamToPerform';
+            return practices.get(api, params);
+        }
+
         function submitExam(examResult) {
 
             console.log('Submit Exam service reached');
@@ -77,7 +86,9 @@
 
         return {
             listCategories,
+            listPredefined,
             getDistribution,
+            getPredefinedExam,
             getExam,
             submitExam,
             getStats,

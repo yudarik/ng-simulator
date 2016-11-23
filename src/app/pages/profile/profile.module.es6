@@ -21,7 +21,7 @@
             },
             controllerAs: '$ctrl',
             resolve: {
-                    userProfile: function(customerService) {
+                userProfile: function(customerService) {
                     return customerService.getInfo();
                 }
             }

@@ -131,6 +131,23 @@
             sidebarMeta: {
                 order: 400
             }
+        }).state('exams.predefined', {
+            url: '/predefined',
+            parent: 'exams',
+            template: '<div class="col-xs-12 col-md-4" ng-repeat="exam in $ctrl.exams.predefinedExamBeans">\n                            <div class="panel panel-success">\n                                <div class="panel-heading">\n                                    <span class="text-white">{{::exam.displayName}}</span>\n                                    <a class="label label-info pull-right" ui-sref="exams.practice({\'practiceType\': \'PREDEFINED_EXAM\'})">{{::\'EXAMS.BUTTONS.START\'|translate}}</a>\n                                </div>\n                                <div class="panel-body">\n                                    <p><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; \n                                        <label>{{::exam.description}}</label>\n                                    </p>\n                                    <p><i class="fa fa-list-ol" aria-hidden="true"></i>&nbsp;\n                                        {{::\'EXAMS.PREDEFINED.NUMOFQUEST\'|translate}}:&nbsp;\n                                        <span class="label label-warning">{{::exam.numberOfQuestionsInExam}}</span>\n                                    </p>\n                                    <p><i class="fa fa-clock-o"></i>:&nbsp;\n                                        {{::\'EXAMS.PREDEFINED.TIME\'|translate}}:&nbsp;\n                                        <span class="label label-warning">{{::exam.time/60|number:2}} ({{::\'EXAMS.PREDEFINED.MINUTE\'|translate}})</span>\n                                    </p>\n                                    <p><i class="fa fa-clock-o"></i>&nbsp;\n                                        {{::\'EXAMS.PREDEFINED.TIME_EXTENDED\'|translate}}:&nbsp;\n                                        <span class="label label-warning">{{::exam.extendedTime/60|number:2}} ({{::\'EXAMS.PREDEFINED.MINUTE\'|translate}})</span>\n                                    </p>\n                                    <p><i class="fa fa-clock-o"></i>&nbsp;\n                                        {{::\'EXAMS.PREDEFINED.UNLIMITED_TIME\'|translate}}:&nbsp;\n                                        <span ng-if="::exam.allowUnlimitedTime">\n                                            <i class="fa fa-check text-success" aria-hidden="true"></i>\n                                        </span>\n                                        <span ng-if="::!exam.allowUnlimitedTime">\n                                            <i class="fa fa-times text-danger" aria-hidden="true"></i>\n                                        </span>                                        \n                                    </p>\n                                    <p ng-if="::exam.packagesToBuy"><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;\n                                        {{::\'EXAMS.PREDEFINED.PACKAGESTOBUY\'|translate}}:&nbsp;\n                                        <span>{{::exam.packagesToBuy}}</span>\n                                    </p>                                    \n                                </div>\n                            </div>\n                          </div>',
+            controller: ["exams", function (exams) {
+                this.exams = exams;
+            }],
+            controllerAs: '$ctrl',
+            resolve: {
+                exams: ["examService", function (examService) {
+                    return examService.listPredefined();
+                }]
+            },
+            title: 'EXAMS.TYPES.PREDEFINED_EXAM',
+            sidebarMeta: {
+                order: 400
+            }
         });
     }
 })();

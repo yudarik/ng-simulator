@@ -12,22 +12,15 @@
 
             this.user = {};
 
-            /*userAuthService.getUser().then(()=>{
-                $state.go('profile');
-                //$state.go('exams.distribution');
-            });*/
-
-            if (userAuthService.isLoggedIn()) {
-                $state.go('profile');
-            }
-
             this.submit = ()=>{
                 userAuthService.signin(this.user)
                     .then((user)=>{
                         if (user && user.tempPassword) {
                             $state.go('changePassword');
-                        } else {
+                        } else if (user.role === "Customer") {
                             $state.go('dashboard');
+                        } else {
+                            $state.go('profile');
                         }
 
                     }).catch((err)=>{
