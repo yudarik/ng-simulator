@@ -47,6 +47,9 @@
                 case 'REPEAT':
                     api = 'repeatPractice';
                     break;
+                case 'PREDEFINED_EXAM':
+                    return getPredefinedExam(params);
+                    break;
                 default:
                     api = 'practiceToPerform';
             }
@@ -55,8 +58,10 @@
         }
 
         function getPredefinedExam(params) {
-            var api = 'predefinedExams/predefinedExamToPerform';
-            return practices.get(api, params);
+            var api = 'predefinedExams/predefinedExamToPerform/'+params.id+'/';
+            delete params.practiceType;
+
+            return practices.get(api, {timeFrame: params.timeFrame});
         }
 
         function submitExam(examResult) {

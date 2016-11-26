@@ -36,12 +36,21 @@
                     if (!$rootScope.currentUser) {
 
                         Restangular.setDefaultHttpFields({'withCredentials': true});
+                        var defer = $q.defer();
 
-                        return auth.customGET('').then(function(user){
-                            return (!resetPassword)? $rootScope.currentUser = user : angular.noop;
+                        auth.customGET('').then(function(user){
+                            if (!resetPassword){
+                                $rootScope.currentUser = user
+                            }
+
+                            defer.resolve(user);
                         }, function(reason){
-                            return $state.go('signin');
+
+                            defer.reject(reason);
+                            //$state.go('signin');
                         });
+
+                        return defer.promise;
                     } else {
                         return $q.when($rootScope.currentUser);
                     }

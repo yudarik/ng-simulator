@@ -157,46 +157,56 @@
             .state('exams.predefined', {
                 url: '/predefined',
                 parent: 'exams',
-                template: `<div class="col-xs-12 col-md-4" ng-repeat="exam in $ctrl.exams.predefinedExamBeans">
+                template: `<div class="col-xs-12 col-md-4 predefined-exam-component" ng-repeat="exam in $ctrl.exams">
                             <div class="panel panel-success">
                                 <div class="panel-heading">
                                     <span class="text-white">{{::exam.displayName}}</span>
-                                    <a class="label label-info pull-right" ui-sref="exams.practice({'practiceType': 'PREDEFINED_EXAM'})">{{::'EXAMS.BUTTONS.START'|translate}}</a>
+                                    <a class="label label-info pull-right" ui-sref="exams.practice({'practiceType': 'PREDEFINED_EXAM', examParams: exam})">{{::'EXAMS.BUTTONS.START'|translate}}</a>
                                 </div>
                                 <div class="panel-body">
-                                    <p><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; 
-                                        <label>{{::exam.description}}</label>
+                                    <p><label>{{::exam.description}}</label>
                                     </p>
                                     <p><i class="fa fa-list-ol" aria-hidden="true"></i>&nbsp;
                                         {{::'EXAMS.PREDEFINED.NUMOFQUEST'|translate}}:&nbsp;
                                         <span class="label label-warning">{{::exam.numberOfQuestionsInExam}}</span>
                                     </p>
-                                    <p><i class="fa fa-clock-o"></i>:&nbsp;
-                                        {{::'EXAMS.PREDEFINED.TIME'|translate}}:&nbsp;
-                                        <span class="label label-warning">{{::exam.time/60|number:2}} ({{::'EXAMS.PREDEFINED.MINUTE'|translate}})</span>
-                                    </p>
-                                    <p><i class="fa fa-clock-o"></i>&nbsp;
-                                        {{::'EXAMS.PREDEFINED.TIME_EXTENDED'|translate}}:&nbsp;
-                                        <span class="label label-warning">{{::exam.extendedTime/60|number:2}} ({{::'EXAMS.PREDEFINED.MINUTE'|translate}})</span>
-                                    </p>
-                                    <p><i class="fa fa-clock-o"></i>&nbsp;
-                                        {{::'EXAMS.PREDEFINED.UNLIMITED_TIME'|translate}}:&nbsp;
-                                        <span ng-if="::exam.allowUnlimitedTime">
-                                            <i class="fa fa-check text-success" aria-hidden="true"></i>
-                                        </span>
-                                        <span ng-if="::!exam.allowUnlimitedTime">
-                                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                                        </span>                                        
-                                    </p>
-                                    <p ng-if="::exam.packagesToBuy"><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;
+                                    <p ng-if="::exam.packagesToBuy.length>0" class="row col-xs-12">
+                                        <i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;
                                         {{::'EXAMS.PREDEFINED.PACKAGESTOBUY'|translate}}:&nbsp;
-                                        <span>{{::exam.packagesToBuy}}</span>
-                                    </p>                                    
+                                        <span>{{::exam.packagesToBuy.toString()}}</span>
+                                    </p>
+                                    <div class="pull-left timeFrame">                                        
+                                        <ul class="col-md-4">
+                                            <li class="pull-left">
+                                                <label class="radio-inline custom-radio nowrap">                                                    
+                                                    <input type="radio" name="timeFrame{{::exam.id}}" value="UNLIMITED" 
+                                                           ng-model="exam.timeFrame" ng-disabled="!exam.allowUnlimitedTime"
+                                                           ng-checked="exam.timeFrame === 'UNLIMITED'"><span>{{::'EXAMS.DISTRIBUTION.TIMEFRAME.UNLIMITED'|translate}}</span>
+                                                </label>
+                                            </li>
+                                            <li class="pull-left">
+                                                <label class="radio-inline custom-radio nowrap">
+                                                    <input type="radio" name="timeFrame{{::exam.id}}" value="NORMAL" ng-model="exam.timeFrame"
+                                                           ng-checked="exam.timeFrame === 'NORMAL'">
+                                                    <span>{{::'EXAMS.DISTRIBUTION.TIMEFRAME.REGULAR'|translate}}</span>
+                                                </label>
+                                            </li>
+                                            <li class="pull-left">
+                                                <label class="radio-inline custom-radio nowrap">
+                                                    <input type="radio" name="timeFrame{{::exam.id}}" value="EXTENDED" ng-model="exam.timeFrame"
+                                                           ng-checked="exam.timeFrame === 'EXTENDED'"><span>{{::'EXAMS.DISTRIBUTION.TIMEFRAME.EXTENDED'|translate}}</span>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                                                      
                                 </div>
                             </div>
                           </div>`,
                 controller: function(exams){
-                    this.exams = exams;
+                    this.exams = _.map(exams.predefinedExamBeans, (exam) => {
+                        return _.assign(exam, {timeFrame: 'NORMAL'});
+                    });
                 },
                 controllerAs: '$ctrl',
                 resolve: {

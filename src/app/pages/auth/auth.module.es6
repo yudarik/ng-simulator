@@ -31,11 +31,12 @@
                     $rootScope.currentUser = null;
 
                     userAuthService.getUser().then(user => {
-                        if (user.role === "Customer") {
+                        /*if (user.role === "Customer") {
                             $state.go('dashboard');
                         } else {
-                            $state.go('profile');
-                        }
+                            //$state.go('profile');
+                        }*/
+                        $state.go('dashboard');
                     });
                 }
             })
