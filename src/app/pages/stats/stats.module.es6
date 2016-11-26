@@ -16,7 +16,7 @@
         $stateProvider
             .state('dashboard', {
                 url: '/dashboard',
-                //parent: 'auth',
+                parent: 'auth',
                 templateUrl: 'app/pages/stats/stats.html',
                 title: 'STATS.DASHBOARD.TITLE',
                 sidebarMeta: {
