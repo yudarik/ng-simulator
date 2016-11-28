@@ -45,7 +45,7 @@
                 .setDefaultHeaders({
                     'Content-Type': 'application/json'
                 })
-                //.setBaseUrl('rest');
+                //.setBaseUrl('rest'); // Production Build
                 .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
