@@ -34,19 +34,24 @@
                 prefix: 'assets/languages/',
                 suffix: '.json'
             });
+            $translateProvider.registerAvailableLanguageKeys(['en_US', 'he_IL'], {
+                'iw_IL': 'he_IL'
+            });
 
-            $translateProvider.preferredLanguage('he_IL');
+            //$translateProvider.preferredLanguage('en_US');
+            $translateProvider.use('he_IL');
 
             RestangularProvider
                 .setDefaultHeaders({
                     'Content-Type': 'application/json'
                 })
-                //.setBaseUrl('rest');
+                //.setBaseUrl('rest'); // Production Build
                 .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
             RestangularProvider.setErrorInterceptor(
-                function ( response ) {
+                (response) => {
                     if ( response.status === 401 || response.status === 403) {
                         window.location = '#/signin';
                     }
@@ -55,12 +60,12 @@
                         console.log( response );
                         //toaster.error('error', '',"An unknown error has occurred.<br>Details: " + response.data);
                     }
-                    // Stop the promise chain.
-                    return false;
+                    // Continue the promise chain.
+                    return true;
                 }
             );
         })
-        .run(function($rootScope, $state, simulator_config, simulatorService){
+        .run(function($rootScope, $state, $uibModal, $translate, simulator_config, simulatorService){
 
             $rootScope.appTitle = 'Loading...';
 
@@ -68,15 +73,25 @@
                 _.assign(simulator_config, config);
                 $rootScope.appTitle = simulator_config.applicationTitle;
                 $rootScope.simulatorConfigLoaded = true;
+                $rootScope.appLayout = simulator_config.layout.toLowerCase();
+                $rootScope.simulatorConfig = simulator_config;
 
-                if ($state.get('exams.post-credit'))
-                    $state.get('exams.post-credit').sidebarMeta.disabled = !simulator_config.postCreditModeEnabled;
+                if (simulator_config.trainingDocumentsOnly) {
+                    $state.get('exams').sidebarMeta.hidden = true;
+                    $state.get('dashboard').sidebarMeta.hidden = true;
+                }
+
+                if ($state.get('exams.post-credit')) {
+                    $state.get('exams.post-credit').sidebarMeta.hidden = !simulator_config.postCreditModeEnabled;
+                    $state.get('exams.post-credit').sidebarMeta.disabled = !simulator_config.postCreditModeNow;
+
+                }
 
                 if ($state.get('exams.predefined'))
-                    $state.get('exams.predefined').sidebarMeta.disabled = !simulator_config.predefinedExamsEnabled;
+                    $state.get('exams.predefined').sidebarMeta.hidden = !simulator_config.predefinedExamsEnabled;
 
                 if ($state.get('manuals'))
                     $state.get('manuals').sidebarMeta.disabled = !simulator_config.trainingDocumentsEnabled;
-            })
+            });
         })
 })();

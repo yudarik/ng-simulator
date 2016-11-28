@@ -1,6 +1,8 @@
 $_right_-space: 240px;
 body.flip {
 
+  direction: rtl!important;
+
    overflow-x: hidden;
   .al-main {
     margin-right: $_right_-space;
@@ -9,12 +11,13 @@ body.flip {
   .menu-collapsed {
     .al-main {
       margin-right: 50px;
+      margin-left:0;
     }
   }
   @media all and (orientation: portrait) {
     &.mobile {
       .menu-collapsed .al-main {
-        margin-right: 0;
+        margin-right: 0!important;
       }
     }
   }

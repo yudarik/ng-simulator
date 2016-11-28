@@ -7,6 +7,7 @@
 
     function practiceSummaryCtrl(summary, simulator_config) {
         this.simulator_config = simulator_config;
+        this.passingGrade = this.simulator_config['passing grade'];
         this.summary = summary;
         this.categoriesStats = [];
 
@@ -48,8 +49,11 @@
         };
 
         this.getLabelClass = (num) => {
-            if (num <= 55) return 'label-danger';
-            if (num <= 75) return 'label-warning';
+
+            var warningArea = (100 - this.passingGrade)/2;
+
+            if (num <= this.passingGrade) return 'label-danger';
+            if (num <= this.passingGrade + warningArea) return 'label-warning';
             if (num <= 100) return 'label-success';
             else return 'label-default';
         }

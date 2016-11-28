@@ -31,20 +31,32 @@
                            $state.go('signin');
                         })
                 },
-                getUser: () => {
+                getUser: (resetPassword) => {
 
                     if (!$rootScope.currentUser) {
 
                         Restangular.setDefaultHttpFields({'withCredentials': true});
+                        var defer = $q.defer();
 
-                        return auth.customGET('').then(function(user){
-                            return $rootScope.currentUser = user;
+                        auth.customGET('').then(function(user){
+                            if (!resetPassword){
+                                $rootScope.currentUser = user
+                            }
+
+                            defer.resolve(user);
                         }, function(reason){
-                            return $state.go('signin');
+
+                            defer.reject(reason);
+                            //$state.go('signin');
                         });
+
+                        return defer.promise;
                     } else {
                         return $q.when($rootScope.currentUser);
                     }
+                },
+                isLoggedIn: () => {
+                    return !!$rootScope.currentUser;
                 }
             };
 
@@ -72,7 +84,12 @@
                 return customers.customPUT(email, 'password', undefined, {ContentType: 'application/json'});
             }
 
-            return {getQuota, getInfo, putInfo, resetPassword};
+            function changePassword(user) {
+                let params = $.param(user);
+                return customers.customPOST(params, 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded'})
+            }
+
+            return {getQuota, getInfo, putInfo, resetPassword, changePassword};
         })
 
 })();

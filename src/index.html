@@ -25,9 +25,8 @@
   <!-- endbuild -->
 
   <!-- Load Bootstrap RTL theme from RawGit -->
-  <link rel="stylesheet" href="https://cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
 </head>
-<body ng-class="{'signin': !currentUser}" class="flip" dir="rtl">
+<body ng-class="{'signin': !currentUser, 'flip': appLayout === 'rtl'}" dir="{{appLayout}}">
 <div class="body-bg"></div>
 <main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
   <toaster-container></toaster-container>
@@ -41,6 +40,7 @@
   <div class="al-main">
     <div class="al-content">
       <content-top ng-if="currentUser"></content-top>
+      <welcome ng-if="currentUser && simulatorConfigLoaded" user="currentUser" config="simulatorConfig"></welcome>
       <div ui-view></div>
     </div>
   </div>
@@ -65,12 +65,12 @@
   <div></div>
 </div>
 
+
 <!-- build:js(src) scripts/vendor.js -->
 <!-- bower:js -->
 <!-- run `gulp inject` to automatically populate bower script dependencies -->
 <!-- endbower -->
 <!-- endbuild -->
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
 <!-- inject:js -->
@@ -81,6 +81,8 @@
 <!-- angular templates will be automatically converted in js and inserted here -->
 <!-- endinject -->
 <!-- endbuild -->
+<script src="/bower_components/angular-i18n/angular-locale_he-il.js"></script>
+
 
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>

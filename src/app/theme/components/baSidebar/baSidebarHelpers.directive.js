@@ -83,7 +83,7 @@
         $element.addClass('ba-sidebar-item-expanded');
       }
 
-      $scope.$on('$stateChangeStart', function (event, toState) {
+      /*$scope.$on('$stateChangeStart', function (event, toState) {
         if (!_isState(toState) && $element.hasClass('ba-sidebar-item-expanded')) {
           vm.$collapse();
           $element.removeClass('ba-sidebar-item-expanded');
@@ -95,7 +95,7 @@
           vm.$expand();
           $element.addClass('ba-sidebar-item-expanded');
         }
-      });
+      });*/
 
       /* Default is all menus expanded*/
       vm.$expand();

@@ -12,16 +12,15 @@
 
             this.user = {};
 
-            userAuthService.getUser().then(()=>{
-                $state.go('profile');
-                //$state.go('exams.distribution');
-            });
-
             this.submit = ()=>{
                 userAuthService.signin(this.user)
                     .then((user)=>{
-                        if (user){
+                        if (user && user.tempPassword) {
+                            $state.go('changePassword');
+                        } else if (user.role === "Customer") {
                             $state.go('dashboard');
+                        } else {
+                            $state.go('profile');
                         }
 
                     }).catch((err)=>{
@@ -31,6 +30,14 @@
                             this.message = err.data.errorMessage
                         }
 
+                        switch(err.status) {
+                            case 401:
+                            case 403:
+                                this.message = $translate.instant('AUTH.ERROR.'+err.data.errorMessage.toUpperCase());
+                                break;
+
+
+                        }
                     });
             }
         })

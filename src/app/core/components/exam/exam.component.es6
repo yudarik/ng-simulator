@@ -9,19 +9,23 @@
         .component('exam', {
             /**ngInject*/
             bindings: {
-                questions: '=',
-                timeframe: '<',
-                type: '<'
+                config: '<'
             },
-            template: `<div class="panel question-area col-xs-12" ng-show="$ctrl.questionInDisplay">
+            template: `<div class="panel question-area col-xs-12"
+                            ng-class="{'solution':$ctrl.isSolution}"
+                            ng-show="$ctrl.questionInDisplay">
                            <div class="panel-body">
                                <exam-question question="$ctrl.questionInDisplay"></exam-question>
                            </div>
                        </div>
-                       <exam-remote remote-map="$ctrl.questions" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()"></exam-remote>
+                       <exam-remote practice-id="$ctrl.config.practiceID" remote-map="$ctrl.questions" is-solution="$ctrl.isSolution" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()" on-return="$ctrl.return()"></exam-remote>
                        <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>`,
-            controller: function ($scope, $uibModal, $interval, examService, simulatorService, simulator_config) {
+            controller: function ($scope, $uibModal, $interval, $state, examService, simulatorService, baSidebarService, simulator_config) {
                 'ngInject';
+                this.timeframe = (this.config && this.config.timePerQuestion)? this.config.timePerQuestion * this.config.questions.length : undefined;
+                this.isSolution = !(this.timeframe);
+                this.questions = (this.config)? this.config.questions : [];
+                this.type = (this.config)? this.config.practiceType : undefined;
 
                 var ping;
 
@@ -37,6 +41,7 @@
 
                     let practiseResult = {
                         practiceType: this.type,
+                        originalPracticeId: this.config.originalPracticeId,
                         predefinedExamId: "0",
                         totalTimeSecs: this.totalTimeFrame,
                         elapsedTimeSecs: this.totalTimeFrame - this.timeframe,
@@ -113,6 +118,11 @@
 
                 this.init = () =>{
 
+
+                    if (!baSidebarService.isMenuCollapsed()) {
+                        baSidebarService.toggleMenuCollapsed();
+                    }
+
                     var answerArray = [];
 
                     for (var i=1; i <= simulator_config.answersPerQuestionNumber; i++) {
@@ -139,9 +149,8 @@
 
                     ping = $interval(()=>{
                         simulatorService.ping();
-                    }, 10000);
+                    }, 30000);
                 };
-
                 this.init();
 
                 this.totalTimeFrame = angular.copy(this.timeframe);
@@ -175,6 +184,17 @@
                         });
                     } else {
                         submitExam();
+                    }
+                };
+
+                this.return = ()=>{
+
+                    if (this.isSolution) {
+                        examService.getPracticeInfo(this.config.practiceID).then(solution => {
+                            $state.go('exams.practice-summary', {examSummary: solution});
+                        });
+                    } else {
+                        $state.go('dashboard');
                     }
                 };
 

@@ -23,22 +23,7 @@
                     icon: 'ion-speedometer',
                     order: 100
                 }
-            })
-           /* .state('account-stats', {
-                url: '/account-stats',
-                parent: 'auth',
-                controller: 'accountStatsCtrl as accountStats',
-                templateUrl: 'app/pages/stats/account-stats/account-stats.html',
-                resolve: {
-                    quota: function(customerService) {
-                        return customerService.getQuota();
-                    }
-                },
-                title: 'STATS.ACCOUNT.TITLE',
-                sidebarMeta: {
-                    order: 400
-                }
-            })*/
+            });
     }
     function chartJsConfig(ChartJsProvider, baConfigProvider) {
         var layoutColors = baConfigProvider.colors;

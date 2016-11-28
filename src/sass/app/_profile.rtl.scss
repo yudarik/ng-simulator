@@ -1,0 +1,15 @@
+body.flip {
+  .profile-page {
+    .form-group {
+      label {
+        line-height: 34px;
+        font-size: 14px;
+        font-weight: $font-light;
+        float: right;
+      }
+      input {
+        font-weight: $font-light;
+      }
+    }
+  }
+}

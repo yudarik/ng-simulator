@@ -1,0 +1,19 @@
+body.flip {
+  exam {
+
+    margin: 0 260px 0 200px;
+  }
+  .menu-collapsed {
+    exam {
+      margin: 0 72px 0 200px;
+    }
+  }
+  @media (max-width: 768px){
+
+    .menu-collapsed {
+      exam {
+        margin: 0 72px 0 20px;
+      }
+    }
+  }
+}

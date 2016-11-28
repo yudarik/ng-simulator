@@ -235,9 +235,22 @@ a.sn-link {
       line-height: 34px;
       font-size: 14px;
       font-weight: $font-light;
+      float: left;
     }
     input{
       font-weight: $font-light;
+    }
+  }
+}
+.profile-modal {
+  &.modal-content {
+    padding:10px;
+
+    h3 {
+      padding-top: 0;
+    }
+    .alert {
+      margin-bottom:0;
     }
   }
 }

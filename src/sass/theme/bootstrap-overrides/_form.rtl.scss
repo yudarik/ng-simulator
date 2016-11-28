@@ -10,4 +10,11 @@ body.flip {
         margin: 0 -22px 0 6px;
       }
   }
+
+  .pull-left {
+    float: right!important;
+  }
+  .pull-right {
+    float: left!important;
+  }
 }

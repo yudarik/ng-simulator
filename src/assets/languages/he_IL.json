@@ -10,12 +10,22 @@
     "FORGOT_PASSWORD": "שככתי את הסיסמא",
     "REMEMBER_PASSWORD": "זוכר את הסיסמא? התחבר",
     "RESET_PASSWORD_BTN": "אפס סיסמא",
+    "CHANGE_PASSWORD": "שינויי סיסמא",
     "LOGIN_BTN": "כניסה",
     "REGISTER_BTN": "הרשם",
     "USER_PASSWARD_INCORRECT": "שם המשתמש או הסיסמא שגויים",
-    "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
     "REGISTERED_SUCCESSFULLY": "נרשמתם בהצלחה, פרטי הכניסה נשלחו לכתובת הדוא\"ל איתה נרשמתם",
-    "PASSWORD_RESET_EMAIL_SENT": "הנחיות לאיפוס הסיסמא נשלחו לכתובת הדוא\"ל"
+    "PASSWORD_RESET_EMAIL_SENT": "הנחיות לאיפוס הסיסמא נשלחו לכתובת הדוא\"ל",
+    "ERROR": {
+      "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
+      "ACCOUNT.EXPIRED": "פג תוקפו של חשבון המשתמש, אנא פנה למנהל האתר",
+      "PASSWORD_VALIDATION_FAILED": "סיסמא נוכחית אינה נכונה"
+    },
+    "WELCOME": {
+      "MESSAGE": {
+        "OK_BTN": "תודה"
+      }
+    }
   },
   "EXAMS": {
     "TYPES": {
@@ -24,12 +34,15 @@
       "POST_CREDIT_PRACTICE": "תרגול חוזר",
       "GENERAL_PRACTICE": "תרגול כללי",
       "PRACTICE_SUMMARY": "סיכום וניתוח תוצאות",
+      "WEAK_AREAS_PRACTICE": "תרגול בנקודות חולשה",
       "WEAK_AREAS": "תרגול בנקודות חולשה",
       "PRACTICE": "תרגול",
       "EXAM": "מבחן",
-      "PRACTICE_SOLUTION": "פתרון התרגול"
+      "PRACTICE_SOLUTION": "פתרון התרגול",
+      "PREDEFINED_EXAM": "מבחני הסמכה"
     },
     "EXAM_FINISH_ARE_YOU_SURE": "עדיין נותר לך זמן, האם את/ה מעוניין/נת לסיים כעת בכל זאת ?",
+    "EXAM_CANCEL_ARE_YOU_SURE": "הינך בטוח שברצונך לבטל את התרגול/בחינה?",
     "SUMMARY": {
       "FINAL_GRADE": "ציון סופי",
       "TOTAL_TIME": "זמן כולל",
@@ -43,7 +56,8 @@
       "ID": "מס' סידורי",
       "LABEL": "סיכום",
       "PRACTICE_SOLUTION": "פתרון התרגול",
-      "TIPS_FOR_SUCCESS": "טיפים להצלחה בבחינה"
+      "TIPS_FOR_SUCCESS": "טיפים להצלחה בבחינה",
+      "REPEAT_PRACTICE": "חזור על התרגול"
     },
     "DISTRIBUTION": {
       "TITLE": "חלוקת שאלות לפי קטגוריות:",
@@ -63,11 +77,25 @@
     },
     "BUTTONS": {
       "CONTINUE": "המשך",
-      "FINISH": "סייים"
+      "FINISH": "סייים",
+      "RETURN": "יציאה",
+      "DOWNLOAD": "שמור תרגול",
+      "START": "התחל בחינה"
     },
     "PRACTICE": {
       "QUESTION_LABEL": "שאלה",
       "ANSWERS_LABEL": "תשובות"
+    },
+    "TOOLTIPS": {
+      "POSTCREDIT_DISABLED": "תרגול זה אינו זמין כל עוד יש בחשבונך שאלות חדשות"
+    },
+    "PREDEFINED": {
+      "NUMOFQUEST": "כמות שאלות",
+      "TIME": "הגבלת זמן לבחינה",
+      "MINUTE": "דקות",
+      "TIME_EXTENDED": "הגבלת זמן עם הארכה",
+      "UNLIMITED_TIME": "בחינה ללא הגבלת זמן",
+      "PACKAGESTOBUY": "מוגבל ברכישת חבילות"
     }
   },
   "STATS": {
@@ -88,7 +116,11 @@
       "PREDEFINEDEXAMSWITHQUOTASLIST": "Predefined Exams With Quotas list",
       "PACKAGESCURRENCY": "ש\"ח",
       "PURCHASEDPRODUCTS": "חבילות שנרכשו",
-      "CANCELEDPRODUCTS": "חבילות שבוטלו"
+      "CANCELEDPRODUCTS": "חבילות שבוטלו",
+      "PRACTICE": "תרגול כללי",
+      "EXAM": "מבחן",
+      "WEAK_AREAS_PRACTICE": "תרגול בנקודות חולשה",
+      "POST_CREDIT_PRACTICE": "תרגול לאחר גמר כל האשראי"
     },
     "DASHBOARD": {
       "TITLE": "סטטיסטיקת תרגולים",
@@ -151,10 +183,12 @@
       "FIRST_NAME": "שם פרטי",
       "LAST_NAME": "שם משפחה",
       "CHANGE_PASSWORD": "שינויי סיסמא",
+      "CHANGE_PASSWORD_BTN": "שנה סיסמא",
       "OLDPASSWORD": "סיסמא נוכחית",
       "PASSWORD": "סיסמא חדשה",
       "CONFIRM_PASSWORD": "אימות סיסמא",
       "PASSWORD_DONOT_MATCH": "הסיסמאות אינן זהות",
+      "UPDATE_PASSWORD": "עדכן סיסמא",
       "CONTACT_INFO": "דרכי התקשרות",
       "EMAIL": "דוא\"ל",
       "PHONE": "טלפון",
@@ -166,7 +200,11 @@
       "ACCEPT_COMERCIAL_MAIL": "מאשר קבלת מייל פרסומי",
       "UPCOMING_EXAM": "מועד בחינה מתוכנן",
       "SELECT_EXAM_DATE": "בחר מועד",
-      "DETAILS_UPDATED_SUCCESS": "הפרטים עודכנו בהצלחה"
+      "OR_SELECT_OTHER_DATE": "או בחר מועד אחר",
+      "DETAILS_UPDATED_SUCCESS": "הפרטים עודכנו בהצלחה",
+      "NEXT": "הבא",
+      "PREV": "הקורדם",
+      "SELECT_DATE": "בחר מועד בחינה"
     }
   },
   "GENERAL": {

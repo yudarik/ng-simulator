@@ -14,6 +14,10 @@
             return categories.get('');
         }
 
+        function listPredefined() {
+            return practices.get('predefinedExams');
+        }
+
         function getDistribution() {
             return categories.customGET('distribution')
                 .then((res)=>{
@@ -40,11 +44,24 @@
                 case 'PRACTICE':
                     api = 'practiceToPerform';
                     break;
+                case 'REPEAT':
+                    api = 'repeatPractice';
+                    break;
+                case 'PREDEFINED_EXAM':
+                    return getPredefinedExam(params);
+                    break;
                 default:
                     api = 'practiceToPerform';
             }
 
             return practices.get(api, params);
+        }
+
+        function getPredefinedExam(params) {
+            var api = 'predefinedExams/predefinedExamToPerform/'+params.id+'/';
+            delete params.practiceType;
+
+            return practices.get(api, {timeFrame: params.timeFrame});
         }
 
         function submitExam(examResult) {
@@ -74,7 +91,9 @@
 
         return {
             listCategories,
+            listPredefined,
             getDistribution,
+            getPredefinedExam,
             getExam,
             submitExam,
             getStats,

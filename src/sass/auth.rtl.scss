@@ -5,33 +5,32 @@ body.signin.flip {
     margin-right: 0;
   }
 
-}
+  .auth-main {
 
-.auth-main {
+    button.btn-auth {
+      float: left;
+    }
 
-  button.btn-auth {
-    float: left;
-  }
+    a.forgot-pass {
 
-  a.forgot-pass {
+      text-align: left;
 
-    text-align: left;
+      float: right;
 
-    float: right;
+    }
+    .al-share-auth {
+      .al-share {
+        li {
+          margin-right: 24px;
+          &:first-child {
+            margin-right: 0;
+          }
 
-  }
-  .al-share-auth {
-    .al-share {
-      li {
-        margin-right: 24px;
-        &:first-child {
-          margin-right: 0;
         }
-
       }
     }
-  }
-  .control-label {
-    float: right;
+    .control-label {
+      float: right;
+    }
   }
 }

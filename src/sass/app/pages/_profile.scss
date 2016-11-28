@@ -1,0 +1,36 @@
+body.flip {
+  .ui-select-bootstrap {
+    > .ui-select-match > .btn {
+      text-align: right!important;
+    }
+    .ui-select-toggle > .caret {
+      right: auto;
+      left: 10px;
+    }
+  }
+}
+.input-group-btn:first-child {
+  > .btn,
+  > .btn-group {
+    padding: 5px 12px;
+  }
+}
+ul.dropdown-menu[uib-datepicker-popup-wrap] {
+  width: 322px;
+
+  div[uib-datepicker] {
+    button {
+      > i.glyphicon-chevron-right {
+        &::before {
+          content: "\e079";
+        }
+      }
+      > i.glyphicon-chevron-left {
+        &::before {
+          content: "\e080"
+        }
+      }
+
+    }
+  }
+}
