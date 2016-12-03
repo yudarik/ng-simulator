@@ -11,7 +11,7 @@
         bindings: {
             titleLabel: '<'
         },
-        template: '<div id="practicesGradeChart" class="amChart" style="height: 300px;"></div>',
+        template: '<div id="practicesGradeChart" class="amChart" style="height:300px;"></div>',
         controller: /** @ngInject */
         ["$translate", "$filter", "$state", "examService", "simulator_config", function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config) {
             var _this = this;
@@ -25,13 +25,13 @@
             };
 
             var colors = {
-                "PRACTICE": "Yellow",
+                "PRACTICE": "Purple",
                 "EXAM": "Red",
                 "SUGGESTED_PRACTICE": "Cyan",
                 "PREDEFINED_EXAM": "Green",
                 "REPEATED_PRACTICE": "Orange",
                 "POST_CREDIT_PRACTICE": "Blue",
-                "WEAK_AREAS_PRACTICE": "Purple"
+                "WEAK_AREAS_PRACTICE": "Yellow"
             };
 
             var chartConf = {
@@ -52,9 +52,10 @@
                     "titleRotation": 0
                 },
                 "chartCursor": {
-                    "enabled": true,
+                    "enabled": false,
                     "cursorAlpha": 0,
-                    "oneBalloonOnly": true
+                    "oneBalloonOnly": true,
+                    "zoomable": false
                 },
                 "trendLines": [],
                 "graphs": [{
@@ -94,7 +95,7 @@
                 "allLabels": [],
                 "balloon": {},
                 "legend": {
-                    "enabled": true,
+                    "enabled": false,
                     "accessibleLabel": "",
                     "labelText": "Practice Type",
                     "valueText": "[[Practice Type]]"
@@ -102,7 +103,8 @@
                 "titles": [{
                     "id": "Title-1",
                     "size": 15,
-                    "text": this.titleLabel
+                    "text": this.titleLabel,
+                    "color": "#666666"
                 }],
                 "dataProvider": [],
                 "listeners": [{

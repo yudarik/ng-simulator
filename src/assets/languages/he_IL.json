@@ -45,7 +45,8 @@
     "EXAM_CANCEL_ARE_YOU_SURE": "הינך בטוח שברצונך לבטל את התרגול/בחינה?",
     "SUMMARY": {
       "FINAL_GRADE": "ציון סופי",
-      "TOTAL_TIME": "זמן כולל",
+      "TOTAL_TIME": "סך הכל זמן שהוקצב לפתרון",
+      "TIME_ELAPSED": "הזמן שנדרש לפתרון",
       "AVERAGE_TIME_FOR_QUESTION": "זמן ממוצע לשאלה",
       "QUESTION_DISTRIBUTION": "התפלגות שאלות על פיי קטגוריות",
       "CATEGORY": "קטגוריה",

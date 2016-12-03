@@ -8,6 +8,7 @@
 .amChart {
   width: 100%;
   font-size: 11px;
+  position: relative;
 }
 .amcharts-chart-div {
   a[title="JavaScript charts"] {
@@ -19,6 +20,18 @@
 #categoriesCorectIncorect,
 #practiceTypeGrades,
 #userRankChart,
-#practicesGradeChart {
+#practicesGradeChart,
+#timeCylinder {
   height: 300px;
+}
+
+#questionsQuotaChart {
+  height: 275px;
+  width: 225%;
+  right: -70%;
+
+  @media all and (min-width: 640px) and (max-width:991px) {
+    width: 180%;
+    right: -44%;
+  }
 }

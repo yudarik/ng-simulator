@@ -19,7 +19,13 @@
                 var chartColors = _.values(layoutColors.dashboard);
 
                 var chartConf = {
-                    titles: [{text: this.titleLabel, size: 18}],
+                    titles: [
+                        {
+                            text: this.titleLabel,
+                            size: 15,
+                            "color": "#666666"
+                        }
+                    ],
                     type: 'serial',
                     theme: 'default',
                     color: layoutColors.defaultText,
@@ -91,7 +97,7 @@
                         return practiceTypesPerformed.map((key,index) => {
                             if (grouped[key].length > 0) {
                                 return {
-                                    type: $translate.instant('STATS.ACCOUNT.'+key.toUpperCase()),
+                                    type: $translate.instant('EXAMS.TYPES.'+key.toUpperCase()),
                                     questions: this.getQuestionsSum(grouped[key]),
                                     practices: grouped[key].length,
                                     color: chartColors[index]

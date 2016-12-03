@@ -6,17 +6,18 @@
     'use strict';
 
     angular.module('Simulator.components.charts')
-        .component('userQuota', {
+        .component('timeCylinder', {
             bindings: {
-                titleLabel: '<'
+                timeElapsed: '<',
+                totalTime: '<'
             },
-            template: `<h5 class="text-center">{{$ctrl.titleLabel}}</h5>
-                        <div id="questionsQuotaChart" class="amChart"></div>
-                       `,
-            controller: function userQuotaCtrl($translate, customerService) {
+            template: `<div id="timeCylinder" class="amChart"></div>`,
+            controller: function timeCylinderCtrl($translate, $filter) {
                 'ngInject';
 
-                var questionsQuota = {
+                var timeframe = $filter('timeframe');
+
+                var chartConf = {
                     "theme": "light",
                     "type": "serial",
                     "depth3D": 100,
@@ -68,23 +69,13 @@
                 };
 
                 this.$onInit = () => {
-                    customerService.getQuota().then((quota) => {
-
-                        questionsQuota.dataProvider.push({
-                            category1: $translate.instant('STATS.ACCOUNT.LEFTNEWQUESTIONSQUOTA'),
-                            category2: $translate.instant('STATS.ACCOUNT.SPENTNEWQUESTIONSQUOTA'),
-                            value1: quota['leftNewQuestionsQuota'],
-                            value2: quota['totalNewQuestionsQuota'] - quota['leftNewQuestionsQuota']
-                        });
-                        questionsQuota.dataProvider.push({
-                            category1: $translate.instant('STATS.ACCOUNT.LEFTPOSTCREDITQUESTIONSQUOTA'),
-                            category2: $translate.instant('STATS.ACCOUNT.SPENTPOSTCREDITQUESTIONSQUOTA'),
-                            value1: quota['leftPostCreditQuestionsQuota'],
-                            value2: quota['totalPostCreditQuestionsQuota'] - quota['leftPostCreditQuestionsQuota']
-                        });
-
-                        AmCharts.makeChart('questionsQuotaChart', questionsQuota);
+                    chartConf.dataProvider.push({
+                        category1: $translate.instant('EXAMS.SUMMARY.TIME_ELAPSED'),
+                        category2: $translate.instant('EXAMS.SUMMARY.TOTAL_TIME'),
+                        value1: this.timeElapsed,
+                        value2: this.totalTime - this.timeElapsed
                     });
+                    AmCharts.makeChart('timeCylinder', chartConf);
                 };
 
             },

@@ -38,7 +38,7 @@
                 var practiseResult = {
                     practiceType: _this.type,
                     originalPracticeId: _this.config.originalPracticeId,
-                    predefinedExamId: "0",
+                    predefinedExamId: _this.config.predefinedExamId || 0,
                     totalTimeSecs: _this.totalTimeFrame,
                     elapsedTimeSecs: _this.totalTimeFrame - _this.timeframe,
                     questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping

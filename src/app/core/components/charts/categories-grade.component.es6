@@ -118,7 +118,8 @@
                         {
                             "id": "Title-1",
                             "size": 15,
-                            "text": translations.title
+                            "text": translations.title,
+                            "color": "#666666"
                         }
                     ],
                     "dataProvider": []

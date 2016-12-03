@@ -11,42 +11,81 @@
         bindings: {
             titleLabel: '<'
         },
-        template: '<div class="col-xs-12">' + '<canvas class="chart chart-pie"' + 'chart-data="$ctrl.newQuestionsQuota.data" ' + 'chart-labels="$ctrl.newQuestionsQuota.labels" ' + 'chart-options="$ctrl.options">' + '</canvas>' + '</div>' + '<div class="chartBottomMargin"></div>' + '<div class="col-xs-12">' + '<canvas class="chart chart-pie"' + 'chart-data="$ctrl.postCreditQuestionQuota.data" ' + 'chart-labels="$ctrl.postCreditQuestionQuota.labels" ' + 'chart-options="$ctrl.options">' + '</canvas>' + '</div>',
+        template: '<h5 class="text-center">{{$ctrl.titleLabel}}</h5>\n                        <div id="questionsQuotaChart" class="amChart"></div>\n                       ',
         controller: ["$translate", "customerService", function userQuotaCtrl($translate, customerService) {
             'ngInject';
 
-            var _this = this;
+            var questionsQuota = {
+                "theme": "light",
+                "type": "serial",
+                "depth3D": 100,
+                "angle": 30,
+                "autoMargins": false,
+                "marginBottom": 100,
+                "marginLeft": 350,
+                "marginRight": 300,
+                "dataProvider": [],
+                "valueAxes": [{
+                    "stackType": "100%",
+                    "gridAlpha": 0
+                }],
+                "graphs": [{
+                    "type": "column",
+                    "topRadius": 1,
+                    "columnWidth": 1,
+                    "showOnAxis": true,
+                    "lineThickness": 2,
+                    "lineAlpha": 0.5,
+                    "lineColor": "#FFFFFF",
+                    "fillColors": "#8d003b",
+                    "fillAlphas": 0.8,
+                    "valueField": "value1",
+                    "balloonText": "[[category1]]: [[value]]"
+                }, {
+                    "type": "column",
+                    "topRadius": 1,
+                    "columnWidth": 1,
+                    "showOnAxis": true,
+                    "lineThickness": 2,
+                    "lineAlpha": 0.5,
+                    "lineColor": "#cdcdcd",
+                    "fillColors": "#cdcdcd",
+                    "fillAlphas": 0.5,
+                    "valueField": "value2",
+                    "balloonText": "[[category2]]: [[value]]"
+                }],
 
-            this.options = {
-                title: {
-                    display: true,
-                    text: this.titleLabel,
-                    fontSize: 14
+                "categoryField": "category1",
+                "categoryAxis": {
+                    "axisAlpha": 0,
+                    "labelOffset": 40,
+                    "gridAlpha": 0
                 },
-                legend: {
-                    display: true,
-                    position: 'right'
+                "export": {
+                    "enabled": false
                 }
             };
 
-            this.newQuestionsQuota = {
-                labels: [],
-                data: []
-            };
-            this.postCreditQuestionQuota = {
-                labels: [],
-                data: []
-            };
-            customerService.getQuota().then(function (quota) {
+            this.$onInit = function () {
+                customerService.getQuota().then(function (quota) {
 
-                _this.newQuestionsQuota.data = [quota['totalNewQuestionsQuota'] - quota['leftNewQuestionsQuota'], quota['leftNewQuestionsQuota']];
-                _this.newQuestionsQuota.labels[0] = $translate.instant('STATS.ACCOUNT.SPENTNEWQUESTIONSQUOTA');
-                _this.newQuestionsQuota.labels[1] = $translate.instant('STATS.ACCOUNT.LEFTNEWQUESTIONSQUOTA');
+                    questionsQuota.dataProvider.push({
+                        category1: $translate.instant('STATS.ACCOUNT.LEFTNEWQUESTIONSQUOTA'),
+                        category2: $translate.instant('STATS.ACCOUNT.SPENTNEWQUESTIONSQUOTA'),
+                        value1: quota['leftNewQuestionsQuota'],
+                        value2: quota['totalNewQuestionsQuota'] - quota['leftNewQuestionsQuota']
+                    });
+                    questionsQuota.dataProvider.push({
+                        category1: $translate.instant('STATS.ACCOUNT.LEFTPOSTCREDITQUESTIONSQUOTA'),
+                        category2: $translate.instant('STATS.ACCOUNT.SPENTPOSTCREDITQUESTIONSQUOTA'),
+                        value1: quota['leftPostCreditQuestionsQuota'],
+                        value2: quota['totalPostCreditQuestionsQuota'] - quota['leftPostCreditQuestionsQuota']
+                    });
 
-                _this.postCreditQuestionQuota.data = [quota['totalPostCreditQuestionsQuota'] - quota['leftPostCreditQuestionsQuota'], quota['leftPostCreditQuestionsQuota']];
-                _this.postCreditQuestionQuota.labels[0] = $translate.instant('STATS.ACCOUNT.SPENTPOSTCREDITQUESTIONSQUOTA');
-                _this.postCreditQuestionQuota.labels[1] = $translate.instant('STATS.ACCOUNT.LEFTPOSTCREDITQUESTIONSQUOTA');
-            });
-        }]
+                    AmCharts.makeChart('questionsQuotaChart', questionsQuota);
+                });
+            };
+        }],
+        controllerAs: '$ctrl'
     });
 })();

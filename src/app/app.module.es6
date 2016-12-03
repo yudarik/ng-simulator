@@ -16,7 +16,7 @@ angular.module('Simulator', [
   'ngJsTree',
   'angular-progress-button-styles',
   'BlurAdmin.theme',
-  'BlurAdmin.pages',
+  //'BlurAdmin.pages',
   'Simulator.core',
   'Simulator.pages'
 ]);

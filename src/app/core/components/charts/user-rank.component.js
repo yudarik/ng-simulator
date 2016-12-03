@@ -71,17 +71,18 @@
                 "titles": [{
                     "id": "Title-1",
                     "size": 15,
-                    "text": this.titleLabel
+                    "text": this.titleLabel,
+                    "color": "#666666"
                 }],
                 "dataProvider": [{
                     "category": "#2",
-                    "Color": "Silver",
+                    "Color": "Red",
                     "Rank": "3",
                     "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Office-Customer-Male-Dark-icon.png",
                     "userDetails": "Nurit"
                 }, {
                     "category": "#1",
-                    "Color": "#FFD700",
+                    "Color": "Purple",
                     "Rank": "4",
                     "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Office-Customer-Male-Dark-icon.png",
                     "userDetails": "Moshe"

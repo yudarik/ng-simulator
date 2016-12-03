@@ -42,7 +42,7 @@
                     let practiseResult = {
                         practiceType: this.type,
                         originalPracticeId: this.config.originalPracticeId,
-                        predefinedExamId: "0",
+                        predefinedExamId: this.config.predefinedExamId || 0,
                         totalTimeSecs: this.totalTimeFrame,
                         elapsedTimeSecs: this.totalTimeFrame - this.timeframe,
                         questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
