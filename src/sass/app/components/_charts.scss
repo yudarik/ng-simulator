@@ -16,9 +16,9 @@
     font-size: 9px!important;
   }
 }
-#practiceTypeGrades {
-  height: 400px;
-}
-#categoriesCorectIncorect {
-  height: 400px;
+#categoriesCorectIncorect,
+#practiceTypeGrades,
+#userRankChart,
+#practicesGradeChart {
+  height: 300px;
 }

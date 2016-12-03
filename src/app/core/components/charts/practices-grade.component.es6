@@ -10,21 +10,9 @@
             bindings: {
                 titleLabel: '<'
             },
-            template: '<div>'+
-                      '<canvas id="practices_grade" class="chart chart-bar text-right" direction="rtl"'+
-                      'chart-data="$ctrl.data" '+
-                      'chart-labels="$ctrl.labels" '+
-                      'chart-series="$ctrl.series" '+
-                      'chart-options="$ctrl.options"'+
-                      'chart-click="$ctrl.onClick">'+
-                      '</canvas>'+
-                      '</div>',
+            template: `<div id="practicesGradeChart" class="amChart" style="height: 300px;"></div>`,
             controller: /** @ngInject */
-                function practicesGradeCtrl($translate, $filter, $state, examService) {
-
-                this.labels = [];
-                this.data = [];
-                this.series = [];
+                function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config) {
 
                 var translate = {
                     grade: $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.GRADE'),
@@ -34,120 +22,144 @@
                     practiceID: $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.PRACTICEID')
                 };
 
-                this.options = {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: this.titleLabel,
-                        fontSize: 14
-                    },
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    },
-                    tooltips: {
-                        mode: 'single',
-                        direction: 'rtl',
-                        class: 'text-right',
-                        style: 'direction:rtl, float:left, text-alight: right',
-                        textAlign: 'right',
-                        bodyFontSize: 14,
-                        bodySpacing: 4,
-                        callbacks: {
-                            title: function(data) {
-                                var item = getItem(data);
-                                return item? `${moment(item.date).format('LLL')}` : '';
-                            },
-                            footer: function(data) {
-                                var item = getItem(data);
-                                return item? `${translate.practiceID}: ${item.practiceID}` : '';
-                            },
-                            beforeLabel: function(data) {
-                                var item = getItem(data);
-                                return item? `${translate.type}: ${$translate.instant('EXAMS.TYPES.'+item.practiceType)}` : '';
-                            },
-                            label: function(data) {
-                                var item = getItem(data);
-
-                                return item? `${translate.grade}: ${$filter('number')(item.grade, 1)}` : '';
-                            },
-                            afterLabel: function(data) {
-                                var item = getItem(data);
-                                return item? `${translate.timeSpent}: ${$filter('number')(item.elapsedTimeSecs/60, 2)}` : '';
-                            }
-                        }
-                    }
+                var colors = {
+                    "PRACTICE": "Yellow",
+                    "EXAM": "Red",
+                    "SUGGESTED_PRACTICE": "Cyan",
+                    "PREDEFINED_EXAM": "Green",
+                    "REPEATED_PRACTICE": "Orange",
+                    "POST_CREDIT_PRACTICE": "Blue",
+                    "WEAK_AREAS_PRACTICE": "Purple"
                 };
+
+                var chartConf = {
+                    "type": "serial",
+                    "categoryField": "Practice Date",
+                    "dataDateFormat": "DD/MM/YYYY HH:NN:SS",
+                    "maxSelectedSeries": 20,
+                    "maxZoomFactor": 10,
+                    "startDuration": 1,
+                    "categoryAxis": {
+                        "autoRotateAngle": 39.6,
+                        "autoRotateCount": 1,
+                        "gridPosition": "start",
+                        "labelColorField": "",
+                        "twoLineMode": true,
+                        "labelRotation": 50.4,
+                        "title": translate.date,
+                        "titleRotation": 0
+                    },
+                    "chartCursor": {
+                        "enabled": true,
+                        "cursorAlpha": 0,
+                        "oneBalloonOnly": true
+                    },
+                    "trendLines": [],
+                    "graphs": [
+                        {
+                            "animationPlayed": true,
+                            "balloonText": "[[Practice Type]]: [[value]]",
+                            "colorField": "Practice Color",
+                            "fillAlphas": 1,
+                            "id": "AmGraph-1",
+                            "legendAlpha": 1,
+                            "legendValueText": "",
+                            "lineColorField": "Practice Type",
+                            "markerType": "square",
+                            "stackable": false,
+                            "title": translate.type,
+                            "type": "column",
+                            "valueField": "Practice Grade",
+                            "visibleInLegend": false,
+                            "xAxis": "ValueAxis-1"
+                        },
+                        {
+                            "balloonColor": "#FF0000",
+                            "balloonText": "Minimum Passing Grade [[value]]",
+                            "color": "#FF0000",
+                            "id": "AmGraph-2",
+                            "labelText": "",
+                            "lineColor": "#FF0000",
+                            "lineThickness": 2,
+                            "title": "graph 2",
+                            "type": "smoothedLine",
+                            "valueField": "Minimum Passing Grade",
+                            "visibleInLegend": false
+                        }
+                    ],
+                    "guides": [],
+                    "valueAxes": [
+                        {
+                            "id": "ValueAxis-1",
+                            "title": translate.grade
+                        }
+                    ],
+                    "allLabels": [],
+                    "balloon": {},
+                    "legend": {
+                        "enabled": true,
+                        "accessibleLabel": "",
+                        "labelText": "Practice Type",
+                        "valueText": "[[Practice Type]]"
+                    },
+                    "titles": [
+                        {
+                            "id": "Title-1",
+                            "size": 15,
+                            "text": this.titleLabel
+                        }
+                    ],
+                    "dataProvider": [],
+                    "listeners": [{
+                        "event": "clickGraphItem",
+                        "method": (event) => {
+                            this.onClick(event);
+                        }
+                    }]
+                };
+
+                this.numberFilter = $filter('number');
+                this.allPractices = [];
 
                 this.onClick = (data) => {
-                    if (Array.isArray(data) && data[0] && typeof data[0]._index !== 'undefined') {
-                        data[0].index = data[0]._index;
-                    }
 
-                    var item = getItem(data);
+                    var item = getItem(data.item);
+                    var practice = _.find(this.allPractices, {practiceID: item["Practice ID"]});
 
-                    examService.getPracticeInfo(item.practiceID).then(solution => {
-                        //$state.go('exams.practice-solution', {practiceSolution: solution.questions});
-                        $state.go('exams.practice-summary', {examSummary: _.assign({}, item, {questions: solution.questions})});
+                    examService.getPracticeInfo(item["Practice ID"]).then(solution => {
+                        $state.go('exams.practice-summary', {examSummary: _.assign({}, practice, {questions: solution.questions})});
                     });
                 };
 
-                examService.getStats().then((practices) => {
+                this.$onInit = () => {
+                    examService.getStats().then((practices) => {
 
-                    this.practices = _.groupBy(_.sortBy(practices, 'date'), 'practiceType');
-                    this.seriesKeys = _.keys(this.practices);
-                    this.labelsHelper = _.map(_.sortBy(practices, 'date'), 'date');
+                        this.allPractices = practices;
 
+                        chartConf.dataProvider = practices.map(practice => {
 
-                    this.series = _.map(this.seriesKeys, key => {
-                        return $translate.instant('EXAMS.TYPES.'+key);
+                            return {
+                                "Practice Date": moment(practice.date).format("hh:mm DD/MM/YYYY"),
+                                "Practice Type": $translate.instant('EXAMS.TYPES.'+practice.practiceType),
+                                "Practice Color": colors[practice.practiceType],
+                                "Practice Grade": this.numberFilter(practice.grade, 1),
+                                "Minimum Passing Grade": simulator_config.passingGrade,
+                                "Practice ID": practice.practiceID
+                            }
+                        });
+
+                        AmCharts.makeChart('practicesGradeChart', chartConf);
                     });
-                    this.data = zeros([this.seriesKeys.length, this.labelsHelper.length]);
-                    this.dataHelper = angular.copy(this.data);
+                };
 
-                    _.forEach(this.practices, (groupValue, groupKey)=>{
-                        _.forEach(groupValue, practice => {
-                            var x = this.seriesKeys.indexOf(groupKey),
-                                y= this.labelsHelper.indexOf(practice.date);
+                function getItem(item) {
 
-                            this.data[x][y] = practice.grade;
-                            this.dataHelper[x][y] = practice;
-                        })
-                    });
-                    this.labels = _.map(this.labelsHelper, (date, index) => {
-                        if (moment(date).format('DD/MM/YY').toString() !== moment(this.labelsHelper[index-1]).format('DD/MM/YY').toString()) {
-                            return moment(date).format('DD/MM/YY').toString();
-                        } else {
-                            return '.';
-                        }
-                    });
-                });
-
-                var getItem = (data) => {
-
-                    if (!data || data.yLabel === 0) {
+                    if (!item || !item.dataContext) {
                         return;
                     }
 
-                    if (Array.isArray(data)) {
-                        data = data[0];
-                    }
-
-                    var datasetIndex = (data.datasetIndex > -1)? data.datasetIndex : data._datasetIndex;
-
-                    return this.dataHelper[datasetIndex][data.index];
-                };
-
-                function zeros(dimensions) {
-                    var array = [];
-
-                    for (var i = 0; i < dimensions[0]; ++i) {
-                        array.push(dimensions.length == 1 ? undefined : zeros(dimensions.slice(1)));
-                    }
-
-                    return array;
+                    return item.dataContext;
                 }
-
             }
 
         });

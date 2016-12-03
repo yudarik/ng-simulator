@@ -6,11 +6,11 @@
         <h5 class="row">
             <div class="col-xs-12 col-md-6">
                 <label class="control-label">{{::'EXAMS.SUMMARY.ID'|translate}}:</label>
-                <span class="col-xs-8 pull-left">{{::practiceSummary.summary.practiceID}}</span>
+                <span class="col-xs-8 pull-right">{{::practiceSummary.summary.practiceID}}</span>
             </div>
             <div class="col-xs-12 col-md-6">
                 <label class="control-label">{{::'EXAMS.SUMMARY.DATE'|translate}}:</label>
-                <span class="col-xs-8 pull-left">{{::practiceSummary.summary.date|date: 'MMMM dd, yyyy hh:mm a'}}</span>
+                <span class="col-xs-8 pull-right">{{::practiceSummary.summary.date|date: 'MMMM dd, yyyy hh:mm a'}}</span>
             </div>
 
         </h5>
@@ -33,7 +33,11 @@
 
         <h3 class="row text-center">{{::'EXAMS.SUMMARY.QUESTION_DISTRIBUTION'|translate}}</h3>
 
-        <table class="table table-condensed col-xs-12 col-md-4">
+        <div class="graph vertical centered table-condensed col-xs-12">
+            <categories-grade-radar stats="practiceSummary.categoriesStats"></categories-grade-radar>
+        </div>
+
+        <table class="table table-condensed col-xs-12">
             <thead>
                 <th>{{::'EXAMS.SUMMARY.CATEGORY'|translate}}</th>
                 <th>{{::'EXAMS.SUMMARY.QUESTIONS_COUNT'|translate}}</th>
@@ -56,17 +60,12 @@
             </tbody>
         </table>
 
-        <div class="graph vertical centered table-condensed col-xs-12 col-md-7">
-            <br><br><br>
-            <categories-grade-radar stats="practiceSummary.categoriesStats"></categories-grade-radar>
-            <div class="row text-center">
-                <br/>
-                <br>
-                <div class="col-xs-12">
-                    <a class="btn btn-default" ui-sref="exams.practice-solution({practiceSummary: practiceSummary.summary})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>
-                    <a class="btn btn-default" ui-sref="exams.practice({practiceType: 'REPEAT', examParams: {practiceId: practiceSummary.summary.practiceID, timeFrame: 'NORMAL'}})">{{::'EXAMS.SUMMARY.REPEAT_PRACTICE'|translate}}</a>
-                    <a class="btn btn-default" ng-href="{{practiceSummary.simulator_config.tipsForSuccessLinkURL}}" target="_blank">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</a>
-                </div>
+        <div class="row text-center">
+            <br/><br/>
+            <div class="col-xs-12">
+                <a class="btn btn-default" ui-sref="exams.practice-solution({practiceSummary: practiceSummary.summary})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>
+                <a class="btn btn-default" ui-sref="exams.practice({practiceType: 'REPEAT', examParams: {practiceId: practiceSummary.summary.practiceID, timeFrame: 'NORMAL'}})">{{::'EXAMS.SUMMARY.REPEAT_PRACTICE'|translate}}</a>
+                <a class="btn btn-default" ng-href="{{practiceSummary.simulator_config.tipsForSuccessLinkURL}}" target="_blank">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</a>
             </div>
         </div>
 

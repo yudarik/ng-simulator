@@ -10,51 +10,129 @@
             bindings: {
                 titleLabel: '<'
             },
-            template: '<div>'+
-                      '<canvas id="pie" class="chart chart-horizontal-bar"'+
-                      'chart-data="$ctrl.data" '+
-                      'chart-labels="$ctrl.labels" '+
-                      'chart-series="$ctrl.series"'+
-                      'chart-options="$ctrl.options">'+
-                      '</canvas>'+
-                      '</div>',
+            template: `<div id="userRankChart" class="amChart"></div>`,
             controller: function userRankCtrl($translate, customerStatsService) {
                 'ngInject';
 
-                this.labels = [];
-                this.data = [];
-                this.series = [];
-                this.options = {
-                    title: {
-                        display: true,
-                        text: this.titleLabel,
-                        fontSize: 14
+                var chartConf = {
+                    "type": "serial",
+                    "categoryField": "category",
+                    "angle": 30,
+                    "autoMarginOffset": 0,
+                    "depth3D": 30,
+                    "startDuration": 1,
+                    "categoryAxis": {
+                        "gridPosition": "start",
+                        "axisThickness": 0,
+                        "gridCount": 0,
+                        "gridThickness": 0,
+                        "tickLength": 0,
+                        "title": ""
                     },
-                    legend: {
-                        display: false,
-                        position: 'top'
-                    }
+                    "trendLines": [],
+                    "graphs": [
+                        {
+                            "balloonText": "[[userDetails]]\n"+$translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.RANK')+" [[category]]",
+                            "bullet": "custom",
+                            "bulletBorderThickness": 0,
+                            "colorField": "Color",
+                            "customBulletField": "Icon",
+                            "fillAlphas": 1,
+                            "fillColorsField": "Color",
+                            "gradientOrientation": "horizontal",
+                            "id": "AmGraph-1",
+                            "labelColorField": "Color",
+                            "labelOffset": 2,
+                            "labelText": "[[userDetails]]",
+                            "maxBulletSize": 500,
+                            "minBulletSize": 50,
+                            "title": "My Relative Score",
+                            "type": "step",
+                            "valueField": "Rank",
+                            "visibleInLegend": false
+                        }
+                    ],
+                    "guides": [],
+                    "valueAxes": [
+                        {
+                            "axisTitleOffset": 0,
+                            "id": "ValueAxis-2",
+                            "axisAlpha": 0,
+                            "fontSize": 4,
+                            "labelsEnabled": false,
+                            "showFirstLabel": false,
+                            "showLastLabel": false,
+                            "titleBold": false
+                        }
+                    ],
+                    "allLabels": [],
+                    "balloon": {},
+                    "legend": {
+                        "enabled": true,
+                        "useGraphSettings": true
+                    },
+                    "titles": [
+                        {
+                            "id": "Title-1",
+                            "size": 15,
+                            "text": this.titleLabel
+                        }
+                    ],
+                    "dataProvider": [
+                        {
+                            "category": "#2",
+                            "Color": "Silver",
+                            "Rank": "3",
+                            "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Office-Customer-Male-Dark-icon.png",
+                            "userDetails": "Nurit"
+                        },
+                        {
+                            "category": "#1",
+                            "Color": "#FFD700",
+                            "Rank": "4",
+                            "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Office-Customer-Male-Dark-icon.png",
+                            "userDetails": "Moshe"
+                        },
+                        {
+                            "category": "#3",
+                            "Color": "#B8860B",
+                            "Rank": "2",
+                            "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Office-Customer-Male-Dark-icon.png",
+                            "userDetails": "Yaakov"
+                        },
+                        {
+                            "category": "#7",
+                            "Color": "Green",
+                            "Rank": "1",
+                            "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Occupations-Bartender-Male-Light-icon.png",
+                            "userDetails": "You"
+                        }
+                    ]
                 };
 
-                customerStatsService.getRank().then((ranks) => {
-                    ranks.splice(0, 0, {
-                        rank: 10,
-                        averageGrade: 75
+                this.$onInit = () =>{
+                    customerStatsService.getRank().then((ranks) => {
+
+                        chartConf.dataProvider = ranks.map((rank,index) => {
+                            return _.assign(chartConf.dataProvider[index], {
+                                Rank: rank.rank,
+                                category: rank.rank,
+                                userDetails: getName(rank)
+                            });
+                        });
+                        AmCharts.makeChart('userRankChart',chartConf);
                     });
-                    ranks.reverse();
-                    _.forEach(ranks, (rank)=>{
-                        this.labels.push(getName(rank));
-                        this.data.push(rank.averageGrade);
-                    });
-                });
+
+                };
+
+
 
                 function getName(rank) {
 
-                    var userRank = $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.RANK') +" "+rank.rank,
-                        anonymous = $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.ANONYMOUS'),
+                    var anonymous = $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.ANONYMOUS'),
                         you = $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.YOU');
 
-                    return (rank.name)? userRank+": "+you : userRank+": "+anonymous;
+                    return (rank.name)? you : anonymous;
                 }
             }
         });

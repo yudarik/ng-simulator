@@ -134,7 +134,9 @@
         },
         "GRADES_RADAR": {
           "TITLE": "התפלגות ציונים לפי קטגוריה",
-          "GRADE": "ציון"
+          "GRADE": "ציון",
+          "CATEGORY": "קטגוריה",
+          "PASSING_GRADE":"ציון עובר"
         },
         "USERS_RANK": {
           "TITLE": "ממוצע ציונים משוקלל",
