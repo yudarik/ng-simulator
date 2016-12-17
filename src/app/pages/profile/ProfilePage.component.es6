@@ -19,7 +19,7 @@
           this.userProfileForm = {};
 
           this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
-            return moment(date).format('DD/MM/YYYY').toString();
+            return date;//moment(date).format('DD/MM/YYYY').toString();
           });
           this.user = angular.copy(this.userProfile);
 
@@ -28,7 +28,9 @@
             let params = this.user.plain();
 
             if (this.user.examEventDate && typeof this.user.examEventDate === "object") {
-              params.examEventDate = moment(this.user.examEventDate).format('DD/MM/YYYY').toString();
+              params.examEventDate = this.user.examEventDate.getTime();//.format('DD/MM/YYYY').toString();
+            } else if (typeof this.user.examEventDate === "number") {
+                params.examEventDate = this.user.examEventDate;
             }
 
             _.forEach(this.user, (val, key)=>{
@@ -46,7 +48,7 @@
                 toaster.pop('error','', err.data.description);
               }
             })
-          }
+          };
 
           this.togglePasswordChange = () => {
             this.showChangePassword = !this.showChangePassword;

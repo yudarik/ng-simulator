@@ -26,7 +26,8 @@
             predefinedExamsEnabled:                 null,
             trainingDocumentsEnabled:               null,
             postCreditModeEnabled:                  null,
-            sendingLastChanceToEnrollEmail:         null
+            sendingLastChanceToEnrollEmail:         null,
+            defaultState:                           'dashboard'
         })
         .config(function(RestangularProvider, $translateProvider){
 
@@ -46,7 +47,8 @@
                     'Content-Type': 'application/json'
                 })
                 //.setBaseUrl('rest'); // Production Build
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
@@ -71,6 +73,7 @@
 
             simulatorService.getStatus().then(config => {
                 _.assign(simulator_config, config);
+
                 $rootScope.appTitle = simulator_config.applicationTitle;
                 $rootScope.simulatorConfigLoaded = true;
                 $rootScope.appLayout = simulator_config.layout.toLowerCase();
@@ -79,6 +82,7 @@
                 if (simulator_config.trainingDocumentsOnly) {
                     $state.get('exams').sidebarMeta.hidden = true;
                     $state.get('dashboard').sidebarMeta.hidden = true;
+                    simulator_config.defaultState = 'manuals';
                 }
 
                 if ($state.get('exams.post-credit')) {
@@ -92,6 +96,12 @@
 
                 if ($state.get('manuals'))
                     $state.get('manuals').sidebarMeta.disabled = !simulator_config.trainingDocumentsEnabled;
+            });
+
+            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+                if (_.get(toState, 'sidebarMeta.hidden') || _.get($state.get(toState.parent), 'sidebarMeta.hidden')) {
+                    event.preventDefault();
+                }
             });
         })
 })();

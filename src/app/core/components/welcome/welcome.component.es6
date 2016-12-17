@@ -16,8 +16,7 @@ angular.module('Simulator.components')
             };
 
             this.$onInit = () => {
-                if (this.user.firstLogin &&
-                    this.config.welcomeMessage !== '' &&
+                if (this.config.welcomeMessage !== '' &&
                     this.config.welcomeMessage !== null) {
 
                     if (this.user.role === 'Candidate' ||

@@ -12,8 +12,10 @@
     <span class="text-{{profile.getAlertType()}} pull-left" ng-if="profile.alert" ng-bind="profile.alert.msg">
     </span>
 
-    <button type="submit" class="btn btn-primary btn-with-icon">
+    <button type="submit" class="btn btn-primary btn-with-icon" ng-if="profile.currentPage === 3">
       <i class="ion-android-checkmark-circle"></i>{{::'USER.PROFILE_PAGE.UPDATE_PROFILE'|translate}}
     </button>
   </form>
 </div>
+<!--
+<welcome ng-if="profile.user && !profile.user.firstLogin" user="profile.user" config="profile.simulatorConfig"></welcome>-->

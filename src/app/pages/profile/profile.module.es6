@@ -29,7 +29,7 @@
         .state('profileModal', {
             url: '/profile-modal',
             parent: 'auth',
-            controller: function ($uibModal, $translate, $timeout, userProfile, customerService, simulator_config) {
+            controller: function ($uibModal, $state, $translate, $timeout, userProfile, customerService, simulator_config) {
 
                 var buttons = {
                     next: $translate.instant('USER.PROFILE_PAGE.NEXT'),
@@ -41,6 +41,7 @@
                         controller: function($uibModalInstance) {
 
                             this.user = userProfile;
+                            this.simulatorConfig = simulator_config;
                             this.currentPage = 1;
                             this.buttons = buttons;
                             this.alert;
@@ -90,7 +91,7 @@
                         controllerAs: 'profile',
                         templateUrl: 'app/pages/profile/profileModal.html'
                     }).result.then(function (link) {
-                        item.href = link;
+                        $state.go(simulator_config.defaultState);
                     });
                 };
                 showModal();

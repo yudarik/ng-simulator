@@ -8,7 +8,7 @@
                 <div class="input-group">
                     <span class="input-group-btn" uib-datepicker-popup="dd/MM/yyyy"
                                                 datepicker-append-to-body="false"
-                                                ng-model="profile.user  .examEventDate"
+                                                ng-model="profile.user.examEventDate"
                                                 is-open="datePicker.opened"
                                                 show-button-bar="false"
                                                 close-text="Close" theme="bootstrap">
@@ -17,7 +17,7 @@
                     </span>
                     <ui-select name="examEventDate" class="text-right" ng-model="profile.user.examEventDate">
                         <ui-select-match placeholder="{{::'USER.PROFILE_PAGE.SELECT_EXAM_DATE'|translate}}">{{$select.selected | date: 'dd/MM/yyyy'}}</ui-select-match>
-                        <ui-select-choices repeat="event in profile.upcomingExamEventDates">{{event}}</ui-select-choices>
+                        <ui-select-choices repeat="event in profile.upcomingExamEventDates">{{event|date: 'dd/MM/yyyy'}}</ui-select-choices>
                     </ui-select>
                 </div>
             </div>

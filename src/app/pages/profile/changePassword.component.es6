@@ -6,32 +6,41 @@
     angular.module('Simulator.pages.profile')
         .component('changePassword', {
             bindings: {
-                openDialog: '='
+                openDialog: '<'
             },
-            controller: function($uibModal, $translate, $timeout, customerService) {
+            controller: function($uibModal, $state, $translate, $timeout, customerService) {
                 this.passwordResetForm = {};
 
                 this.$onInit = function () {
-                    this.displayDialog();
+                    //displayDialog();
                 };
 
-                this.displayDialog = ()=> {
-                    $uibModal.open({
+                this.$onChanges = (changesObj) => {
+                    if (changesObj.openDialog && !_.isNil(changesObj.openDialog.currentValue)) {
+                        displayDialog();
+                    }
+                };
+
+                var displayDialog = ()=> {
+                    this.dialogInstance = $uibModal.open({
                         animation: true,
+                        backdrop  : 'static',
+                        keyboard  : false,
                         controller: function($uibModalInstance) {
                             this.user = {};
+                            this.$uibModalInstance = $uibModalInstance;
 
                             this.changePassword = () =>{
 
                                 customerService.changePassword(this.user).then(()=>{
                                     this.alert = {
                                         type: 'success',
-                                        msg: $translate.instant('USER.PROFILE_PAGE.DETAILS_UPDATED_SUCCESS')
+                                        msg: $translate.instant('USER.PROFILE_PAGE.PASSWORD_CHANGE_SUCCESS')
                                     };
                                     $timeout(()=>{
-                                        $uibModalInstance.close();
-                                    },2000);
-
+                                        this.$uibModalInstance.close();
+                                        $state.go('signout');
+                                    },5000);
                                 }).catch(err =>{
 
                                     if (err.data) {
@@ -46,9 +55,9 @@
                         },
                         controllerAs: 'passwordModal',
                         templateUrl: 'app/pages/profile/passwordModal.html'
-                    }).result.then(() => {
-
-                    }, () => {
+                    }).result.then((event) => {
+                        this.openDialog = !this.openDialog;
+                    }, (event) => {
                         this.openDialog = !this.openDialog;
                     });
                 }

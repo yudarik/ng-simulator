@@ -26,17 +26,17 @@
                         });
                     }
                 },
-                controller: function ($rootScope, $state, userAuthService) {
+                controller: function ($rootScope, $state, userAuthService, simulator_config) {
 
                     $rootScope.currentUser = null;
 
                     userAuthService.getUser().then(user => {
                         /*if (user.role === "Customer") {
-                            $state.go('dashboard');
+                            $state.go(simulator_config.defaultState);
                         } else {
                             //$state.go('profile');
                         }*/
-                        $state.go('dashboard');
+                        $state.go(simulator_config.defaultState);
                     });
                 }
             })

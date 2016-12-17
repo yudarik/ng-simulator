@@ -182,7 +182,7 @@
                         $state.go('exams.practice-summary', { examSummary: solution });
                     });
                 } else {
-                    $state.go('dashboard');
+                    $state.go(simulator_config.defaultState);
                 }
             };
 

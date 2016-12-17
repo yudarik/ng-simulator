@@ -17,12 +17,13 @@
                     .then((user)=>{
                         if (user && user.tempPassword) {
                             $state.go('changePassword');
+                        } else if (user && user.firstLogin) {
+                            $state.go('profileModal');
                         } else if (user.role === "Customer") {
-                            $state.go('dashboard');
+                            $state.go(simulator_config.defaultState);
                         } else {
                             $state.go('profile');
                         }
-
                     }).catch((err)=>{
                         if (err.status === 401) {
                             this.message = $translate.instant('AUTH.'+err.data.errorMessage.toUpperCase());

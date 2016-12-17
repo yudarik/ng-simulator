@@ -21,7 +21,7 @@
                 resolve: {
                     summary: function($state, $stateParams) {
                         if (!$stateParams.examSummary) {
-                            $state.go('dashboard')
+                            $state.go(simulator_config.defaultState);
                         }
                         return $stateParams.examSummary;
                     }

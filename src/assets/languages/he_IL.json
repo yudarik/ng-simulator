@@ -205,12 +205,14 @@
       "SELECT_EXAM_DATE": "בחר מועד",
       "OR_SELECT_OTHER_DATE": "או בחר מועד אחר",
       "DETAILS_UPDATED_SUCCESS": "הפרטים עודכנו בהצלחה",
+      "PASSWORD_CHANGE_SUCCESS": "הסיסמא שונתה בהצלחה, יוצא מהמערכת לצורך התחברות מחדש בעוד 5 שניות...",
       "NEXT": "הבא",
       "PREV": "הקורדם",
       "SELECT_DATE": "בחר מועד בחינה"
     }
   },
   "GENERAL": {
-    "REQUIRED": "שדה חובה"
+    "REQUIRED": "שדה חובה",
+    "CANCEL": "סגור"
   }
 }
