@@ -79,6 +79,8 @@
 
                     examConfig: function($state, $stateParams, $q, examService) {
 
+                        $state.get('exams.practice').title = 'EXAMS.TYPES.'+$stateParams.practiceType;
+
                         return examService.getExam($stateParams.practiceType, $stateParams.examParams)
                             .then(res => res)
                             .catch(err => {

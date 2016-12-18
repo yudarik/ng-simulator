@@ -106,7 +106,7 @@
 
                     chartConf.dataProvider = ranks.map(function (rank, index) {
                         return _.assign(chartConf.dataProvider[index], {
-                            Rank: rank.rank,
+                            Rank: rank.averageGrade,
                             category: rank.rank,
                             userDetails: getName(rank)
                         });
