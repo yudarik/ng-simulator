@@ -1,7 +1,7 @@
 <!--
 <pre style="direction:ltr">{{practiceSummary.summary | json}}</pre>
 -->
-<div class="panel">
+<div class="panel practice-summary">
     <div class="panel-body">
         <h5 class="row">
             <div class="col-xs-12 col-md-6">
@@ -31,15 +31,16 @@
         </h5>
         <hr>
 
-        <h3 class="row text-center">{{::'EXAMS.SUMMARY.QUESTION_DISTRIBUTION'|translate}}</h3>
-
+        <!--<h3 class="row text-center">{{::'EXAMS.SUMMARY.QUESTION_DISTRIBUTION'|translate}}</h3>
+-->
         <div class="graph vertical centered table-condensed col-xs-12">
             <categories-grade-radar stats="practiceSummary.categoriesStats"></categories-grade-radar>
             <br/>
         </div>
 
         <div class="col-xs-12 text-center">
-            <time-cylinder time-elapsed="practiceSummary.summary.elapsedTimeSecs" total-time="practiceSummary.summary.totalTimeSecs"></time-cylinder>
+            <time-cylinder class="col-md-6" time-elapsed="practiceSummary.summary.elapsedTimeSecs" total-time="practiceSummary.summary.totalTimeSecs"></time-cylinder>
+            <exam-grade-gauge class="col-md-6" exam-grade="practiceSummary.summary.grade" title-label=""></exam-grade-gauge>
         </div>
 
         <table class="table table-condensed col-xs-12">

@@ -18,6 +18,11 @@
                 url: '/dashboard',
                 parent: 'auth',
                 templateUrl: 'app/pages/stats/stats.html',
+                controller: (baSidebarService)=>{
+                    if (baSidebarService.isMenuCollapsed()) {
+                        baSidebarService.toggleMenuCollapsed();
+                    }
+                },
                 title: 'STATS.DASHBOARD.TITLE',
                 sidebarMeta: {
                     icon: 'ion-speedometer',
