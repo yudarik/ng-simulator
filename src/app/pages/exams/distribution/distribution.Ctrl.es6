@@ -8,6 +8,7 @@
     function distributionCtrl($state, dist, distributionType, practiceType, totalQuota) {
 
         this.distributionType = distributionType;
+        this.practiceType = practiceType;
         this.totalQuota = totalQuota;
 
         this.examParams = {

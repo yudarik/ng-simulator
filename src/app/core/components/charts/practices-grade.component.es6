@@ -10,7 +10,7 @@
             bindings: {
                 titleLabel: '<'
             },
-            template: `<div id="practicesGradeChart" class="amChart" style="height:300px;"></div>`,
+            template: `<div id="practicesGradeChart" class="amChart"></div>`,
             controller: /** @ngInject */
                 function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config) {
 
@@ -19,7 +19,8 @@
                     type: $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.TYPE'),
                     timeSpent: $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.TIME_SPENT'),
                     date: $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.DATE'),
-                    practiceID: $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.PRACTICEID')
+                    practiceID: $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.PRACTICEID'),
+                    minimumPassingGrade: $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.MINIMUM_PASSING_GRADE')
                 };
 
                 var colors = {
@@ -50,7 +51,8 @@
                         "titleRotation": 0
                     },
                     "chartCursor": {
-                        "enabled": false,
+                        "enabled": true,
+                        categoryBalloonEnabled: false,
                         "cursorAlpha": 0,
                         "oneBalloonOnly": true,
                         "zoomable": false
@@ -76,7 +78,7 @@
                         },
                         {
                             "balloonColor": "#FF0000",
-                            "balloonText": "Minimum Passing Grade [[value]]",
+                            "balloonText": translate.minimumPassingGrade+": [[value]]",
                             "color": "#FF0000",
                             "id": "AmGraph-2",
                             "labelText": "",

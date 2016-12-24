@@ -41,7 +41,7 @@
   <div class="al-main">
     <div class="al-content">
       <content-top ng-if="currentUser"></content-top>
-      <welcome ng-if="currentUser && !currentUser.firstLogin && simulatorConfigLoaded" user="currentUser" config="simulatorConfig"></welcome>
+      <welcome ng-if="currentUser && currentUser.firstLogin && simulatorConfigLoaded" user="currentUser" config="simulatorConfig"></welcome>
       <div ui-view></div>
     </div>
   </div>

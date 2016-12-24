@@ -15,6 +15,10 @@
             .state('exams.distribution-general', {
                 url: '/general-distribution',
                 parent: 'exams',
+                params: {
+                    distribution: null,
+                    practiceType: 'PRACTICE'
+                },
                 templateUrl: 'app/pages/exams/distribution/distribution.html',
                 controller: 'distributionCtrl as distribution',
                 resolve: {
@@ -24,8 +28,10 @@
                     distributionType: function() {
                         return 'general-practice'
                     },
-                    practiceType: function() {
-                        return 'PRACTICE';
+                    practiceType: function($stateParams, $state) {
+                        $state.get('exams.distribution-general').title = 'EXAMS.TYPES.'+$stateParams.practiceType;
+
+                        return $stateParams.practiceType;
                     },
                     totalQuota: function(customerService) {
                         return customerService.getQuota().then(quota=>{

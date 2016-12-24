@@ -71,7 +71,7 @@
                 parent: 'exams',
                 params: {
                     examParams: {},
-                    practiceType: ''
+                    practiceType: 'PRACTICE'
                 },
                 template: '<exam config="practice.examConfig" tabindex="1"></exam>',
                 controller: 'practiceCtrl as practice',
@@ -79,8 +79,9 @@
 
                     examConfig: function($state, $stateParams, $q, examService) {
 
-                        $state.get('exams.practice').title = 'EXAMS.TYPES.'+$stateParams.practiceType;
-
+                        if ($stateParams.practiceType) {
+                            $state.get('exams.practice').title = 'EXAMS.TYPES.'+$stateParams.practiceType;
+                        }
                         return examService.getExam($stateParams.practiceType, $stateParams.examParams)
                             .then(res => res)
                             .catch(err => {
@@ -127,7 +128,7 @@
                                         </li>
                                     </ol>
                                     <div class="col-md-12">
-,                                        <a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.getDistribution()})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>
+,                                        <a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.getDistribution(), practiceType: 'WEAK_AREAS'})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>
                                     </div>
                                 </div>
                             </div>`,
@@ -156,6 +157,24 @@
                     order: 400
                 }
             })
+            .state('exams.repeated-practice', {
+                url: '/repeated-practice',
+                parent: 'exams',
+                template: `<div class="panel col-md-12">
+                                <div class="panel-body">
+                                    <practices-grade class="repeated-practice-view" title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"></practices-grade>
+                                </div>
+                            </div>`,
+                resolve: {
+                    practiceConfig: function(customerStatsService) {
+                        return customerStatsService.getCategories();
+                    }
+                },
+                title: 'EXAMS.TYPES.REPEATED_POST_CREDIT_PRACTICE',
+                sidebarMeta: {
+                    order: 400
+                }
+            })
             .state('exams.predefined', {
                 url: '/predefined',
                 parent: 'exams',
@@ -163,7 +182,6 @@
                             <div class="panel panel-success">
                                 <div class="panel-heading">
                                     <span class="text-white">{{::exam.displayName}}</span>
-                                    <a class="label label-info pull-right" ui-sref="exams.practice({'practiceType': 'PREDEFINED_EXAM', examParams: exam})">{{::'EXAMS.BUTTONS.START'|translate}}</a>
                                 </div>
                                 <div class="panel-body">
                                     <p><label>{{::exam.description}}</label>
@@ -201,7 +219,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                                                      
+                                    <a class="btn btn-md btn-success pull-right" ui-sref="exams.practice({'practiceType': 'PREDEFINED_EXAM', examParams: exam})">{{::'EXAMS.BUTTONS.START'|translate}}</a>                                  
                                 </div>
                             </div>
                           </div>`,

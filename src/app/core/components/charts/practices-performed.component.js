@@ -60,7 +60,7 @@
                     "visibleInLegend": false
                 }],
                 chartCursor: {
-                    categoryBalloonEnabled: false,
+                    categoryBalloonEnabled: true,
                     cursorAlpha: 0,
                     zoomable: false
                 },

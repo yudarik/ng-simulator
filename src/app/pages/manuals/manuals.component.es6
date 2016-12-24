@@ -12,15 +12,16 @@
             controller: function manualsCtrl ($translate, NgTableParams, manualsService) {
                 'ngInject';
 
-                this.search = {
-                    pattern: undefined
+                this.filter = {
+                    pattern: undefined,
+                    docType: undefined
                 };
 
-                this.tableParams = new NgTableParams({
+                /*this.tableParams = new NgTableParams({
                     group: 'category'
                 }, {
                     dataset: this.manuals
-                });
+                });*/
 
                 this.getUrl = (id)=>{
                     return manualsService.get(id);
@@ -32,6 +33,23 @@
                     link: $translate.instant('MANUALS.TABLE_HEADS.DOC_LINK'),
                     category: $translate.instant('MANUALS.TABLE_HEADS.CATEGORY'),
                     type: $translate.instant('MANUALS.TABLE_HEADS.TYPE')
+                };
+
+                this.getPanelClass = (type) => {
+                    if (!type) return;
+                    switch (type) {
+                        case 'AUDIO':
+                            return 'panel-warning';
+                            break;
+                        case 'VIDEO':
+                            return 'panel-danger';
+                            break;
+                        case 'DOCUMENT':
+                            return 'panel-success';
+                            break;
+                        default:
+                            return 'panel-default';
+                    }
                 };
 
                 this.getLinkClass = (manual)=>{
@@ -54,7 +72,7 @@
                     return type;
                 }
             },
-            template:
+/*            template:
                 `<div class="row">
                    <div class="panel panel-default">
                        <div class="panel-body">
@@ -87,6 +105,40 @@
                            </div>
                        </div>
                    </div>
-                </div>`
+                </div>`*/
+            template: `<div class="row">
+                            <div class="col-xs-4 form-group">
+                                <input class="form-control" type="search" 
+                                    placeholder="{{::'MANUALS.SEARCH_PLACEHOLDER'|translate}}"
+                                    ng-model="$ctrl.filter.pattern"/>                                
+                            </div>
+                            <div class="col-xs-4 form-group">
+                                <label>{{::'MANUALS.FILTER_BY_TYPE'|translate}}</label>:&nbsp;
+                                <div class="btn-group">
+                                    <button class="btn btn-warning" uncheckable uib-btn-radio="'AUDIO'" ng-model="$ctrl.filter.docType">{{::'MANUALS.RESOURCE_TYPES.AUDIO'|translate}}</button>                                
+                                    <button class="btn btn-danger" uncheckable uib-btn-radio="'VIDEO'" ng-model="$ctrl.filter.docType">{{::'MANUALS.RESOURCE_TYPES.VIDEO'|translate}}</button>                                
+                                    <button class="btn btn-success" uncheckable uib-btn-radio="'DOCUMENT'" ng-model="$ctrl.filter.docType">{{::'MANUALS.RESOURCE_TYPES.DOCUMENT'|translate}}</button>                                
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-3 online-manual-component" ng-repeat="manual in $ctrl.manuals | filter: {displayName: $ctrl.filter.pattern, docType: ($ctrl.filter.docType !== null) ?$ctrl.filter.docType : ''}">
+                            <div class="panel" ng-class="$ctrl.getPanelClass(manual.docType)">
+                                <div class="panel-heading">
+                                    
+                                    <i class="pull-right fa {{$ctrl.getLinkClass(manual)}}"></i>
+                                </div>
+                                <div class="panel-body">
+                                    <p>
+                                        <label uib-tooltip="{{::manual.description}}">{{::manual.displayName}}</label>
+                                    </p>
+                                    
+                                    <a class="btn btn-md btn-success pull-right displayDoc" href="{{::$ctrl.getUrl(manual.id)}}" target="_blank" ng-bind="::'MANUALS.DISPLAY'|translate"></a>                                  
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        `,
         });
 })();

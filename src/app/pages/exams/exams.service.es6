@@ -44,7 +44,7 @@
                 case 'PRACTICE':
                     api = 'practiceToPerform';
                     break;
-                case 'REPEAT':
+                case 'REPEATED_POST_CREDIT_PRACTICE':
                     api = 'repeatPractice';
                     break;
                 case 'PREDEFINED_EXAM':

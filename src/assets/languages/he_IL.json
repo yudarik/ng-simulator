@@ -31,7 +31,7 @@
     "TYPES": {
       "TITLE": "תרגולים ובחינות",
       "FULL_EXAM": "בחינה מלאה",
-      "POST_CREDIT_PRACTICE": "תרגול חוזר",
+      "POST_CREDIT_PRACTICE": "תרגול משאלות חוזרות",
       "GENERAL_PRACTICE": "תרגול כללי",
       "PRACTICE_SUMMARY": "סיכום וניתוח תוצאות",
       "WEAK_AREAS_PRACTICE": "תרגול בנקודות חולשה",
@@ -39,7 +39,8 @@
       "PRACTICE": "תרגול כללי",
       "EXAM": "בחינה מלאה",
       "PRACTICE_SOLUTION": "פתרון התרגול",
-      "PREDEFINED_EXAM": "מבחני הסמכה"
+      "PREDEFINED_EXAM": "מבחני הסמכה",
+      "REPEATED_POST_CREDIT_PRACTICE": "תרגול חוזר"
     },
     "EXAM_FINISH_ARE_YOU_SURE": "עדיין נותר לך זמן, האם את/ה מעוניין/נת לסיים כעת בכל זאת ?",
     "EXAM_CANCEL_ARE_YOU_SURE": "הינך בטוח שברצונך לבטל את התרגול/בחינה?",
@@ -131,7 +132,8 @@
           "TYPE": "סוג",
           "TIME_SPENT": "זמן לפתרון (דקות):",
           "DATE": "תאריך",
-          "PRACTICEID": "מס' סידורי"
+          "PRACTICEID": "מס' סידורי",
+          "MINIMUM_PASSING_GRADE": "ציון עובר מינימלי"
         },
         "GRADES_RADAR": {
           "TITLE": "התפלגות ציונים לפי קטגוריה",
@@ -176,7 +178,14 @@
       "TYPE": "סוג",
       "OTHER": "אחר"
     },
-    "DISPLAY":  "הצג"
+    "DISPLAY":  "הצג",
+    "SEARCH_PLACEHOLDER": "חיפוש לפי שם מסמך",
+    "FILTER_BY_TYPE": "סינון לפי סוג",
+    "RESOURCE_TYPES": {
+      "DOCUMENT": "מסמך",
+      "AUDIO": "קובץ שמע",
+      "VIDEO": "סרטון"
+    }
   },
   "USER": {
     "SIGNOUT": "התנתק",
