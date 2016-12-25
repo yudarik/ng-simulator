@@ -123,24 +123,24 @@
                                 <div class="panel-body">
                                     <h3>{{::\'\'|translate}}</h3>
                                     <ol>
-                                        <li ng-repeat="item in weakAreas.practiceConfig">
-                                            {{::item.category.name}}
+                                        <li ng-repeat="category in weakAreas.practiceConfig.categories">
+                                            {{::category.name}}
                                         </li>
                                     </ol>
                                     <div class="col-md-12">
-,                                        <a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.getDistribution(), practiceType: 'WEAK_AREAS'})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>
+,                                        <a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.practiceConfig, practiceType: 'WEAK_AREAS_PRACTICE'})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>
                                     </div>
                                 </div>
                             </div>`,
                 resolve: {
                     practiceConfig: function(customerStatsService) {
-                        return customerStatsService.getCategories();
+                        return customerStatsService.getCategories('WEAK_AREAS_PRACTICE');
                     }
                 },
                 controller: function($filter, practiceConfig) {
-                    this.practiceConfig = $filter('orderBy')(practiceConfig, (item)=>{
+                    this.practiceConfig = practiceConfig;/*$filter('orderBy')(practiceConfig, (item)=>{
                         return item.totalQuestionsAskedInCategory - item.questionIDsCorrectlyAnswered.length;
-                    }, true);
+                    }, true);*/
 
                     this.getDistribution = () => {
                         return {
@@ -152,7 +152,7 @@
                     }
                 },
                 controllerAs: 'weakAreas',
-                title: 'EXAMS.TYPES.WEAK_AREAS',
+                title: 'EXAMS.TYPES.WEAK_AREAS_PRACTICE',
                 sidebarMeta: {
                     order: 400
                 }
@@ -165,11 +165,6 @@
                                     <practices-grade class="repeated-practice-view" title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"></practices-grade>
                                 </div>
                             </div>`,
-                resolve: {
-                    practiceConfig: function(customerStatsService) {
-                        return customerStatsService.getCategories();
-                    }
-                },
                 title: 'EXAMS.TYPES.REPEATED_POST_CREDIT_PRACTICE',
                 sidebarMeta: {
                     order: 400

@@ -107,18 +107,18 @@
         }).state('exams.weak-areas', {
             url: '/weak-areas',
             parent: 'exams',
-            template: '<div class="panel col-md-offset-4 col-md-4">\n                                <div class="panel-body">\n                                    <h3>{{::\'\'|translate}}</h3>\n                                    <ol>\n                                        <li ng-repeat="item in weakAreas.practiceConfig">\n                                            {{::item.category.name}}\n                                        </li>\n                                    </ol>\n                                    <div class="col-md-12">\n,                                        <a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.getDistribution(), practiceType: \'WEAK_AREAS\'})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>\n                                    </div>\n                                </div>\n                            </div>',
+            template: '<div class="panel col-md-offset-4 col-md-4">\n                                <div class="panel-body">\n                                    <h3>{{::\'\'|translate}}</h3>\n                                    <ol>\n                                        <li ng-repeat="category in weakAreas.practiceConfig.categories">\n                                            {{::category.name}}\n                                        </li>\n                                    </ol>\n                                    <div class="col-md-12">\n,                                        <a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.practiceConfig, practiceType: \'WEAK_AREAS_PRACTICE\'})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>\n                                    </div>\n                                </div>\n                            </div>',
             resolve: {
                 practiceConfig: ["customerStatsService", function (customerStatsService) {
-                    return customerStatsService.getCategories();
+                    return customerStatsService.getCategories('WEAK_AREAS_PRACTICE');
                 }]
             },
             controller: ["$filter", "practiceConfig", function ($filter, practiceConfig) {
                 var _this = this;
 
-                this.practiceConfig = $filter('orderBy')(practiceConfig, function (item) {
-                    return item.totalQuestionsAskedInCategory - item.questionIDsCorrectlyAnswered.length;
-                }, true);
+                this.practiceConfig = practiceConfig; /*$filter('orderBy')(practiceConfig, (item)=>{
+                                                      return item.totalQuestionsAskedInCategory - item.questionIDsCorrectlyAnswered.length;
+                                                      }, true);*/
 
                 this.getDistribution = function () {
                     return {
@@ -130,7 +130,7 @@
                 };
             }],
             controllerAs: 'weakAreas',
-            title: 'EXAMS.TYPES.WEAK_AREAS',
+            title: 'EXAMS.TYPES.WEAK_AREAS_PRACTICE',
             sidebarMeta: {
                 order: 400
             }
@@ -138,11 +138,6 @@
             url: '/repeated-practice',
             parent: 'exams',
             template: '<div class="panel col-md-12">\n                                <div class="panel-body">\n                                    <practices-grade class="repeated-practice-view" title-label="\'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE\'|translate"></practices-grade>\n                                </div>\n                            </div>',
-            resolve: {
-                practiceConfig: ["customerStatsService", function (customerStatsService) {
-                    return customerStatsService.getCategories();
-                }]
-            },
             title: 'EXAMS.TYPES.REPEATED_POST_CREDIT_PRACTICE',
             sidebarMeta: {
                 order: 400

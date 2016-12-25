@@ -122,7 +122,8 @@
       "PRACTICE": "תרגול כללי",
       "EXAM": "מבחן",
       "WEAK_AREAS_PRACTICE": "תרגול בנקודות חולשה",
-      "POST_CREDIT_PRACTICE": "תרגול לאחר גמר כל האשראי"
+      "POST_CREDIT_PRACTICE": "תרגול לאחר גמר כל האשראי",
+      "GRADE": "ציון"
     },
     "DASHBOARD": {
       "TITLE": "סטטיסטיקת תרגולים",

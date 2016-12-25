@@ -67,7 +67,7 @@
                 categoryField: 'type',
                 categoryAxis: {
                     gridPosition: 'start',
-                    labelRotation: 0,
+                    labelRotation: 39.6,
                     gridAlpha: 0.5,
                     gridColor: layoutColors.border,
                     fontSize: 14

@@ -42,6 +42,7 @@
                     api = 'postCreditPracticeToPerform';
                     break;
                 case 'PRACTICE':
+                case 'WEAK_AREAS_PRACTICE':
                     api = 'practiceToPerform';
                     break;
                 case 'REPEATED_POST_CREDIT_PRACTICE':

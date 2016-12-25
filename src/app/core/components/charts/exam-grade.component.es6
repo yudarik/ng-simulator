@@ -44,7 +44,13 @@
                     "arrows": [ {} ],
                     "export": {
                         "enabled": true
-                    }
+                    },
+                    "titles": [
+                        {
+                            "text": this.titleLabel,
+                            "size": 15
+                        }
+                    ]
                 };
 
                 this.$onInit = ()=>{

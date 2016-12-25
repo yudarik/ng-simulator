@@ -13,8 +13,15 @@
                 return customerStats.get('rank', {ever: true});
             }
 
-            function getCategories() {
-                return customerStats.get('categories');
+            function getCategories(type) {
+                switch (type) {
+                    case 'WEAK_AREAS_PRACTICE':
+                        return customerStats.get('weaknesses/categories');
+                        break;
+                    default:
+                        return customerStats.get('categories');
+                }
+
             }
 
             return {getRank, getCategories};

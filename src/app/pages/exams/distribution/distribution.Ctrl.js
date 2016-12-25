@@ -48,7 +48,7 @@
 
         this.startExam = function () {
 
-            this.examParams.questionDistribution = practiceType === 'PRACTICE' ? _.zipObject(_.map(this.config.categories, 'id'), _.map(this.config.categories, 'questionDistribution')) : [];
+            this.examParams.questionDistribution = practiceType === 'PRACTICE' || practiceType === 'WEAK_AREAS_PRACTICE' ? _.zipObject(_.map(this.config.categories, 'id'), _.map(this.config.categories, 'questionDistribution')) : [];
 
             if (practiceType === 'POST_CREDIT_PRACTICE') {
                 this.examParams.questionNumber = this.examParams.totalQuestion;
@@ -62,7 +62,7 @@
         };
 
         this.config = {};
-        this.config.categories = practiceType === 'PRACTICE' ? this.initQuestionDistribution() : [];
+        this.config.categories = practiceType === 'PRACTICE' || practiceType === 'WEAK_AREAS_PRACTICE' ? this.initQuestionDistribution() : [];
     }
 
     angular.module('Simulator.pages.exams.distribution').controller('distributionCtrl', distributionCtrl);
