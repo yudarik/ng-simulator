@@ -101,7 +101,7 @@ gulp.task('clean-release-es6', function(){
 
 gulp.task('build', ['html', 'fonts', 'other']);
 
-gulp.task('es6', () => {
+gulp.task('es6', function() {
   gulp.src(path.join(conf.paths.src, '/app/**/*.es6'))
     .pipe($.ngAnnotate())
     .pipe($.babel({
