@@ -9,13 +9,21 @@
                 <div class="form-group form-group-xs col-md-4 pull-left" ng-repeat="category in distribution.config.categories track by category.id">
                     <label for class="col-sm-6 control-label pull-left">{{category.name}}:</label>
                     <div class="col-sm-4">
-                        <input type="number" class="form-control" ng-model="category.questionDistribution" min="0" max="{{::distribution.examParams.totalQuestion}}" name="category.id">
+                        <input type="number" class="form-control"
+                               ng-model="category.questionDistribution"
+                               min="0"
+                               max="{{::distribution.examParams.totalQuestion}}"
+                               name="category.id"
+                               ng-disabled="::distribution.isReadOnly()">
                     </div>
                 </div>
                 <div class="form-group col-md-4 pull-left">
                     <label for class="col-sm-6 control-label pull-left"><b ng-bind="::'EXAMS.DISTRIBUTION.TOTAL_QUESTIONS'|translate"></b></label>
                     <div class="col-sm-4">
-                        <input type="number" class="form-control" ng-model="distribution.examParams.totalQuestion" min="1" max="{{::distribution.totalQuota}}" ng-change="distribution.initQuestionDistribution()">
+                        <input type="number" class="form-control"
+                               ng-model="distribution.examParams.totalQuestion" min="1" max="{{::distribution.getTotalQuota()}}"
+                               ng-change="distribution.initQuestionDistribution()"
+                               ng-disabled="::distribution.isReadOnly()">
                     </div>
                 </div>
             </div>

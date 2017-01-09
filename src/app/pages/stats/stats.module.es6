@@ -18,9 +18,19 @@
                 url: '/dashboard',
                 parent: 'auth',
                 templateUrl: 'app/pages/stats/stats.html',
-                controller: (baSidebarService)=>{
+                /** @ngInject */
+                controller: function(baSidebarService, user) {
+
                     if (baSidebarService.isMenuCollapsed()) {
                         baSidebarService.toggleMenuCollapsed();
+                    }
+
+                    this.isCandidate = (user.role === "Candidate");
+                },
+                controllerAs: 'dashboard',
+                resolve: {
+                    user: (userAuthService) => {
+                        return userAuthService.getUser();
                     }
                 },
                 title: 'STATS.DASHBOARD.TITLE',

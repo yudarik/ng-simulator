@@ -15,7 +15,7 @@
         this.totalQuota = totalQuota;
 
         this.examParams = {
-            totalQuestion: dist.questionsInExam,
+            totalQuestion: totalQuota ? dist.questionsInExam : 10,
             questionDistribution: [],
             difficulty: 'MEDIUM',
             timeFrame: 'NORMAL'
@@ -59,6 +59,13 @@
             }
 
             $state.go('exams.practice', { examParams: this.examParams, practiceType: practiceType });
+        };
+
+        this.getTotalQuota = function () {
+            return this.totalQuota ? this.totalQuota : 10;
+        };
+        this.isReadOnly = function () {
+            return _.isNil(totalQuota);
         };
 
         this.config = {};

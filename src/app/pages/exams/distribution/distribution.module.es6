@@ -36,6 +36,8 @@
                     totalQuota: function(customerService) {
                         return customerService.getQuota().then(quota=>{
                             return quota.leftNewQuestionsQuota;
+                        }).catch(() => {
+                            return null;
                         })
                     }
                 },
@@ -62,6 +64,8 @@
                     totalQuota: function(customerService) {
                         return customerService.getQuota().then(quota=>{
                             return quota.leftNewQuestionsQuota;
+                        }).catch(() => {
+                            return null;
                         })
                     }
                 },
@@ -88,6 +92,8 @@
                     totalQuota: function(customerService) {
                         return customerService.getQuota().then(quota=>{
                             return quota.leftPostCreditQuestionsQuota;
+                        }).catch(() => {
+                            return null;
                         })
                     }
                 },

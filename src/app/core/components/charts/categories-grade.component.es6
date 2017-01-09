@@ -88,7 +88,7 @@
                             "gapPeriod": 0,
                             "id": "AmGraph-4",
                             "lineColor": "#FF0000",
-                            "lineThickness": 2,
+                            "lineThickness": 0,
                             "minDistance": 0,
                             "stackable": false,
                             "switchable": false,

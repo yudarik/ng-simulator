@@ -14,6 +14,7 @@
             template: `<div class="panel question-area col-xs-12"
                             ng-class="{'solution':$ctrl.isSolution}"
                             ng-show="$ctrl.questionInDisplay">
+                        <div class="panel-heading" ng-if="$ctrl.config.predefinedExamDisplayName"><h3>{{::$ctrl.config.predefinedExamDisplayName}}</h3></div>
                            <div class="panel-body">
                                <exam-question question="$ctrl.questionInDisplay"></exam-question>
                            </div>

@@ -39,7 +39,7 @@
                 'iw_IL': 'he_IL'
             });
 
-            //$translateProvider.preferredLanguage('en_US');
+            $translateProvider.preferredLanguage('he_IL');
             $translateProvider.use('he_IL');
 
             RestangularProvider
@@ -54,7 +54,7 @@
 
             RestangularProvider.setErrorInterceptor(
                 (response) => {
-                    if ( response.status === 401 || response.status === 403) {
+                    if ( response.status === 401) {
                         window.location = '#/signin';
                     }
                     else {
