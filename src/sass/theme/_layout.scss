@@ -32,7 +32,7 @@ body.mobile{
     bottom: 0;
     right: 0;
     background-attachment: inherit;
-    background-color: $body-bg;
+    //background-color: $body-bg;
   }
   &.blur-theme .body-bg{
     @include main-background();
@@ -211,6 +211,8 @@ a {
 }
 
 @media (max-width: 590px) {
+  @include scrollbars(.3em, #d9d9d9, rgba(0,0,0,0));
+
   .al-footer-right {
     float: none;
     margin-bottom: 19px;

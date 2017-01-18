@@ -15,7 +15,7 @@
       </a>
       <ul  class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
         <li><i class="dropdown-arr"></i></li>
-        <li><a href="#/profile"><i class="fa fa-user"></i>{{::'USER.PROFILE'|translate}}</a></li>
+        <li><a href="#/profile" ng-if="!pageTop.hideProfile()"><i class="fa fa-user"></i>{{::'USER.PROFILE'|translate}}</a></li>
 <!--        <li><a href><i class="fa fa-cog"></i>Settings</a></li>-->
         <li><a ui-sref="signout" class="signout"><i class="fa fa-power-off"></i>{{::'USER.SIGNOUT'|translate}}</a></li>
       </ul>

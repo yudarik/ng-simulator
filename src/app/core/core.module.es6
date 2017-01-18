@@ -87,8 +87,7 @@
 
                 if ($state.get('exams.post-credit')) {
                     $state.get('exams.post-credit').sidebarMeta.hidden = !simulator_config.postCreditModeEnabled;
-                    $state.get('exams.post-credit').sidebarMeta.disabled = !simulator_config.postCreditModeNow;
-
+                    $state.get('exams.post-credit').sidebarMeta.disabled = true;
                 }
 
                 if ($state.get('exams.predefined'))
@@ -103,5 +102,11 @@
                     event.preventDefault();
                 }
             });
+
+            $rootScope.$on('post-login-bean', function(event, data) {
+                if (data.user) {
+                    $state.get('exams.post-credit').sidebarMeta.disabled = !data.user.postCreditModeNow;
+                }
+            })
         })
 })();

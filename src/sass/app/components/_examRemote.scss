@@ -104,6 +104,14 @@
     height: 70px;
     margin: 0!important;
 
+    //panel-disapbled
+    background-color: transparent!important;
+    box-shadow: none!important;
+
+    .panel-body {
+      padding: 0!important;
+    }
+
     .exam-remote {
       padding-left: 0;
       padding-right: 0;
@@ -123,11 +131,13 @@
       overflow-x: scroll;
       overflow-y: hidden;
       z-index: 0;
-      padding-left: 155px;
+      padding-left: 50%;
       padding-bottom: 0;
     }
     .arrows {
-      width: 170px;
+      width: 50%;
+      background: $body-bg;
+      margin-bottom: 15px;
 
       .nav {
         float: right;
@@ -144,7 +154,17 @@
         .btn {
           width: 45px;
           padding: 6px 5px;
+
+          &.finishExam {
+            margin-bottom: 0!important;
+          }
+          &.export {
+            margin-top: 0;
+            width: auto;
+            display: none;
+          }
         }
+
       }
     }
   }

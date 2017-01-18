@@ -13,7 +13,7 @@
             template: `<h5 class="text-center">{{$ctrl.titleLabel}}</h5>
                         <div id="questionsQuotaChart" class="amChart"></div>
                        `,
-            controller: function userQuotaCtrl($translate, customerService) {
+            controller: function userQuotaCtrl($translate, customerService, simulator_config) {
                 'ngInject';
 
                 var questionsQuota = {
@@ -27,7 +27,7 @@
                     "marginRight": 300,
                     "dataProvider": [],
                     "valueAxes": [ {
-                        "stackType": "100%",
+                        "stackType": "regular",
                         "gridAlpha": 0
                     } ],
                     "graphs": [ {
@@ -59,7 +59,7 @@
                     "categoryField": "category1",
                     "categoryAxis": {
                         "axisAlpha": 0,
-                        "labelOffset": 40,
+                        "labelOffset": 100,
                         "gridAlpha": 0
                     },
                     "export": {
@@ -70,18 +70,22 @@
                 this.$onInit = () => {
                     customerService.getQuota().then((quota) => {
 
+                        if (simulator_config.postCreditModeEnabled) {
+                            questionsQuota.dataProvider.push({
+                                category1: $translate.instant('STATS.ACCOUNT.LEFTPOSTCREDITQUESTIONSQUOTA'),
+                                category2: $translate.instant('STATS.ACCOUNT.SPENTPOSTCREDITQUESTIONSQUOTA'),
+                                value1: quota['leftPostCreditQuestionsQuota'],
+                                value2: quota['totalPostCreditQuestionsQuota'] - quota['leftPostCreditQuestionsQuota']
+                            });
+                        }
+
                         questionsQuota.dataProvider.push({
                             category1: $translate.instant('STATS.ACCOUNT.LEFTNEWQUESTIONSQUOTA'),
                             category2: $translate.instant('STATS.ACCOUNT.SPENTNEWQUESTIONSQUOTA'),
                             value1: quota['leftNewQuestionsQuota'],
                             value2: quota['totalNewQuestionsQuota'] - quota['leftNewQuestionsQuota']
                         });
-                        questionsQuota.dataProvider.push({
-                            category1: $translate.instant('STATS.ACCOUNT.LEFTPOSTCREDITQUESTIONSQUOTA'),
-                            category2: $translate.instant('STATS.ACCOUNT.SPENTPOSTCREDITQUESTIONSQUOTA'),
-                            value1: quota['leftPostCreditQuestionsQuota'],
-                            value2: quota['totalPostCreditQuestionsQuota'] - quota['leftPostCreditQuestionsQuota']
-                        });
+
 
                         AmCharts.makeChart('questionsQuotaChart', questionsQuota);
                     });

@@ -100,7 +100,11 @@ body.flip {
   @media (max-width: $resXS) {
 
     .al-main {
-      margin-right: 0;
+      margin-right: 0!important;
+
+      .al-content {
+        padding: 10px;
+      }
     }
     .al-footer {
       padding-right: 0;

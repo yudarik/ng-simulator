@@ -14,6 +14,13 @@
             controller: function userRankCtrl($translate, customerStatsService) {
                 'ngInject';
 
+                var textLabels = {
+                    rank: $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.RANK'),
+                    joinDate: $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.JOINDATE'),
+                    averageGrade: $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.AVERAGEGRADE'),
+                    examsPerformed: $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.EXAMSPERFORMED')
+                };
+
                 var chartConf = {
                     "type": "serial",
                     "categoryField": "category",
@@ -32,7 +39,15 @@
                     "trendLines": [],
                     "graphs": [
                         {
-                            "balloonText": "[[userDetails]]\n"+$translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.RANK')+" [[category]]",
+                            "balloonFunction": function(dataItem) {
+                                var context = dataItem.dataContext;
+                                return `<p style="text-align: right">
+                                               ${context.userDetails}<br/>
+                                               ${textLabels.rank}: ${context.category}<br/>
+                                               ${textLabels.joinDate}: ${context.dateJoined}<br/>
+                                               ${textLabels.averageGrade}: ${context.Rank}<br/>
+                                               ${textLabels.examsPerformed}: ${context.numberOfExamsPerformed}</p>`;
+                            },
                             "bullet": "custom",
                             "bulletBorderThickness": 0,
                             "colorField": "Color",
@@ -118,7 +133,10 @@
                             return _.assign(chartConf.dataProvider[index], {
                                 Rank: rank.averageGrade,
                                 category: rank.rank,
-                                userDetails: getName(rank)
+                                userDetails: getName(rank),
+                                averageGrade: rank.averageGrade,
+                                dateJoined: moment(rank.dateJoined).format('DD/MM/YY'),
+                                numberOfExamsPerformed: rank.numberOfExamsPerformed
                             });
                         });
                         AmCharts.makeChart('userRankChart',chartConf);

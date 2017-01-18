@@ -100,7 +100,7 @@
                     "allLabels": [],
                     "balloon": {},
                     "legend": {
-                        "enabled": false,
+                        "enabled": true,
                         "accessibleLabel": "",
                         "labelText": "Practice Type",
                         "valueText": "[[Practice Type]]"

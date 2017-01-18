@@ -8,12 +8,16 @@ angular.module('Simulator.components')
             config: '<',
             user: '<'
         },
+        template: `<div class="alert bg-info closeable" ng-if="$ctrl.showWelcome">
+                    <button type="button" class="close" aria-label="Close" ng-click="$ctrl.showWelcome = !$ctrl.showWelcome">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <span ng-bind="$ctrl.config.welcomeMessage"></span>
+                    </div>`,
         controller: function($uibModal, $translate, simulator_config) {
 
-            var config = this.config || simulator_config;
-            var translate = {
-                ok : $translate.instant('AUTH.WELCOME.MESSAGE.OK_BTN')
-            };
+            this.welcomeMessage = this.config.welcomeMessage || simulator_config.welcomeMessage;
+            this.showWelcome = false;
 
             this.$onInit = () => {
                 if (this.config.welcomeMessage !== '' &&
@@ -22,42 +26,10 @@ angular.module('Simulator.components')
                     if (this.user.role === 'Candidate' ||
                         (this.user.role === 'Customer' &&
                         !this.config.welcomeMessageForCandidatesOnly)) {
-                        showWelcome();
+                        this.showWelcome = true;
                     }
                 }
             };
 
-            function showWelcome() {
-                var modal = $uibModal.open({
-                    animation: true,
-                        template: `<div class="col-md-12" ba-panel>
-                                        <div class="text-center">
-                                            <h3 ng-bind="$ctrl.title" class="text-center"></h3>
-                                            <br/>
-                                            <button class="btn btn-success btn-sm"
-                                                ng-click="$ctrl.close()" ng-bind="$ctrl.closeText">
-                                            </button>
-                                        </div>
-                                    </div>`,
-                    controller: function($uibModalInstance) {
-                        this.title = config.welcomeMessage;
-                        this.closeText = translate.ok;
-
-                        this.close = ()=>{
-                            $uibModalInstance.close();
-                        }
-                    },
-                    controllerAs: '$ctrl'
-                });
-
-                modal.result.then(()=>{
-
-                });
-            }
-        },
-        resolve: {
-            translate: function($translate){
-                return $translate('AUTH.WELCOME')
-            }
         }
     });

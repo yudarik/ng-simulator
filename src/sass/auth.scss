@@ -22,14 +22,25 @@ body.signin {
       &.panel {
         background: #fff;
       }
+      .submit-area {
+        margin: 0;
+      }
 
       .auth-block {
         width: 100%;
         background: inherit;
-        color: inherit;
+        color: #ffffff;
+
+        a {
+          color: #ffffff;
+        }
+
+        h1 {
+          color: #ffffff;
+        }
 
         .control-label {
-          color: inherit;
+          color: #ffffff;
         }
       }
     }

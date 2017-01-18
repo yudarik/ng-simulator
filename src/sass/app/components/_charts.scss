@@ -18,17 +18,21 @@
   }
 }
 #categoriesCorectIncorect,
-#practiceTypeGrades,
 #userRankChart,
-#practicesGradeChart,
+#practiceTypeGrades,
+#categoriesGradeChart,
 #timeCylinder {
-  height: 300px;
+  height: 350px;
+}
+#practicesGradeChart
+ {
+  height: 400px;
 }
 
 #questionsQuotaChart {
-  height: 275px;
-  width: 225%;
-  right: -70%;
+  height: 325px;
+  width: 200%;
+  right: -55%;
 
   @media all and (min-width: 640px) and (max-width:991px) {
     width: 180%;

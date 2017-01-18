@@ -55,6 +55,11 @@
                         return $q.when($rootScope.currentUser);
                     }
                 },
+                getPostLogin: (user) => {
+                    return Srv.getUser().then(postLoginData => {
+                        return _.assign({}, user, postLoginData);
+                    });
+                },
                 isLoggedIn: () => {
                     return !!$rootScope.currentUser;
                 }

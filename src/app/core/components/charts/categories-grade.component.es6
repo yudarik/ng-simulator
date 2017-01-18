@@ -11,7 +11,7 @@
                 stats: '=',
                 titleLabel: '<'
             },
-            template: `<div id="categoriesGradeChart" class="amChart" style="width:100%;height:300px"></div>`,
+            template: `<div id="categoriesGradeChart" class="amChart"></div>`,
             controller: /** @ngInject */
                 function CategoriesChartsCtrl($translate, $filter, customerStatsService, simulator_config) {
 
@@ -67,7 +67,7 @@
                             "legendAlpha": 1,
                             "legendValueText": "[[value]]",
                             "lineColorField": "Practice Type",
-                            "lineThickness": 1,
+                            "lineThickness": 0,
                             "markerType": "square",
                             "negativeBase": 5,
                             "showAllValueLabels": true,
@@ -88,7 +88,7 @@
                             "gapPeriod": 0,
                             "id": "AmGraph-4",
                             "lineColor": "#FF0000",
-                            "lineThickness": 0,
+                            "lineThickness": 2,
                             "minDistance": 0,
                             "stackable": false,
                             "switchable": false,
@@ -103,6 +103,7 @@
                     "valueAxes": [
                         {
                             "id": "ValueAxis-1",
+                            "maximum": 100,
                             "title": translations.grade
                         }
                     ],
@@ -119,7 +120,6 @@
                             "id": "Title-1",
                             "size": 15,
                             "text": translations.title,
-                            "color": "#666666"
                         }
                     ],
                     "dataProvider": []

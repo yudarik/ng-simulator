@@ -70,5 +70,9 @@
   .question-area {
     bottom: 110px;
     top: 120px;
+
+    &.solution {
+      bottom: 60px;
+    }
   }
 }
