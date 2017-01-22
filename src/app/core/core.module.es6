@@ -94,7 +94,7 @@
                     $state.get('exams.predefined').sidebarMeta.hidden = !simulator_config.predefinedExamsEnabled;
 
                 if ($state.get('manuals'))
-                    $state.get('manuals').sidebarMeta.disabled = !simulator_config.trainingDocumentsEnabled;
+                    $state.get('manuals').sidebarMeta.hidden = !simulator_config.trainingDocumentsEnabled;
             });
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {

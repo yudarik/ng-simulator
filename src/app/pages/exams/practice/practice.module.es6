@@ -214,14 +214,21 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    <div class="pull-left packages2buy" ng-if="exam.packagesToBuy">
+                                        <a ng-repeat="package in exam.packagesToBuy" ng-bind="::$ctrl.getPackage2BuyName(package)" href></a>
+                                    </div>
                                     <a class="btn btn-md btn-success pull-right" ui-sref="exams.practice({'practiceType': 'PREDEFINED_EXAM', examParams: exam})">{{::'EXAMS.BUTTONS.START'|translate}}</a>                                  
                                 </div>
                             </div>
                           </div>`,
                 controller: function(exams){
+                    this.productsById = exams.productsById;
                     this.exams = _.map(exams.predefinedExamBeans, (exam) => {
                         return _.assign(exam, {timeFrame: 'NORMAL'});
                     });
+                    this.getPackage2BuyName = (id) => {
+                        return this.productsById[id].productDisplayName;
+                    };
                 },
                 controllerAs: '$ctrl',
                 resolve: {
