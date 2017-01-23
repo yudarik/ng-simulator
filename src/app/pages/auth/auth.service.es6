@@ -39,7 +39,7 @@
                         var defer = $q.defer();
 
                         auth.customGET('').then(function(user){
-                            if (!resetPassword){
+                            if (!resetPassword && !user.tempPassword){
                                 $rootScope.currentUser = user
                             }
 

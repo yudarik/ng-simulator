@@ -112,8 +112,8 @@
                                     placeholder="{{::'MANUALS.SEARCH_PLACEHOLDER'|translate}}"
                                     ng-model="$ctrl.filter.pattern"/>                                
                             </div>
-                            <div class="col-xs-4 form-group">
-                                <label>{{::'MANUALS.FILTER_BY_TYPE'|translate}}</label>:&nbsp;
+                            <div class="col-xs-8 form-group">
+                                <!--<label class="hidden-xs">{{::'MANUALS.FILTER_BY_TYPE'|translate}}</label>-->
                                 <div class="btn-group">
                                     <button class="btn btn-warning" uncheckable uib-btn-radio="'AUDIO'" ng-model="$ctrl.filter.docType">{{::'MANUALS.RESOURCE_TYPES.AUDIO'|translate}}</button>                                
                                     <button class="btn btn-danger" uncheckable uib-btn-radio="'VIDEO'" ng-model="$ctrl.filter.docType">{{::'MANUALS.RESOURCE_TYPES.VIDEO'|translate}}</button>                                
@@ -123,7 +123,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-xs-12 col-md-3 online-manual-component" ng-repeat="manual in $ctrl.manuals | filter: {displayName: $ctrl.filter.pattern, docType: ($ctrl.filter.docType !== null) ?$ctrl.filter.docType : ''}">
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 online-manual-component" ng-repeat="manual in $ctrl.manuals | filter: {displayName: $ctrl.filter.pattern, docType: ($ctrl.filter.docType !== null) ?$ctrl.filter.docType : ''}">
                             <div class="panel" ng-class="$ctrl.getPanelClass(manual.docType)">
                                 <div class="panel-heading">
                                     

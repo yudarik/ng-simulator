@@ -1,10 +1,21 @@
+@import "../components/_charts.scss";
+
 .practice-summary {
+
+  .charts {
+    overflow: hidden;
+    display: block;
+  }
+
   #examGradeGauge {
 
   }
+
   #timeCylinder {
     width: 210%;
     right: -60%;
+
+    @include cylinderChart();
   }
   #categoriesGradeChart {
     height: 380px;

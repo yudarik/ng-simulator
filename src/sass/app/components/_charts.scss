@@ -1,3 +1,46 @@
+@mixin cylinderChart() {
+  @media all and (min-width: 992px) and (max-width:1080px) {
+    width: 230%;
+    right: -72%;
+  }
+  @media all and (min-width: 940px) and (max-width:991px) {
+    width: 150%;
+    right: -29%;
+  }
+  @media all and (min-width: 840px) and (max-width:939px) {
+    width: 150%;
+    right: -29%;
+  }
+  @media all and (min-width: 740px) and (max-width:839px) {
+    width: 160%;
+    right: -35%;
+  }
+  @media all and (min-width: 640px) and (max-width:739px) {
+    width: 180%;
+    right: -44%;
+  }
+  @media all and (min-width: 460px) and (max-width:639px) {
+    width: 230%;
+    right: -70%;
+  }
+  @media all and (min-width: 400px) and (max-width:459px) {
+    width: 270%;
+    right: -94%;
+  }
+  @media all and (min-width: 350px) and (max-width:399px) {
+    width: 300%;
+    right: -106%;
+  }
+  @media all and (min-width: 300px) and (max-width:349px) {
+    width: 340%;
+    right: -128%;
+  }
+  @media all and (max-width:299px) {
+    width: 360%;
+    right: -138%;
+  }
+}
+
 .stats {
   .chartBottomMargin {
     margin-bottom: 50px;
@@ -17,6 +60,11 @@
     font-size: 9px!important;
   }
 }
+.user-quota-panel {
+  overflow: hidden;
+
+}
+
 #categoriesCorectIncorect,
 #userRankChart,
 #practiceTypeGrades,
@@ -24,18 +72,13 @@
 #timeCylinder {
   height: 350px;
 }
-#practicesGradeChart
- {
+#practicesGradeChart {
   height: 400px;
 }
-
 #questionsQuotaChart {
   height: 325px;
   width: 200%;
   right: -55%;
 
-  @media all and (min-width: 640px) and (max-width:991px) {
-    width: 180%;
-    right: -44%;
-  }
+  @include cylinderChart();
 }
