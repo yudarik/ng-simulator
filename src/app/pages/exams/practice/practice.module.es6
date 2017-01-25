@@ -177,18 +177,25 @@
                             <div class="panel panel-success">
                                 <div class="panel-heading">
                                     <span class="text-white">{{::exam.displayName}}</span>
-                                </div>
+                                </div>                                
                                 <div class="panel-body">
+                                    <div class="panel-overlay"><p ng-bind="::$ctrl.getTooltip(exam)"></p></div>
                                     <p><label>{{::exam.description}}</label>
                                     </p>
                                     <p><i class="fa fa-list-ol" aria-hidden="true"></i>&nbsp;
                                         {{::'EXAMS.PREDEFINED.NUMOFQUEST'|translate}}:&nbsp;
                                         <span class="label label-warning">{{::exam.numberOfQuestionsInExam}}</span>
                                     </p>
-                                    <p ng-if="::exam.packagesToBuy.length>0" class="row col-xs-12">
+                                    <p ng-if="::exam.packagesToBuy" class="row col-xs-12">
                                         <i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;
                                         {{::'EXAMS.PREDEFINED.PACKAGESTOBUY'|translate}}:&nbsp;
-                                        <span>{{::exam.packagesToBuy.toString()}}</span>
+                                        <div>
+                                            <ul class="pull-left">
+                                                <li ng-repeat="package in exam.packagesToBuy">
+                                                    <a ng-href="{{::$ctrl.getPayPalUrl()}}" target="_blank" ng-bind="::$ctrl.getPackage2BuyName(package)"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </p>
                                     <div class="pull-left timeFrame">                                        
                                         <ul class="col-md-4">
@@ -213,27 +220,55 @@
                                                 </label>
                                             </li>
                                         </ul>
-                                    </div>
-                                    <div class="pull-left packages2buy" ng-if="exam.packagesToBuy">
-                                        <a ng-repeat="package in exam.packagesToBuy" ng-bind="::$ctrl.getPackage2BuyName(package)" href></a>
-                                    </div>
-                                    <a class="btn btn-md btn-success pull-right" ui-sref="exams.practice({'practiceType': 'PREDEFINED_EXAM', examParams: exam})">{{::'EXAMS.BUTTONS.START'|translate}}</a>                                  
+                                    </div>                                  
+                                    <button class="btn btn-md btn-success pull-right" 
+                                        ng-disabled="::$ctrl.isExamQuotaUnavailable(exam)" 
+                                        ng-click="$ctrl.navigate(exam)"
+                                        ng-bind="$ctrl.getButtonText(exam)"></button>                                  
                                 </div>
                             </div>
                           </div>`,
-                controller: function(exams){
+                controller: function($state, $translate, $window, exams, simulator_config, user){
                     this.productsById = exams.productsById;
-                    this.exams = _.map(exams.predefinedExamBeans, (exam) => {
+                    this.exams = _.orderBy(_.map(exams.predefinedExamBeans, (exam) => {
                         return _.assign(exam, {timeFrame: 'NORMAL'});
-                    });
+                    }), 'order');
                     this.getPackage2BuyName = (id) => {
                         return this.productsById[id].productDisplayName;
                     };
+                    this.getPayPalUrl = () => {
+                        return (user.role === 'Candidate')?
+                            simulator_config.payPalCandidateStoreURL :
+                            simulator_config.payPalCustomerStoreURL;
+                    };
+                    this.navigate = (exam) => {
+                        if (this.isExamAvailable(exam)) {
+                            $state.go('exams.practice', {'practiceType': 'PREDEFINED_EXAM', examParams: exam});
+                        } else {
+                            $window.open(this.getPayPalUrl(), '_blank')
+                        }
+
+                    };
+                    this.isExamAvailable = (exam) => {
+                        return exam.available;
+                    };
+                    this.isExamQuotaUnavailable = (exam) => {
+                        return (exams.maxPracticesPerPredefinedExam - exam.practicesPerformed) <= 0;
+                    };
+                    this.getButtonText = (exam) => {
+                        return this.isExamAvailable(exam)? $translate.instant('EXAMS.BUTTONS.START') : $translate.instant('EXAMS.BUTTONS.BUY_PACKAGE');
+                    }
+                    this.getTooltip = (exam) => {
+                        return this.isExamQuotaUnavailable(exam)? $translate.instant('EXAMS.BUTTONS.QUOTA_EXCEEDED') : '';
+                    }
                 },
                 controllerAs: '$ctrl',
                 resolve: {
                     exams: function(examService) {
                         return examService.listPredefined();
+                    },
+                    user: function(userAuthService){
+                        return userAuthService.getUser();
                     }
                 },
                 title: 'EXAMS.TYPES.PREDEFINED_EXAM',
