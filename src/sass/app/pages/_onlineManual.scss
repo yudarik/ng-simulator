@@ -20,5 +20,41 @@
         }
       }
     }
+    .panel-body {
+      position: relative;
+    }
+    .panel-overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 99;
+      left: 0;
+      right: 0;
+
+      p {
+        vertical-align: middle;
+        color: #fff;
+        position: relative;
+        font-size: 16px;
+        padding: 0;
+        top: 45%;
+        text-align: center;;
+      }
+      ul > li {
+        color: white;
+      }
+      label {
+        color: white;
+        padding: 10px 15px;
+      }
+    }
+  }
+}
+.manuals-page {
+  .btn-with-icon {
+    i {
+      padding: 3px 0;
+    }
   }
 }

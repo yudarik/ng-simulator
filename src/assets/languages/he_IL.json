@@ -187,10 +187,12 @@
     "DISPLAY":  "הצג",
     "SEARCH_PLACEHOLDER": "חיפוש לפי שם מסמך",
     "FILTER_BY_TYPE": "סינון לפי סוג",
+    "AVAILABLE_ON_ORDER_OF": "זמין ברכישת החבילות הבאות:",
     "RESOURCE_TYPES": {
       "DOCUMENT": "מסמך",
       "AUDIO": "קובץ שמע",
-      "VIDEO": "סרטון"
+      "VIDEO": "סרטון",
+      "OTHER": "אחר"
     }
   },
   "USER": {

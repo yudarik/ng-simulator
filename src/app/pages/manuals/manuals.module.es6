@@ -20,7 +20,13 @@
                 resolve: {
                     manuals: function(manualsService){
                         return manualsService.list().then(list=>{
-                            return _.sortBy(list.onlineManualBeans, 'order');
+
+                            list.onlineManualBeans = list.onlineManualBeans.map(item => _.assign(item, {packagesToBuy: [1,2]}));
+
+                            return {
+                                list: _.sortBy(list.onlineManualBeans, 'order'),
+                                productsById: list.productsById
+                            };
                         });
                     }
                 },

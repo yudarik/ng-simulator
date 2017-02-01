@@ -179,7 +179,7 @@
                                     <span class="text-white">{{::exam.displayName}}</span>
                                 </div>                                
                                 <div class="panel-body">
-                                    <div class="panel-overlay"><p ng-bind="::$ctrl.getTooltip(exam)"></p></div>
+                                    <div class="panel-overlay" ng-if=$ctrl.isExamQuotaUnavailable(exam)><p ng-bind="::$ctrl.getTooltip(exam)"></p></div>
                                     <p><label>{{::exam.description}}</label>
                                     </p>
                                     <p><i class="fa fa-list-ol" aria-hidden="true"></i>&nbsp;

@@ -9,22 +9,22 @@
             bindings: {
                 manuals: '='
             },
-            controller: function manualsCtrl ($translate, NgTableParams, manualsService) {
+            controller: function manualsCtrl ($translate, $window, manualsService) {
                 'ngInject';
+
+                this.list = this.manuals.list
 
                 this.filter = {
                     pattern: undefined,
                     docType: undefined
                 };
 
-                /*this.tableParams = new NgTableParams({
-                    group: 'category'
-                }, {
-                    dataset: this.manuals
-                });*/
-
-                this.getUrl = (id)=>{
+                this.getUrl = (id) => {
                     return manualsService.get(id);
+                };
+                this.navigate = (manual) => {
+                    if (!manual.available) return;
+                    $window.open(this.getUrl(manual.id), '_blank');
                 };
 
                 this.tableHeads = {
@@ -47,17 +47,20 @@
                         case 'DOCUMENT':
                             return 'panel-success';
                             break;
+                        case 'OTHER':
+                            return 'panel-info';
+                            break;
                         default:
                             return 'panel-default';
                     }
                 };
 
-                this.getLinkClass = (manual)=>{
-                    if (!manual.docType) return;
+                this.getLinkClass = (docType) => {
+                    if (!docType) return;
 
                     var type;
 
-                    switch (manual.docType){
+                    switch (docType) {
                         case 'AUDIO':
                             type = 'fa-volume-up'
                             break;
@@ -67,46 +70,22 @@
                         case 'DOCUMENT':
                             type = 'fa-file-pdf-o';
                             break;
+                        case 'OTHER':
+                            type = 'fa-file-text-o';
+                            break;
                     }
 
                     return type;
+                };
+
+                this.getPackage2BuyName = (id) => {
+                    return this.manuals.productsById[id].productDisplayName;
+                };
+                this.getTooltip = (manual) => {
+                    return manual.available? '': ``
                 }
             },
-/*            template:
-                `<div class="row">
-                   <div class="panel panel-default">
-                       <div class="panel-body">
-                           <div class="row"></div>
-                           <div class="col-xs-12">
-                               <table class="table table-hover table-condensed flip" direction="rtl" ng-table="$ctrl.tableParams">
-
-                                   <colroup>
-                                       <col width="50%" />
-                                       <col width="40%" />
-                                       <col width="10%" />
-                                   </colgroup>
-
-                                   <tr ng-repeat-start="group in $groups track by $index" class="ng-table-group flip">
-                                        <td colspan="3">
-                                            <a href="" ng-click="group.$hideRows = !group.$hideRows">
-                                               <span class="glyphicon" ng-class="{'glyphicon-chevron-left': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
-                                               <strong>{{ (group.value !== null)? group.value : 'MANUALS.TABLE_HEADS.OTHER'|translate }}</strong>
-                                           </a>
-                                       </td>
-                                   </tr>
-                                   <tr ng-hide="group.$hideRows" ng-repeat="manual in group.data track by manual.id" ng-repeat-end>
-                                       <td sortable="'displayName'" data-title="$ctrl.tableHeads.displayName" filter="{displayName: 'text'}" filter-placeholder="search">{{manual.displayName}}</td>
-                                       <td sortable="'description'" data-title="$ctrl.tableHeads.description" filter="{description: 'text'}">{{manual.description}}</td>
-                                       <td sortable="'docType'" data-title="$ctrl.tableHeads.type">
-                                           <a href="{{::$ctrl.getUrl(manual.id)}}" target="_blank"><i class="fa {{$ctrl.getLinkClass(manual)}}">&nbsp;</i></a>
-                                       </td>
-                                   </tr>
-                               </table>
-                           </div>
-                       </div>
-                   </div>
-                </div>`*/
-            template: `<div class="row">
+            template: `<div class="row manuals-page">
                             <div class="col-xs-4 form-group">
                                 <input class="form-control" type="search" 
                                     placeholder="{{::'MANUALS.SEARCH_PLACEHOLDER'|translate}}"
@@ -115,26 +94,35 @@
                             <div class="col-xs-8 form-group">
                                 <!--<label class="hidden-xs">{{::'MANUALS.FILTER_BY_TYPE'|translate}}</label>-->
                                 <div class="btn-group">
-                                    <button class="btn btn-warning" uncheckable uib-btn-radio="'AUDIO'" ng-model="$ctrl.filter.docType">{{::'MANUALS.RESOURCE_TYPES.AUDIO'|translate}}</button>                                
-                                    <button class="btn btn-danger" uncheckable uib-btn-radio="'VIDEO'" ng-model="$ctrl.filter.docType">{{::'MANUALS.RESOURCE_TYPES.VIDEO'|translate}}</button>                                
-                                    <button class="btn btn-success" uncheckable uib-btn-radio="'DOCUMENT'" ng-model="$ctrl.filter.docType">{{::'MANUALS.RESOURCE_TYPES.DOCUMENT'|translate}}</button>                                
+                                    <button class="btn btn-with-icon btn-warning" uncheckable uib-btn-radio="'AUDIO'" ng-model="$ctrl.filter.docType"><i class="pull-right fa {{$ctrl.getLinkClass('AUDIO')}}"></i>{{::'MANUALS.RESOURCE_TYPES.AUDIO'|translate}}</button>                                
+                                    <button class="btn btn-with-icon btn-danger" uncheckable uib-btn-radio="'VIDEO'" ng-model="$ctrl.filter.docType"><i class="pull-right fa {{$ctrl.getLinkClass('VIDEO')}}"></i>{{::'MANUALS.RESOURCE_TYPES.VIDEO'|translate}}</button>                                
+                                    <button class="btn btn-with-icon btn-success" uncheckable uib-btn-radio="'DOCUMENT'" ng-model="$ctrl.filter.docType"><i class="pull-right fa {{$ctrl.getLinkClass('DOCUMENT')}}"></i>{{::'MANUALS.RESOURCE_TYPES.DOCUMENT'|translate}}</button>                                
+                                    <button class="btn btn-with-icon btn-info" uncheckable uib-btn-radio="'OTHER'" ng-model="$ctrl.filter.docType"><i class="pull-right fa {{$ctrl.getLinkClass('OTHER')}}"></i>{{::'MANUALS.RESOURCE_TYPES.OTHER'|translate}}</button>                                
                                 </div>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 online-manual-component" ng-repeat="manual in $ctrl.manuals | filter: {displayName: $ctrl.filter.pattern, docType: ($ctrl.filter.docType !== null) ?$ctrl.filter.docType : ''}">
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 online-manual-component" ng-repeat="manual in $ctrl.list | filter: {displayName: $ctrl.filter.pattern, docType: ($ctrl.filter.docType !== null) ?$ctrl.filter.docType : ''} | orderBy: 'order'">
                             <div class="panel" ng-class="$ctrl.getPanelClass(manual.docType)">
-                                <div class="panel-heading">
-                                    
-                                    <i class="pull-right fa {{$ctrl.getLinkClass(manual)}}"></i>
+                                <div class="panel-heading">                                    
+                                    <i class="pull-right fa {{$ctrl.getLinkClass(manual.docType)}}"></i>
+                                    <span class="pull-left">{{::manual.category}}</span>
                                 </div>
-                                <div class="panel-body">
+                                <div class="panel-body">    
+                                    <div class="panel-overlay" ng-if-="manual.available === false">
+                                        <label class="control-label" ng-bind="::'MANUALS.AVAILABLE_ON_ORDER_OF'|translate"></label>
+                                        <ul><li ng-repeat="package in manual.packagesToBuy">{{$ctrl.getPackage2BuyName(package)}}</li></ul>
+                                    </div>
                                     <p>
-                                        <label uib-tooltip="{{::manual.description}}">{{::manual.displayName}}</label>
+                                        <span>{{::manual.displayName}}</span><br/>
+                                        <label ng-bind="::manual.description"></label>
                                     </p>
                                     
-                                    <a class="btn btn-md btn-success pull-right displayDoc" href="{{::$ctrl.getUrl(manual.id)}}" target="_blank" ng-bind="::'MANUALS.DISPLAY'|translate"></a>                                  
+                                    <button class="btn btn-md btn-success pull-right displayDoc" 
+                                        ng-click="$ctrl.navigate(manual)" 
+                                        ng-disabled="!manual.available" 
+                                        ng-bind="::'MANUALS.DISPLAY'|translate"></button>                                  
                                 </div>
                             </div>
                           </div>
