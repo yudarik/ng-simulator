@@ -5,9 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.pages.stats', [
-        'chart.js'
-    ])
+    angular.module('Simulator.pages.stats', [])
         .config(routeConfig)
         .config(chartJsConfig);
 

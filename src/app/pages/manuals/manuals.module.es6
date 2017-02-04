@@ -4,7 +4,7 @@
 
 (function () {
     'use strict';
-    angular.module('Simulator.pages.manuals', ['ngTable'])
+    angular.module('Simulator.pages.manuals', ['angularGrid'])
         .config(routeConfig);
 
     function routeConfig($stateProvider) {
@@ -12,22 +12,22 @@
             .state('manuals', {
                 url: '/manuals',
                 parent: 'auth',
-                template: '<online-manuals manuals="manualsCtrl.manuals"></online-manuals>',
-                controller: function(manuals){
-                    this.manuals = manuals;
-                },
-                controllerAs: 'manualsCtrl',
+                template: '<online-manuals manuals="$resolve.manuals" user="$resolve.user"></online-manuals>',
+
                 resolve: {
                     manuals: function(manualsService){
                         return manualsService.list().then(list=>{
 
-                            list.onlineManualBeans = list.onlineManualBeans.map(item => _.assign(item, {packagesToBuy: [1,2]}));
+                           // list.onlineManualBeans = list.onlineManualBeans.map(item => _.assign(item, {packagesToBuy: [1,2]}));
 
                             return {
                                 list: _.sortBy(list.onlineManualBeans, 'order'),
                                 productsById: list.productsById
                             };
                         });
+                    },
+                    user: function(userAuthService) {
+                        return userAuthService.getUser();
                     }
                 },
                 title: 'MANUALS.TITLE',
