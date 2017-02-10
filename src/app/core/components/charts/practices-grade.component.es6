@@ -32,16 +32,23 @@
                     repeatedPredefinedExam: $translate.instant('EXAMS.TYPES.REPEATED_PREDEFINED_EXAM'),
                     postCreditPractice: $translate.instant('EXAMS.TYPES.POST_CREDIT_PRACTICE'),
                     repeatedPostCreditPractice: $translate.instant('EXAMS.TYPES.REPEATED_POST_CREDIT_PRACTICE'),
+                    weakAreasPractice: $translate.instant('EXAMS.TYPES.WEAK_AREAS_PRACTICE'),
+                    repeatedWeakAreasPractice: $translate.instant('EXAMS.TYPES.REPEATED_WEAK_AREAS_PRACTICE'),
                 };
 
                 var colors = {
-                    "PRACTICE": "Purple",
-                    "EXAM": "Red",
-                    "SUGGESTED_PRACTICE": "Cyan",
-                    "PREDEFINED_EXAM": "Green",
-                    "REPEATED_PRACTICE": "Orange",
-                    "POST_CREDIT_PRACTICE": "Blue",
-                    "WEAK_AREAS_PRACTICE": "Yellow"
+                    "EXAM":  "#FF0000",
+                    "REPEATED_EXAM": "#F08080",
+                    "PREDEFINED_EXAM": "#FFFF00",
+                    "REPEATED_PREDEFINED_EXAM":  "#FFF69C",
+                    "SUGGESTED_PRACTICE": "#0000FF",
+                    "REPEATED_SUGGESTED_PRACTICE": "#ADD8E6",
+                    "PRACTICE":  "#008000",
+                    "REPEATED_PRACTICE": "#90EE90",
+                    "POST_CREDIT_PRACTICE":  "#FF00FF",
+                    "REPEATED_POST_CREDIT_PRACTICE": "#EE82EE",
+                    "WEAK_AREAS_PRACTICE": "Brown",
+                    "REPEATED_WEAK_AREAS_PRACTICE": "Black",
                 };
 
                 var chartConf = {
@@ -163,71 +170,83 @@
                         {
                             "clustered": false,
                             "id": "General Practice [for legend]",
-                            "legendColor": "#008000",
+                            "fillColors": colors.PRACTICE,
+                            "legendColor": colors.PRACTICE,
                             "stackable": false,
                             "title": translate.generalPractice
                         },
                         {
-                            "fillColors": "#90EE90",
+                            "fillColors": colors.REPEATED_PRACTICE,
                             "id": "Repeated General Practice  [for legend]",
                             "legendAlpha": 1,
-                            "legendColor": "#90EE90",
+                            "legendColor": colors.REPEATED_PRACTICE,
                             "legendPeriodValueText": "",
                             "legendValueText": "",
-                            "lineColor": "#90EE90",
+                            "lineColor": colors.REPEATED_PRACTICE,
                             "markerType": "square",
                             "title": translate.repeatedGeneralPractice
                         },
                         {
                             "id": "Exam [for legend]",
-                            "legendColor": "#FF0000",
+                            "fillColors": colors.EXAM,
+                            "legendColor": colors.EXAM,
                             "title": translate.exam
                         },
                         {
-                            "fillColors": "#F08080",
                             "id": "Repeated Exam [for legend]",
-                            "legendColor": "#F08080",
-                            "lineColor": "#F08080",
+                            "legendColor": colors.REPEATED_EXAM,
+                            "fillColors": colors.REPEATED_EXAM,
+                            "lineColor": colors.REPEATED_EXAM,
                             "title": translate.repeatedExam
                         },
                         {
                             "id": "Suggested Practice [for legend]",
-                            "legendColor": "#0000FF",
+                            "fillColors": colors.SUGGESTED_PRACTICE,
+                            "legendColor": colors.SUGGESTED_PRACTICE,
+                            "lineColor": colors.SUGGESTED_PRACTICE,
                             "title": translate.suggestedPractice
                         },
                         {
-                            "fillColors": "#ADD8E6",
                             "id": "Repeated Suggested Practice [for legend]",
-                            "legendColor": "#ADD8E6",
-                            "lineColor": "#ADD8E6",
+                            "legendColor": colors.REPEATED_SUGGESTED_PRACTICE,
+                            "fillColors": colors.REPEATED_SUGGESTED_PRACTICE,
+                            "lineColor": colors.REPEATED_SUGGESTED_PRACTICE,
                             "title": translate.repeatedSuggestedPractice
                         },
                         {
-                            "fillColors": "#FFFF00",
+
                             "fixedColumnWidth": -1,
                             "id": "Predefined Exam [for legend]",
-                            "legendColor": "#FFFF00",
-                            "lineColor": "#FFFF00",
+                            "fillColors": colors.PREDEFINED_EXAM,
+                            "legendColor": colors.PREDEFINED_EXAM,
+                            "lineColor": colors.PREDEFINED_EXAM,
                             "lineThickness": 0,
                             "title": translate.predefinedExam
                         },
                         {
-                            "fillColors": "#FFF69C",
+                            "fillColors": colors.REPEATED_PREDEFINED_EXAM,
                             "id": "Repeated Predefined Exam [for legend]",
-                            "legendColor": "#FFF69C",
+                            "legendColor": colors.REPEATED_PREDEFINED_EXAM,
                             "title": translate.repeatedPredefinedExam
                         },
                         {
-                            "fillColors": "#FF00FF",
+                            "fillColors": colors.POST_CREDIT_PRACTICE,
+                            "legendColor": colors.POST_CREDIT_PRACTICE,
                             "id": "Post Credit Practice [for legend]",
-                            "legendColor": "#FF00FF",
                             "title": translate.postCreditPractice
                         },
                         {
-                            "fillColors": "#EE82EE",
+                            "fillColors": colors.REPEATED_POST_CREDIT_PRACTICE,
                             "fixedColumnWidth": -1,
                             "id": "Repeated Post Credit Practice [for legend]",
-                            "legendColor": "#EE82EE",
+                            "legendColor": colors.REPEATED_POST_CREDIT_PRACTICE,
+                            "title": translate.repeatedPostCreditPractice
+                        },
+                        {
+                            "fillColors": colors.WEAK_AREAS_PRACTICE,
+                            "fixedColumnWidth": -1,
+                            "id": "Weak Areas Practice [for legend]",
+                            "legendColor": colors.WEAK_AREAS_PRACTICE,
                             "title": translate.repeatedPostCreditPractice
                         }
                     ],
