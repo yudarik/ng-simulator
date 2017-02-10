@@ -315,7 +315,7 @@
                         chartConf.dataProvider = practices.map(practice => {
 
                             return {
-                                "Practice Date": moment(practice.date).format("hh:mm DD/MM/YYYY"),
+                                "Practice Date": moment.unix(practice.date).format("hh:mm DD/MM/YYYY"),
                                 "Practice Type": $translate.instant('EXAMS.TYPES.'+practice.practiceType),
                                 "Practice Color": colors[practice.practiceType],
                                 "Practice Grade": this.numberFilter(practice.grade, 1),
