@@ -98,8 +98,8 @@
                             '<br/>',
                             '<br/>',
                             '<p class="text-center ">',
-                            '<button class="btn btn-success btn-space" ng-click="ok()">אישור</button>',
-                            '<button class="btn btn-default" ng-click="cancel()">ביטול</button>',
+                            '<button class="btn btn-success btn-space" ng-click="ok()">{{::\'GENERAL.OK\'|translate}}</button>',
+                            '<button class="btn btn-default" ng-click="cancel()">{{::\'GENERAL.CANCEL\'|translate"}}</button>',
                             '</p>',
                             '</div></div>'].join(''),
                         controller: function ($uibModalInstance, $scope) {

@@ -4,10 +4,10 @@
     position: relative;
 
     .btn.displayDoc {
-      position: absolute;
+      position: relative;
       bottom: 0;
       left: 0;
-      margin: 25px;
+      //margin: 25px;
     }
     p {
       label {
@@ -19,9 +19,18 @@
         }
       }
     }
+    .panel-heading {
+      span {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 85%;
+        white-space: nowrap;
+      }
+    }
     .panel-body {
       position: relative;
       min-height: 90px;
+      padding:10px;
     }
     .panel-overlay {
       position: relative;
@@ -74,5 +83,16 @@
   .grid-img.img-loaded{
     visibility: visible;
     opacity: 1;
+  }
+
+  .filter-buttons {
+    .btn {
+      width: 130px;
+
+      &.active {
+        box-shadow: inset 2px 4px 10px rgba(0, 0, 0, 0.4);
+        -webkit-box-shadow: inset 2px 4px 10px rgba(0, 0, 0, 0.4);
+      }
+    }
   }
 }

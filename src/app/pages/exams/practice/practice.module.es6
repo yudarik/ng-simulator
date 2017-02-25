@@ -79,11 +79,15 @@
 
                     examConfig: function($state, $stateParams, $q, examService) {
 
-                        if ($stateParams.practiceType) {
-                            $state.get('exams.practice').title = 'EXAMS.TYPES.'+$stateParams.practiceType;
-                        }
                         return examService.getExam($stateParams.practiceType, $stateParams.examParams)
-                            .then(res => res)
+                            .then(res => {
+
+                                if (res.practiceType) {
+                                    $state.get('exams.practice').title = 'EXAMS.TYPES.'+res.practiceType;
+                                }
+
+                                return res;
+                            })
                             .catch(err => {
                                 if (_.get(err.data, 'description')) {
 
@@ -160,12 +164,10 @@
             .state('exams.repeated-practice', {
                 url: '/repeated-practice',
                 parent: 'exams',
-                template: `<div class="panel col-md-12">
-                                <div class="panel-body">
-                                    <practices-grade class="repeated-practice-view" title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"></practices-grade>
-                                </div>
+                template: `<div ba-panel ba-panel-class="with-scroll" class="col-xs-12" dir="ltr">
+                               <practices-grade class="repeated-practice-view" title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"></practices-grade>
                             </div>`,
-                title: 'EXAMS.TYPES.REPEATED_POST_CREDIT_PRACTICE',
+                title: 'EXAMS.TYPES.REPEATED_ALL',
                 sidebarMeta: {
                     order: 400
                 }
@@ -191,13 +193,12 @@
                                         {{::'EXAMS.PREDEFINED.PACKAGESTOBUY'|translate}}:&nbsp;
                                         <div>
                                             <ul class="pull-left">
-                                                <li ng-repeat="package in exam.packagesToBuy">
-                                                    <a ng-href="{{::$ctrl.getPayPalUrl()}}" target="_blank" ng-bind="::$ctrl.getPackage2BuyName(package)"></a>
+                                                <li class="circle" ng-repeat="package in exam.packagesToBuy" ng-bind="::$ctrl.getPackage2BuyName(package)">
                                                 </li>
                                             </ul>
                                         </div>
                                     </p>
-                                    <div class="pull-left timeFrame">                                        
+                                    <div class="pull-left timeFrame" ng-if="::!exam.packagesToBuy">                                        
                                         <ul class="col-md-4">
                                             <li class="pull-left">
                                                 <label class="radio-inline custom-radio nowrap">                                                    

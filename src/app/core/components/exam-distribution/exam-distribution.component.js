@@ -25,6 +25,13 @@
             this.initQuestionDistribution = function () {
                 var _this = this;
 
+                /**
+                 * 1. foreach category, multiply total on categoryPercentage
+                 * 2. If user changes manulaly distribution of one of the spinnerer, add/subtract from total
+                 * without changing others.
+                 * If user changes total, calculate all spinners again, without touching the manual changed categories
+                 */
+
                 var total = this.examParams.totalQuestion;
 
                 var distMap = _.map(this.categories, function (category, index) {

@@ -49,16 +49,18 @@
                 "REPEATED_PRACTICE": "#90EE90",
                 "POST_CREDIT_PRACTICE": "#FF00FF",
                 "REPEATED_POST_CREDIT_PRACTICE": "#EE82EE",
-                "WEAK_AREAS_PRACTICE": "Brown",
+                "WEAK_AREAS_PRACTICE": "#0000FF",
                 "REPEATED_WEAK_AREAS_PRACTICE": "Black"
             };
 
             var chartConf = {
                 "type": "serial",
+                "zoomOutText": '',
+                "zoomOutButtonAlpha": 0,
                 "categoryField": "Practice Date",
                 "dataDateFormat": "DD/MM/YYYY HH:NN:SS",
                 "maxSelectedSeries": 20,
-                "maxZoomFactor": 10,
+                //"maxZoomFactor": 10,
                 "startDuration": 1,
                 "theme": "default",
                 "categoryAxis": {
@@ -186,18 +188,6 @@
                     "lineColor": colors.REPEATED_EXAM,
                     "title": translate.repeatedExam
                 }, {
-                    "id": "Suggested Practice [for legend]",
-                    "fillColors": colors.SUGGESTED_PRACTICE,
-                    "legendColor": colors.SUGGESTED_PRACTICE,
-                    "lineColor": colors.SUGGESTED_PRACTICE,
-                    "title": translate.suggestedPractice
-                }, {
-                    "id": "Repeated Suggested Practice [for legend]",
-                    "legendColor": colors.REPEATED_SUGGESTED_PRACTICE,
-                    "fillColors": colors.REPEATED_SUGGESTED_PRACTICE,
-                    "lineColor": colors.REPEATED_SUGGESTED_PRACTICE,
-                    "title": translate.repeatedSuggestedPractice
-                }, {
 
                     "fixedColumnWidth": -1,
                     "id": "Predefined Exam [for legend]",
@@ -206,12 +196,14 @@
                     "lineColor": colors.PREDEFINED_EXAM,
                     "lineThickness": 0,
                     "title": translate.predefinedExam
-                }, {
+                },
+                /*{
                     "fillColors": colors.REPEATED_PREDEFINED_EXAM,
                     "id": "Repeated Predefined Exam [for legend]",
                     "legendColor": colors.REPEATED_PREDEFINED_EXAM,
                     "title": translate.repeatedPredefinedExam
-                }, {
+                },*/
+                {
                     "fillColors": colors.POST_CREDIT_PRACTICE,
                     "legendColor": colors.POST_CREDIT_PRACTICE,
                     "id": "Post Credit Practice [for legend]",
@@ -227,7 +219,13 @@
                     "fixedColumnWidth": -1,
                     "id": "Weak Areas Practice [for legend]",
                     "legendColor": colors.WEAK_AREAS_PRACTICE,
-                    "title": translate.repeatedPostCreditPractice
+                    "title": translate.weakAreasPractice
+                }, {
+                    "id": "Repeated Suggested Practice [for legend]",
+                    "legendColor": colors.REPEATED_WEAK_AREAS_PRACTICE,
+                    "fillColors": colors.REPEATED_WEAK_AREAS_PRACTICE,
+                    "lineColor": colors.REPEATED_WEAK_AREAS_PRACTICE,
+                    "title": translate.repeatedWeakAreasPractice
                 }],
                 "guides": [],
                 "valueAxes": [{
@@ -289,7 +287,7 @@
                     chartConf.dataProvider = practices.map(function (practice) {
 
                         return {
-                            "Practice Date": moment.unix(practice.date).format("hh:mm DD/MM/YYYY"),
+                            "Practice Date": moment.unix(practice.date / 1000).format("DD/MM/YYYY hh:mm:ss"),
                             "Practice Type": $translate.instant('EXAMS.TYPES.' + practice.practiceType),
                             "Practice Color": colors[practice.practiceType],
                             "Practice Grade": _this.numberFilter(practice.grade, 1),

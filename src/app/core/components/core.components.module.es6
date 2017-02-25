@@ -6,6 +6,7 @@
     'use strict';
 
     angular.module('Simulator.components', [
-        'Simulator.components.charts'
+        'Simulator.components.charts',
+        'Simulator.core.directives'
     ])
 })();

@@ -10,7 +10,7 @@
                 productsId: '<',
                 user: '<'
             },
-            controller: function($window, manualsService,simulator_config) {
+            controller: function($window, $translate, manualsService,simulator_config) {
 
                 this.getPackage2BuyName = (id) => {
                     return this.productsId[id].productDisplayName;
@@ -74,27 +74,33 @@
                         simulator_config.payPalCandidateStoreURL :
                         simulator_config.payPalCustomerStoreURL;
                 };
+
+                this.getButtonLabel = () => {
+                    if(this.item.available) {
+                        return $translate.instant('MANUALS.DISPLAY')
+                    }
+                    return $translate.instant('MANUALS.BUY_PACKAGE');
+                }
             },
             template: `<div class="col-xs-12 online-manual-component">
                             <div class="panel" ng-class="$ctrl.getPanelClass($ctrl.item.docType)">
                                 <div class="panel-heading">                                    
                                     <i class="pull-right fa {{$ctrl.getLinkClass($ctrl.item.docType)}}"></i>
-                                    <span class="pull-left">{{::$ctrl.item.category || $ctrl.item.displayName}}</span>
+                                    <span class="pull-left" tooltip="{{::$ctrl.item.displayName}}">{{::$ctrl.item.displayName}}</span>
                                 </div>
                                 <div class="panel-body">                               
                                     <p ng-if="$ctrl.item.category">
-                                        <span>{{::$ctrl.item.displayName}}</span><br/>
-                                        <label ng-bind="::$ctrl.item.description"></label>
+                                        <span class="label label-info">{{::$ctrl.item.category}}</span><br/>
+                                        <p ng-bind="::$ctrl.item.description"></p>
                                     </p>
                                     <div ng-if="!$ctrl.item.available">
-                                        <label class="control-label" ng-bind="::'MANUALS.AVAILABLE_ON_ORDER_OF'|translate"></label>
-                                        <ul><li ng-repeat="package in $ctrl.item.packagesToBuy">{{$ctrl.getPackage2BuyName(package)}}</li></ul>
+                                        <p class="control-label"><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;<span ng-bind="::'MANUALS.AVAILABLE_ON_ORDER_OF'|translate"></span></p>
+                                        <ul><li class="circle" ng-repeat="package in $ctrl.item.packagesToBuy">{{$ctrl.getPackage2BuyName(package)}}</li></ul>
                                     </div>
                                     
                                     <button class="btn btn-md btn-success pull-right displayDoc" 
-                                        ng-click="$ctrl.navigate()" 
-                                        ng-disabled="!$ctrl.item.available" 
-                                        ng-bind="::'MANUALS.DISPLAY'|translate"></button>                                  
+                                        ng-click="$ctrl.navigate()"                                        
+                                        >{{$ctrl.getButtonLabel()}}</button>                                  
                                 </div>
                             </div>
                           </div>`

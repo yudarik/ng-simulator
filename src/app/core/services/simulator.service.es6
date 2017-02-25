@@ -20,7 +20,7 @@
                 return promise;
             } else */
             if (statusCache) {
-                defer.resolve(statusCache);
+                $q.when(statusCache);
             }
 
             simulators.get('status').then(status => {

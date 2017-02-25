@@ -11,11 +11,13 @@
     "REMEMBER_PASSWORD": "זוכר את הסיסמא? התחבר",
     "RESET_PASSWORD_BTN": "אפס סיסמא",
     "CHANGE_PASSWORD": "שינויי סיסמא",
+    "CHANGE_PASSWORD_TEMP": "שינויי סיסמא",
     "LOGIN_BTN": "כניסה",
     "REGISTER_BTN": "הרשם",
     "USER_PASSWARD_INCORRECT": "שם המשתמש או הסיסמא שגויים",
     "REGISTERED_SUCCESSFULLY": "נרשמתם בהצלחה, פרטי הכניסה נשלחו לכתובת הדוא\"ל איתה נרשמתם",
     "PASSWORD_RESET_EMAIL_SENT": "הנחיות לאיפוס הסיסמא נשלחו לכתובת הדוא\"ל",
+    "INITIAL_PROFILE_SETUP_TITLE": "עדכון פרטים אישיים",
     "ERROR": {
       "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
       "ACCOUNT.EXPIRED": "פג תוקפו של חשבון המשתמש, אנא פנה למנהל האתר",
@@ -35,6 +37,8 @@
       "REPEATED_POST_CREDIT_PRACTICE": "תרגול חוזר משאלות חוזרות",
       "GENERAL_PRACTICE": "תרגול כללי",
       "REPEATED_GENERAL_PRACTICE": "תרגול כללי חוזר",
+      "REPEATED_PRACTICE": "תרגול כללי חוזר",
+      "REPEATED_ALL": "תרגול חוזר",
       "PRACTICE_SUMMARY": "סיכום וניתוח תוצאות",
       "WEAK_AREAS_PRACTICE": "תרגול בנקודות חולשה",
       "REPEATED_WEAK_AREAS_PRACTICE": "תרגול חוזר בנקודות חולשה",
@@ -193,9 +197,10 @@
       "OTHER": "אחר"
     },
     "DISPLAY":  "הצג",
+    "BUY_PACKAGE": "עבור לרכישה",
     "SEARCH_PLACEHOLDER": "חיפוש לפי שם מסמך",
     "FILTER_BY_TYPE": "סינון לפי סוג",
-    "AVAILABLE_ON_ORDER_OF": "זמין ברכישת החבילות הבאות:",
+    "AVAILABLE_ON_ORDER_OF": "מוגבל ברכישת חבילות:",
     "RESOURCE_TYPES": {
       "DOCUMENT": "מסמך",
       "AUDIO": "קובץ שמע",
@@ -238,6 +243,8 @@
   },
   "GENERAL": {
     "REQUIRED": "שדה חובה",
-    "CANCEL": "סגור"
+    "CANCEL": "ביטול",
+    "OK": "אישור",
+    "CLOSE": "סגור"
   }
 }

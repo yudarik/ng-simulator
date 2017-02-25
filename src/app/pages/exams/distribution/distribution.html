@@ -35,18 +35,21 @@
                         <li class="pull-left">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="difficulty" value="EASY" ng-model="distribution.examParams.difficulty"
+                                       ng-disabled="::distribution.isReadOnly()"
                                        ng-checked="distribution.examParams.difficulty === 'EASY'"><span>{{::'EXAMS.DISTRIBUTION.LEVEL.EASY'|translate}}</span>
                             </label>
                         </li>
                         <li class="pull-left">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="difficulty" value="MEDIUM" ng-model="distribution.examParams.difficulty"
+                                       ng-disabled="::distribution.isReadOnly()"
                                        ng-checked="distribution.examParams.difficulty === 'MEDIUM'"><span>{{::'EXAMS.DISTRIBUTION.LEVEL.MEDIUM'|translate}}</span>
                             </label>
                         </li>
                         <li class="pull-left">
                             <label class="radio-inline custom-radio nowrap">
                                 <input type="radio" name="difficulty" value="HARD" ng-model="distribution.examParams.difficulty"
+                                       ng-disabled="::distribution.isReadOnly()"
                                        ng-checked="distribution.examParams.difficulty === 'HARD'"
                                 ><span>{{::'EXAMS.DISTRIBUTION.LEVEL.HARD'|translate}}</span>
                             </label>

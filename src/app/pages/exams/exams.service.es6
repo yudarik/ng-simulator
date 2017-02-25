@@ -45,7 +45,7 @@
                 case 'WEAK_AREAS_PRACTICE':
                     api = 'practiceToPerform';
                     break;
-                case 'REPEATED_POST_CREDIT_PRACTICE':
+                case 'REPEATED':
                     api = 'repeatPractice';
                     break;
                 case 'PREDEFINED_EXAM':

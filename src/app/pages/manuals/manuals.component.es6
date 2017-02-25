@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-8 text-center form-group">
                                 <!--<label class="hidden-xs">{{::'MANUALS.FILTER_BY_TYPE'|translate}}</label>-->
-                                <div class="btn-group">
+                                <div class="btn-group filter-buttons">
                                     <button class="btn btn-with-icon btn-warning" uncheckable uib-btn-radio="'AUDIO'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('AUDIO')}}"></i>{{::'MANUALS.RESOURCE_TYPES.AUDIO'|translate}}</button>                                
                                     <button class="btn btn-with-icon btn-danger" uncheckable uib-btn-radio="'VIDEO'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('VIDEO')}}"></i>{{::'MANUALS.RESOURCE_TYPES.VIDEO'|translate}}</button>                                
                                     <button class="btn btn-with-icon btn-success" uncheckable uib-btn-radio="'DOCUMENT'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('DOCUMENT')}}"></i>{{::'MANUALS.RESOURCE_TYPES.DOCUMENT'|translate}}</button>                                
@@ -74,7 +74,7 @@
                         <hr>
                         <ul class="dynamic-grid" angular-grid="$ctrl.list" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
 
-                            <li class="grid" data-ng-repeat="manual in $ctrl.list | filter: {displayName: $ctrl.filter.pattern, docType: ($ctrl.filter.docType !== null) ?$ctrl.filter.docType : ''} | orderBy: 'order'"> 
+                            <li class="grid" data-ng-repeat="manual in $ctrl.list | filter: $ctrl.filter.pattern | filter: {docType: ($ctrl.filter.docType !== null) ?$ctrl.filter.docType : ''} | orderBy: 'order'"> 
                                 <manual-item class="" item="manual" products-id="$ctrl.manuals.productsById" user="$ctrl.user"></manual-item>                         
                             </li>                            
                         </ul>`,
