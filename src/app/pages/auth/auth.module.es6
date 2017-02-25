@@ -37,6 +37,8 @@
                             //$state.go('profile');
                         }*/
                         $state.go(simulator_config.defaultState);
+                    }).catch(err => {
+                        $state.go('signin');
                     });
                 }
             })
@@ -44,8 +46,10 @@
                 abstract: true,
                 template: '<div ui-view></div>',
                 resolve: {
-                    user: (userAuthService) => {
-                        return userAuthService.getUser();
+                    user: (userAuthService, $state) => {
+                        return userAuthService.getUser()
+                            .then(user => user)
+                            .catch(err => $state.go('signin'));
                     }
                 }
             })

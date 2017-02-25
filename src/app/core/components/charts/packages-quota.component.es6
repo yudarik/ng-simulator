@@ -11,7 +11,7 @@
                 titleLabel: '<'
             },
             template:
-                      `<div class="col-xs-12">
+                      `<div id="packageQuota" class="col-xs-12">
                           <canvas class="chart chart-pie"
                           chart-data="$ctrl.package.data"
                           chart-labels="$ctrl.package.labels"

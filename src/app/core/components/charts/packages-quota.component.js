@@ -11,7 +11,7 @@
         bindings: {
             titleLabel: '<'
         },
-        template: '<div class="col-xs-12">\n                          <canvas class="chart chart-pie"\n                          chart-data="$ctrl.package.data"\n                          chart-labels="$ctrl.package.labels"\n                          chart-series="$ctrl.package.series"\n                          chart-options="$ctrl.options">\n                          </canvas>\n                      </div>',
+        template: '<div id="packageQuota" class="col-xs-12">\n                          <canvas class="chart chart-pie"\n                          chart-data="$ctrl.package.data"\n                          chart-labels="$ctrl.package.labels"\n                          chart-series="$ctrl.package.series"\n                          chart-options="$ctrl.options">\n                          </canvas>\n                      </div>',
         controller: /** @ngInject */
         ["$translate", "$filter", "customerService", function packageQuotaCtrl($translate, $filter, customerService) {
             var _this = this;

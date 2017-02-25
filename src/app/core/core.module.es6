@@ -40,16 +40,16 @@
             });
 
             $translateProvider.preferredLanguage('he_IL');
-            $translateProvider.use('he_IL');
+            //$translateProvider.use('he_IL');
 
             RestangularProvider
                 .setDefaultHeaders({
                     'Content-Type': 'application/json'
                 })
                 //.setBaseUrl('rest'); // Production Build
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest');
-                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
             RestangularProvider.setErrorInterceptor(
@@ -73,6 +73,8 @@
 
             simulatorService.getStatus().then(config => {
                 _.assign(simulator_config, config);
+
+                $translate.use(config.locale);
 
                 $rootScope.appTitle = simulator_config.applicationTitle;
                 $rootScope.simulatorConfigLoaded = true;

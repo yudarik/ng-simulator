@@ -10,8 +10,7 @@
             bindings: {
                 titleLabel: '<'
             },
-            template: `<h5 class="text-center">{{$ctrl.titleLabel}}</h5>
-                        <div id="questionsQuotaChart" class="amChart"></div>
+            template: `<div id="questionsQuotaChart" class="amChart"></div>
                        `,
             controller: function userQuotaCtrl($translate, customerService, simulator_config) {
                 'ngInject';
@@ -64,7 +63,14 @@
                     },
                     "export": {
                         "enabled": false
-                    }
+                    },
+                    "titles": [
+                        {
+                            "size": 15,
+                            "text": this.titleLabel,
+                            "color": "#666666"
+                        }
+                    ],
                 };
 
                 this.$onInit = () => {

@@ -47,6 +47,10 @@
     display: inline-block;
     width: 100%
   }
+  .user-quota {
+    overflow: hidden;
+  }
+
 }
 .amChart {
   width: 100%;
@@ -65,18 +69,25 @@
 
 }
 
-#categoriesCorectIncorect,
 #userRankChart,
 #practiceTypeGrades,
 #categoriesGradeChart,
-#timeCylinder {
-  height: 350px;
+#timeCylinder,
+#packageQuota {
+  height: 400px;
 }
 #practicesGradeChart {
   height: 400px;
 }
+#categoriesCorectIncorect {
+  height:340px;
+}
+#categoriesCorectIncorectLegend {
+  position: relative;;
+  bottom:0;
+}
 #questionsQuotaChart {
-  height: 325px;
+  height: 400px;
   width: 200%;
   right: -55%;
 

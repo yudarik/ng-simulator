@@ -78,6 +78,7 @@
         "START": "התחל תרגול"
       },
       "TIMEFRAME": {
+        "TITLE": "זמן בחינה:",
         "UNLIMITED": "ללא מגבלת זמן",
         "REGULAR": "רגיל",
         "EXTENDED": "הערכת זמן"

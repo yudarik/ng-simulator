@@ -58,7 +58,7 @@
              ui-state="subitem.stateRef || ''"
              ng-href="{{::(subitem.fixedHref ? subitem.fixedHref: '')}}"
              ng-class="{'disabled':subitem.disabled}">
-            <i class="{{ ::subitem.icon }}"></i><span>{{ ::subitem.title | translate}}</span>
+            <i class="{{ ::(subitem.icon)? subitem.icon : 'hidden' }}"></i><span>{{ ::subitem.title | translate}}</span>
           </a>
         </li>
       </ul>

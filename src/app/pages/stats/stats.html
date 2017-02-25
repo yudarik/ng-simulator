@@ -1,38 +1,39 @@
+<welcome ng-if="currentUser && simulatorConfigLoaded && stateName === 'dashboard'" user="currentUser" config="simulatorConfig"></welcome>
 <div class="widgets stats">
 
     <div class="row" dir="ltr">
-        <div class="col-xs-12" ba-panel ba-panel-class="with-scroll" ng-if="!dashboard.isCandidate">
+        <div ba-panel ba-panel-class="with-scroll" class="col-xs-12" ng-if="!dashboard.isCandidate">
             <practices-grade title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"></practices-grade>
         </div>
-        <div class="col-xs-12 col-md-6" ng-if="!dashboard.isCandidate">
-            <div ba-panel ba-panel-class="user-quota-panel" dir="rtl">
-                <user-quota title-label="'STATS.ACCOUNT.TITLE'|translate"></user-quota>
-            </div>
-            <div ba-panel  ba-panel-class="with-scroll">
-                <categories-grade-radar title-label="'STATS.DASHBOARD.CHARTS.GRADES_RADAR.TITLE'|translate"></categories-grade-radar>
-            </div>
-
+        <div ba-panel ba-panel-class="with-scroll" class="col-xs-12" ng-if="!dashboard.isCandidate">
+            <categories-grade-radar title-label="'STATS.DASHBOARD.CHARTS.GRADES_RADAR.TITLE'|translate"></categories-grade-radar>
         </div>
 
-        <div class="col-xs-12" ng-class="{'col-md-6': !dashboard.isCandidate}">
-            <div ba-panel ba-panel-class="with-scroll" ng-if="!dashboard.isCandidate">
-                <user-rank title-label="'STATS.DASHBOARD.CHARTS.USERS_RANK.TITLE'|translate"></user-rank>
-            </div>
-            <div ba-panel ba-panel-class="with-scroll" ng-if="dashboard.isCandidate">
-                <practices-grade title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"></practices-grade>
-            </div>
-            <div ba-panel ba-panel-class="with-scroll" >
-                <practices-performed title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_PERFORMED.TITLE'|translate"></practices-performed>
-            </div>
+        <div ba-panel ba-panel-class="with-scroll" class="col-xs-12" ng-if="dashboard.isCandidate">
+            <practices-grade title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"></practices-grade>
         </div>
 
-<!--        <div class="col-xs-12 col-md-6" ba-panel ba-panel-class="with-scroll">
+        <div ba-panel ba-panel-class="with-scroll" class="col-xs-12">
+            <practices-performed title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_PERFORMED.TITLE'|translate"></practices-performed>
+        </div>
+        <div ba-panel class="col-xs-12 col-md-6 user-quota" ng-if="!dashboard.isCandidate" dir="rtl">
+            <user-quota title-label="'STATS.ACCOUNT.TITLE'|translate"></user-quota>
+        </div>
+
+
+        <div ba-panel ba-panel-class="with-scroll" class="col-xs-12 col-md-6" ng-if="!dashboard.isCandidate">
+            <user-rank title-label="'STATS.DASHBOARD.CHARTS.USERS_RANK.TITLE'|translate"></user-rank>
+        </div>
+<!--
+        <div class="col-xs-12 col-md-6" ba-panel ba-panel-class="with-scroll">
             <package-quota title-label="'STATS.DASHBOARD.CHARTS.PACKAGES_QUOTA.TITLE'|translate"></package-quota>
         </div>-->
 
-        <!--<div class="col-xs-12 col-md-6" ba-panel ba-panel-class="with-scroll">
+<!--
+        <div class="col-xs-12 col-md-6" ba-panel ba-panel-class="with-scroll">
             <categories-correct-incorrect-line title-label="'STATS.DASHBOARD.CHARTS.CATEGORIES_LINE.TITLE'|translate"></categories-correct-incorrect-line>
-        </div>-->
+        </div>
+-->
 
     </div>
 </div>
