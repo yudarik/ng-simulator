@@ -24,8 +24,14 @@
     margin-bottom: 25px;
 
     a.btn-info {
-      width: 100%;
+      width: 33%;
       margin-top: 8px;
+    }
+  }
+
+  table{
+    tr.bold {
+      font-weight:bold;
     }
   }
 }
