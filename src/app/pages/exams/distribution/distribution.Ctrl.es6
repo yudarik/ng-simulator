@@ -21,27 +21,78 @@
         this.initQuestionDistribution = function() {
 
             var total = this.examParams.totalQuestion;
+            var currentTotalAmount = 0;
 
-            var distMap = _.map(dist.categories, (category, index)=>{
+            var distMap = _.map(dist.categories, (category, index) => {
 
-                if (index < total) {
-                    category.questionDistribution = 1;
-                    total--;
-                } else {
-                    category.questionDistribution = 0;
+                if (category.userAdjusted) {
+                    return category;
                 }
 
-                //category.questionDistribution = Math.floor(total * dist.questionsPercentagePerCategoryId[category.id]);
+                var amount = Math.floor(total * dist.questionsPercentagePerCategoryId[category.id]);
+
+                currentTotalAmount += amount;
+
+                category.questionDistribution = amount;
 
                 return category;
             });
-            while (total > 0) {
-                distMap[parseInt(Math.random()*distMap.length)].questionDistribution++;
-                total--;
+
+            if (currentTotalAmount !== total) {
+                distMap = adjustAmount(distMap, currentTotalAmount, total);
             }
 
             return distMap;
         };
+        this.adjustCategory = (category, oldVal) => {
+
+            category.userAdjusted = true;
+
+            if (category.questionDistribution > oldVal) {
+                this.examParams.totalQuestion++;
+            } else if (this.examParams.totalQuestion > 0) {
+                this.examParams.totalQuestion--;
+            }
+        };
+
+        function adjustAmount(distMap, currentAmount, neededAmount) {
+            var initialIndex = Math.round(Math.random() * (distMap.length - 1));
+            var currentIndex = 0,
+                index = 0;
+            var lookingForStartingIndex = true;
+
+            while (currentAmount != neededAmount) {
+                if (index === distMap.length) {
+                    //reached the end of the map, start from the beginning
+                    index = 0
+                }
+                if (lookingForStartingIndex && initialIndex != currentIndex) {
+                    currentIndex++;
+                    continue;
+                } else {
+                    lookingForStartingIndex = false;
+                }
+
+                index++;
+
+                if (distMap[index] && distMap[index].questionDistribution === 0 && currentAmount > neededAmount) {
+                    continue;
+                    //we can't substract more from 0 questions...
+                }
+                if (distMap[index].userAdjusted) {
+                    continue;
+                    //we don't touch user defined adjustment for category
+                }
+
+                distMap[index].questionDistribution = (distMap[index].questionDistribution + (currentAmount < neededAmount ? 1 : -1));
+
+                currentAmount += (currentAmount < neededAmount ? 1 : -1);
+
+                currentIndex++;
+            }
+
+            return distMap;
+        }
 
         this.startExam = function() {
 
