@@ -98,6 +98,10 @@ body.flip {
     }
   }
 
+  @media (max-width: 1200px) and (min-width: $resXS) {
+    @include layout-collapsed();
+  }
+
   @media (max-width: $resXS) {
 
     .al-main {
@@ -109,6 +113,11 @@ body.flip {
     }
     .al-footer {
       padding-right: 0;
+    }
+  }
+  @media (min-width: $resXS + 1) {
+    .menu-collapsed {
+      @include sidebar-collapsed();
     }
   }
 }
