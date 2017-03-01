@@ -7,7 +7,7 @@
 
     function practiceSummaryCtrl(summary, simulator_config) {
         this.simulator_config = simulator_config;
-        this.passingGrade = this.simulator_config['passing grade'];
+        this.passingGrade = this.simulator_config.passingGrade;
         this.summary = summary;
         this.categoriesStats = [];
 

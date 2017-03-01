@@ -5,22 +5,17 @@
  * created on 16.12.2015
  */
 (function () {
-  'use strict';
+    'use strict';
 
-  angular.module('BlurAdmin.theme.components').component('pageTop', {
-    bindings: {
-      user: '<'
-    },
-    templateUrl: 'app/theme/components/pageTop/pageTop.html',
-    /** @ngInject */
-    controller: ["simulator_config", function (simulator_config) {
-      var _this = this;
-
-      this.config = simulator_config;
-      this.hideProfile = function () {
-        return _this.user.role === "Candidate";
-      };
-    }],
-    controllerAs: 'pageTop'
-  });
+    angular.module('BlurAdmin.theme.components').component('pageTop', {
+        bindings: {
+            user: '<'
+        },
+        templateUrl: 'app/theme/components/pageTop/pageTop.html',
+        /** @ngInject */
+        controller: ["simulator_config", function (simulator_config) {
+            this.config = simulator_config;
+        }],
+        controllerAs: 'pageTop'
+    });
 })();

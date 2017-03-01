@@ -26,6 +26,13 @@
     a.btn-info {
       width: 33%;
       margin-top: 8px;
+
+      @media screen and (max-width: $resS) {
+        width: 100%;
+      }
+      @media screen and (min-width: $resS) and (max-width: $resL) {
+        width: 40%;
+      }
     }
   }
 

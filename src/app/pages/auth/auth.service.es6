@@ -76,7 +76,35 @@
             }
 
             function getInfo() {
-                return customers.get('info');
+                return customers.get('info').then(user => user.plain());
+            }
+
+            function putInfo(details) {
+                let params = $.param(details);
+
+                return customers.customPOST(params, 'info', undefined, {'Content-Type': 'application/x-www-form-urlencoded'});
+            }
+
+            function resetPassword(email) {
+                return customers.customPUT(email, 'password', undefined, {ContentType: 'application/json'});
+            }
+
+            function changePassword(user) {
+                let params = $.param(user);
+                return customers.customPOST(params, 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded'})
+            }
+
+            return {getQuota, getInfo, putInfo, resetPassword, changePassword};
+        })
+        .factory('candidateService', (Restangular) => {
+            var customers = Restangular.all('/candidates/');
+
+            function getQuota() {
+                return customers.get('quota');
+            }
+
+            function getInfo() {
+                return customers.get('info').then(user => user.plain());
             }
 
             function putInfo(details) {

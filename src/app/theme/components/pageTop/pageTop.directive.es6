@@ -14,9 +14,6 @@
           /** @ngInject */
           controller: function(simulator_config) {
               this.config = simulator_config;
-              this.hideProfile = () => {
-                return this.user.role === "Candidate";
-              }
           },
           controllerAs: 'pageTop'
       });

@@ -15,14 +15,22 @@
             url: '/profile',
             parent: 'auth',
             title: 'USER.PROFILE',
-            template: '<profile-page user-profile="$ctrl.userProfile"></profile-page>',
-            controller: function(userProfile) {
-                this.userProfile = userProfile;
-            },
+            template: '<profile-page user-profile="$resolve.userProfile[1]" user-type="$resolve.userProfile[0]"></profile-page>',
             controllerAs: '$ctrl',
             resolve: {
-                userProfile: function(customerService) {
-                    return customerService.getInfo();
+                /*userType: function($q, userAuthService) {
+                    return userAuthService.getUser().then(user => {
+                        return user.role;
+                    })
+                },*/
+                userProfile: function($q, userAuthService, customerService, candidateService) {
+                    return userAuthService.getUser().then(user => {
+                        if (user.role === 'Customer') {
+                            return $q.all([$q.when(user.role), customerService.getInfo()]);
+                        } else if (user.role === 'Candidate') {
+                            return $q.all([$q.when(user.role), candidateService.getInfo()]);
+                        }
+                    });
                 }
             }
         })
@@ -97,6 +105,9 @@
                 showModal();
             },
             resolve: {
+                userType: function($q, $rootScope) {
+                    return $q.when($rootScope.currentUser);
+                },
                 userProfile: function(customerService) {
                     return customerService.getInfo();
                 }
