@@ -93,16 +93,17 @@
                 function timeframeModal($uibModal) {
                     var modalInstance = $uibModal.open({
                         animation: true,
-                        template: [ '<div class="panel"><div class="panel-body">',
-                            '<h3 class="text-center">{{::"EXAMS.EXAM_FINISH_ARE_YOU_SURE"|translate}}</h3>',
-                            '<br/>',
-                            '<br/>',
-                            '<p class="text-center ">',
-                            '<button class="btn btn-success btn-space" ng-click="ok()">{{::\'GENERAL.OK\'|translate}}</button>',
-                            '<button class="btn btn-default" ng-click="cancel()">{{::\'GENERAL.CANCEL\'|translate"}}</button>',
-                            '</p>',
-                            '</div></div>'].join(''),
-                        controller: function ($uibModalInstance, $scope) {
+                        template: `<div class="panel"><div class="panel-body">
+                            <h3 class="text-center">{{::"EXAMS.EXAM_FINISH_ARE_YOU_SURE"|translate}}</h3>
+                            <br/>
+                            <br/>
+                            <p class="text-center ">
+                            <button class="btn btn-success btn-space" ng-click="ok()">{{::'GENERAL.OK'|translate}}</button>
+                            <button class="btn btn-default" ng-click="cancel()">{{::'GENERAL.CANCEL'|translate}}</button>
+                            </p>
+                            </div></div>`,
+                        controller: ($uibModalInstance, $scope) => {
+
                             $scope.ok = function () {
                                 $uibModalInstance.close();
                             };

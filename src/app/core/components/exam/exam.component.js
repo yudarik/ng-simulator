@@ -13,7 +13,7 @@
             config: '<'
         },
         template: '<div class="panel question-area col-xs-12"\n                            ng-class="{\'solution\':$ctrl.isSolution}"\n                            ng-show="$ctrl.questionInDisplay">\n                        <div class="panel-heading" ng-if="$ctrl.config.predefinedExamDisplayName"><h3>{{::$ctrl.config.predefinedExamDisplayName}}</h3></div>\n                           <div class="panel-body">\n                               <exam-question question="$ctrl.questionInDisplay"></exam-question>\n                           </div>\n                       </div>\n                       <exam-remote practice-id="$ctrl.config.practiceID" remote-map="$ctrl.questions" is-solution="$ctrl.isSolution" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()" on-return="$ctrl.return()"></exam-remote>\n                       <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>',
-        controller: ["$scope", "$uibModal", "$interval", "$state", "examService", "simulatorService", "baSidebarService", "simulator_config", function ($scope, $uibModal, $interval, $state, examService, simulatorService, baSidebarService, simulator_config) {
+        controller: ["$scope", "$uibModal", "$interval", "$state", "$translate", "examService", "simulatorService", "baSidebarService", "simulator_config", function ($scope, $uibModal, $interval, $state, $translate, examService, simulatorService, baSidebarService, simulator_config) {
             'ngInject';
 
             var _this = this;
@@ -86,21 +86,22 @@
                 return question.answerOptions[random].key;
             }
 
-            function timeframeModal($uibModal) {
-                var modalInstance = $uibModal.open({
+            function timeframeModal(that, $uibModal) {
+                var options = {
                     animation: true,
-                    template: ['<div class="panel"><div class="panel-body">', '<h3 class="text-center">{{::"EXAMS.EXAM_FINISH_ARE_YOU_SURE"|translate}}</h3>', '<br/>', '<br/>', '<p class="text-center ">', '<button class="btn btn-success btn-space" ng-click="ok()">{{::\'GENERAL.OK\'|translate}}</button>', '<button class="btn btn-default" ng-click="cancel()">{{::\'GENERAL.CANCEL\'|translate"}}</button>', '</p>', '</div></div>'].join(''),
-                    controller: ["$uibModalInstance", "$scope", function ($uibModalInstance, $scope) {
+                    template: '<div class="panel"><div class="panel-body">\n                            <h3 class="text-center">{{::"EXAMS.EXAM_FINISH_ARE_YOU_SURE"|translate}}</h3>\n                            <br/>\n                            <br/>\n                            <p class="text-center ">\n                            <button class="btn btn-success btn-space" ng-click="ok()">{{::\'GENERAL.OK\'|translate}}</button>\n                            <button class="btn btn-default" ng-click="cancel()">{{::\'GENERAL.CANCEL\'|translate}}</button>\n                            </p>\n                            </div></div>',
+                    controller: function controller($uibModalInstance, $scope) {
+
                         $scope.ok = function () {
                             $uibModalInstance.close();
                         };
-
                         $scope.cancel = function () {
                             $uibModalInstance.dismiss('cancel');
                         };
-                    }],
+                    },
                     size: 'small'
-                });
+                };
+                var modalInstance = $uibModal.open(options);
 
                 return modalInstance.result;
             }
@@ -165,7 +166,7 @@
                 console.log('FinishExam reached');
 
                 if (_this.timeframe > 10) {
-                    timeframeModal($uibModal).then(function () {
+                    timeframeModal(_this, $uibModal).then(function () {
                         submitExam();
                     }, function () {
                         //dismiss

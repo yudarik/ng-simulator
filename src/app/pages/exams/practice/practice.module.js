@@ -8,7 +8,7 @@
     'use strict';
 
     routeConfig.$inject = ["$stateProvider"];
-    angular.module('Simulator.pages.exams.practice', ['Simulator.components']).config(routeConfig).run(function ($rootScope, $uibModal, $state) {
+    angular.module('Simulator.pages.exams.practice', ['Simulator.components']).config(routeConfig).run(function ($rootScope, $uibModal, $state, $translate) {
 
         function registerStateChangeListener() {
             var onRouteChangeOff = $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -29,12 +29,11 @@
         function redirectModal() {
             var modalInstance = $uibModal.open({
                 animation: true,
-                template: ['<div class="panel"><div class="panel-body">', '<h3 class="text-center">{{::"EXAMS.EXAM_CANCEL_ARE_YOU_SURE"|translate}}</h3>', '<br/>', '<br/>', '<p class="text-center ">', '<button class="btn btn-success btn-space" ng-click="ok()">אישור</button>', '<button class="btn btn-default" ng-click="cancel()">ביטול</button>', '</p>', '</div></div>'].join(''),
+                template: '<div class="panel"><div class="panel-body">\n                        <h3 class="text-center">{{::"EXAMS.EXAM_CANCEL_ARE_YOU_SURE"|translate}}</h3>\n                        <br/>\n                        <br/>\n                        <p class="text-center ">\n                        <button class="btn btn-success btn-space" ng-click="ok()">{{::\'GENERAL.OK\'|translate}}</button>\n                        <button class="btn btn-default" ng-click="cancel()">{{::\'GENERAL.CANCEL\'|translate}}</button>\n                        </p>\n                        </div></div>',
                 controller: function controller($uibModalInstance, $scope) {
                     $scope.ok = function () {
                         $uibModalInstance.close();
                     };
-
                     $scope.cancel = function () {
                         $uibModalInstance.dismiss('cancel');
                     };

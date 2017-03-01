@@ -3,6 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var runSequence = require('run-sequence');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -96,10 +97,14 @@ gulp.task('clean', function () {
   return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
 });
 gulp.task('clean-release-es6', function(){
-  return $.del([path.join(conf.paths.dist,'/app')]);
+  //return $.del([path.join(conf.paths.dist,'/app')]);
+  return gulp.src(path.join(conf.paths.dist,'/app'), {read: false})
+      .pipe($.clean());
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build', function(done){
+  runSequence('html', 'fonts', 'other', 'clean-release-es6', done)
+});
 
 gulp.task('es6', function() {
   gulp.src(path.join(conf.paths.src, '/app/**/*.es6'))

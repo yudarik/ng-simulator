@@ -180,6 +180,9 @@
     }
   },
   "GENERAL": {
-    "REQUIRED": "Required field"
+    "REQUIRED": "Required field",
+    "CANCEL": "Cancel",
+    "OK": "OK",
+    "CLOSE": "Close"
   }
 }
