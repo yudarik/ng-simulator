@@ -8,7 +8,7 @@
     'use strict';
 
     routeConfig.$inject = ["$stateProvider"];
-    angular.module('Simulator.pages.exams.practice', ['Simulator.components']).config(routeConfig).run(function ($rootScope, $uibModal, $state, $translate) {
+    angular.module('Simulator.pages.exams.practice', ['Simulator.components']).config(routeConfig).run(function ($rootScope, $uibModal, $state) {
 
         function registerStateChangeListener() {
             var onRouteChangeOff = $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -34,6 +34,7 @@
                     $scope.ok = function () {
                         $uibModalInstance.close();
                     };
+
                     $scope.cancel = function () {
                         $uibModalInstance.dismiss('cancel');
                     };

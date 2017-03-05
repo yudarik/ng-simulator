@@ -9,9 +9,10 @@
 
     angular.module('Simulator.components.charts').component('userQuota', {
         bindings: {
-            titleLabel: '<'
+            titleLabel: '<',
+            titleTooltip: '<'
         },
-        template: '<div id="questionsQuotaChart" class="amChart"></div>\n                       ',
+        template: '<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>\n                        <div id="questionsQuotaChart" class="amChart"></div>\n                       ',
         controller: ["$translate", "customerService", "simulator_config", function userQuotaCtrl($translate, customerService, simulator_config) {
             'ngInject';
 
@@ -64,11 +65,13 @@
                 "export": {
                     "enabled": false
                 },
-                "titles": [{
-                    "size": 15,
-                    "text": this.titleLabel,
-                    "color": "#666666"
-                }]
+                "titles": [
+                    /*{
+                        "size": 15,
+                        "text": this.titleLabel,
+                        "color": "#666666"
+                    }*/
+                ]
             };
 
             this.$onInit = function () {

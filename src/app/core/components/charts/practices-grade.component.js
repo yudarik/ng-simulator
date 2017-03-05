@@ -9,9 +9,10 @@
 
     angular.module('Simulator.components.charts').component('practicesGrade', {
         bindings: {
-            titleLabel: '<'
+            titleLabel: '<',
+            titleTooltip: '<'
         },
-        template: '<div id="practicesGradeChart" class="amChart flip float-left"></div>',
+        template: '<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>\n                       <h6 class="text-center" style="color:#0000FF">{{::$ctrl.translate.clickActionLabel}}</h6>\n                        <div id="practicesGradeChart" class="amChart flip float-left"></div>',
         controller: /** @ngInject */
         ["$translate", "$filter", "$state", "examService", "simulator_config", function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config) {
             var _this = this;
@@ -37,6 +38,7 @@
                 weakAreasPractice: $translate.instant('EXAMS.TYPES.WEAK_AREAS_PRACTICE'),
                 repeatedWeakAreasPractice: $translate.instant('EXAMS.TYPES.REPEATED_WEAK_AREAS_PRACTICE')
             };
+            this.translate = translate;
 
             var colors = {
                 "EXAM": "#FF0000",
@@ -247,16 +249,19 @@
                     "tabIndex": 4,
                     "valueText": ""
                 },
-                "titles": [{
-                    "id": "Title-1",
-                    "size": 15,
-                    "text": this.titleLabel
-                }, {
-                    "bold": false,
-                    "color": "#0000FF",
-                    "id": "Title-3",
-                    "text": translate.clickActionLabel
-                }],
+                "titles": [
+                    /*{
+                        "id": "Title-1",
+                        "size": 15,
+                        "text": this.titleLabel,
+                    },
+                    {
+                        "bold": false,
+                        "color": "#0000FF",
+                        "id": "Title-3",
+                        "text": translate.clickActionLabel
+                    }*/
+                ],
                 "listeners": [{
                     "event": "clickGraphItem",
                     "method": function method(event) {

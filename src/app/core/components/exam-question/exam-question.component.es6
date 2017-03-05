@@ -125,9 +125,9 @@
                                                    </label>
                                                </li>
                                            </ol>
-                                            <div class="bs-callout bs-callout-warning col-md-12" ng-if="$ctrl.question.help">
-                                            <h4>{{$ctrl.question.help}}</h5>
-                                            <p>{{$ctrl.question.detailedHelp}}</p>
+                                            <div class="bs-callout bs-callout-warning col-md-12" ng-if="$ctrl.question.help && $ctrl.question.help.trim() !== ''">
+                                                <h4>{{$ctrl.question.help}}</h5>
+                                                <p>{{$ctrl.question.detailedHelp}}</p>
                                             </div>
                                        </div>
                                    </form>

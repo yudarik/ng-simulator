@@ -47,14 +47,14 @@
                     'Content-Type': 'application/json'
                 })
                 //.setBaseUrl('rest'); // Production Build
-                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest');
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
+                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
             RestangularProvider.setErrorInterceptor(
                 (response) => {
-                    if ( response.status === 401) {
+                    if ( response.status === 401/* || response.status === 403*/) {
                         window.location = '#/signin';
                     }
                     else {

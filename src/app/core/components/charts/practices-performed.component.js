@@ -9,9 +9,10 @@
 
     angular.module('Simulator.components.charts').component('practicesPerformed', {
         bindings: {
-            titleLabel: '<'
+            titleLabel: '<',
+            titleTooltip: '<'
         },
-        template: '<div id="practiceTypeGrades" class="amChart"></div>',
+        template: '<h4 class="text-center" \n                            tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>\n                        <div id="practiceTypeGrades" class="amChart"></div>',
         controller: ["$translate", "baConfig", "customerService", "examService", function practicesPerformedCtrl($translate, baConfig, customerService, examService) {
             'ngInject';
 
@@ -22,11 +23,13 @@
             var chartColors = _.values(layoutColors.dashboard);
 
             var chartConf = {
-                titles: [{
-                    text: this.titleLabel,
-                    size: 15,
-                    "color": "#666666"
-                }],
+                titles: [
+                    /*{
+                        text: this.titleLabel,
+                        size: 15,
+                        "color": "#666666"
+                    }*/
+                ],
                 type: 'serial',
                 theme: 'default',
                 color: layoutColors.defaultText,

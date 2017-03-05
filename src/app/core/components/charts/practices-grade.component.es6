@@ -8,9 +8,12 @@
     angular.module('Simulator.components.charts')
         .component('practicesGrade', {
             bindings: {
-                titleLabel: '<'
+                titleLabel: '<',
+                titleTooltip: '<'
             },
-            template: `<div id="practicesGradeChart" class="amChart flip float-left"></div>`,
+            template: `<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
+                       <h6 class="text-center" style="color:#0000FF">{{::$ctrl.translate.clickActionLabel}}</h6>
+                        <div id="practicesGradeChart" class="amChart flip float-left"></div>`,
             controller: /** @ngInject */
                 function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config) {
 
@@ -35,6 +38,7 @@
                     weakAreasPractice: $translate.instant('EXAMS.TYPES.WEAK_AREAS_PRACTICE'),
                     repeatedWeakAreasPractice: $translate.instant('EXAMS.TYPES.REPEATED_WEAK_AREAS_PRACTICE'),
                 };
+                this.translate = translate;
 
                 var colors = {
                     "EXAM":  "#FF0000",
@@ -268,7 +272,7 @@
                         "valueText": ""
                     },
                     "titles": [
-                        {
+                        /*{
                             "id": "Title-1",
                             "size": 15,
                             "text": this.titleLabel,
@@ -278,7 +282,7 @@
                             "color": "#0000FF",
                             "id": "Title-3",
                             "text": translate.clickActionLabel
-                        }
+                        }*/
                     ],
                     "listeners": [{
                         "event": "clickGraphItem",

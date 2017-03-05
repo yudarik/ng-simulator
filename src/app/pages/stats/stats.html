@@ -3,22 +3,26 @@
 
     <div class="row" dir="ltr">
         <div ba-panel ba-panel-class="with-scroll" class="col-xs-12">
-            <practices-grade title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"></practices-grade>
+            <practices-grade title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"
+                             title-tooltip="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE_TOOLTIP'|translate"></practices-grade>
         </div>
         <div ba-panel ba-panel-class="with-scroll" class="col-xs-12" ng-if="!dashboard.isCandidate">
-            <categories-grade-radar title-label="'STATS.DASHBOARD.CHARTS.GRADES_RADAR.TITLE'|translate"></categories-grade-radar>
+            <categories-grade title-label="'STATS.DASHBOARD.CHARTS.GRADES_RADAR.TITLE'|translate"
+                            title-tooltip="'STATS.DASHBOARD.CHARTS.GRADES_RADAR.TITLE_TOOLTIP'|translate"></categories-grade>
         </div>
 
         <div ba-panel ba-panel-class="with-scroll" class="col-xs-12">
-            <practices-performed title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_PERFORMED.TITLE'|translate"></practices-performed>
+            <practices-performed title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_PERFORMED.TITLE'|translate"
+            title-tooltip="'STATS.DASHBOARD.CHARTS.PRACTICES_PERFORMED.TITLE_TOOLTIP'|translate"></practices-performed>
         </div>
         <div ba-panel class="col-xs-12 col-md-6 user-quota" ng-if="!dashboard.isCandidate" dir="rtl">
-            <user-quota title-label="'STATS.ACCOUNT.TITLE'|translate"></user-quota>
+            <user-quota title-label="'STATS.ACCOUNT.TITLE'|translate"
+                        title-tooltip="'STATS.ACCOUNT.TITLE_TOOLTIP'|translate"></user-quota>
         </div>
 
-
         <div ba-panel ba-panel-class="with-scroll" class="col-xs-12 col-md-6" ng-if="!dashboard.isCandidate">
-            <user-rank title-label="'STATS.DASHBOARD.CHARTS.USERS_RANK.TITLE'|translate"></user-rank>
+            <user-rank title-label="'STATS.DASHBOARD.CHARTS.USERS_RANK.TITLE'|translate"
+                       title-tooltip="'STATS.DASHBOARD.CHARTS.USERS_RANK.TITLE_TOOLTIP'|translate"></user-rank>
         </div>
 <!--
         <div class="col-xs-12 col-md-6" ba-panel ba-panel-class="with-scroll">

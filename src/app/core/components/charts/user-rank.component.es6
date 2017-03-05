@@ -8,9 +8,11 @@
     angular.module('Simulator.components.charts')
         .component('userRank', {
             bindings: {
-                titleLabel: '<'
+                titleLabel: '<',
+                titleTooltip: '<'
             },
-            template: `<div id="userRankChart" class="amChart"></div>`,
+            template: `<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
+                        <div id="userRankChart" class="amChart"></div>`,
             controller: function userRankCtrl($translate, customerStatsService) {
                 'ngInject';
 
@@ -87,12 +89,12 @@
                         "useGraphSettings": true
                     },
                     "titles": [
-                        {
+                        /*{
                             "id": "Title-1",
                             "size": 15,
                             "text": this.titleLabel,
                             "color": "#666666"
-                        }
+                        }*/
                     ],
                     "dataProvider": [
                         {

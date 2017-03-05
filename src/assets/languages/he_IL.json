@@ -116,6 +116,7 @@
   "STATS": {
     "ACCOUNT": {
       "TITLE": "יתרות בחשבון",
+      "TITLE_TOOLTIP": "tooltip",
       "TOTALNEWQUESTIONSQUOTA": "סה\"כ שאלות חדשות",
       "LEFTNEWQUESTIONSQUOTA": "יתרת שאלות חדשות",
       "SPENTNEWQUESTIONSQUOTA": "כמות שאלות חדשות שנוצלו",
@@ -151,12 +152,14 @@
         },
         "GRADES_RADAR": {
           "TITLE": "התפלגות ציונים לפי קטגוריה",
+          "TITLE_TOOLTIP": "tooltip",
           "GRADE": "ציון",
           "CATEGORY": "קטגוריה",
           "PASSING_GRADE":"ציון עובר"
         },
         "USERS_RANK": {
           "TITLE": "ממוצע ציונים משוקלל",
+          "TITLE_TOOLTIP": "tooltip",
           "RANK": "מקום",
           "YOU": "אתה",
           "ANONYMOUS": "משתמש אנונימי",
@@ -166,6 +169,7 @@
         },
         "PRACTICES_GRADE": {
           "TITLE": "הסטוריית תרגולים",
+          "TITLE_TOOLTIP": "tooltip",
           "CLICK_ON_CHART_TITLE": "לחץ על עמודת הגרף לתרגול חוזר"
         },
         "CATEGORIES_LINE": {
@@ -177,6 +181,7 @@
         },
         "PRACTICES_PERFORMED": {
           "TITLE": "התפלגות תרגולים",
+          "TITLE_TOOLTIP": "tooltip",
           "XAXIS_TITLE": "כמות שאלות שבוצעו"
         },
         "PACKAGES_QUOTA": {

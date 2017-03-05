@@ -8,9 +8,12 @@
     angular.module('Simulator.components.charts')
         .component('practicesPerformed', {
             bindings: {
-                titleLabel: '<'
+                titleLabel: '<',
+                titleTooltip: '<'
             },
-            template: `<div id="practiceTypeGrades" class="amChart"></div>`,
+            template: `<h4 class="text-center" 
+                            tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
+                        <div id="practiceTypeGrades" class="amChart"></div>`,
             controller: function practicesPerformedCtrl($translate, baConfig, customerService, examService) {
                 'ngInject';
 
@@ -20,11 +23,11 @@
 
                 var chartConf = {
                     titles: [
-                        {
+                        /*{
                             text: this.titleLabel,
                             size: 15,
                             "color": "#666666"
-                        }
+                        }*/
                     ],
                     type: 'serial',
                     theme: 'default',
