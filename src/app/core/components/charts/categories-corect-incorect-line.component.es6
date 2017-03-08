@@ -12,7 +12,7 @@
             },
             template: `<div id="categoriesCorectIncorect" class="amChart"></div>
                         <div id="categoriesCorectIncorectLegend"></div>`,
-            controller: function CorrectIncorrectCtrl($translate, baConfig, customerStatsService) {
+            controller: function CorrectIncorrectCtrl($translate, baConfig, statsService) {
                 'ngInject';
 
                 var layoutColors = baConfig.colors;
@@ -105,7 +105,7 @@
                 };
 
                 this.$onInit = ()=>{
-                    customerStatsService.getCategories().then(categoriesStats => {
+                    statsService.getCategories().then(categoriesStats => {
 
                         chartConf.dataProvider = categoriesStats.map(cat => {
                             return {

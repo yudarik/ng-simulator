@@ -50,7 +50,8 @@
       "PREDEFINED_EXAM": "מבחני הסמכה",
       "REPEATED_PREDEFINED_EXAM": "מבחני הסמכה חוזרים",
       "SUGGESTED_PRACTICE": "תרגול מותעם",
-      "REPEATED_SUGGESTED_PRACTICE": "תרגול מותעם חוזר"
+      "REPEATED_SUGGESTED_PRACTICE": "תרגול מותעם חוזר",
+      "DEMO": "דוגמה"
     },
     "EXAM_FINISH_ARE_YOU_SURE": "עדיין נותר לך זמן, האם את/ה מעוניין/נת לסיים כעת בכל זאת ?",
     "EXAM_CANCEL_ARE_YOU_SURE": "הינך בטוח שברצונך לבטל את התרגול/בחינה?",
@@ -238,7 +239,8 @@
       "ACCEPT_COMERCIAL_MAIL": "מאשר קבלת מייל פרסומי",
       "UPCOMING_EXAM": "מועד בחינה מתוכנן",
       "SELECT_EXAM_DATE": "בחר מועד",
-      "OR_SELECT_OTHER_DATE": "או בחר מועד אחר מתוך רשימת מועדים",
+      "SELECT_FROM_UPCOMING_EVENTS": "בחר מתוך רשימת מועדים מתוכננים",
+      "OR_SELECT_OTHER_DATE": "או סמן מועד אחר",
       "DETAILS_UPDATED_SUCCESS": "הפרטים עודכנו בהצלחה",
       "PASSWORD_CHANGE_SUCCESS": "הסיסמא שונתה בהצלחה, יוצא מהמערכת לצורך התחברות מחדש בעוד 5 שניות...",
       "NEXT": "הבא",

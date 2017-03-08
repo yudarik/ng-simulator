@@ -183,7 +183,7 @@
                         },
                         {
                             "fillColors": colors.REPEATED_PRACTICE,
-                            "id": "Repeated General Practice  [for legend]",
+                            "id": "Repeated General Practice [for legend]",
                             "legendAlpha": 1,
                             "legendColor": colors.REPEATED_PRACTICE,
                             "legendPeriodValueText": "",

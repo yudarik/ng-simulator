@@ -15,11 +15,13 @@
         templateUrl: 'app/pages/profile/profile.html',
 
         /** @ngInject */
-        controller: function (toaster, $uibModal, $translate, customerService, candidateService, simulator_config) {
+        controller: function (toaster, $uibModal, $translate, customerService, simulator_config) {
 
-          this.service = (this.userType === 'Customer')? customerService : candidateService;
+          this.service = customerService;
 
           this.userProfileForm = {};
+
+          this.examEventOption = 'select';
 
           this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
             return date;//moment(date).format('DD/MM/YYYY').toString();

@@ -4,39 +4,39 @@
         <div class="form-group row clearfix">
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.EMAIL'|translate}}</label>
 
-            <div class="col-sm-9">
+            <div class="col-sm-9 full-width-on-modal">
                 <input type="email" class="form-control" name="email" placeholder="{{::'USER.PROFILE_PAGE.EMAIL'|translate}}" ng-value="profile.user.email" disabled>
             </div>
         </div>
         <div class="form-group row clearfix">
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.PHONE'|translate}}</label>
 
-            <div class="col-sm-9">
-                <input type="text" class="form-control" name="telephone" placeholder="" ng-model="profile.user.telephone" ng-required="profile.userType === 'Customer'">
+            <div class="col-sm-9 full-width-on-modal">
+                <input type="text" class="form-control" name="telephone" placeholder="{{::'USER.PROFILE_PAGE.PHONE'|translate}}" ng-model="profile.user.telephone" ng-required="profile.userType === 'Customer'">
                 <div class="text-danger" ng-messages="userProfileForm.telephone.$error" role="alert">
-                    <div ng-message="required" ng-bind="::'GENERAL.REQUIRED'|translate"></div>
+                    <span class="sub-little-text" ng-message="required" ng-bind="::'GENERAL.REQUIRED'|translate"></span>
                 </div>
             </div>
         </div>
         <div class="form-group row clearfix">
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.BUSINESS_NAME'|translate}}</label>
 
-            <div class="col-sm-9">
-                <input type="text" class="form-control" name="businessName" placeholder="" ng-model="profile.user.businessName">
+            <div class="col-sm-9 full-width-on-modal">
+                <input type="text" class="form-control" name="businessName" placeholder="{{::'USER.PROFILE_PAGE.BUSINESS_NAME'|translate}}" ng-model="profile.user.businessName">
             </div>
         </div>
         <div class="form-group row clearfix">
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.STREET_ADDRESS'|translate}}</label>
 
-            <div class="col-sm-9">
-                <input type="text" class="form-control" name="streetAddress" placeholder="" ng-model="profile.user.streetAddress">
+            <div class="col-sm-9 full-width-on-modal">
+                <input type="text" class="form-control" name="streetAddress" placeholder="{{::'USER.PROFILE_PAGE.STREET_ADDRESS'|translate}}" ng-model="profile.user.streetAddress">
             </div>
         </div>
         <div class="form-group row clearfix">
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.CITY_ADDRESS'|translate}}</label>
 
-            <div class="col-sm-9">
-                <input type="text" class="form-control" name="cityAddress" placeholder="" ng-model="profile.user.cityAddress">
+            <div class="col-sm-9 full-width-on-modal">
+                <input type="text" class="form-control" name="cityAddress" placeholder="{{::'USER.PROFILE_PAGE.CITY_ADDRESS'|translate}}" ng-model="profile.user.cityAddress">
             </div>
         </div>
     </div>

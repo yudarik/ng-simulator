@@ -108,6 +108,11 @@
             $rootScope.$on('post-login-bean', function(event, data) {
                 if (data.user) {
                     $state.get('exams.post-credit').sidebarMeta.disabled = !data.user.postCreditModeNow;
+
+                    if (data.user.role === "Candidate") {
+                        $state.get('exams.distribution-full').sidebarMeta.disabled = true;
+                        $state.get('exams.weak-areas').sidebarMeta.disabled = true;
+                    }
                 }
             })
         })

@@ -13,7 +13,7 @@
             },
             template: `<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
                         <div id="userRankChart" class="amChart"></div>`,
-            controller: function userRankCtrl($translate, customerStatsService) {
+            controller: function userRankCtrl($translate, statsService) {
                 'ngInject';
 
                 var textLabels = {
@@ -129,7 +129,7 @@
                 };
 
                 this.$onInit = () =>{
-                    customerStatsService.getRank().then((ranks) => {
+                    statsService.getRank().then((ranks) => {
 
                         chartConf.dataProvider = ranks.map((rank,index) => {
                             return _.assign(chartConf.dataProvider[index], {

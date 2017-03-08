@@ -94,7 +94,7 @@
                           <div class="row">
                                <div class="col-xs-12">
                                    <div class="text-left category-label" ng-if="$ctrl.config.showQuestionCategoryInAnswersPage && $ctrl.solvedExamMode">
-                                        <img src="/assets/img/app/category-icon.png" width="25" height="25"/>
+                                        <img src="assets/img/app/category-icon.png" width="25" height="25"/>
                                         <label>{{$ctrl.question.category.categoryName}}</label>
                                    </div>
 
@@ -132,7 +132,7 @@
                                        </div>
                                    </form>
                                </div>
-                               <span class="pull-left text-left col-sm-4 questionID">{{$ctrl.question.questionID}}</span>
+                               <span class="pull-right text-right col-sm-4 questionID">{{$ctrl.question.questionID}}</span>
                            </div>
                         </div>`
 

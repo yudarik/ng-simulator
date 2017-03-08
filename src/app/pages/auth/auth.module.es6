@@ -48,7 +48,9 @@
                 resolve: {
                     user: (userAuthService, $state) => {
                         return userAuthService.getUser()
-                            .then(user => user)
+                            .then(user => {
+                                return user;
+                            })
                             .catch(err => $state.go('signin'));
                     }
                 }

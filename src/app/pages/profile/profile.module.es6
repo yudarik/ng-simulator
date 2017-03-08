@@ -23,14 +23,8 @@
                         return user.role;
                     })
                 },*/
-                userProfile: function($q, userAuthService, customerService, candidateService) {
-                    return userAuthService.getUser().then(user => {
-                        if (user.role === 'Customer') {
-                            return $q.all([$q.when(user.role), customerService.getInfo()]);
-                        } else if (user.role === 'Candidate') {
-                            return $q.all([$q.when(user.role), candidateService.getInfo()]);
-                        }
-                    });
+                userProfile: function($q, userAuthService, customerService) {
+                    return $q.all([userAuthService.getUserType(), customerService.getInfo()]);
                 }
             }
         })
@@ -47,24 +41,21 @@
                     $uibModal.open({
                         animation: true,
                         controller: function($uibModalInstance) {
-
-                            this.user = userProfile;
-                            this.simulatorConfig = simulator_config;
-                            this.currentPage = 1;
-                            this.buttons = buttons;
                             this.alert;
-
+                            this.buttons = buttons;
+                            this.service = customerService;
                             this.userProfileForm = {};
-                            this.upcomingExamEvents = _.map(simulator_config.upcomingExamEventDates, (date)=> {
-                                return {date: date};
+                            this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
+                                return date;//moment(date).format('DD/MM/YYYY').toString();
                             });
+                            this.user = _.clone(userProfile[1]);
 
                             this.getAlertType = ()=>{
                                 if (!this.alert) return;
 
                                 return this.alert.type;
                             };
-                            this.updateProfile = () =>{
+                            /*this.updateProfile = () =>{
 
                                 let params = this.user.plain();
 
@@ -94,7 +85,44 @@
                                         };
                                     }
                                 })
-                            }
+                            }*/
+                            this.updateProfile = () =>{
+
+                                let params = this.user;
+
+                                if (this.user.examEventDate && typeof this.user.examEventDate === "object") {
+                                    params.examEventDate = this.user.examEventDate.getTime();//.format('DD/MM/YYYY').toString();
+                                } else if (typeof this.user.examEventDate === "number") {
+                                    params.examEventDate = this.user.examEventDate;
+                                }
+
+                                _.forEach(params, (val, key)=>{
+
+                                    if (_.isNil(val)) {
+                                        params = _.omit(params, key);
+                                    }
+                                });
+
+                                this.service.putInfo(params).then(()=>{
+                                    this.alert = {
+                                        type: 'success',
+                                        msg: $translate.instant('USER.PROFILE_PAGE.DETAILS_UPDATED_SUCCESS')
+                                    };
+                                    $timeout(()=>{
+                                        $uibModalInstance.close();
+                                    },1000);
+
+                                }).catch(err =>{
+
+                                    if (err.data) {
+                                        this.error = err.data.description;
+                                        this.alert = {
+                                            type: 'danger',
+                                            msg: err.data.description
+                                        };
+                                    }
+                                })
+                            };
                         },
                         controllerAs: 'profile',
                         templateUrl: 'app/pages/profile/profileModal.html'
@@ -105,11 +133,8 @@
                 showModal();
             },
             resolve: {
-                userType: function($q, $rootScope) {
-                    return $q.when($rootScope.currentUser);
-                },
-                userProfile: function(customerService) {
-                    return customerService.getInfo();
+                userProfile: function($q, userAuthService, customerService) {
+                    return $q.all([userAuthService.getUserType(), customerService.getInfo()]);
                 }
             }
         })

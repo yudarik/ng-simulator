@@ -137,8 +137,8 @@
                                 </div>
                             </div>`,
                 resolve: {
-                    practiceConfig: function(customerStatsService) {
-                        return customerStatsService.getCategories('WEAK_AREAS_PRACTICE');
+                    practiceConfig: function(statsService) {
+                        return statsService.getCategories('WEAK_AREAS_PRACTICE');
                     }
                 },
                 controller: function($filter, practiceConfig) {
