@@ -62,6 +62,9 @@
                 },
                 getUserType: () => {
                     return Srv.getUser().then(user => user.role);
+                },
+                resetPassword(email) {
+                    return Restangular.all('/customers/').customPUT($.param(email), 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
                 }
             };
 
