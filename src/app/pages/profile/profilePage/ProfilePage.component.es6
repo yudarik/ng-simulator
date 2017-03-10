@@ -12,7 +12,7 @@
           userProfile: '<',
           userType: '<'
         },
-        templateUrl: 'app/pages/profile/profile.html',
+        templateUrl: 'app/pages/profile/profilePage/profile.html',
 
         /** @ngInject */
         controller: function (toaster, $uibModal, $translate, customerService, simulator_config) {

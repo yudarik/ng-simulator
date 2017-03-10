@@ -49,6 +49,9 @@
                     user: (userAuthService, $state) => {
                         return userAuthService.getUser()
                             .then(user => {
+                                if (user && user.tempPassword) {
+                                    return $state.go('changePassword');
+                                }
                                 return user;
                             })
                             .catch(err => $state.go('signin'));
@@ -81,7 +84,6 @@
             })
             .state('changePassword', {
                 url: '/changePassword',
-                controllerAs: 'passChange',
                 templateUrl: 'app/pages/auth/changePassword/passwordChange.html',
                 controller: 'changePasswordCtrl as passChange',
                 resolve: {

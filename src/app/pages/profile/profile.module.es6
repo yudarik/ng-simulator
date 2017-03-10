@@ -40,6 +40,8 @@
                 var showModal = function (item) {
                     $uibModal.open({
                         animation: true,
+                        backdrop  : 'static',
+                        keyboard  : false,
                         controller: function($uibModalInstance) {
                             this.alert;
                             this.buttons = buttons;
@@ -55,37 +57,6 @@
 
                                 return this.alert.type;
                             };
-                            /*this.updateProfile = () =>{
-
-                                let params = this.user.plain();
-
-                                _.forEach(params, (val, key)=>{
-
-                                    if (_.isEmpty(params[key])) {
-                                        params = _.omit(params, key);
-                                    }
-                                });
-
-                                customerService.putInfo(params).then(()=>{
-                                    this.alert = {
-                                        type: 'success',
-                                        msg: $translate.instant('USER.PROFILE_PAGE.DETAILS_UPDATED_SUCCESS')
-                                    };
-                                    $timeout(()=>{
-                                        $uibModalInstance.close();
-                                    },1000);
-
-                                }).catch(err =>{
-
-                                    if (err.data) {
-                                        this.error = err.data.description;
-                                        this.alert = {
-                                            type: 'danger',
-                                            msg: err.data.description
-                                        };
-                                    }
-                                })
-                            }*/
                             this.updateProfile = () =>{
 
                                 let params = this.user;
@@ -125,7 +96,7 @@
                             };
                         },
                         controllerAs: 'profile',
-                        templateUrl: 'app/pages/profile/profileModal.html'
+                        templateUrl: 'app/pages/profile/profileModal/profileModal.html'
                     }).result.then(function (link) {
                         $state.go(simulator_config.defaultState);
                     });

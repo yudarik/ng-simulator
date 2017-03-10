@@ -36,7 +36,7 @@
 
                         auth.customGET('').then(function(user){
                             if (!resetPassword && !user.tempPassword){
-                                $rootScope.currentUser = user
+                                $rootScope.currentUser = user;
                             }
                             $rootScope.$broadcast('post-login-bean', {user});
 

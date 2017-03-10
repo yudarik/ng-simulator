@@ -253,7 +253,7 @@ a.sn-link {
       margin-bottom:0;
     }
     .form-group {
-      label {
+      label[for] {
         display: none;
       }
       .full-width-on-modal {
