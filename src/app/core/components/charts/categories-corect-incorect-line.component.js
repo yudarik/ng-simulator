@@ -39,6 +39,7 @@
                 "categoryField": "category",
                 "startDuration": 1,
                 "theme": "default",
+                "fontFamily": "'Arimo', sans-serif",
                 "categoryAxis": {
                     "gridPosition": "start",
                     labelRotation: 25,

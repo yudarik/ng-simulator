@@ -2,13 +2,9 @@
     <h2 class="text-center" ng-bind="::'AUTH.INITIAL_PROFILE_SETUP_TITLE'|translate"></h2>
   <form name="userProfileForm" ng-submit="profile.updateProfile(userProfileForm)" novalidate>
       <div ng-include="'app/pages/profile/profileTemplate/general-info.html'"></div>
-      <div ng-include="'app/pages/profile/profileTemplate/contact.html'"></div>
+      <div ng-if="profile.userType === 'Customer'"
+           ng-include="'app/pages/profile/profileTemplate/contact.html'"></div>
       <div ng-include="'app/pages/profile/profileTemplate/exam-date.html'"></div>
-
-<!--    <ul uib-pager total-items="3" ng-model="profile.currentPage"
-        items-per-page="1"
-        next-text="{{::profile.buttons.next}}"
-        previous-text="{{::profile.buttons.prev}}"></ul>-->
 
     <p class="col-md-12 pull-left text-{{profile.getAlertType()}} pull-left" ng-if="profile.alert" ng-bind="profile.alert.msg">
     </p>

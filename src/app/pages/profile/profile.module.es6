@@ -47,10 +47,12 @@
                             this.buttons = buttons;
                             this.service = customerService;
                             this.userProfileForm = {};
+                            this.examEventOption = 'select';
                             this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
                                 return date;//moment(date).format('DD/MM/YYYY').toString();
                             });
                             this.user = _.clone(userProfile[1]);
+                            this.userType = userProfile[0];
 
                             this.getAlertType = ()=>{
                                 if (!this.alert) return;

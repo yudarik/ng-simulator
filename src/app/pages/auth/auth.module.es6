@@ -72,7 +72,8 @@
             })
             .state('signout', {
                 url: '/signout',
-                controller: function(userAuthService){
+                controller: function(userAuthService, customerService){
+                    customerService.clearCache();
                     userAuthService.signout();
                 }
             })

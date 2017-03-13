@@ -59,6 +59,7 @@
                 "type": "serial",
                 "zoomOutText": '',
                 "zoomOutButtonAlpha": 0,
+                "fontFamily": "'Arimo', sans-serif",
                 "categoryField": "Practice Date",
                 "dataDateFormat": "DD/MM/YYYY HH:NN:SS",
                 "maxSelectedSeries": 20,

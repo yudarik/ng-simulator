@@ -18,14 +18,12 @@
                 signout: () => {
 
                     $rootScope.currentUser = null;
-
                     return auth.customPOST({}, 'logout')
                         .then((res)=>{
-
                         })
                         .catch(()=>{
                            $state.go('signin');
-                        })
+                        });
                 },
                 getUser: (resetPassword) => {
 
@@ -72,6 +70,8 @@
         })
         .factory('customerService', function(Restangular, userAuthService, $q) {
 
+            //var service = null;
+
             var service = userAuthService.getUserType().then(type => {
                 if (type === "Customer") {
                     return Restangular.all('/customers/');
@@ -80,8 +80,26 @@
                 }
             });
 
+            function initService() {
+                return userAuthService.getUserType().then(type => {
+                    if (type === "Customer") {
+                        return Restangular.all('/customers/');
+                    } else {
+                        return Restangular.all('/candidates/');
+                    }
+                });
+            }
+
+            function clearCache() {
+                service = null;
+            }
+
             function getService() {
-                return $q.when(service);
+                if (service) {
+                    return $q.when(service);
+                } else {
+                    return initService().then(srv => service = srv);
+                }
             }
 
             function getQuota() {
@@ -107,6 +125,6 @@
                 return getService().then(srv => srv.customPOST(params, 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded'}));
             }
 
-            return {getQuota, getInfo, putInfo, resetPassword, changePassword};
+            return {getQuota, getInfo, putInfo, resetPassword, changePassword, clearCache};
         })
 })();

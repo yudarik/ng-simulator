@@ -31,6 +31,7 @@
                     ],
                     type: 'serial',
                     theme: 'default',
+                    fontFamily: "'Arimo', sans-serif",
                     color: layoutColors.defaultText,
                     dataProvider: [],
                     valueAxes: [
