@@ -30,12 +30,7 @@
 
                     $rootScope.currentUser = null;
 
-                    userAuthService.getUser().then(user => {
-                        /*if (user.role === "Customer") {
-                            $state.go(simulator_config.defaultState);
-                        } else {
-                            //$state.go('profile');
-                        }*/
+                    userAuthService.getUser().then(() => {
                         $state.go(simulator_config.defaultState);
                     }).catch(err => {
                         $state.go('signin');

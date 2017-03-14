@@ -16,7 +16,7 @@
                 userAuthService.signin(this.user)
                     .then(userAuthService.getPostLogin)
                     .then((user)=>{
-                        //user.defaultProfile = true;
+                        user.defaultProfile = true;
                         //user.tempPassword = true;
                         //$scope.$emit('post-login-bean', {user});
 
