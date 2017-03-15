@@ -70,7 +70,8 @@
       "LABEL": "סיכום",
       "PRACTICE_SOLUTION": "פתרון התרגול",
       "TIPS_FOR_SUCCESS": "טיפים להצלחה בבחינה",
-      "REPEAT_PRACTICE": "חזור על התרגול"
+      "REPEAT_PRACTICE": "חזור על התרגול",
+      "TABLE_TITLE": "פירוט התרגול לפי קטגוריות"
     },
     "DISTRIBUTION": {
       "TITLE": "חלוקת שאלות לפי קטגוריות:",

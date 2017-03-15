@@ -52,7 +52,7 @@
 
             var warningArea = (100 - this.passingGrade)/2;
 
-            if (num <= this.passingGrade) return 'label-danger';
+            if (num < this.passingGrade) return 'label-danger';
             if (num <= this.passingGrade + warningArea) return 'label-warning';
             if (num <= 100) return 'label-success';
             else return 'label-default';
