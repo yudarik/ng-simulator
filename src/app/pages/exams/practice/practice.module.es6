@@ -123,39 +123,14 @@
             .state('exams.weak-areas', {
                 url: '/weak-areas',
                 parent: 'exams',
-                template: `<div class="panel col-md-offset-4 col-md-4">
-                                <div class="panel-body">
-                                    <h3>{{::\'\'|translate}}</h3>
-                                    <ol>
-                                        <li ng-repeat="category in weakAreas.practiceConfig.categories">
-                                            {{::category.name}}
-                                        </li>
-                                    </ol>
-                                    <div class="col-md-12">
-,                                        <a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.practiceConfig, practiceType: 'WEAK_AREAS_PRACTICE'})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>
-                                    </div>
-                                </div>
-                            </div>`,
+                template: `<weak-areas-chart config="$resolve.practiceConfig" 
+                                             title-label="::'STATS.DASHBOARD.CHARTS.WEAK_AREAS.TITLE'|translate">                                             
+                            </weak-areas-chart>`,
                 resolve: {
-                    practiceConfig: function(customerStatsService) {
-                        return customerStatsService.getCategories('WEAK_AREAS_PRACTICE');
+                    practiceConfig: function(statsService) {
+                        return statsService.getCategories('WEAK_AREAS_PRACTICE');
                     }
                 },
-                controller: function($filter, practiceConfig) {
-                    this.practiceConfig = practiceConfig;/*$filter('orderBy')(practiceConfig, (item)=>{
-                        return item.totalQuestionsAskedInCategory - item.questionIDsCorrectlyAnswered.length;
-                    }, true);*/
-
-                    this.getDistribution = () => {
-                        return {
-                            categories: _.map(this.practiceConfig, (item)=> {
-                                return item.category;
-                            }),
-                            questionsInExam: this.practiceConfig.length
-                        };
-                    }
-                },
-                controllerAs: 'weakAreas',
                 title: 'EXAMS.TYPES.WEAK_AREAS_PRACTICE',
                 sidebarMeta: {
                     order: 400

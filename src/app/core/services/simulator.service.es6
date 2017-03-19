@@ -10,28 +10,27 @@
 
         var simulators = Restangular.all('simulators');
         var statusCache = null,
-            statusResolved = true;
+            promise,
+            requestInProgress = false;
 
         function getStatus() {
-            var defer = $q.defer(),
-                promise = defer.promise;
 
-            /*if (!statusResolved) {
-                return promise;
-            } else */
             if (statusCache) {
-                $q.when(statusCache);
+                return $q.when(statusCache);
+            }
+            if (requestInProgress) {
+                return $q.when(promise);
             }
 
-            simulators.get('status').then(status => {
+            promise = simulators.get('status').then(status => {
                 statusCache = status;
 
-                statusResolved = true;
-
-                defer.resolve(status);
+                return status
             });
 
-            return promise;
+            requestInProgress = true;
+
+            return $q.when(promise);
         }
 
         function ping() {

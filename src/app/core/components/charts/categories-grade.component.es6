@@ -15,7 +15,7 @@
             template: `<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
                         <div id="categoriesGradeChart" class="amChart"></div>`,
             controller: /** @ngInject */
-                function CategoriesChartsCtrl($translate, $filter, customerStatsService, simulator_config) {
+                function CategoriesChartsCtrl($translate, $filter, statsService, simulator_config) {
 
                 var numberFilter = $filter('number');
 
@@ -35,6 +35,7 @@
                     "maxSelectedSeries": 20,
                     "maxZoomFactor": 10,
                     "startDuration": 1,
+                    "fontFamily": "'Arimo', sans-serif",
                     "categoryAxis": {
                         "autoRotateAngle": 45,
                         "autoRotateCount": 1,
@@ -152,7 +153,7 @@
                 this.$onInit = () => {
                     if (!this.stats) {
 
-                        customerStatsService.getCategories().then(this.init);
+                        statsService.getCategories().then(this.init);
                     } else {
                         this.init(this.stats);
                     }

@@ -18,7 +18,7 @@
         <h5 class="row">
             <div class="col-xs-12 col-md-3">
                 <label>{{::'EXAMS.SUMMARY.FINAL_GRADE'|translate}}:</label>
-                <span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.summary.grade)">{{practiceSummary.summary.grade|number}}%</span>
+                <span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.summary.grade)">{{practiceSummary.summary.grade|number:0}}%</span>
             </div>
             <div class="col-xs-12 col-md-3">
                 <label>{{::'EXAMS.SUMMARY.TIME_ELAPSED'|translate}}:</label>
@@ -35,17 +35,17 @@
             <exam-grade-gauge class="col-md-6" exam-grade="practiceSummary.summary.grade" title-label="::'STATS.ACCOUNT.GRADE'|translate"></exam-grade-gauge>
         </div>
         <div class="graph vertical centered table-condensed col-xs-12">
-            <categories-grade-radar stats="practiceSummary.categoriesStats"></categories-grade-radar>
+            <categories-grade-radar stats="practiceSummary.categoriesStats" style="height: 300px;width:100%"></categories-grade-radar>
             <br/>
         </div>
 
-
+        <h3 class="text-center">{{::'EXAMS.SUMMARY.TABLE_TITLE'|translate}}</h3>
         <table class="table table-condensed col-xs-12">
             <thead>
                 <th>{{::'EXAMS.SUMMARY.CATEGORY'|translate}}</th>
-                <th>{{::'EXAMS.SUMMARY.QUESTIONS_COUNT'|translate}}</th>
-                <th>{{::'EXAMS.SUMMARY.CORRECT_ANSWERS_COUNT'|translate}}</th>
-                <th>{{::'EXAMS.SUMMARY.GRADE'|translate}}</th>
+                <th class="text-center">{{::'EXAMS.SUMMARY.QUESTIONS_COUNT'|translate}}</th>
+                <th class="text-center">{{::'EXAMS.SUMMARY.CORRECT_ANSWERS_COUNT'|translate}}</th>
+                <th class="text-center">{{::'EXAMS.SUMMARY.GRADE'|translate}}</th>
             </thead>
             <tbody>
                 <tr ng-repeat="dist in practiceSummary.questionsDistribution track by $index" class="text-center">

@@ -4,8 +4,29 @@
         <div class="form-group row clearfix">
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.SELECT_EXAM_DATE'|translate}}</label>
 
-            <div class="col-sm-9">
-                <div class="input-group">
+            <div class="col-sm-9 full-width-on-modal">
+                <div class="form-group clearfix">
+                    <div class="col-md-6">
+                        <label class="radio-inline custom-radio nowrap">
+                            <input type="radio" name="examEventOption" ng-model="profile.examEventOption" value="select">
+                            <span>{{::'USER.PROFILE_PAGE.SELECT_FROM_UPCOMING_EVENTS'|translate}}</span>
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="radio-inline custom-radio nowrap">
+                            <input type="radio" name="examEventOption" ng-model="profile.examEventOption" value="other">
+                            <span>{{::'USER.PROFILE_PAGE.OR_SELECT_OTHER_DATE'|translate}}</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group clearfix" ng-if="profile.examEventOption === 'select'">
+                    <ui-select name="examEventDate" class="text-right" ng-model="profile.user.examEventDate" search-enabled="false">
+                        <ui-select-match placeholder="{{::'USER.PROFILE_PAGE.SELECT_EXAM_DATE'|translate}}">{{$select.selected | date: 'dd/MM/yyyy'}}</ui-select-match>
+                        <ui-select-choices repeat="event in profile.upcomingExamEventDates">{{event|date: 'dd/MM/yyyy'}}</ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="input-group" ng-if="profile.examEventOption === 'other'">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="datePicker.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -16,13 +37,7 @@
                            show-button-bar="false"
                            close-text="Close" theme="bootstrap"/>
                 </div>
-                <div class="form-group clearfix">
-                    <p class="">{{::'USER.PROFILE_PAGE.OR_SELECT_OTHER_DATE'|translate}}</p>
-                    <ui-select name="examEventDate" class="text-right" ng-model="profile.user.examEventDate" search-enabled="false">
-                        <ui-select-match placeholder="{{::'USER.PROFILE_PAGE.SELECT_EXAM_DATE'|translate}}">{{$select.selected | date: 'dd/MM/yyyy'}}</ui-select-match>
-                        <ui-select-choices repeat="event in profile.upcomingExamEventDates">{{event|date: 'dd/MM/yyyy'}}</ui-select-choices>
-                    </ui-select>
-                </div>
+
             </div>
         </div>
     </div>

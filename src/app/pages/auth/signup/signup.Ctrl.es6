@@ -24,15 +24,10 @@
                         if (response.status === 'success') {
                             this.message = $translate.instant('AUTH.REGISTERED_SUCCESSFULLY');
                         }
+                    })
+                    .catch((err)=>{
+                        this.message = err.data.description;
                     });
-                    /*.catch((err)=>{
-                        if (err.status === 401) {
-                            this.message = $translate.instant('SIGNIN.'+err.data.errorMessage.toUpperCase());
-                        } else {
-                            this.message = err.data.errorMessage
-                        }
-
-                    });*/
             }
         })
 

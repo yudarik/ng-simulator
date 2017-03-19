@@ -59,6 +59,7 @@
                     "type": "serial",
                     "zoomOutText": '',
                     "zoomOutButtonAlpha": 0,
+                    "fontFamily": "'Arimo', sans-serif",
                     "categoryField": "Practice Date",
                     "dataDateFormat": "DD/MM/YYYY HH:NN:SS",
                     "maxSelectedSeries": 20,
@@ -183,7 +184,7 @@
                         },
                         {
                             "fillColors": colors.REPEATED_PRACTICE,
-                            "id": "Repeated General Practice  [for legend]",
+                            "id": "Repeated General Practice [for legend]",
                             "legendAlpha": 1,
                             "legendColor": colors.REPEATED_PRACTICE,
                             "legendPeriodValueText": "",

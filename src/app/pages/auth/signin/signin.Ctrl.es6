@@ -6,7 +6,7 @@
     'use strict';
 
     angular.module('Simulator.pages.auth')
-        .controller('signinController', function($translate, simulator_config, userAuthService, $state){
+        .controller('signinController', function($scope, $translate, simulator_config, userAuthService, $state){
 
             this.simulator_config = simulator_config;
 
@@ -16,8 +16,9 @@
                 userAuthService.signin(this.user)
                     .then(userAuthService.getPostLogin)
                     .then((user)=>{
-                        /*user.firstLogin = true;
-                        user.tempPassword = true;*/
+                        //user.defaultProfile = true;
+                        //user.tempPassword = true;
+                        //$scope.$emit('post-login-bean', {user});
 
                         if (user && user.tempPassword) {
                             $state.go('changePassword');

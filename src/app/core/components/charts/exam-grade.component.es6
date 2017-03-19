@@ -12,12 +12,13 @@
                 examGrade: '<'
             },
             template: `<div id="examGradeGauge" class="amChart" style="width:100%;height:300px"></div>`,
-            controller: function examGradeGaugeCtrl() {
+            controller: function examGradeGaugeCtrl($filter) {
                 'ngInject';
 
                 let chartConf = {
                     "type": "gauge",
                     "theme": "light",
+                    "fontFamily": "'Arimo', sans-serif",
                     "axes": [ {
                         "axisThickness": 1,
                         "axisAlpha": 0.2,
@@ -60,8 +61,8 @@
                         if ( gaugeChart.arrows ) {
                             if ( gaugeChart.arrows[ 0 ] ) {
                                 if ( gaugeChart.arrows[ 0 ].setValue ) {
-                                    gaugeChart.arrows[ 0 ].setValue( this.examGrade );
-                                    gaugeChart.axes[ 0 ].setBottomText( this.examGrade );
+                                    gaugeChart.arrows[ 0 ].setValue( $filter('number')(this.examGrade) );
+                                    gaugeChart.axes[ 0 ].setBottomText( $filter('number')(this.examGrade) );
                                 }
                             }
                         }

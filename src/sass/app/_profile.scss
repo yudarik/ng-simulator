@@ -246,12 +246,21 @@ a.sn-link {
   &.modal-content {
     padding:10px;
 
-    h3 {
+    h4.with-line {
       padding-top: 0;
     }
     .alert {
       margin-bottom:0;
     }
+    .form-group {
+      label[for] {
+        display: none;
+      }
+      .full-width-on-modal {
+        width: 100%;
+      }
+    }
+
   }
 }
 

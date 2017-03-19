@@ -12,14 +12,30 @@
           userProfile: '<',
           userType: '<'
         },
-        templateUrl: 'app/pages/profile/profile.html',
+        template: `<div ba-panel ba-panel-class="profile-page">
+                    <div class="panel-content col-xs-12 col-md-8 pull-left">
+                      <form name="userProfileForm" ng-submit="profile.updateProfile(profile.user)" novalidate>
+                        <div ng-include="'app/pages/profile/profileTemplate/general-info.html'"></div>
+                        <div ng-if="profile.userType === 'Customer'" ng-include="'app/pages/profile/profileTemplate/contact.html'"></div>
+                        <div ng-include="'app/pages/profile/profileTemplate/password.html'"></div>
+                        <div ng-include="'app/pages/profile/profileTemplate/exam-date.html'"></div>
+                        <div ng-include="'app/pages/profile/profileTemplate/email-notification.html'"></div>
+                  
+                        <button type="submit" class="btn btn-primary btn-with-icon save-profile" ng-disabled="userProfileForm.$invalid">
+                          <i class="ion-android-checkmark-circle"></i>{{::'USER.PROFILE_PAGE.UPDATE_PROFILE'|translate}}
+                        </button>
+                      </form>
+                    </div>
+                  </div>`,
 
         /** @ngInject */
-        controller: function (toaster, $uibModal, $translate, customerService, candidateService, simulator_config) {
+        controller: function (toaster, $uibModal, $translate, customerService, simulator_config) {
 
-          this.service = (this.userType === 'Customer')? customerService : candidateService;
+          this.service = customerService;
 
           this.userProfileForm = {};
+
+          this.examEventOption = 'select';
 
           this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
             return date;//moment(date).format('DD/MM/YYYY').toString();

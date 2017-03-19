@@ -32,14 +32,14 @@
                         $state.get('exams.distribution-general').title = 'EXAMS.TYPES.'+$stateParams.practiceType;
 
                         return $stateParams.practiceType;
-                    },
+                    }/*,
                     totalQuota: function(customerService) {
                         return customerService.getQuota().then(quota=>{
                             return quota.leftNewQuestionsQuota;
                         }).catch(() => {
                             return null;
                         })
-                    }
+                    }*/
                 },
                 title: 'EXAMS.TYPES.GENERAL_PRACTICE',
                 sidebarMeta: {
@@ -60,13 +60,6 @@
                     },
                     practiceType: function() {
                         return 'EXAM';
-                    },
-                    totalQuota: function(customerService) {
-                        return customerService.getQuota().then(quota=>{
-                            return quota.leftNewQuestionsQuota;
-                        }).catch(() => {
-                            return null;
-                        })
                     }
                 },
                 title: 'EXAMS.TYPES.FULL_EXAM',
@@ -88,13 +81,6 @@
                     },
                     practiceType: function() {
                         return 'POST_CREDIT_PRACTICE';
-                    },
-                    totalQuota: function(customerService) {
-                        return customerService.getQuota().then(quota=>{
-                            return quota.leftPostCreditQuestionsQuota;
-                        }).catch(() => {
-                            return null;
-                        })
                     }
                 },
                 title: 'EXAMS.TYPES.POST_CREDIT_PRACTICE',

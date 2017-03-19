@@ -54,7 +54,7 @@
                             }
                         },
                         controllerAs: 'passwordModal',
-                        templateUrl: 'app/pages/profile/passwordModal.html'
+                        templateUrl: 'app/pages/profile/changePassword/passwordModal.html'
                     }).result.then((event) => {
                         this.openDialog = !this.openDialog;
                     }, (event) => {

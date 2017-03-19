@@ -6,33 +6,34 @@
     'use strict';
 
     angular.module('Simulator.pages.stats')
-        .factory('customerStatsService', function(Restangular){
-            var customerStats = Restangular.all('/stats/customer/');
+        .factory('statsService', function(Restangular, userAuthService, $q){
+            var service = userAuthService.getUserType().then(type => {
+                if (type === "Customer") {
+                    return Restangular.all('/stats/customer/');
+                } else {
+                    return Restangular.all('/stats/candidate/');
+                }
+            });
+
+            function getService() {
+                return $q.when(service);
+            }
 
             function getRank() {
-                return customerStats.get('rank', {ever: true});
+                return getService().then(srv => srv.get('rank', {ever: true}));
             }
 
             function getCategories(type) {
                 switch (type) {
                     case 'WEAK_AREAS_PRACTICE':
-                        return customerStats.get('weaknesses/categories');
+                        return getService().then(srv => srv.get('weaknesses/categories'));
                         break;
                     default:
-                        return customerStats.get('categories');
+                        return getService().then(srv => srv.get('categories'));
                 }
 
             }
 
             return {getRank, getCategories};
         })
-        .factory('candidateStatsService', function(Restangular){
-            var candidateStats = Restangular.all('/stats/candidate/');
-
-            function getCategories() {
-                return candidateStats.get('categories');
-            }
-
-            return {getCategories};
-        });
 })();

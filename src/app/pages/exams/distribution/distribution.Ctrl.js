@@ -7,16 +7,16 @@
 (function () {
     'use strict';
 
-    distributionCtrl.$inject = ["$state", "dist", "distributionType", "practiceType", "totalQuota"];
-    function distributionCtrl($state, dist, distributionType, practiceType, totalQuota) {
+    distributionCtrl.$inject = ["$state", "dist", "distributionType", "practiceType"];
+    function distributionCtrl($state, dist, distributionType, practiceType) {
         var _this = this;
 
         this.distributionType = distributionType;
         this.practiceType = practiceType;
-        this.totalQuota = totalQuota;
+        this.totalLeftQuota = practiceType === 'POST_CREDIT_PRACTICE' ? dist.leftPostCreditQuestionsQuota : dist.leftNewQuestionsQuota;
 
         this.examParams = {
-            totalQuestion: totalQuota ? dist.questionsInExam : 10,
+            totalQuestion: this.totalLeftQuota && this.totalLeftQuota >= dist.questionsInExam ? dist.questionsInExam : this.totalLeftQuota,
             questionDistribution: [],
             difficulty: 'MEDIUM',
             timeFrame: 'NORMAL'
@@ -114,10 +114,10 @@
         };
 
         this.getTotalQuota = function () {
-            return this.totalQuota ? this.totalQuota : 10;
+            return this.totalLeftQuota ? this.totalLeftQuota : 0;
         };
         this.isReadOnly = function () {
-            return _.isNil(totalQuota);
+            return _.isNil(this.totalLeftQuota);
         };
 
         this.config = {};

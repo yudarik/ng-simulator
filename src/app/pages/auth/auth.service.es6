@@ -1,10 +1,7 @@
 /**
  * Created by arikyudin on 05/06/16.
  */
-
-(function () {
-    'use strict';
-
+(function(){
     angular.module('Simulator.pages.auth')
         .factory('userAuthService', function($rootScope, Restangular, $state, $q){
 
@@ -14,7 +11,6 @@
 
                 signin: (userDetails) => {
                     return auth.customPOST(userDetails, 'login');
-
                 },
                 signup: (userDetails) => {
                     return Restangular.all('candidates').post({emailAddress: userDetails.email});
@@ -22,14 +18,12 @@
                 signout: () => {
 
                     $rootScope.currentUser = null;
-
                     return auth.customPOST({}, 'logout')
                         .then((res)=>{
-
                         })
                         .catch(()=>{
                            $state.go('signin');
-                        })
+                        });
                 },
                 getUser: (resetPassword) => {
 
@@ -40,8 +34,9 @@
 
                         auth.customGET('').then(function(user){
                             if (!resetPassword && !user.tempPassword){
-                                $rootScope.currentUser = user
+                                $rootScope.currentUser = user;
                             }
+                            $rootScope.$broadcast('post-login-bean', {user});
 
                             defer.resolve(user);
                         }, function(reason){
@@ -62,67 +57,74 @@
                 },
                 isLoggedIn: () => {
                     return !!$rootScope.currentUser;
+                },
+                getUserType: () => {
+                    return Srv.getUser().then(user => user.role);
+                },
+                resetPassword(email) {
+                    return Restangular.all('/customers/').customPUT($.param(email), 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
                 }
             };
 
             return Srv;
         })
+        .factory('customerService', function(Restangular, userAuthService, $q) {
 
-        .factory('customerService', (Restangular) => {
-            var customers = Restangular.all('/customers/');
+            //var service = null;
+
+            var service = userAuthService.getUserType().then(type => {
+                if (type === "Customer") {
+                    return Restangular.all('/customers/');
+                } else {
+                    return Restangular.all('/candidates/');
+                }
+            });
+
+            function initService() {
+                return userAuthService.getUserType().then(type => {
+                    if (type === "Customer") {
+                        return Restangular.all('/customers/');
+                    } else {
+                        return Restangular.all('/candidates/');
+                    }
+                });
+            }
+
+            function clearCache() {
+                service = null;
+            }
+
+            function getService() {
+                if (service) {
+                    return $q.when(service);
+                } else {
+                    return initService().then(srv => service = srv);
+                }
+            }
 
             function getQuota() {
-                return customers.get('quota');
+                return getService().then(srv => srv.get('quota'));
             }
 
             function getInfo() {
-                return customers.get('info').then(user => user.plain());
+                return getService().then(srv => srv.get('info')).then(user => user.plain());
             }
 
             function putInfo(details) {
                 let params = $.param(details);
 
-                return customers.customPOST(params, 'info', undefined, {'Content-Type': 'application/x-www-form-urlencoded'});
+                return getService().then(srv => srv.customPOST(params, 'info', undefined, {'Content-Type': 'application/x-www-form-urlencoded'}));
             }
 
             function resetPassword(email) {
-                return customers.customPUT(email, 'password', undefined, {ContentType: 'application/json'});
+                return getService().then(srv => srv.customPUT(email, 'password', undefined, {ContentType: 'application/json'}));
             }
 
             function changePassword(user) {
                 let params = $.param(user);
-                return customers.customPOST(params, 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded'})
+                return getService().then(srv => srv.customPOST(params, 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded'}));
             }
 
-            return {getQuota, getInfo, putInfo, resetPassword, changePassword};
+            return {getQuota, getInfo, putInfo, resetPassword, changePassword, clearCache};
         })
-        .factory('candidateService', (Restangular) => {
-            var customers = Restangular.all('/candidates/');
-
-            function getQuota() {
-                return customers.get('quota');
-            }
-
-            function getInfo() {
-                return customers.get('info').then(user => user.plain());
-            }
-
-            function putInfo(details) {
-                let params = $.param(details);
-
-                return customers.customPOST(params, 'info', undefined, {'Content-Type': 'application/x-www-form-urlencoded'});
-            }
-
-            function resetPassword(email) {
-                return customers.customPUT(email, 'password', undefined, {ContentType: 'application/json'});
-            }
-
-            function changePassword(user) {
-                let params = $.param(user);
-                return customers.customPOST(params, 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded'})
-            }
-
-            return {getQuota, getInfo, putInfo, resetPassword, changePassword};
-        })
-
 })();

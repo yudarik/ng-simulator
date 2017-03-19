@@ -30,12 +30,7 @@
 
                     $rootScope.currentUser = null;
 
-                    userAuthService.getUser().then(user => {
-                        /*if (user.role === "Customer") {
-                            $state.go(simulator_config.defaultState);
-                        } else {
-                            //$state.go('profile');
-                        }*/
+                    userAuthService.getUser().then(() => {
                         $state.go(simulator_config.defaultState);
                     }).catch(err => {
                         $state.go('signin');
@@ -48,7 +43,12 @@
                 resolve: {
                     user: (userAuthService, $state) => {
                         return userAuthService.getUser()
-                            .then(user => user)
+                            .then(user => {
+                                if (user && user.tempPassword) {
+                                    return $state.go('changePassword');
+                                }
+                                return user;
+                            })
                             .catch(err => $state.go('signin'));
                     }
                 }
@@ -67,7 +67,8 @@
             })
             .state('signout', {
                 url: '/signout',
-                controller: function(userAuthService){
+                controller: function(userAuthService, customerService){
+                    customerService.clearCache();
                     userAuthService.signout();
                 }
             })
@@ -79,7 +80,6 @@
             })
             .state('changePassword', {
                 url: '/changePassword',
-                controllerAs: 'passChange',
                 templateUrl: 'app/pages/auth/changePassword/passwordChange.html',
                 controller: 'changePasswordCtrl as passChange',
                 resolve: {

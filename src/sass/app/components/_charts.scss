@@ -48,7 +48,7 @@
     width: 100%
   }
   .user-quota {
-    /*overflow: hidden;*/
+    overflow: hidden;
   }
 
 }
@@ -71,7 +71,6 @@
 
 #userRankChart,
 #practiceTypeGrades,
-#categoriesGradeChart,
 #timeCylinder,
 #packageQuota {
   height: 400px;
@@ -92,4 +91,7 @@
   right: -55%;
 
   @include cylinderChart();
+}
+#categoriesGradeChart {
+  height: 500px;
 }

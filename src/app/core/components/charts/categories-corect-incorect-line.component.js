@@ -12,7 +12,7 @@
             titleLabel: '<'
         },
         template: '<div id="categoriesCorectIncorect" class="amChart"></div>\n                        <div id="categoriesCorectIncorectLegend"></div>',
-        controller: ["$translate", "baConfig", "customerStatsService", function CorrectIncorrectCtrl($translate, baConfig, customerStatsService) {
+        controller: ["$translate", "baConfig", "statsService", function CorrectIncorrectCtrl($translate, baConfig, statsService) {
             'ngInject';
 
             var layoutColors = baConfig.colors;
@@ -39,6 +39,7 @@
                 "categoryField": "category",
                 "startDuration": 1,
                 "theme": "default",
+                "fontFamily": "'Arimo', sans-serif",
                 "categoryAxis": {
                     "gridPosition": "start",
                     labelRotation: 25,
@@ -97,7 +98,7 @@
             };
 
             this.$onInit = function () {
-                customerStatsService.getCategories().then(function (categoriesStats) {
+                statsService.getCategories().then(function (categoriesStats) {
 
                     chartConf.dataProvider = categoriesStats.map(function (cat) {
                         return {

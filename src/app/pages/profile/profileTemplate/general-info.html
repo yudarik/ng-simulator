@@ -4,10 +4,10 @@
         <div class="form-group row clearfix">
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.FIRST_NAME'|translate}}</label>
 
-            <div class="col-sm-9">
+            <div class="col-sm-9 full-width-on-modal">
                 <input type="text" class="form-control" name="firstName" placeholder="{{::'USER.PROFILE_PAGE.FIRST_NAME'|translate}}" ng-model="profile.user.firstName" required>
                 <div class="text-danger" ng-messages="userProfileForm.firstName.$error" role="alert">
-                    <div ng-message="required" ng-bind="::'GENERAL.REQUIRED'|translate"></div>
+                    <span class="sub-little-text float-left" ng-message="required" ng-bind="::'GENERAL.REQUIRED'|translate"></span>
                 </div>
             </div>
         </div>
@@ -18,10 +18,10 @@
         <div class="form-group row clearfix">
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.LAST_NAME'|translate}}</label>
 
-            <div class="col-sm-9">
+            <div class="col-sm-9 full-width-on-modal">
                 <input type="text" class="form-control" name="lastName" placeholder="{{::'USER.PROFILE_PAGE.LAST_NAME'|translate}}" ng-model="profile.user.lastName" required>
                 <div class="text-danger" ng-messages="userProfileForm.lastName.$error" role="alert">
-                    <div ng-message="required" ng-bind="::'GENERAL.REQUIRED'|translate"></div>
+                    <span class="sub-little-text float-left" ng-message="required" ng-bind="::'GENERAL.REQUIRED'|translate"></span>
                 </div>
             </div>
         </div>

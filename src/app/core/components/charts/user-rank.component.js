@@ -13,7 +13,7 @@
             titleTooltip: '<'
         },
         template: '<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>\n                        <div id="userRankChart" class="amChart"></div>',
-        controller: ["$translate", "customerStatsService", function userRankCtrl($translate, customerStatsService) {
+        controller: ["$translate", "statsService", function userRankCtrl($translate, statsService) {
             'ngInject';
 
             var textLabels = {
@@ -30,6 +30,7 @@
                 "autoMarginOffset": 0,
                 "depth3D": 30,
                 "startDuration": 1,
+                "fontFamily": "'Arimo', sans-serif",
                 "categoryAxis": {
                     "gridPosition": "start",
                     "axisThickness": 0,
@@ -115,7 +116,7 @@
             };
 
             this.$onInit = function () {
-                customerStatsService.getRank().then(function (ranks) {
+                statsService.getRank().then(function (ranks) {
 
                     chartConf.dataProvider = ranks.map(function (rank, index) {
                         return _.assign(chartConf.dataProvider[index], {

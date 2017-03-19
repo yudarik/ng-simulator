@@ -23,93 +23,18 @@
                         return user.role;
                     })
                 },*/
-                userProfile: function($q, userAuthService, customerService, candidateService) {
-                    return userAuthService.getUser().then(user => {
-                        if (user.role === 'Customer') {
-                            return $q.all([$q.when(user.role), customerService.getInfo()]);
-                        } else if (user.role === 'Candidate') {
-                            return $q.all([$q.when(user.role), candidateService.getInfo()]);
-                        }
-                    });
+                userProfile: function($q, userAuthService, customerService) {
+                    return $q.all([userAuthService.getUserType(), customerService.getInfo()]);
                 }
             }
         })
         .state('profileModal', {
             url: '/profile-modal',
             parent: 'auth',
-            controller: function ($uibModal, $state, $translate, $timeout, userProfile, customerService, simulator_config) {
-
-                var buttons = {
-                    next: $translate.instant('USER.PROFILE_PAGE.NEXT'),
-                    prev: $translate.instant('USER.PROFILE_PAGE.PREV')
-                };
-                var showModal = function (item) {
-                    $uibModal.open({
-                        animation: true,
-                        controller: function($uibModalInstance) {
-
-                            this.user = userProfile;
-                            this.simulatorConfig = simulator_config;
-                            this.currentPage = 1;
-                            this.buttons = buttons;
-                            this.alert;
-
-                            this.userProfileForm = {};
-                            this.upcomingExamEvents = _.map(simulator_config.upcomingExamEventDates, (date)=> {
-                                return {date: date};
-                            });
-
-                            this.getAlertType = ()=>{
-                                if (!this.alert) return;
-
-                                return this.alert.type;
-                            };
-                            this.updateProfile = () =>{
-
-                                let params = this.user.plain();
-
-                                _.forEach(params, (val, key)=>{
-
-                                    if (_.isEmpty(params[key])) {
-                                        params = _.omit(params, key);
-                                    }
-                                });
-
-                                customerService.putInfo(params).then(()=>{
-                                    this.alert = {
-                                        type: 'success',
-                                        msg: $translate.instant('USER.PROFILE_PAGE.DETAILS_UPDATED_SUCCESS')
-                                    };
-                                    $timeout(()=>{
-                                        $uibModalInstance.close();
-                                    },1000);
-
-                                }).catch(err =>{
-
-                                    if (err.data) {
-                                        this.error = err.data.description;
-                                        this.alert = {
-                                            type: 'danger',
-                                            msg: err.data.description
-                                        };
-                                    }
-                                })
-                            }
-                        },
-                        controllerAs: 'profile',
-                        templateUrl: 'app/pages/profile/profileModal.html'
-                    }).result.then(function (link) {
-                        $state.go(simulator_config.defaultState);
-                    });
-                };
-                showModal();
-            },
+            template: `<profile-modal user-profile="$resolve.userProfile[1]" user-type="$resolve.userProfile[0]"></profile-modal>`,
             resolve: {
-                userType: function($q, $rootScope) {
-                    return $q.when($rootScope.currentUser);
-                },
-                userProfile: function(customerService) {
-                    return customerService.getInfo();
+                userProfile: function($q, userAuthService, customerService) {
+                    return $q.all([userAuthService.getUserType(), customerService.getInfo()]);
                 }
             }
         })
