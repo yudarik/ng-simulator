@@ -74,15 +74,15 @@ a {
   padding: 66px 0 34px 0;
   min-height: 500px;
 }
-.menu-collapsed {
+/*.menu-collapsed {
   .al-main {
     margin-left: 50px;
   }
-}
+}*/
 @media all and (orientation: portrait) {
   &.mobile {
     .menu-collapsed .al-main {
-      margin-left: 0!important;
+      //margin-left: 0!important;
     }
   }
 }
@@ -222,9 +222,9 @@ a {
     height: 76px;
     text-align: center;
   }
-  .al-main {
+  /*.al-main {
     padding-bottom: 76px;
-  }
+  }*/
   .al-footer-main {
     float: none;
     display: inline-block;

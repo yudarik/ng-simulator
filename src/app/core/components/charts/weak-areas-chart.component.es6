@@ -7,7 +7,8 @@
     angular.module('Simulator.components.charts')
         .component('weakAreasChart', {
             bindings: {
-                config: '<'
+                config: '<',
+                titleLabel: '<'
             },
             template: `<div class="panel col-md-offset-3 col-md-6" dir="ltr">
                                 <div class="panel-body">
@@ -68,7 +69,7 @@
                         {
                             "id": "Title-1",
                             "size": 15,
-                            "text": "Expertise Level Per Category"
+                            "text": this.titleLabel
                         }
                     ],
                     "dataProvider": []

@@ -188,6 +188,9 @@
         },
         "PACKAGES_QUOTA": {
           "TITLE": "חבילות שנרכשו"
+        },
+        "WEAK_AREAS": {
+          "TITLE": "Expertise Level Per Category"
         }
       }
 

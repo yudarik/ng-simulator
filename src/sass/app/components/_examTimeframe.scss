@@ -20,8 +20,27 @@
     }
   }
 }
-.menu-collapsed {
+@media all and (min-width: 769px) {
   .exam-timeframe {
+    right: 0px;
+    left: 240px;
+  }
+  .menu-collapsed .exam-timeframe {
+    right: 0px;
     left: 50px;
+  }
+}
+
+@media all and (min-width: 500px) and (max-width: 768px) {
+  .exam-timeframe {
+    right: 0px;
+    left: 50px;
+  }
+}
+
+@media (max-width: 499px){
+  .exam-timeframe {
+    right: 0;
+    left: 0;
   }
 }

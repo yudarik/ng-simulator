@@ -1,12 +1,26 @@
 body.flip {
-  .exam-timeframe {
-
-    right: 240px;
-    left: 0px;
+  @media all and (min-width: 769px) {
+    .exam-timeframe {
+      right: 240px;
+      left: 0px;
+    }
+    .menu-collapsed .exam-timeframe {
+      right: 50px;
+      left: 0;
+    }
   }
-  .menu-collapsed {
+
+  @media all and (min-width: 500px) and (max-width: 768px) {
     .exam-timeframe {
       right: 50px;
+      left: 0;
+    }
+  }
+
+  @media (max-width: 499px){
+    .exam-timeframe {
+      right: 0;
+      left: 0;
     }
   }
 }

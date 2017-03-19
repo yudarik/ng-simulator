@@ -123,7 +123,9 @@
             .state('exams.weak-areas', {
                 url: '/weak-areas',
                 parent: 'exams',
-                template: `<weak-areas-chart config="$resolve.practiceConfig"></weak-areas-chart>`,
+                template: `<weak-areas-chart config="$resolve.practiceConfig" 
+                                             title-label="::'STATS.DASHBOARD.CHARTS.WEAK_AREAS.TITLE'|translate">                                             
+                            </weak-areas-chart>`,
                 resolve: {
                     practiceConfig: function(statsService) {
                         return statsService.getCategories('WEAK_AREAS_PRACTICE');

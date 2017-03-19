@@ -11,18 +11,23 @@ exam {
     border: 0;
   }
 }
-.menu-collapsed {
+@media all and (min-width: 769px) {
   exam {
+    margin: 0 200px 0 260px;
+  }
+  .menu-collapsed exam {
     margin: 0 200px 0 72px;
   }
 }
-@media (max-width: 768px){
+@media all and (min-width: 500px) and (max-width: 768px){
+
+  exam {
+    margin: 0 20px 0 72px;
+  }
+}
+@media (max-width: 499px){
+
   exam {
     margin: 0 20px;
-  }
-  .menu-collapsed {
-    exam {
-      margin: 0 20px 0 72px;
-    }
   }
 }
