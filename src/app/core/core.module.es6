@@ -110,8 +110,10 @@
                     $state.get('exams.post-credit').sidebarMeta.disabled = !data.user.postCreditModeNow;
 
                     if (data.user.role === "Candidate") {
-                        $state.get('exams.distribution-full').sidebarMeta.disabled = true;
-                        $state.get('exams.weak-areas').sidebarMeta.disabled = true;
+                        ['exams.distribution-full', 'exams.weak-areas','exams.repeated-practice'].forEach(state => {
+                            $state.get(state).sidebarMeta.disabled = true;
+                            $state.get(state).tooltip = 'EXAMS.TOOLTIPS.NOT_AVAILABLE_IN_DEMO';
+                        });
                     }
                 }
             })

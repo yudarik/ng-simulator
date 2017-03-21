@@ -3,19 +3,19 @@
 -->
 <div class="panel practice-summary">
     <div class="panel-body">
-        <h5 class="row">
+        <div class="row">
             <div class="col-xs-12 col-md-6">
                 <label class="control-label">{{::'EXAMS.SUMMARY.ID'|translate}}:</label>
-                <span class="col-xs-8 pull-right">{{::practiceSummary.summary.practiceID}}</span>
+                <span>{{::practiceSummary.summary.practiceID}}</span>
             </div>
             <div class="col-xs-12 col-md-6">
                 <label class="control-label">{{::'EXAMS.SUMMARY.DATE'|translate}}:</label>
-                <span class="col-xs-8 pull-right">{{::practiceSummary.summary.date|date: 'dd/MM/yyyy hh:mm'}}</span>
+                <span>{{::practiceSummary.summary.date|date: 'dd/MM/yyyy hh:mm'}}</span>
             </div>
 
-        </h5>
+        </div>
         <hr>
-        <h5 class="row">
+        <div class="row">
             <div class="col-xs-12 col-md-3">
                 <label>{{::'EXAMS.SUMMARY.FINAL_GRADE'|translate}}:</label>
                 <span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.summary.grade)">{{practiceSummary.summary.grade|number:0}}%</span>
@@ -28,14 +28,14 @@
                 <label>{{::'EXAMS.SUMMARY.AVERAGE_TIME_FOR_QUESTION'|translate}}:</label>
                 {{practiceSummary.summary.elapsedTimeSecs / practiceSummary.summary.questions.length |timeframe}}
             </div>
-        </h5>
+        </div>
 
         <div class="col-xs-12 text-center charts">
             <time-cylinder class="col-md-6" time-elapsed="practiceSummary.summary.elapsedTimeSecs" total-time="practiceSummary.summary.totalTimeSecs"></time-cylinder>
             <exam-grade-gauge class="col-md-6" exam-grade="practiceSummary.summary.grade" title-label="::'STATS.ACCOUNT.GRADE'|translate"></exam-grade-gauge>
         </div>
         <div class="graph vertical centered table-condensed col-xs-12">
-            <categories-grade-radar stats="practiceSummary.categoriesStats" style="height: 300px;width:100%"></categories-grade-radar>
+            <categories-grade stats="practiceSummary.categoriesStats" style="height: 300px;width:100%"></categories-grade>
             <br/>
         </div>
 

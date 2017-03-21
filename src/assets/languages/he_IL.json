@@ -104,7 +104,8 @@
       "ANSWERS_LABEL": "תשובות"
     },
     "TOOLTIPS": {
-      "POSTCREDIT_DISABLED": "תרגול זה אינו זמין כל עוד יש בחשבונך שאלות חדשות"
+      "POSTCREDIT_DISABLED": "תרגול זה אינו זמין כל עוד יש בחשבונך שאלות חדשות",
+      "NOT_AVAILABLE_IN_DEMO": "תרגול זה אינו זמין במצב דמו"
     },
     "PREDEFINED": {
       "NUMOFQUEST": "כמות שאלות",
@@ -190,7 +191,7 @@
           "TITLE": "חבילות שנרכשו"
         },
         "WEAK_AREAS": {
-          "TITLE": "Expertise Level Per Category"
+          "TITLE": "רמת בקיאות בכל קטגוריה"
         }
       }
 

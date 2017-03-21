@@ -3,7 +3,7 @@
  */
 (function(){
     angular.module('Simulator.pages.auth')
-        .factory('userAuthService', function($rootScope, Restangular, $state, $q){
+        .factory('userAuthService', function($rootScope, Restangular, $q, $window){
 
             var auth = Restangular.all('/auth');
 
@@ -22,7 +22,8 @@
                         .then((res)=>{
                         })
                         .catch(()=>{
-                           $state.go('signin');
+                            $window.location.reload();
+                            //$state.go('signin');
                         });
                 },
                 getUser: (resetPassword) => {

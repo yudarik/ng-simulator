@@ -12,8 +12,11 @@
                 examGrade: '<'
             },
             template: `<div id="examGradeGauge" class="amChart" style="width:100%;height:300px"></div>`,
-            controller: function examGradeGaugeCtrl($filter) {
+            controller: function examGradeGaugeCtrl($filter, simulator_config) {
                 'ngInject';
+
+                let passingGrade = simulator_config.passingGrade;
+                let warningArea = (100 - passingGrade)/2;
 
                 let chartConf = {
                     "type": "gauge",
@@ -26,17 +29,17 @@
                         "valueInterval": 20,
                         "bands": [ {
                             "color": "#cc4748",
-                            "endValue": 60,
+                            "endValue": passingGrade - 1,
                             "startValue": 0
                         }, {
                             "color": "#fdd400",
-                            "endValue": 80,
-                            "startValue": 61
+                            "endValue": passingGrade + warningArea,
+                            "startValue": passingGrade
                         }, {
                             "color": "#84b761",
                             "endValue": 100,
                             "innerRadius": "95%",
-                            "startValue": 81
+                            "startValue": 100 - warningArea + 1
                         } ],
                         "bottomText": "0 %",
                         "bottomTextYOffset": -20,
@@ -62,7 +65,7 @@
                             if ( gaugeChart.arrows[ 0 ] ) {
                                 if ( gaugeChart.arrows[ 0 ].setValue ) {
                                     gaugeChart.arrows[ 0 ].setValue( $filter('number')(this.examGrade) );
-                                    gaugeChart.axes[ 0 ].setBottomText( $filter('number')(this.examGrade) );
+                                    gaugeChart.axes[ 0 ].setBottomText( $filter('number')(this.examGrade, 0) + '%' );
                                 }
                             }
                         }
