@@ -89,7 +89,7 @@
                             <p class="col-md-12 pull-left text-{{profile.getAlertType()}} pull-left" ng-if="profile.alert" ng-bind="profile.alert.msg">
                             </p>
                         
-                            <button type="submit" class="btn btn-primary btn-with-icon">
+                            <button type="submit" class="btn btn-primary btn-with-icon" ng-disabled="userProfileForm.$invalid">
                               <i class="ion-android-checkmark-circle"></i>{{::'USER.PROFILE_PAGE.UPDATE_PROFILE'|translate}}
                             </button>
                           </form>

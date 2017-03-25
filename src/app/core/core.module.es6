@@ -67,7 +67,7 @@
                 }
             );
         })
-        .run(function($rootScope, $state, $uibModal, $translate, simulator_config, simulatorService){
+        .run(function($rootScope, $state, $uibModal, $translate, $css, simulator_config, simulatorService){
 
             $rootScope.appTitle = 'Loading...';
 
@@ -79,6 +79,11 @@
                 $rootScope.appTitle = simulator_config.applicationTitle;
                 $rootScope.simulatorConfigLoaded = true;
                 $rootScope.appLayout = simulator_config.layout.toLowerCase();
+
+                if ($rootScope.appLayout === 'rtl') {
+                    $css.add('assets/vendor-files/bootstrap-rtl.css');
+                }
+
                 $rootScope.simulatorConfig = simulator_config;
 
                 if (simulator_config.trainingDocumentsOnly) {

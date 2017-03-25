@@ -17,7 +17,7 @@
                       <form name="userProfileForm" ng-submit="profile.updateProfile(profile.user)" novalidate>
                         <div ng-include="'app/pages/profile/profileTemplate/general-info.html'"></div>
                         <div ng-if="profile.userType === 'Customer'" ng-include="'app/pages/profile/profileTemplate/contact.html'"></div>
-                        <div ng-include="'app/pages/profile/profileTemplate/password.html'"></div>
+                        <div ng-if="profile.userType === 'Customer'" ng-include="'app/pages/profile/profileTemplate/password.html'"></div>
                         <div ng-include="'app/pages/profile/profileTemplate/exam-date.html'"></div>
                         <div ng-include="'app/pages/profile/profileTemplate/email-notification.html'"></div>
                   
@@ -29,7 +29,7 @@
                   </div>`,
 
         /** @ngInject */
-        controller: function (toaster, $uibModal, $translate, customerService, simulator_config) {
+        controller: function (toaster, $uibModal, $translate, $state, $timeout, customerService, simulator_config) {
 
           this.service = customerService;
 
@@ -62,6 +62,9 @@
 
             this.service.putInfo(params).then(()=>{
               toaster.pop('success','',$translate.instant('USER.PROFILE_PAGE.DETAILS_UPDATED_SUCCESS'));
+                $timeout(()=>{
+                    $state.go('dashboard');
+                }, 1000);
             }).catch(err =>{
 
               if (err.data) {

@@ -15,6 +15,7 @@ angular.module('Simulator', [
   'ui.slimscroll',
   'ngJsTree',
   'angular-progress-button-styles',
+  'angularCSS',
   'BlurAdmin.theme',
   //'BlurAdmin.pages',
   'Simulator.core',

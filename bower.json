@@ -62,13 +62,13 @@
     "angular-translate-loader-static-files": "^2.11.0",
     "ng-table": "^1.0.0",
     "AngularJS-Toaster": "angularjs-toaster#^2.0.0",
-    "bootstrap-rtl": "^3.4.0",
     "angular-ui-select": "^0.19.6",
     "angular-messages": "^1.5.8",
     "angular-i18n": "^1.5.8",
     "lodash": "^4.17.2",
     "angulargrid": "^0.6.3",
-    "amcharts3": "^3.20.20"
+    "amcharts3": "^3.20.20",
+    "angular-css": "^1.0.8"
   },
   "overrides": {
     "bootstrap": {

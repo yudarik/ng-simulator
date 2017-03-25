@@ -52,7 +52,7 @@
                     "POST_CREDIT_PRACTICE":  "#FF00FF",
                     "REPEATED_POST_CREDIT_PRACTICE": "#EE82EE",
                     "WEAK_AREAS_PRACTICE": "#0000FF",
-                    "REPEATED_WEAK_AREAS_PRACTICE": "Black",
+                    "REPEATED_WEAK_AREAS_PRACTICE": "#ADD8E6",
                 };
 
                 var chartConf = {

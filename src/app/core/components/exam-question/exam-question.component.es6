@@ -93,10 +93,10 @@
             template: `<div class="exam-question">
                           <div class="row">
                                <div class="col-xs-12">
-                                   <div class="text-left category-label" ng-if="$ctrl.config.showQuestionCategoryInAnswersPage && $ctrl.solvedExamMode">
+                                   <p class="text-right category-label" ng-if="$ctrl.config.showQuestionCategoryInAnswersPage && $ctrl.solvedExamMode">
                                         <img src="assets/img/app/category-icon.png" width="25" height="25"/>
                                         <label>{{$ctrl.question.category.categoryName}}</label>
-                                   </div>
+                                   </p>
 
                                    <label>{{::'EXAMS.PRACTICE.QUESTION_LABEL'|translate}}:</label>
                                    <h4>{{$ctrl.question.question}}</h4>

@@ -120,6 +120,8 @@
 
                 this.init = () =>{
 
+                    if (!this.questions.length) return;
+
 
                     if (!baSidebarService.isMenuCollapsed()) {
                         baSidebarService.toggleMenuCollapsed();

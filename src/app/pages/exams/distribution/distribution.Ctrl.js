@@ -83,7 +83,7 @@
                     continue;
                     //we can't substract more from 0 questions...
                 }
-                if (distMap[index].userAdjusted) {
+                if (distMap[index] && distMap[index].userAdjusted) {
                     continue;
                     //we don't touch user defined adjustment for category
                 }

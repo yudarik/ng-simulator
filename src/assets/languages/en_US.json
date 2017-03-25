@@ -10,88 +10,127 @@
     "FORGOT_PASSWORD": "Forgot Password",
     "REMEMBER_PASSWORD": "Remember Password? Login",
     "RESET_PASSWORD_BTN": "Reset Password",
+    "CHANGE_PASSWORD": "Change Password",
+    "CHANGE_PASSWORD_TEMP": "Change Password",
     "LOGIN_BTN": "Submit",
     "REGISTER_BTN": "Register",
     "USER_PASSWARD_INCORRECT": "Incorrect user name and/or password",
     "REGISTERED_SUCCESSFULLY": "Registration complete. Login details were sent by mail",
     "PASSWORD_RESET_EMAIL_SENT": "Password reset details were sent by mail",
+    "INITIAL_PROFILE_SETUP_TITLE": "Update Profile",
     "ERROR": {
       "INVALID.CREDENTIALS": "Incorrect user name and/or password",
-      "ACCOUNT.EXPIRED": "The account is expired. Please contact the office for more details."
+      "ACCOUNT.EXPIRED": "The account is expired. Please contact the office for more details.",
+      "PASSWORD_VALIDATION_FAILED": "Password is incorrect"
+    },
+    "WELCOME": {
+      "MESSAGE": {
+        "OK_BTN": "Thank you"
+      }
     }
   },
   "EXAMS": {
     "TYPES": {
-      "TITLE": "Exams & Practices",
-      "FULL_EXAM": "Complete exam",
-      "POST_CREDIT_PRACTICE": "Post credit practice",
-      "GENERAL_PRACTICE": "General practice",
-      "PRACTICE_SUMMARY": "Results analysis",
-      "WEAK_AREAS_PRACTICE": "Practice in weak areas",
-      "WEAK_AREAS": "Practice in weak areas",
-      "PRACTICE": "Practice",
-      "EXAM": "Exam",
-      "PRACTICE_SOLUTION": "Practice solution"
+      "TITLE": "Exam and Prctices",
+      "FULL_EXAM": "Full Exam",
+      "POST_CREDIT_PRACTICE": "Post Credit Practice",
+      "REPEATED_POST_CREDIT_PRACTICE": "Repeated Post Credit Practice",
+      "GENERAL_PRACTICE": "General Practice",
+      "REPEATED_GENERAL_PRACTICE": "Repeated General Practice",
+      "REPEATED_PRACTICE": "Repeated General Practice",
+      "REPEATED_ALL": "Repeat Practice",
+      "PRACTICE_SUMMARY": "Practice Results Analysis",
+      "WEAK_AREAS_PRACTICE": "Weak Areas Practice",
+      "REPEATED_WEAK_AREAS_PRACTICE": "Repeated Weak Areas Practice",
+      "WEAK_AREAS": "Weak Areas Practice",
+      "PRACTICE": "General Practice",
+      "EXAM": "Full Exam",
+      "REPEATED_EXAM": "Repeated Full Exam",
+      "PRACTICE_SOLUTION": "Practice Solution",
+      "PREDEFINED_EXAM": "predefined Exam",
+      "REPEATED_PREDEFINED_EXAM": "Repeated Predefined Exam",
+      "SUGGESTED_PRACTICE": "Weak Areas Practice",
+      "REPEATED_SUGGESTED_PRACTICE": "Repeated Weak Areas Practice",
+      "DEMO": "Demo"
     },
     "EXAM_FINISH_ARE_YOU_SURE": "There is still time left, are you sure that you want to finish now?",
     "EXAM_CANCEL_ARE_YOU_SURE": "Are you sure that you want to leave?",
     "SUMMARY": {
-      "FINAL_GRADE": "Final score",
-      "TOTAL_TIME": "Total time",
-      "AVERAGE_TIME_FOR_QUESTION": "Average time for question",
-      "QUESTION_DISTRIBUTION": "Questions distribution per category",
+      "FINAL_GRADE": "Final Grade",
+      "TOTAL_TIME": "Total Time",
+      "TIME_ELAPSED": "Elapsed Time",
+      "AVERAGE_TIME_FOR_QUESTION": "Average Elapsed Time Per Question",
+      "QUESTION_DISTRIBUTION": "Question Distribution by Category",
       "CATEGORY": "Category",
-      "QUESTIONS_COUNT": "Number of questions",
-      "CORRECT_ANSWERS_COUNT": "Number of correct answers",
-      "GRADE": "Score",
+      "QUESTIONS_COUNT": "Total Number of Questions",
+      "CORRECT_ANSWERS_COUNT": "Number of Correct Answers",
+      "GRADE": "Grade",
       "DATE": "Date",
       "ID": "ID",
       "LABEL": "Summary",
-      "PRACTICE_SOLUTION": "Practice solution",
-      "TIPS_FOR_SUCCESS": "Tips for success",
-      "REPEAT_PRACTICE": "Repeated practice"
+      "PRACTICE_SOLUTION": "Practice Solution",
+      "TIPS_FOR_SUCCESS": "Tips for Success",
+      "REPEAT_PRACTICE": "Repeat Practice",
+      "TABLE_TITLE": "Practice Analysis by Category"
     },
     "DISTRIBUTION": {
-      "TITLE": "Question distribution by category",
-      "TOTAL_QUESTIONS": "Total questions:",
+      "TITLE": "Question Distribution by Category",
+      "TOTAL_QUESTIONS": "Total Number of Questions:",
       "LEVEL": {
         "TITLE": "Difficulty level:",
         "EASY": "Easy",
-        "MEDIUM": "Mediocre",
+        "MEDIUM": "Normal",
         "HARD": "Hard",
-        "START": "Start"
+        "START": "Begin Practice"
       },
       "TIMEFRAME": {
+        "TITLE": "Time Frame:",
         "UNLIMITED": "Unlimited",
         "REGULAR": "Normal",
-        "EXTENDED": "Extended time"
+        "EXTENDED": "Extended Time"
       }
     },
     "BUTTONS": {
       "CONTINUE": "Continue",
       "FINISH": "Finish",
       "RETURN": "Exit",
-      "DOWNLOAD": "Save practice"
+      "DOWNLOAD": "Save Practice",
+      "START": "Begin Practice",
+      "BUY_PACKAGE": "Purchase",
+      "QUOTA_EXCEEDED": "Quota of this practice has exceeded, it is no longer available for practice."
     },
     "PRACTICE": {
       "QUESTION_LABEL": "Question",
       "ANSWERS_LABEL": "Answers"
+},
+    "TOOLTIPS": {
+      "POSTCREDIT_DISABLED": "This practice type is unavailable since you still have new questions left in your quota",
+      "NOT_AVAILABLE_IN_DEMO": "Not available in demo mode"
+    },
+    "PREDEFINED": {
+      "NUMOFQUEST": "Number of Questions",
+      "TIME": "Time Frame",
+      "MINUTE": "Minutes",
+      "TIME_EXTENDED": "Extended Time",
+      "UNLIMITED_TIME": "Unlimited",
+      "PACKAGESTOBUY": "Requires Purchase of Packages"
     }
   },
   "STATS": {
     "ACCOUNT": {
-      "TITLE": "Account Quotas",
-      "TOTALNEWQUESTIONSQUOTA": "Total new questions",
-      "LEFTNEWQUESTIONSQUOTA": "New questions left",
-      "SPENTNEWQUESTIONSQUOTA": "New questions used",
-      "PRACTICESPERFORMED": "Practices performed",
-      "EXAMSPERFORMED": "Exams performed",
-      "GENERALPRACTICESPERFORMED": "General practices performed",
-      "SUGGESTEDPRACTICESPERFORMED": "Suggested practices performed",
-      "PREDEFINEDEXAMSPERFORMED": "Predefined practices performed",
-      "TOTALPOSTCREDITQUESTIONSQUOTA": "Total post credit questions",
-      "LEFTPOSTCREDITQUESTIONSQUOTA": "Post credit questions left",
-      "SPENTPOSTCREDITQUESTIONSQUOTA": "Post credit questions used",
+      "TITLE": "Account Balance",
+      "TITLE_TOOLTIP": "Presentation of the quotas of questions left in your account",
+      "TOTALNEWQUESTIONSQUOTA": "Total New Questions",
+      "LEFTNEWQUESTIONSQUOTA": "New Questions Left",
+      "SPENTNEWQUESTIONSQUOTA": "New Questions Used",
+      "PRACTICESPERFORMED": "Practices Performed",
+      "EXAMSPERFORMED": "Exams Performed",
+      "GENERALPRACTICESPERFORMED": "General Practices Performed",
+      "SUGGESTEDPRACTICESPERFORMED": "Suggested Practices Performed",
+      "PREDEFINEDEXAMSPERFORMED": "Predefined Practices Performed",
+      "TOTALPOSTCREDITQUESTIONSQUOTA": "Total Post Credit Questions",
+      "LEFTPOSTCREDITQUESTIONSQUOTA": "Post Credit Questions Left",
+      "SPENTPOSTCREDITQUESTIONSQUOTA": "Post Credit Questions Used",
       "SINGLEPREDEFINEDEXAMQUOTA": "Single predefined exam quota",
       "PREDEFINEDEXAMSWITHQUOTASLIST": "Predefined exams with quotas list",
       "PACKAGESCURRENCY": "NIS",
@@ -99,50 +138,67 @@
       "CANCELEDPRODUCTS": "Cancelled packages",
       "PRACTICE": "General practice",
       "EXAM": "Exam",
-      "WEAK_AREAS_PRACTICE": "Weak areas practice",
-      "POST_CREDIT_PRACTICE": "Post credit practice"
+      "WEAK_AREAS_PRACTICE": "Weak Areas Practice",
+      "POST_CREDIT_PRACTICE": "Post Credit Practice",
+      "GRADE": "Grade"
     },
     "DASHBOARD": {
       "TITLE": "Practice Statistics",
       "CHARTS": {
         "GENERAL": {
-          "GRADE": "Score",
+          "GRADE": "Grade",
           "TYPE": "Type",
-          "TIME_SPENT": "Time spent (mins)",
+          "TIME_SPENT": "Time Elapsed (mins)",
           "DATE": "Date",
-          "PRACTICEID": "ID"
+          "PRACTICEID": "ID",
+          "MINIMUM_PASSING_GRADE": "Passing Grade"
         },
         "GRADES_RADAR": {
-          "TITLE": "Score distribution per category",
-          "GRADE": "Score"
+          "TITLE": "Grade Distribution By Category",
+          "TITLE_TOOLTIP": "Average grade in each of the categories",
+          "GRADE": "Grade",
+          "CATEGORY": "Category",
+          "PASSING_GRADE":"Passing Grade"
         },
         "USERS_RANK": {
-          "TITLE": "Weighted average score",
+          "TITLE": "Weighted Average Grade",
+          "TITLE_TOOLTIP": "This chart compares your overall performance to other users who are attending to the exam on the same date",
           "RANK": "Rank",
           "YOU": "You",
-          "ANONYMOUS": "Anonymous user"
+          "ANONYMOUS": "Anonymous User",
+          "JOINDATE": "Join Date",
+          "AVERAGEGRADE": "Average Grade",
+          "EXAMSPERFORMED": "Number of Exams Performed"
         },
         "PRACTICES_GRADE": {
-          "TITLE": "Practice distribution per practice type"
+          "TITLE": "Practice Distribution Per Type",
+          "TITLE_TOOLTIP": "An overview of all performed practices",
+          "CLICK_ON_CHART_TITLE": "Click on a practice to repeat it"
         },
         "CATEGORIES_LINE": {
-          "TITLE": "Correct and incorrect answers distribution per category",
+          "TITLE": "Correct and Incorrect Answers Distribution Per Category",
           "CORRECT": "Correct",
           "INCORRECT": "Incorrect",
-          "TOTAL_ASKED": "Total questions asked"
+          "TOTAL_ASKED": "Total Questions Asked",
+          "XAXIS_TITLE": "Number of Questions Asked"
         },
         "PRACTICES_PERFORMED": {
-          "TITLE": "Practice Statistics"
+          "TITLE": "Practice Statistics",
+          "TITLE_TOOLTIP": "Overview of practices performed per type",
+          "XAXIS_TITLE": "Number of Questions Performed"
         },
         "PACKAGES_QUOTA": {
-          "TITLE": "Purchased packages"
+          "TITLE": "Purchased Packages"
+        },
+        "WEAK_AREAS": {
+          "TITLE": "Level of Knowledge Per Cateogry"
         }
       }
 
     }
   },
   "MANUALS": {
-    "TITLE": "Online manuals",
+    "TITLE": "Online Manuals",
     "TABLE_HEADS": {
       "DOC_NAME": "Name",
       "DOC_LINK": "Link",
@@ -151,36 +207,54 @@
       "TYPE": "Type",
       "OTHER": "Other"
     },
-    "DISPLAY":  "Display"
+    "DISPLAY":  "Display",
+    "BUY_PACKAGE": "Purchase",
+    "SEARCH_PLACEHOLDER": "Search",
+    "FILTER_BY_TYPE": "Filter by Type",
+    "AVAILABLE_ON_ORDER_OF": "Requires Purchase of Packages",
+    "RESOURCE_TYPES": {
+      "DOCUMENT": "Document",
+      "AUDIO": "Audio",
+      "VIDEO": "Video",
+      "OTHER": "Other"
+    }
   },
   "USER": {
-    "SIGNOUT": "Sign out",
-    "PROFILE": "User profile",
+    "SIGNOUT": "Sign Out",
+    "PROFILE": "User Profile",
     "PROFILE_PAGE": {
       "GENERAL_INFO": "General",
-      "FIRST_NAME": "First name",
-      "LAST_NAME": "Family name",
-      "CHANGE_PASSWORD": "Change password",
-      "OLDPASSWORD": "Current password",
-      "PASSWORD": "New password",
-      "CONFIRM_PASSWORD": "New password verification",
-      "PASSWORD_DONOT_MATCH": "Passwords mismatch",
-      "CONTACT_INFO": "Contact information",
+      "FIRST_NAME": "First Name",
+      "LAST_NAME": "Family Name",
+      "CHANGE_PASSWORD": "Change Password",
+      "CHANGE_PASSWORD_BTN": "Change Password",
+      "OLDPASSWORD": "Current Password",
+      "PASSWORD": "New Password",
+      "CONFIRM_PASSWORD": "New Password Verification",
+      "PASSWORD_DONOT_MATCH": "Passwords Mismatch",
+      "UPDATE_PASSWORD": "Update Password",
+      "CONTACT_INFO": "Contact Information",
       "EMAIL": "Email",
       "PHONE": "Phone",
       "STREET_ADDRESS": "Address",
       "CITY_ADDRESS": "City",
       "BUSINESS_NAME": "Company",
-      "SEND_EMAIL_NOTIFICATIONS": "Commercial mail",
-      "UPDATE_PROFILE": "Update profile",
-      "ACCEPT_COMERCIAL_MAIL": "Accept getting commercial mail",
-      "UPCOMING_EXAM": "Exam date",
-      "SELECT_EXAM_DATE": "Select date",
-      "DETAILS_UPDATED_SUCCESS": "Profile updated successfully"
+      "SEND_EMAIL_NOTIFICATIONS": "Commercial Mail",
+      "UPDATE_PROFILE": "Update Profile",
+      "ACCEPT_COMERCIAL_MAIL": "Accept Getting Commercial Mail",
+      "UPCOMING_EXAM": "Exam Date",
+      "SELECT_EXAM_DATE": "Select Date",
+      "SELECT_FROM_UPCOMING_EVENTS": "Select From List",
+      "OR_SELECT_OTHER_DATE": "or Set a Custom Date",
+      "DETAILS_UPDATED_SUCCESS": "Details Were Successfully Updated",
+      "PASSWORD_CHANGE_SUCCESS": "Password Was Successfully Modified, Please re-login.",
+      "NEXT": "Next",
+      "PREV": "Previous",
+      "SELECT_DATE": "Choose Exam Date"
     }
   },
   "GENERAL": {
-    "REQUIRED": "Required field",
+    "REQUIRED": "Required Field",
     "CANCEL": "Cancel",
     "OK": "OK",
     "CLOSE": "Close"

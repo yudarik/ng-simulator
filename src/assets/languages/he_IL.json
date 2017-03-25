@@ -7,11 +7,11 @@
     "EXISTING_USER": "משתמש רשום? התחבר",
     "EMAIL": "שם משתמש (דוא'ל)",
     "PASSWORD": "סיסמא",
-    "FORGOT_PASSWORD": "שככתי את הסיסמא",
+    "FORGOT_PASSWORD": "שכחתי את הסיסמא",
     "REMEMBER_PASSWORD": "זוכר את הסיסמא? התחבר",
     "RESET_PASSWORD_BTN": "אפס סיסמא",
-    "CHANGE_PASSWORD": "שינויי סיסמא",
-    "CHANGE_PASSWORD_TEMP": "שינויי סיסמא",
+    "CHANGE_PASSWORD": "שינוי סיסמא",
+    "CHANGE_PASSWORD_TEMP": "שינוי סיסמא",
     "LOGIN_BTN": "כניסה",
     "REGISTER_BTN": "הרשם",
     "USER_PASSWARD_INCORRECT": "שם המשתמש או הסיסמא שגויים",
@@ -21,7 +21,7 @@
     "ERROR": {
       "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
       "ACCOUNT.EXPIRED": "פג תוקפו של חשבון המשתמש, אנא פנה למנהל האתר",
-      "PASSWORD_VALIDATION_FAILED": "סיסמא נוכחית אינה נכונה"
+      "PASSWORD_VALIDATION_FAILED": "הסיסמא שגויה"
     },
     "WELCOME": {
       "MESSAGE": {
@@ -49,9 +49,9 @@
       "PRACTICE_SOLUTION": "פתרון התרגול",
       "PREDEFINED_EXAM": "מבחני הסמכה",
       "REPEATED_PREDEFINED_EXAM": "מבחני הסמכה חוזרים",
-      "SUGGESTED_PRACTICE": "תרגול מותעם",
-      "REPEATED_SUGGESTED_PRACTICE": "תרגול מותעם חוזר",
-      "DEMO": "דוגמה"
+      "SUGGESTED_PRACTICE": "תרגול בנקודות חולשה",
+      "REPEATED_SUGGESTED_PRACTICE": "תרגול חוזר בנקודות חולשה",
+      "DEMO": "דמו"
     },
     "EXAM_FINISH_ARE_YOU_SURE": "עדיין נותר לך זמן, האם את/ה מעוניין/נת לסיים כעת בכל זאת ?",
     "EXAM_CANCEL_ARE_YOU_SURE": "הינך בטוח שברצונך לבטל את התרגול/בחינה?",
@@ -84,20 +84,20 @@
         "START": "התחל תרגול"
       },
       "TIMEFRAME": {
-        "TITLE": "זמן בחינה:",
+        "TITLE": "מסגרת זמן:",
         "UNLIMITED": "ללא מגבלת זמן",
         "REGULAR": "רגיל",
-        "EXTENDED": "הערכת זמן"
+        "EXTENDED": "הארכת זמן"
       }
     },
     "BUTTONS": {
       "CONTINUE": "המשך",
-      "FINISH": "סייים",
+      "FINISH": "סיים",
       "RETURN": "יציאה",
       "DOWNLOAD": "שמור תרגול",
-      "START": "התחל בחינה",
+      "START": "התחל תרגול",
       "BUY_PACKAGE": "עבור לרכישה",
-      "QUOTA_EXCEEDED": "המבחן אינו זמין משום שניצלת את מקסימום הבחינות האפשרי עבור בחינה זו."
+      "QUOTA_EXCEEDED": "לא נותר מספיק קרדיט לביצוע תרגול זה ולכן הוא אינו זמין"
     },
     "PRACTICE": {
       "QUESTION_LABEL": "שאלה",
@@ -109,29 +109,29 @@
     },
     "PREDEFINED": {
       "NUMOFQUEST": "כמות שאלות",
-      "TIME": "הגבלת זמן לבחינה",
+      "TIME": "מסגרת זמן",
       "MINUTE": "דקות",
-      "TIME_EXTENDED": "הגבלת זמן עם הארכה",
-      "UNLIMITED_TIME": "בחינה ללא הגבלת זמן",
-      "PACKAGESTOBUY": "מוגבל ברכישת חבילות"
+      "TIME_EXTENDED": "הארכת זמן",
+      "UNLIMITED_TIME": "ללא הגבלת זמן",
+      "PACKAGESTOBUY": "מותנה ברכישת חבילות"
     }
   },
   "STATS": {
     "ACCOUNT": {
       "TITLE": "יתרות בחשבון",
-      "TITLE_TOOLTIP": "tooltip",
+      "TITLE_TOOLTIP": "גרף המתאר את יתרת השאלות שנותרה לתרגול בחשבון",
       "TOTALNEWQUESTIONSQUOTA": "סה\"כ שאלות חדשות",
       "LEFTNEWQUESTIONSQUOTA": "יתרת שאלות חדשות",
       "SPENTNEWQUESTIONSQUOTA": "כמות שאלות חדשות שנוצלו",
       "PRACTICESPERFORMED": "כמות תרגולים שבוצעו",
       "EXAMSPERFORMED": "כמות מבחנים שבוצעו",
       "GENERALPRACTICESPERFORMED": "תרגולים כלללים שבוצעו",
-      "SUGGESTEDPRACTICESPERFORMED": "Suggested practices performed",
-      "PREDEFINEDEXAMSPERFORMED": "Predefined practices performed",
+      "SUGGESTEDPRACTICESPERFORMED": "תרגולים בנקודות חולשה שבוצעו",
+      "PREDEFINEDEXAMSPERFORMED": "מבחנים מוגדרים מראש שבוצעו",
       "TOTALPOSTCREDITQUESTIONSQUOTA": "סה\"כ שאלות בתרגול חוזר",
       "LEFTPOSTCREDITQUESTIONSQUOTA": "יתרת שאלות לתרגול חוזר",
       "SPENTPOSTCREDITQUESTIONSQUOTA": "שאלות חוזרות שנוצלו",
-      "SINGLEPREDEFINEDEXAMQUOTA": "Single Predefined Exam Quota",
+      "SINGLEPREDEFINEDEXAMQUOTA": "יתרת תרגול של מבחן מוגדר מראש",
       "PREDEFINEDEXAMSWITHQUOTASLIST": "Predefined Exams With Quotas list",
       "PACKAGESCURRENCY": "ש\"ח",
       "PURCHASEDPRODUCTS": "חבילות שנרכשו",
@@ -155,36 +155,36 @@
         },
         "GRADES_RADAR": {
           "TITLE": "התפלגות ציונים לפי קטגוריה",
-          "TITLE_TOOLTIP": "tooltip",
+          "TITLE_TOOLTIP": "ציון ממוצע בכל קטגוריה",
           "GRADE": "ציון",
           "CATEGORY": "קטגוריה",
           "PASSING_GRADE":"ציון עובר"
         },
         "USERS_RANK": {
           "TITLE": "ממוצע ציונים משוקלל",
-          "TITLE_TOOLTIP": "tooltip",
+          "TITLE_TOOLTIP": "שקלול הביצועים שלך עד כה בהשוואה למשתמשים אחרים אשר לומדים לאותו מועד בחינה כמוך",
           "RANK": "מקום",
           "YOU": "אתה",
           "ANONYMOUS": "משתמש אנונימי",
-          "JOINDATE": "תאריך הצתרפות",
+          "JOINDATE": "תאריך הצטרפות",
           "AVERAGEGRADE": "ציון ממוצע",
-          "EXAMSPERFORMED": "כמות תרגולים שביצע"
+          "EXAMSPERFORMED": "כמות בחינות שבוצעו"
         },
         "PRACTICES_GRADE": {
           "TITLE": "הסטוריית תרגולים",
-          "TITLE_TOOLTIP": "tooltip",
-          "CLICK_ON_CHART_TITLE": "לחץ על עמודת הגרף לתרגול חוזר"
+          "TITLE_TOOLTIP": "תצוגת כלל התרגולים שבוצעו",
+          "CLICK_ON_CHART_TITLE": "הקלק על תרגול לצורך ביצוע תרגול חוזר"
         },
         "CATEGORIES_LINE": {
-          "TITLE": "התפלגות בין תשובות נכונות ללא נכונות לפי קטגוריה",
+          "TITLE": "התפלגות בין תשובות נכונות ושגויות לפי קטגוריה",
           "CORRECT": "נכון",
-          "INCORRECT": "לא נכון",
+          "INCORRECT": "שגוי",
           "TOTAL_ASKED": "סך שאלות שנשאלו",
           "XAXIS_TITLE": "כמות שאלות שנשאלו"
         },
         "PRACTICES_PERFORMED": {
           "TITLE": "התפלגות תרגולים",
-          "TITLE_TOOLTIP": "tooltip",
+          "TITLE_TOOLTIP": "תצוגת התרגולים שבוצעו על פי קטגוריה",
           "XAXIS_TITLE": "כמות שאלות שבוצעו"
         },
         "PACKAGES_QUOTA": {
@@ -209,9 +209,9 @@
     },
     "DISPLAY":  "הצג",
     "BUY_PACKAGE": "עבור לרכישה",
-    "SEARCH_PLACEHOLDER": "חיפוש לפי שם מסמך",
+    "SEARCH_PLACEHOLDER": "חיפוש",
     "FILTER_BY_TYPE": "סינון לפי סוג",
-    "AVAILABLE_ON_ORDER_OF": "מוגבל ברכישת חבילות:",
+    "AVAILABLE_ON_ORDER_OF": "מוגבל ברכישת חבילות",
     "RESOURCE_TYPES": {
       "DOCUMENT": "מסמך",
       "AUDIO": "קובץ שמע",
@@ -226,7 +226,7 @@
       "GENERAL_INFO": "מידע כללי",
       "FIRST_NAME": "שם פרטי",
       "LAST_NAME": "שם משפחה",
-      "CHANGE_PASSWORD": "שינויי סיסמא",
+      "CHANGE_PASSWORD": "שינוי סיסמא",
       "CHANGE_PASSWORD_BTN": "שנה סיסמא",
       "OLDPASSWORD": "סיסמא נוכחית",
       "PASSWORD": "סיסמא חדשה",
@@ -247,7 +247,7 @@
       "SELECT_FROM_UPCOMING_EVENTS": "בחר מתוך רשימת מועדים מתוכננים",
       "OR_SELECT_OTHER_DATE": "או סמן מועד אחר",
       "DETAILS_UPDATED_SUCCESS": "הפרטים עודכנו בהצלחה",
-      "PASSWORD_CHANGE_SUCCESS": "הסיסמא שונתה בהצלחה, יוצא מהמערכת לצורך התחברות מחדש בעוד 5 שניות...",
+      "PASSWORD_CHANGE_SUCCESS": "הסיסמא עודכנה בהצלחה, אנא בצע כניסה מחודשת",
       "NEXT": "הבא",
       "PREV": "הקורדם",
       "SELECT_DATE": "בחר מועד בחינה"

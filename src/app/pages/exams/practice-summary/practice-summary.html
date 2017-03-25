@@ -20,11 +20,11 @@
                 <label>{{::'EXAMS.SUMMARY.FINAL_GRADE'|translate}}:</label>
                 <span class="label" ng-class="practiceSummary.getLabelClass(practiceSummary.summary.grade)">{{practiceSummary.summary.grade|number:0}}%</span>
             </div>
-            <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-4">
                 <label>{{::'EXAMS.SUMMARY.TIME_ELAPSED'|translate}}:</label>
                 {{practiceSummary.summary.elapsedTimeSecs|timeframe}}
             </div>
-            <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-5">
                 <label>{{::'EXAMS.SUMMARY.AVERAGE_TIME_FOR_QUESTION'|translate}}:</label>
                 {{practiceSummary.summary.elapsedTimeSecs / practiceSummary.summary.questions.length |timeframe}}
             </div>
@@ -65,9 +65,10 @@
 
         <div class="col-xs-12 text-center action-buttons">
             <br/>
-            <a class="btn btn-info" ui-sref="exams.practice-solution({practiceSummary: practiceSummary.summary})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</a>
-            <a class="btn btn-info" ui-sref="exams.practice({practiceType: 'REPEATED', examParams: {practiceId: practiceSummary.summary.practiceID, timeFrame: 'NORMAL'}})">{{::'EXAMS.SUMMARY.REPEAT_PRACTICE'|translate}}</a>
-            <a class="btn btn-info" ng-href="{{practiceSummary.simulator_config.tipsForSuccessLinkURL}}" target="_blank">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</a>
+            <button class="btn btn-info" ui-sref="exams.practice-solution({practiceSummary: practiceSummary.summary})">{{::'EXAMS.SUMMARY.PRACTICE_SOLUTION'|translate}}</button>
+            <button class="btn btn-info" ui-sref="exams.practice({practiceType: 'REPEATED', examParams: {practiceId: practiceSummary.summary.practiceID, timeFrame: 'NORMAL'}})"
+                ng-disabled="practiceSummary.summary.practiceType === 'PREDEFINED_EXAM'">{{::'EXAMS.SUMMARY.REPEAT_PRACTICE'|translate}}</button>
+            <button class="btn btn-info" ng-href="{{practiceSummary.simulator_config.tipsForSuccessLinkURL}}" target="_blank">{{::'EXAMS.SUMMARY.TIPS_FOR_SUCCESS'|translate}}</button>
 
         </div>
 
