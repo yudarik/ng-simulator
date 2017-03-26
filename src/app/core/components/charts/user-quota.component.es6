@@ -34,7 +34,7 @@
                     "graphs": [ {
                         "type": "column",
                         "topRadius": 1,
-                        "columnWidth": 1,
+                        "columnWidth": 0.3,
                         "showOnAxis": true,
                         "lineThickness": 2,
                         "lineAlpha": 0.5,
@@ -46,7 +46,7 @@
                     }, {
                         "type": "column",
                         "topRadius": 1,
-                        "columnWidth": 1,
+                        "columnWidth": 0.3,
                         "showOnAxis": true,
                         "lineThickness": 2,
                         "lineAlpha": 0.5,

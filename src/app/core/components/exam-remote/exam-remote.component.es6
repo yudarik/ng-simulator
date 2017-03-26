@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="finish">
                                         <button class="btn btn-success col-md-12 finishExam" ng-if="!$ctrl.isSolution" ng-disabled="!$ctrl.isFinishEnabled()" ng-click="$ctrl.submit()">{{::'EXAMS.BUTTONS.FINISH'|translate}}</button>
-                                        <button class="btn btn-success col-md-12" ng-click="$ctrl.onReturn()" style="font-size: 14px">{{::'EXAMS.BUTTONS.RETURN'|translate}}</button>
+                                        <button class="btn btn-success col-md-12" ng-click="$ctrl.onReturn()">{{::'EXAMS.BUTTONS.RETURN'|translate}}</button>
                                         <a class="btn btn-success col-md-12 pull-left xs-hiden export" ng-if="$ctrl.showSavePracticeButton()" target="_blank"
                                             ng-href="DownloadPracticeHTMLFile?practiceID={{$ctrl.practiceId}}""
                                             tooltip="{{::'EXAMS.BUTTONS.DOWNLOAD'|translate}}" tooltip-placement="top">

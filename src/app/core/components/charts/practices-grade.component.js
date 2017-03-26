@@ -111,7 +111,7 @@
                     "categoryBalloonDateFormat": "DD/MM/YY, HH:NN",
                     "cursorAlpha": 0,
                     "oneBalloonOnly": true,
-                    "zoomable": false
+                    "zoomable": true
                 },
                 "trendLines": [],
                 "graphs": [{
@@ -290,10 +290,11 @@
 
                     _this.allPractices = practices;
 
+                    chartConf.maxSelectedSeries = practices.length;
                     chartConf.dataProvider = practices.map(function (practice) {
 
                         return {
-                            "Practice Date": moment.unix(practice.date / 1000).format("DD/MM/YYYY hh:mm:ss"),
+                            "Practice Date": moment.unix(practice.date / 1000).format("DD/MM/YYYY HH:mm:ss"),
                             "Practice Type": $translate.instant('EXAMS.TYPES.' + practice.practiceType),
                             "Practice Color": colors[practice.practiceType],
                             "Practice Grade": _this.numberFilter(practice.grade, 1),

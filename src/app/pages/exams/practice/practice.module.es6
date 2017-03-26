@@ -197,7 +197,7 @@
                                             </li>
                                         </ul>
                                     </div>                                  
-                                    <button class="btn btn-md btn-success pull-right" 
+                                    <button class="btn btn-md btn-success pull-right navigate2Exam" 
                                         ng-disabled="::$ctrl.isExamQuotaUnavailable(exam)" 
                                         ng-click="$ctrl.navigate(exam)"
                                         ng-bind="$ctrl.getButtonText(exam)"></button>                                  

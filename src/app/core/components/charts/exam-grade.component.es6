@@ -28,18 +28,21 @@
                         "tickAlpha": 0.2,
                         "valueInterval": 20,
                         "bands": [ {
-                            "color": "#cc4748",
-                            "endValue": passingGrade - 1,
+                            "balloonText": "Failed",
+                            "color": "#FF0000",
+                            "endValue": passingGrade - 0.1,
                             "startValue": 0
                         }, {
-                            "color": "#fdd400",
+                            "balloonText": "Passed",
+                            "color": "#ffac29",
                             "endValue": passingGrade + warningArea,
                             "startValue": passingGrade
                         }, {
-                            "color": "#84b761",
+                            "balloonText": "Succeeded",
+                            "color": "#00CC00",
                             "endValue": 100,
                             "innerRadius": "95%",
-                            "startValue": 100 - warningArea + 1
+                            "startValue": 100 - warningArea + 0.1
                         } ],
                         "bottomText": "0 %",
                         "bottomTextYOffset": -20,

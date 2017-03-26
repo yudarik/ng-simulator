@@ -10,7 +10,7 @@
                 config: '<',
                 titleLabel: '<'
             },
-            template: `<div class="panel col-md-offset-1 col-md-10" dir="ltr">
+            template: `<div class="panel col-md-12" dir="ltr">
                                 <div class="panel-body">
                                     <div id="weakAreasChart" class="amCharts" style="height:500px;width:100%; background-color: #FFFFFF;"></div>
                                     <div class="col-md-12">

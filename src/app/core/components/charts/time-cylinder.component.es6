@@ -34,7 +34,7 @@
                     "graphs": [ {
                         "type": "column",
                         "topRadius": 1,
-                        "columnWidth": 1,
+                        "columnWidth": 0.3,
                         "showOnAxis": true,
                         "lineThickness": 2,
                         "lineAlpha": 0.5,
@@ -42,11 +42,14 @@
                         "fillColors": "#8d003b",
                         "fillAlphas": 0.8,
                         "valueField": "value1",
-                        "balloonText": "[[category1]]: [[value]]"
+                        //"balloonText": "[[category1]]: [[value1]],
+                        "balloonFunction": (graphDataItem) => {
+                            return `${graphDataItem.dataContext.category1}: ${this.toTimeString(graphDataItem.dataContext.value1)}`;
+                        }
                     }, {
                         "type": "column",
                         "topRadius": 1,
-                        "columnWidth": 1,
+                        "columnWidth": 0.3,
                         "showOnAxis": true,
                         "lineThickness": 2,
                         "lineAlpha": 0.5,
@@ -54,7 +57,10 @@
                         "fillColors": "#cdcdcd",
                         "fillAlphas": 0.5,
                         "valueField": "value2",
-                        "balloonText": "[[category2]]: [[value]]"
+                        //"balloonText": "[[category2]]: [[value2]],
+                        "balloonFunction": (graphDataItem) => {
+                            return `${graphDataItem.dataContext.category2}: ${this.toTimeString(graphDataItem.dataContext.value2)}`;
+                        }
                     } ],
 
                     "categoryField": "category1",
@@ -77,6 +83,10 @@
                     });
                     AmCharts.makeChart('timeCylinder', chartConf);
                 };
+
+                this.toTimeString = (seconds) => {
+                    return moment("1900-01-01 00:00:00").add(parseInt(seconds), 'seconds').format("HH:mm:ss");
+                }
 
             },
             controllerAs: '$ctrl'

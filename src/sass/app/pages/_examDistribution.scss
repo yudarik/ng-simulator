@@ -39,9 +39,24 @@
       text-align: center;;
     }
   }
+  .navigate2Exam {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left:auto;
+    margin: 22px;
+  }
 }
 practices-grade.repeated-practice-view {
   .amChart {
     height: 500px!important;
+  }
+}
+body.flip {
+  .predefined-exam-component {
+    .navigate2Exam {
+      left: 0;
+      right: auto;
+    }
   }
 }
