@@ -58,6 +58,10 @@
             if (num <= 100) return 'label-success';
             else return 'label-default';
         }
+
+        this.repeatePracticeDisabled = () => {
+            return this.summary.practiceType === 'PREDEFINED_EXAM';
+        }
     }
 
     angular.module('Simulator.pages.exams.practice-summary')

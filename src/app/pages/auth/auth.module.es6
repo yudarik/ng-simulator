@@ -84,7 +84,7 @@
                 controller: 'changePasswordCtrl as passChange',
                 resolve: {
                     user: (userAuthService) => {
-                        return userAuthService.getUser('reset');
+                        return userAuthService.getUser('resetPassword');
                     }
                 }
             })

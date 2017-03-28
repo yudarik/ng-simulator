@@ -25,6 +25,7 @@
             answersPerQuestionNumber:               null,
             predefinedExamsEnabled:                 null,
             trainingDocumentsEnabled:               null,
+            trainingDocumentsOnly:                  null,
             postCreditModeEnabled:                  null,
             sendingLastChanceToEnrollEmail:         null,
             defaultState:                           'dashboard'
@@ -67,7 +68,7 @@
                 }
             );
         })
-        .run(function($rootScope, $state, $uibModal, $translate, $css, simulator_config, simulatorService){
+        .run(function($rootScope, $state, $uibModal, $translate, $css, simulator_config, simulatorService, customerService){
 
             $rootScope.appTitle = 'Loading...';
 
@@ -97,6 +98,10 @@
                     $state.get('exams.post-credit').sidebarMeta.disabled = true;
                 }
 
+                if ($state.get('exams.repeated-practice')) {
+                    $state.get('exams.repeated-practice').sidebarMeta.hidden = !simulator_config.postCreditModeEnabled;
+                }
+
                 if ($state.get('exams.predefined'))
                     $state.get('exams.predefined').sidebarMeta.hidden = !simulator_config.predefinedExamsEnabled;
 
@@ -112,15 +117,62 @@
 
             $rootScope.$on('post-login-bean', function(event, data) {
                 if (data.user) {
-                    $state.get('exams.post-credit').sidebarMeta.disabled = !data.user.postCreditModeNow;
 
-                    if (data.user.role === "Candidate") {
+                    customerService.getQuota().then(setStateBasedMenuItems(data.user));
+                }
+            });
+
+            function setStateBasedMenuItems(user) {
+
+                return (quota) => {
+                    $state.get('exams.post-credit').sidebarMeta.disabled = !user.postCreditModeNow;
+
+                    if (user.role === "Candidate") {
                         ['exams.distribution-full', 'exams.weak-areas','exams.repeated-practice'].forEach(state => {
                             $state.get(state).sidebarMeta.disabled = true;
                             $state.get(state).tooltip = 'EXAMS.TOOLTIPS.NOT_AVAILABLE_IN_DEMO';
                         });
                     }
+
+                    if (quota.leftNewQuestionsQuota <= 0) {
+                        disableState('exams.distribution-general', 'EXAMS.TOOLTIPS.NO_MORE_CREDITS');
+                    }
+
+                    if (quota.leftPostCreditQuestionsQuota <= 0) {
+                        disableState('exams.repeated-practice', 'EXAMS.TOOLTIPS.NO_MORE_POST_CREDITS');
+                        disableState('exams.post-credit', 'EXAMS.TOOLTIPS.NO_MORE_POST_CREDITS');
+                    } else {
+                        enableState('exams.repeated-practice');
+                        enableState('exams.post-credit');
+                    }
+
+                    if (!quota.predefinedExamWithQuotasList.length) {
+                        disableState('exams.predefined', 'NO_PREDEFINED_EXAMS_AVAILABLE');
+                    } else if (_.every(quota.predefinedExamWithQuotasList, {leftQuota: 0})) {
+                        disableState('exams.predefined', 'NO_PREDEFINED_EXAMS_AVAILABLE_QUOTA');
+                    }
+
+                    if ((quota.totalNewQuestionsQuota - quota.leftNewQuestionsQuota >= quota.minimumQuestionsToStartSuggesting) &&
+                        quota.leftNewQuestionsQuota > 0) {
+                        enableState('exams.weak-areas');
+                    } else {
+                        disableState('exams.weak-areas', 'NO_WEAk_AREAS_PRACTICE_AVAILABLE');
+                    }
+                };
+            }
+
+            function disableState(stateName, tooltip) {
+                if (stateName) {
+                    $state.get(stateName).sidebarMeta.disabled = true;
                 }
-            })
+                if (tooltip && stateName) {
+                    $state.get(stateName).tooltip = tooltip;
+                }
+            }
+            function enableState(stateName) {
+                if (stateName) {
+                    $state.get(stateName).sidebarMeta.disabled = false;
+                }
+            }
         })
 })();
