@@ -22,7 +22,33 @@
                 });
             }
         };
-    }]);
+    }])
+    .directive('hideDisableMenuItem', function(simulatorService, $timeout){
+
+        return {
+            restrict: 'A',
+            scope: {
+                hideDisableMenuItem: '@'
+            },
+            link: function(scope, elem, attrs) {
+
+                let stateName = scope.hideDisableMenuItem;//attrs.state;
+
+                scope.$on('stateBasedMenuItemsSetupComplete', ()=>{
+                    $timeout(()=>{
+                        if (stateName && stateName !== '' && simulatorService.isStateHidden(stateName)) {
+                            elem.remove();
+                        }
+
+                        if (stateName && stateName !== '' && simulatorService.isStateDisabled(stateName)) {
+                            attrs.$updateClass('disabled', attrs.class);
+                            attrs.tooltip = $translate.instant(simulatorService.getStateTooltip(stateName));
+                        }
+                    });
+                });
+            }
+        }
+    })
 
 
 })();

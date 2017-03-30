@@ -41,7 +41,7 @@
                 abstract: true,
                 template: '<div ui-view></div>',
                 resolve: {
-                    user: (userAuthService, $state) => {
+                    user: (userAuthService,customerService,simulatorService,$state) => {
                         return userAuthService.getUser()
                             .then(user => {
                                 if (user && user.tempPassword) {

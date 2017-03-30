@@ -4,7 +4,7 @@
          ba-panel-title="{{::(distribution.distributionType !== 'full-exam')? 'EXAMS.DISTRIBUTION.TITLE':''|translate}}"
          ba-panel-class="">
 
-        <form class="form-horizontal text-left" name="exam-distribution" ng-submit="distribution.startExam()" ng-model="distribution.examParams">
+        <form class="form-horizontal text-left" name="exam-distribution" ng-submit="distribution.startExam()" ng-model="distribution.examParams" novalidate>
             <div class="row" ng-if="distribution.distributionType !== 'full-exam'">
                 <div class="form-group form-group-xs col-xs-12 col-sm-6 pull-left" ng-repeat="category in distribution.config.categories track by category.id">
                     <label for class="col-sm-6 control-label pull-left">{{category.name}}:</label>
@@ -16,6 +16,9 @@
                                max="{{::distribution.examParams.totalQuestion}}"
                                name="category.id"
                                ng-disabled="::distribution.isReadOnly()">
+                        <div ng-messages="exam-distribution.number.$error">
+                            <div ng-message="maxlength">Maximum number exceaded</div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group col-xs-12 col-sm-6 pull-left">

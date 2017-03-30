@@ -7,6 +7,8 @@
 
             var auth = Restangular.all('/auth');
 
+            var getUserRequestInProgress, getUserPromise;
+
             var Srv = {
 
                 signin: (userDetails) => {
@@ -28,28 +30,37 @@
                 },
                 getUser: (resetPassword) => {
 
-                    if (!$rootScope.currentUser) {
+                    if ($rootScope.currentUser) {
+                        return $q.when($rootScope.currentUser);
+                    }
 
-                        Restangular.setDefaultHttpFields({'withCredentials': true});
-                        var defer = $q.defer();
+                    if (getUserRequestInProgress) {
+                        return $q.when(getUserPromise)
+                    }
 
-                        auth.customGET('').then(function(user){
-                            if (!resetPassword && !user.tempPassword){
+                    Restangular.setDefaultHttpFields({'withCredentials': true});
+
+                    //let defer = $q.defer();
+
+                    getUserPromise = new Promise((resolve, reject) => {
+                        auth.customGET('').then(function (user) {
+                            if (!resetPassword && !user.tempPassword) {
                                 $rootScope.currentUser = user;
                             }
                             $rootScope.$broadcast('post-login-bean', {user});
 
-                            defer.resolve(user);
-                        }, function(reason){
+                            resolve(user);
+                        }).catch(function (reason) {
+                            getUserRequestInProgress = false;
 
-                            defer.reject(reason);
-                            //$state.go('signin');
+                            reject(reason);
                         });
+                    });
 
-                        return defer.promise;
-                    } else {
-                        return $q.when($rootScope.currentUser);
-                    }
+                    getUserRequestInProgress = true;
+
+                    return $q.when(getUserPromise)
+                    //return defer.promise;
                 },
                 getPostLogin: (user) => {
                     return Srv.getUser().then(postLoginData => {
@@ -71,9 +82,9 @@
         })
         .factory('customerService', function(Restangular, userAuthService, $q) {
 
-            //var service = null;
+            let userQuota, getUserQuota, getUserQuotaInProgress;
 
-            var service = userAuthService.getUserType().then(type => {
+            let service = userAuthService.getUserType().then(type => {
                 if (type === "Customer") {
                     return Restangular.all('/customers/');
                 } else {
@@ -104,7 +115,21 @@
             }
 
             function getQuota() {
-                return getService().then(srv => srv.get('quota'));
+                if (userQuota) {
+                    return $q.when(userQuota);
+                }
+                if (getUserQuotaInProgress) {
+                    return $q.when(getUserQuota);
+                }
+                getUserQuota = getService().then(srv => srv.get('quota')).then(quota => {
+                    userQuota = quota;
+
+                    return userQuota;
+                });
+
+                getUserQuotaInProgress = true;
+
+                return $q.when(getUserQuota)
             }
 
             function getInfo() {

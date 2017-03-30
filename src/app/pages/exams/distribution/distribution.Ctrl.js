@@ -52,10 +52,14 @@
 
             category.userAdjusted = true;
 
+            if (category.questionDistribution > _this.examParams.totalQuestion) {
+                category.questionDistribution = _this.examParams.totalQuestion;
+            }
+
             if (category.questionDistribution > oldVal) {
-                _this.examParams.totalQuestion++;
+                _this.examParams.totalQuestion += category.questionDistribution - oldVal;
             } else if (_this.examParams.totalQuestion > 0) {
-                _this.examParams.totalQuestion--;
+                _this.examParams.totalQuestion -= oldVal - category.questionDistribution;
             }
         };
 
@@ -88,7 +92,9 @@
                     //we don't touch user defined adjustment for category
                 }
 
-                distMap[index].questionDistribution = distMap[index].questionDistribution + (currentAmount < neededAmount ? 1 : -1);
+                if (distMap[index]) {
+                    distMap[index].questionDistribution = distMap[index].questionDistribution + (currentAmount < neededAmount ? 1 : -1);
+                }
 
                 currentAmount += currentAmount < neededAmount ? 1 : -1;
 
