@@ -75,6 +75,9 @@
             };
 
             this.$onInit = function () {
+
+                var chart = AmCharts.makeChart('questionsQuotaChart', questionsQuota);
+
                 customerService.getQuota().then(function (quota) {
 
                     if (simulator_config.postCreditModeEnabled) {
@@ -93,7 +96,7 @@
                         value2: quota['totalNewQuestionsQuota'] - quota['leftNewQuestionsQuota']
                     });
 
-                    AmCharts.makeChart('questionsQuotaChart', questionsQuota);
+                    chart.validateData();
                 });
             };
         }],

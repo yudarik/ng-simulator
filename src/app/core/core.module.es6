@@ -62,7 +62,6 @@
                     }
                     else {
                         // Some other unknown Error.
-                        console.log( response );
                         //toaster.error('error', '',"An unknown error has occurred.<br>Details: " + response.data);
                     }
                     // Continue the promise chain.

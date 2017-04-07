@@ -23,7 +23,7 @@
             }
         };
     }])
-    .directive('hideDisableMenuItem', function(simulatorService, $timeout){
+    .directive('hideDisableMenuItem', function(simulatorService, $timeout, $translate){
 
         return {
             restrict: 'A',

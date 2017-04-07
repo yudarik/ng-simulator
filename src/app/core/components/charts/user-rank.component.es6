@@ -11,7 +11,7 @@
                 titleLabel: '<',
                 titleTooltip: '<'
             },
-            template: `<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
+            template: `<h4 class="text-center" ui-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
                         <div id="userRankChart" class="amChart"></div>`,
             controller: function userRankCtrl($translate, statsService) {
                 'ngInject';

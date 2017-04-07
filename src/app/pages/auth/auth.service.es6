@@ -3,7 +3,7 @@
  */
 (function(){
     angular.module('Simulator.pages.auth')
-        .factory('userAuthService', function($rootScope, Restangular, $q, $window){
+        .factory('userAuthService', function($rootScope, Restangular, $q, $window,$state){
 
             var auth = Restangular.all('/auth');
 
@@ -19,13 +19,14 @@
                 },
                 signout: () => {
 
-                    $rootScope.currentUser = null;
+                    Srv.clearCache();
+
                     return auth.customPOST({}, 'logout')
                         .then((res)=>{
                         })
                         .catch(()=>{
                             $window.location.reload();
-                            //$state.go('signin');
+                            $state.go('signin');
                         });
                 },
                 getUser: (resetPassword) => {
@@ -39,8 +40,6 @@
                     }
 
                     Restangular.setDefaultHttpFields({'withCredentials': true});
-
-                    //let defer = $q.defer();
 
                     getUserPromise = new Promise((resolve, reject) => {
                         auth.customGET('').then(function (user) {
@@ -59,8 +58,7 @@
 
                     getUserRequestInProgress = true;
 
-                    return $q.when(getUserPromise)
-                    //return defer.promise;
+                    return $q.when(getUserPromise);
                 },
                 getPostLogin: (user) => {
                     return Srv.getUser().then(postLoginData => {
@@ -75,6 +73,11 @@
                 },
                 resetPassword(email) {
                     return Restangular.all('/customers/').customPUT($.param(email), 'password', undefined, {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
+                },
+                clearCache: () => {
+                    $rootScope.currentUser = null;
+                    getUserRequestInProgress = null;
+                    getUserPromise = null;
                 }
             };
 
@@ -82,23 +85,17 @@
         })
         .factory('customerService', function(Restangular, userAuthService, $q) {
 
-            let userQuota, getUserQuota, getUserQuotaInProgress;
-
-            let service = userAuthService.getUserType().then(type => {
-                if (type === "Customer") {
-                    return Restangular.all('/customers/');
-                } else {
-                    return Restangular.all('/candidates/');
-                }
-            });
+            let service, userQuota, getUserQuota, getUserQuotaInProgress;
 
             function initService() {
                 return userAuthService.getUserType().then(type => {
                     if (type === "Customer") {
-                        return Restangular.all('/customers/');
+                        service = Restangular.all('/customers/');
                     } else {
-                        return Restangular.all('/candidates/');
+                        service = Restangular.all('/candidates/');
                     }
+
+                    return service;
                 });
             }
 
@@ -121,15 +118,23 @@
                 if (getUserQuotaInProgress) {
                     return $q.when(getUserQuota);
                 }
-                getUserQuota = getService().then(srv => srv.get('quota')).then(quota => {
-                    userQuota = quota;
+                getUserQuota = new Promise((resolve, reject) => {
+                    return getService().then(srv => {
+                        return srv.get('quota');
+                    })
+                        .then(quota => {
+                            userQuota = quota;
 
-                    return userQuota;
-                });
+                            resolve(quota);
+                        })
+                        .catch(err => {
+                                reject(err);
+                            });
+                        });
 
                 getUserQuotaInProgress = true;
 
-                return $q.when(getUserQuota)
+                return $q.when(getUserQuota);
             }
 
             function getInfo() {

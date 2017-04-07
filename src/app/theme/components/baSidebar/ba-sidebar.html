@@ -26,7 +26,7 @@
           ng-class="{'slide-right': item.slideRight}">
         <li ng-repeat="subitem in ::item.subMenu" ng-class="::{'with-sub-menu': subitem.subMenu}" ui-sref-active="selected"
             ba-sidebar-toggling-item="subitem" class="ba-sidebar-sublist-item"
-            tooltip="{{::subitem.tooltip|translate}}" tooltip-placement="bottom" hide-disable-menu-item="{{::subitem.name}}">
+            ui-tooltip="{{::subitem.tooltip|translate}}" tooltip-placement="bottom" hide-disable-menu-item="{{::subitem.name}}">
           <a ng-mouseenter="hoverItem($event, item)" ng-if="::subitem.subMenu" ba-ui-sref-toggler
              class="al-sidebar-list-link subitem-submenu-link">
 

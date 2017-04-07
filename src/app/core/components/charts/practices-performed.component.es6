@@ -12,7 +12,7 @@
                 titleTooltip: '<'
             },
             template: `<h4 class="text-center" 
-                            tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
+                            ui-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
                         <div id="practiceTypeGrades" class="amChart"></div>`,
             controller: function practicesPerformedCtrl($translate, baConfig, customerService, examService) {
                 'ngInject';

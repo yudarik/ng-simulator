@@ -39,7 +39,7 @@
                                         <button class="btn btn-success col-md-12" ng-click="$ctrl.onReturn()">{{::'EXAMS.BUTTONS.RETURN'|translate}}</button>
                                         <a class="btn btn-success col-md-12 pull-left xs-hiden export" ng-if="$ctrl.showSavePracticeButton()" target="_blank"
                                             ng-href="DownloadPracticeHTMLFile?practiceID={{$ctrl.practiceId}}""
-                                            tooltip="{{::'EXAMS.BUTTONS.DOWNLOAD'|translate}}" tooltip-placement="top">
+                                            ui-tooltip="{{::'EXAMS.BUTTONS.DOWNLOAD'|translate}}" tooltip-placement="top">
                                             <i class="fa fa-download" aria-hidden="true"></i>&nbsp;{{::'EXAMS.BUTTONS.DOWNLOAD'|translate}}
                                         </a>
                                     </div>

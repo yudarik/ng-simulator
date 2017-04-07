@@ -11,7 +11,7 @@
                 titleLabel: '<',
                 titleTooltip: '<'
             },
-            template: `<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
+            template: `<h4 class="text-center" ui-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
                        <h6 class="text-center" style="color:#0000FF">{{::$ctrl.translate.clickActionLabel}}</h6>
                         <div id="practicesGradeChart" class="amChart flip float-left"></div>`,
             controller: /** @ngInject */
