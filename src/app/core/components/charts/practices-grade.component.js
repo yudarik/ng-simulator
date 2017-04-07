@@ -12,7 +12,7 @@
             titleLabel: '<',
             titleTooltip: '<'
         },
-        template: '<h4 class="text-center" ui-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>\n                       <h6 class="text-center" style="color:#0000FF">{{::$ctrl.translate.clickActionLabel}}</h6>\n                        <div id="practicesGradeChart" class="amChart flip float-left"></div>',
+        template: '<h4 class="text-center" uib-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>\n                       <h6 class="text-center" style="color:#0000FF">{{::$ctrl.translate.clickActionLabel}}</h6>\n                        <div id="practicesGradeChart" class="amChart flip float-left"></div>',
         controller: /** @ngInject */
         ["$translate", "$filter", "$state", "examService", "simulator_config", function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config) {
             var _this = this;

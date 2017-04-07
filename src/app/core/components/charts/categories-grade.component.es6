@@ -12,7 +12,7 @@
                 titleLabel: '<',
                 titleTooltip: '<'
             },
-            template: `<h4 class="text-center" ui-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
+            template: `<h4 class="text-center" uib-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
                         <div id="categoriesGradeChart" class="amChart"></div>`,
             controller: /** @ngInject */
                 function CategoriesChartsCtrl($translate, $filter, statsService, simulator_config) {

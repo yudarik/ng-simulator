@@ -42,7 +42,7 @@
 
                         if (stateName && stateName !== '' && simulatorService.isStateDisabled(stateName)) {
                             attrs.$updateClass('disabled', attrs.class);
-                            attrs.tooltip = $translate.instant(simulatorService.getStateTooltip(stateName));
+                            attrs.uibTooltip = $translate.instant(simulatorService.getStateTooltip(stateName));
                         }
                     });
                 });

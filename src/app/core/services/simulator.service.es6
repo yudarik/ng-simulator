@@ -43,6 +43,9 @@
 
             return (quota) => {
 
+                //TESTING
+
+
                 setHiddenState('exams', simulator_config.trainingDocumentsOnly);
                 setHiddenState('dashboard', simulator_config.trainingDocumentsOnly);
 
@@ -76,6 +79,7 @@
                 }
 
                 $rootScope.$broadcast('stateBasedMenuItemsSetupComplete');
+                //$rootScope.stateBasedMenuItemsSetupComplete = true;
             };
         }
 

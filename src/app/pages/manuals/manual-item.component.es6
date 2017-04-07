@@ -86,7 +86,7 @@
                             <div class="panel" ng-class="$ctrl.getPanelClass($ctrl.item.docType)">
                                 <div class="panel-heading">                                    
                                     <i class="pull-right fa {{$ctrl.getLinkClass($ctrl.item.docType)}}"></i>
-                                    <span class="pull-left" ui-tooltip="{{::$ctrl.item.displayName}}">{{::$ctrl.item.displayName}}</span>
+                                    <span class="pull-left" uib-tooltip="{{::$ctrl.item.displayName}}">{{::$ctrl.item.displayName}}</span>
                                 </div>
                                 <div class="panel-body">                               
                                     <p ng-if="$ctrl.item.category">
