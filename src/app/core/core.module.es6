@@ -69,7 +69,9 @@
                 }
             );
         })
-        .run(function($rootScope, $state, $uibModal, $translate, $css, simulator_config, simulatorService, customerService){
+        .run(function($rootScope, $state, $uibModal, $translate, $timeout, $css, simulator_config, simulatorService, customerService){
+
+            var $scope = $rootScope.$new();
 
             $rootScope.appTitle = 'Loading...';
 
@@ -117,7 +119,15 @@
                 }
             });
 
-            $rootScope.$on('post-login-bean', function(event, data) {
+            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+                if (toState.name === 'signin' && fromState.name === 'signout') {
+                    $timeout(function() {
+                        document.location.reload();
+                    });
+                }
+            });
+
+            $scope.$on('post-login-bean', function(event, data) {
                 if (data.user) {
                     customerService.getQuota().then(simulatorService.setStateBasedMenuItems(data.user));
                 }

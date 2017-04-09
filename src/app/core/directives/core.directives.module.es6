@@ -32,7 +32,7 @@
             },
             link: function(scope, elem, attrs) {
 
-                let stateName = scope.hideDisableMenuItem;//attrs.state;
+                let stateName = scope.hideDisableMenuItem;
 
                 scope.$on('stateBasedMenuItemsSetupComplete', ()=>{
                     $timeout(()=>{
