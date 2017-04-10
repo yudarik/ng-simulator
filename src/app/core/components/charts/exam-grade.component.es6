@@ -22,6 +22,7 @@
                     "type": "gauge",
                     "theme": "light",
                     "fontFamily": "'Arimo', sans-serif",
+                    "fontSize": 14,
                     "axes": [ {
                         "axisThickness": 1,
                         "axisAlpha": 0.2,
@@ -34,7 +35,7 @@
                             "startValue": 0
                         }, {
                             "balloonText": "Passed",
-                            "color": "#ffac29",
+                            "color": "#fdd400",
                             "endValue": passingGrade + warningArea,
                             "startValue": passingGrade
                         }, {
@@ -50,7 +51,7 @@
                     } ],
                     "arrows": [ {} ],
                     "export": {
-                        "enabled": true
+                        "enabled": false
                     },
                     "titles": [
                         {

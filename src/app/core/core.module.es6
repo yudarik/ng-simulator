@@ -49,9 +49,9 @@
                     'Content-Type': 'application/json'
                 })
                 //.setBaseUrl('rest'); // Production Build
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest');
-                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
 
@@ -91,26 +91,8 @@
                 $rootScope.simulatorConfig = simulator_config;
 
                 if (simulator_config.trainingDocumentsOnly) {
-                    // $state.get('exams').sidebarMeta.hidden = true;
-                    // $state.get('dashboard').sidebarMeta.hidden = true;
                     simulator_config.defaultState = 'manuals';
                 }
-                /*
-
-                if ($state.get('exams.post-credit')) {
-                    $state.get('exams.post-credit').sidebarMeta.hidden = !simulator_config.postCreditModeEnabled;
-                    $state.get('exams.post-credit').sidebarMeta.disabled = true;
-                }
-
-                if ($state.get('exams.repeated-practice')) {
-                    $state.get('exams.repeated-practice').sidebarMeta.hidden = !simulator_config.postCreditModeEnabled;
-                }
-
-                if ($state.get('exams.predefined'))
-                    $state.get('exams.predefined').sidebarMeta.hidden = !simulator_config.predefinedExamsEnabled;
-
-                if ($state.get('manuals'))
-                    $state.get('manuals').sidebarMeta.hidden = !simulator_config.trainingDocumentsEnabled;*/
             });
 
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
@@ -132,5 +114,10 @@
                     customerService.getQuota().then(simulatorService.setStateBasedMenuItems(data.user));
                 }
             });
+
+            $rootScope.$on('$translateChangeSuccess', function () {
+
+            });
+
         })
 })();

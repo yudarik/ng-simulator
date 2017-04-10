@@ -103,7 +103,7 @@ gulp.task('clean-release-es6', function(){
 });
 
 gulp.task('build', function(done){
-  runSequence('html', 'fonts', 'other', 'clean-release-es6', done)
+  runSequence('html', 'fonts', 'other', 'copyVendorFiles', 'clean-release-es6', done)
 });
 
 gulp.task('es6', function() {

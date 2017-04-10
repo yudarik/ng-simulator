@@ -7,13 +7,15 @@
 
 
     angular.module('Simulator.pages.auth')
-        .controller('forgotController', function($translate, simulator_config, userAuthService){
+        .controller('forgotController', function($scope, $translate, simulator_config, userAuthService){
 
             this.simulator_config = simulator_config;
 
             this.user = {};
 
             this.submit = ()=>{
+                this.formChanged = false;
+
                 userAuthService.resetPassword({emailAddress: this.user.email})
                     .then((response)=>{
                         if (response.status === 'success') {
@@ -23,7 +25,15 @@
                     .catch((err)=>{
                         this.message = err.data.description;
                     });
-            }
+            };
+
+            $scope.$watch('forgot.user.email', (oldVal, newVal) => {
+                if (oldVal === newVal) {
+                    return;
+                } else {
+                    this.formChanged = true;
+                }
+            });
         })
 
 })();

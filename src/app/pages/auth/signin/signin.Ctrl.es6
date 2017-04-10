@@ -13,6 +13,9 @@
             this.user = {};
 
             this.submit = ()=>{
+
+                this.formChanged = false;
+
                 userAuthService.signin(this.user)
                     .then(userAuthService.getPostLogin)
                     .then((user)=>{
@@ -45,6 +48,14 @@
 
                         }
                     });
-            }
+            };
+
+            $scope.$watchCollection('signin.user', (oldVal, newVal) => {
+                if (oldVal === newVal) {
+                    return;
+                } else {
+                    this.formChanged = true;
+                }
+            });
         })
 })();
