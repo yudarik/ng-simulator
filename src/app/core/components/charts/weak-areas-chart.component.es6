@@ -29,7 +29,7 @@
                     "fontFamily": "'Arimo', sans-serif",
                     "angle": 30,
                     "depth3D": 30,
-                    "startDuration": 1,
+                    "startDuration": 0,
                     "categoryAxis": {
                         "gridPosition": "start"
                     },
@@ -72,7 +72,11 @@
                             "text": this.titleLabel
                         }
                     ],
-                    "dataProvider": []
+                    "dataProvider": [],
+                    "listeners": [{
+                        "event": "rendered",
+                        "method": handleRender
+                    }],
                 };
 
                 this.$onInit = () => {
@@ -85,12 +89,25 @@
                         }
                     }), "Expertise Level", "desc");
 
-                    AmCharts.makeChart('weakAreasChart', chart);
+                    chart.valueAxes[0].maximum = this.getMax();
+
+                    let amChart = AmCharts.makeChart('weakAreasChart', chart);
+
                 };
 
                 this.getLevelById = (id) => {
-                    return parseInt(this.config.questionsPercentagePerCategoryId[id] * 1000);
+                    return parseInt(this.config.questionsPercentagePerCategoryId[id] * 100);
                 };
+
+                this.getMax = () => {
+                    return _.max(_.values(this.config.questionsPercentagePerCategoryId)) * 100;
+                };
+
+                function handleRender() {
+                    $('#weakAreasChart svg g [fill*="N"]').each((index, node) =>{
+                        node.attributes.fill.nodeValue = "#ffffff";
+                    });
+                }
             },
         })
 

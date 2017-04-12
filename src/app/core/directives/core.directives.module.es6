@@ -34,6 +34,10 @@
 
                 let stateName = scope.hideDisableMenuItem;
 
+                this.$onInit = () => {
+
+                };
+
                 scope.$on('stateBasedMenuItemsSetupComplete', ()=>{
                     $timeout(()=>{
                         if (stateName && stateName !== '' && simulatorService.isStateHidden(stateName)) {

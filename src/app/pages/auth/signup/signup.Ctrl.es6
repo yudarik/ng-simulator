@@ -24,7 +24,7 @@
                 userAuthService.signup(this.user)
                     .then((response)=>{
                         if (response.status === 'success') {
-                            this.message = $translate.instant('AUTH.REGISTERED_SUCCESSFULLY');
+                            this.message = response.description;//$translate.instant('AUTH.REGISTERED_SUCCESSFULLY');
                         }
                     })
                     .catch((err)=>{

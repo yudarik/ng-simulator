@@ -21,7 +21,8 @@
     "ERROR": {
       "INVALID.CREDENTIALS": "שם המשתמש או הסיסמא שגויים",
       "ACCOUNT.EXPIRED": "פג תוקפו של חשבון המשתמש, אנא פנה למנהל האתר",
-      "PASSWORD_VALIDATION_FAILED": "הסיסמא שגויה"
+      "PASSWORD_VALIDATION_FAILED": "הסיסמא שגויה",
+      "EMAIL": "שם משתמש (דוא\"ל) לא חוקי"
     },
     "WELCOME": {
       "MESSAGE": {

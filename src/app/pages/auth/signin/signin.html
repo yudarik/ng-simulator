@@ -1,19 +1,23 @@
 <logo-component></logo-component>
 <main class="auth-main">
   <div class="auth-block panel-body">
-    <h1>{{::'AUTH.SIMULATOR_SIGNIN'|translate}}</h1>
-    <a ui-sref="signup" class="auth-link">{{::'AUTH.NEW_ACCOUNT_REGISTER'|translate}}</a>
+    <h1 ng-bind="::'AUTH.SIMULATOR_SIGNIN'|translate"></h1>
+    <a ui-sref="signup" class="auth-link" ng-bind="::'AUTH.NEW_ACCOUNT_REGISTER'|translate"></a>
 
-    <form name="loginform" class="form-horizontal" ng-model="signin.user" ng-submit="signin.submit()">
+    <form name="loginform" class="form-horizontal" ng-model="signin.user" ng-submit="signin.submit()" novalidate>
       <div class="form-group">
-        <label class="col-sm-4 control-label">{{::'AUTH.EMAIL'|translate}}</label>
+        <label class="col-sm-4 control-label" ng-bind="::'AUTH.EMAIL'|translate"></label>
 
         <div class="col-sm-8">
-          <input type="email" class="form-control" name="email" placeholder="{{::'AUTH.EMAIL'|translate}}" ng-model="signin.user.username">
+          <input type="email" class="form-control" name="email" placeholder="{{::'AUTH.EMAIL'|translate}}" ng-model="signin.user.username" required="required">
+          <div class="text-default" ng-messages="loginform.email.$error" role="alert">
+            <span class="sub-little-text float-left" ng-message="required" ng-bind="::'GENERAL.REQUIRED'|translate"></span>
+            <span class="sub-little-text float-left" ng-message="email" ng-bind="::'AUTH.ERROR.EMAIL'|translate"></span>
+          </div>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-4 control-label">{{::'AUTH.PASSWORD'|translate}}</label>
+        <label class="col-sm-4 control-label" ng-bind="::'AUTH.PASSWORD'|translate"></label>
 
         <div class="col-sm-8">
           <input type="password" class="form-control" name="password" placeholder="{{::'AUTH.PASSWORD'|translate}}" ng-model="signin.user.password">
@@ -27,8 +31,8 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8 submit-area">
-          <button type="submit" class="btn btn-default btn-auth pull-right">{{::'AUTH.LOGIN_BTN'|translate}}</button>
-          <a ui-sref="forgotPassword" class="forgot-pass pull-left">{{::'AUTH.FORGOT_PASSWORD'|translate}}</a>
+          <button type="submit" class="btn btn-default btn-auth pull-right" ng-disabled="loginform.$invalid" ng-bind="::'AUTH.LOGIN_BTN'|translate"></button>
+          <a ui-sref="forgotPassword" class="forgot-pass pull-left" ng-bind="::'AUTH.FORGOT_PASSWORD'|translate"></a>
         </div>
       </div>
 

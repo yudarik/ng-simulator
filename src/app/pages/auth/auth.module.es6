@@ -20,7 +20,7 @@
 
                             $translate.use(config.locale);
 
-                            return $q.when($translate.isReady());
+                            return $q.all([$translate.isReady(), $translate.instant('AUTH')]);
                         }).catch(err => {
                             return false;
                         });

@@ -44,6 +44,12 @@
             return (quota) => {
 
                 //TESTING
+/*                simulator_config.postCreditModeEnabled = true;
+
+                quota.leftNewQuestionsQuota = 200;
+                quota.leftPostCreditQuestionsQuota = 1000;
+                user.postCreditModeNow = true;
+                simulator_config.minimumQuestionsToStartSuggesting = 1;*/
 
 
                 setHiddenState('exams', simulator_config.trainingDocumentsOnly);
