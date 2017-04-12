@@ -1,6 +1,6 @@
 <div class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
   <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu></a>
-  <a href="#/" class="al-logo clearfix"><span ng-bind="::pageTop.config.applicationTitle"></span></a>
+  <a ui-sref="{{pageTop.config.defaultState}}" class="al-logo clearfix"><span ng-bind="::pageTop.config.applicationTitle"></span></a>
 
   <div class="user-profile clearfix">
     <div class="al-user-profile" uib-dropdown>

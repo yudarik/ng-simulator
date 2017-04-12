@@ -39,7 +39,7 @@
                 return category;
             });
 
-            if (currentTotalAmount !== total) {
+            if (currentTotalAmount && total && currentTotalAmount !== total) {
                 distMap = adjustAmount(distMap, currentTotalAmount, total);
             }
 
