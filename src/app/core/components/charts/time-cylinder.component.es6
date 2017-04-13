@@ -20,6 +20,8 @@
                 var chartConf = {
                     "theme": "light",
                     "type": "serial",
+                    "fontSize": 14,
+                    "fontFamily": "'Arimo', sans-serif",
                     "depth3D": 100,
                     "angle": 30,
                     "autoMargins": false,
@@ -29,7 +31,9 @@
                     "dataProvider": [],
                     "valueAxes": [ {
                         "stackType": "100%",
-                        "gridAlpha": 0
+                        "gridAlpha": 0,
+                        "axisAlpha": 0,
+                        "labelsEnabled": false
                     } ],
                     "graphs": [ {
                         "type": "column",

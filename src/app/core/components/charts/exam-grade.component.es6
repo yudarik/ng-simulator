@@ -12,7 +12,7 @@
                 examGrade: '<'
             },
             template: `<div id="examGradeGauge" class="amChart" style="width:100%;height:300px"></div>`,
-            controller: function examGradeGaugeCtrl($filter, simulator_config) {
+            controller: function examGradeGaugeCtrl($filter, $translate, simulator_config) {
                 'ngInject';
 
                 let passingGrade = simulator_config.passingGrade;
@@ -29,20 +29,19 @@
                         "tickAlpha": 0.2,
                         "valueInterval": 20,
                         "bands": [ {
-                            "balloonText": "Failed",
+                            "balloonText": $translate.instant('EXAMS.SUMMARY.PRACTICE_FAILED'),
                             "color": "#FF0000",
                             "endValue": passingGrade - 0.1,
                             "startValue": 0
                         }, {
-                            "balloonText": "Passed",
+                            "balloonText": $translate.instant('EXAMS.SUMMARY.PRACTICE_PASSED'),
                             "color": "#fdd400",
                             "endValue": passingGrade + warningArea,
                             "startValue": passingGrade
                         }, {
-                            "balloonText": "Succeeded",
+                            "balloonText": $translate.instant('EXAMS.SUMMARY.PRACTICE_SUCCESS'),
                             "color": "#00CC00",
                             "endValue": 100,
-                            "innerRadius": "95%",
                             "startValue": 100 - warningArea + 0.1
                         } ],
                         "bottomText": "0 %",

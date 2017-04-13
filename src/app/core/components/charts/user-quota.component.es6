@@ -22,6 +22,8 @@
                     "type": "serial",
                     "depth3D": 100,
                     "angle": 30,
+                    "fontSize": 14,
+                    "fontFamily": "'Arimo', sans-serif",
                     "autoMargins": false,
                     "marginBottom": 100,
                     "marginLeft": 350,

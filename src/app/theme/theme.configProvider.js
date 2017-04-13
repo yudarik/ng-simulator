@@ -38,6 +38,21 @@
     aqua: '#00ffff'
   };
 
+  var practicesColors = {
+      "EXAM":  "#FF0000",
+      "REPEATED_EXAM": "#F08080",
+      "PREDEFINED_EXAM": "#FFFF00",
+      "REPEATED_PREDEFINED_EXAM":  "#FFF69C",
+      "SUGGESTED_PRACTICE": "#0000FF",
+      "REPEATED_SUGGESTED_PRACTICE": "#ADD8E6",
+      "PRACTICE":  "#008000",
+      "REPEATED_PRACTICE": "#90EE90",
+      "POST_CREDIT_PRACTICE":  "#FF00FF",
+      "REPEATED_POST_CREDIT_PRACTICE": "#EE82EE",
+      "WEAK_AREAS_PRACTICE": "#0000FF",
+      "REPEATED_WEAK_AREAS_PRACTICE": "#ADD8E6",
+  };
+
   angular.module('BlurAdmin.theme')
     .provider('baConfig', configProvider);
 
@@ -78,7 +93,7 @@
           gossip: dashboardColors.gossip,
           white: dashboardColors.white
         },*/
-        dashboard: dashboardColors
+        dashboard: practicesColors
       }
     };
 

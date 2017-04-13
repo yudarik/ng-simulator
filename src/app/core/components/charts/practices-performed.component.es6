@@ -19,7 +19,7 @@
 
                 var layoutColors = baConfig.colors;
 
-                var chartColors = _.values(layoutColors.dashboard);
+                var chartColors = layoutColors.dashboard;
 
                 var chartConf = {
                     titles: [
@@ -32,7 +32,7 @@
                     type: 'serial',
                     theme: 'default',
                     fontFamily: "'Arimo', sans-serif",
-                    color: layoutColors.defaultText,
+                    fontSize: 14,
                     dataProvider: [],
                     valueAxes: [
                         {
@@ -104,7 +104,7 @@
                                     type: $translate.instant('EXAMS.TYPES.'+key.toUpperCase()),
                                     questions: this.getQuestionsSum(grouped[key]),
                                     practices: grouped[key].length,
-                                    color: chartColors[index]
+                                    color: chartColors[key.toUpperCase()]
                                 };
                             } else return false;
 

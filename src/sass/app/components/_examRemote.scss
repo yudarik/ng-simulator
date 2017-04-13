@@ -65,7 +65,7 @@
 
   .arrows {
     background: #fff;
-    width: 150px;
+    width: 160px;
     text-align: center;
     padding: 15px;
     position: absolute;
@@ -167,6 +167,15 @@
           }
         }
 
+      }
+    }
+  }
+  @media all and (min-width: 769px) {
+    .arrows {
+      .finish {
+        .btn {
+          width: 100%;
+        }
       }
     }
   }

@@ -13,6 +13,7 @@ angular.module('Simulator', [
   'smart-table',
   "xeditable",
   'ui.slimscroll',
+  'oc.lazyLoad',
   'ngJsTree',
   'angular-progress-button-styles',
   'angularCSS',

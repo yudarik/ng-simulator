@@ -71,7 +71,10 @@
       "PRACTICE_SOLUTION": "Practice Solution",
       "TIPS_FOR_SUCCESS": "Tips for Success",
       "REPEAT_PRACTICE": "Repeat Practice",
-      "TABLE_TITLE": "Practice Analysis by Category"
+      "TABLE_TITLE": "Practice Analysis by Category",
+      "PRACTICE_FAILED": "Failed",
+      "PRACTICE_PASSED": "Passed",
+      "PRACTICE_SUCCESS": "Success"
     },
     "DISTRIBUTION": {
       "TITLE": "Question Distribution by Category",
@@ -105,7 +108,12 @@
 },
     "TOOLTIPS": {
       "POSTCREDIT_DISABLED": "This practice type is unavailable since you still have new questions left in your quota",
-      "NOT_AVAILABLE_IN_DEMO": "Not available in demo mode"
+      "NOT_AVAILABLE_IN_DEMO": "Not available in demo mode",
+      "NO_MORE_CREDITS": "לא נותר מספיק קרדיט לביצוע תרגול זה ולכן הוא אינו זמין",
+      "NO_MORE_POST_CREDITS": "לא נותר מספיק קרדיט לביצוע תרגול זה ולכן הוא אינו זמין",
+      "NO_PREDEFINED_EXAMS_AVAILABLE": "אין מבחני הסמכה",
+      "NO_PREDEFINED_EXAMS_AVAILABLE_QUOTA": "לא נותר קרדיט באף אחד ממבחני ההסמכה",
+      "NO_WEAK_AREAS_PRACTICE_AVAILABLE": "no more new questions credit left or not enough practice was done to start suggesting"
     },
     "PREDEFINED": {
       "NUMOFQUEST": "Number of Questions",

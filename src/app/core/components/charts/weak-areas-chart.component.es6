@@ -20,12 +20,13 @@
                             </div>`,
             controller: function() {
 
-                let chartColors = ['Yellow', 'Brown', 'Cyan', 'Red', 'Grey', 'Gold', 'Green', 'Orange', 'Blue', 'Pink'];
+                let chartColors = ['#FFFF00', '#a52a2a', '#00ffff', '#ff0000', '#808080', '#FFD700', '#008000', '#ffa500', '#0000ff', '#FF00FF'];
 
                 let chart = {
                     "type": "serial",
                     "categoryField": "category",
                     "rotate": true,
+                    "fontSize": 14,
                     "fontFamily": "'Arimo', sans-serif",
                     "angle": 30,
                     "depth3D": 30,
@@ -56,7 +57,7 @@
                             "totalText": "",
                             "unit": "%",
                             "title": "Expertise Level",
-                            "titleFontSize": 1
+                            "titleFontSize": 14
                         }
                     ],
                     "allLabels": [],
@@ -68,7 +69,7 @@
                     "titles": [
                         {
                             "id": "Title-1",
-                            "size": 15,
+                            "size": 14,
                             "text": this.titleLabel
                         }
                     ],
@@ -104,9 +105,9 @@
                 };
 
                 function handleRender() {
-                    $('#weakAreasChart svg g [fill*="N"]').each((index, node) =>{
+                    /*$('#weakAreasChart svg g [fill*="N"]').each((index, node) =>{
                         node.attributes.fill.nodeValue = "#ffffff";
-                    });
+                    });*/
                 }
             },
         })

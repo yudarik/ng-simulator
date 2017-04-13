@@ -30,6 +30,7 @@
                     "autoMarginOffset": 0,
                     "depth3D": 30,
                     "startDuration": 1,
+                    "fontSize": 14,
                     "fontFamily": "'Arimo', sans-serif",
                     "categoryAxis": {
                         "gridPosition": "start",

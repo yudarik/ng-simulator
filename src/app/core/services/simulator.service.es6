@@ -81,7 +81,7 @@
                     quota.leftNewQuestionsQuota > 0) {
                     enableState('exams.weak-areas');
                 } else {
-                    disableState('exams.weak-areas', 'EXAMS.TOOLTIPS.NO_WEAk_AREAS_PRACTICE_AVAILABLE');
+                    disableState('exams.weak-areas', 'EXAMS.TOOLTIPS.NO_WEAK_AREAS_PRACTICE_AVAILABLE');
                 }
 
                 $rootScope.$broadcast('stateBasedMenuItemsSetupComplete');

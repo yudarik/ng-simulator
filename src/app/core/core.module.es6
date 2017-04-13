@@ -49,9 +49,9 @@
                     'Content-Type': 'application/json'
                 })
                 //.setBaseUrl('rest'); // Production Build
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest');
-                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
 
 
@@ -69,7 +69,7 @@
                 }
             );
         })
-        .run(function($rootScope, $state, $uibModal, $translate, $timeout, $css, simulator_config, simulatorService, customerService){
+        .run(function($rootScope, $state, $uibModal, $translate, $timeout, $ocLazyLoad, simulator_config, simulatorService, customerService){
 
             var $scope = $rootScope.$new();
 
@@ -85,7 +85,10 @@
                 $rootScope.appLayout = simulator_config.layout.toLowerCase();
 
                 if ($rootScope.appLayout === 'rtl') {
-                    $css.add('assets/vendor-files/bootstrap-rtl.css');
+                    $ocLazyLoad.load([
+                        'assets/vendor-files/bootstrap-rtl.css',
+                        'assets/vendor-files/angular-locale_he-il.js'
+                    ]);
                 }
 
                 $rootScope.simulatorConfig = simulator_config;

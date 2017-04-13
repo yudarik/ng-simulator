@@ -36,6 +36,7 @@
                     "maxZoomFactor": 10,
                     "startDuration": 1,
                     "fontFamily": "'Arimo', sans-serif",
+                    "fontSize": 14,
                     "categoryAxis": {
                         "autoRotateAngle": 45,
                         "autoRotateCount": 1,

@@ -40,6 +40,7 @@
                     "startDuration": 1,
                     "theme": "default",
                     "fontFamily": "'Arimo', sans-serif",
+                    "fontSize": 14,
                     "categoryAxis": {
                         "gridPosition": "start",
                         labelRotation: 25,
