@@ -6,7 +6,7 @@
     'use strict';
     angular.module('Simulator.core.services', []);
     angular.module('Simulator.core.services')
-        .factory('simulatorService', function(Restangular, $q, $rootScope, simulator_config){
+        .factory('simulatorService', function(Restangular, $q, $rootScope, simulator_config, userAuthService, customerService){
 
         var simulators = Restangular.all('simulators');
         var statusCache = null,
@@ -39,17 +39,15 @@
             return simulators.get('ping');
         }
 
-        function setStateBasedMenuItems(user) {
+        function setStateBasedMenuItems() {
 
-            return (quota) => {
+            return $q.all([
+                userAuthService.getUser(),
+                customerService.getQuota()
+            ]).then(data => {
 
-                //TESTING
-/*                simulator_config.postCreditModeEnabled = true;
-
-                quota.leftNewQuestionsQuota = 200;
-                quota.leftPostCreditQuestionsQuota = 1000;
-                user.postCreditModeNow = true;
-                simulator_config.minimumQuestionsToStartSuggesting = 1;*/
+                var user = data[0];
+                var quota = data[1];
 
 
                 setHiddenState('exams', simulator_config.trainingDocumentsOnly);
@@ -84,9 +82,8 @@
                     disableState('exams.weak-areas', 'EXAMS.TOOLTIPS.NO_WEAK_AREAS_PRACTICE_AVAILABLE');
                 }
 
-                $rootScope.$broadcast('stateBasedMenuItemsSetupComplete');
-                //$rootScope.stateBasedMenuItemsSetupComplete = true;
-            };
+                return $q.when('done');
+            });
         }
 
         function initState(stateName) {

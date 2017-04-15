@@ -111,16 +111,5 @@
                     });
                 }
             });
-
-            $scope.$on('post-login-bean', function(event, data) {
-                if (data.user) {
-                    customerService.getQuota().then(simulatorService.setStateBasedMenuItems(data.user));
-                }
-            });
-
-            $rootScope.$on('$translateChangeSuccess', function () {
-
-            });
-
         })
 })();

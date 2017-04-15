@@ -34,22 +34,14 @@
 
                 let stateName = scope.hideDisableMenuItem;
 
-                this.$onInit = () => {
+                if (stateName && stateName !== '' && simulatorService.isStateHidden(stateName)) {
+                    elem.remove();
+                }
 
-                };
-
-                scope.$on('stateBasedMenuItemsSetupComplete', ()=>{
-                    $timeout(()=>{
-                        if (stateName && stateName !== '' && simulatorService.isStateHidden(stateName)) {
-                            elem.remove();
-                        }
-
-                        if (stateName && stateName !== '' && simulatorService.isStateDisabled(stateName)) {
-                            attrs.$updateClass('disabled', attrs.class);
-                            attrs.uibTooltip = $translate.instant(simulatorService.getStateTooltip(stateName));
-                        }
-                    });
-                });
+                if (stateName && stateName !== '' && simulatorService.isStateDisabled(stateName)) {
+                    attrs.$updateClass('disabled', attrs.class);
+                    attrs.uibTooltip = $translate.instant(simulatorService.getStateTooltip(stateName));
+                }
             }
         }
     })

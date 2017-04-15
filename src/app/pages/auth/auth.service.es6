@@ -46,7 +46,7 @@
                             if (!resetPassword && !user.tempPassword) {
                                 $rootScope.currentUser = user;
                             }
-                            $rootScope.$broadcast('post-login-bean', {user});
+                            //$rootScope.$broadcast('post-login-bean', {user});
 
                             resolve(user);
                         }).catch(function (reason) {
