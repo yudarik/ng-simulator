@@ -22,6 +22,8 @@
             timeFrame: 'NORMAL'
         };
 
+        this.maxCategoryDistribution = this.examParams.totalQuestion;
+
         this.initQuestionDistribution = function () {
 
             var total = this.examParams.totalQuestion;
@@ -42,7 +44,7 @@
                 return category;
             });
 
-            if (currentTotalAmount && total && currentTotalAmount !== total) {
+            if (currentTotalAmount >= 0 && total >= 0 && currentTotalAmount !== total) {
                 distMap = adjustAmount(distMap, currentTotalAmount, total);
             }
 
@@ -50,10 +52,14 @@
         };
         this.adjustCategory = function (category, oldVal) {
 
+            if (typeof category.questionDistribution === 'undefined') {
+                category.questionDistribution = parseInt(oldVal);
+            }
+
             category.userAdjusted = true;
 
-            if (category.questionDistribution > _this.examParams.totalQuestion) {
-                category.questionDistribution = _this.examParams.totalQuestion;
+            if (category.questionDistribution > _this.maxCategoryDistribution) {
+                category.questionDistribution = _this.maxCategoryDistribution;
             }
 
             if (category.questionDistribution > oldVal) {
