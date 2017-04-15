@@ -9,7 +9,7 @@
     .controller('BaSidebarCtrl', BaSidebarCtrl);
 
   /** @ngInject */
-  function BaSidebarCtrl($scope, baSidebarService, simulatorService) {
+  function BaSidebarCtrl($scope, $translate, baSidebarService, simulatorService) {
 
     simulatorService.setStateBasedMenuItems().then(function(){
 
@@ -29,5 +29,9 @@
         baSidebarService.setMenuCollapsed(true);
       }
     });
+
+    $scope.getTooltip = function(stateName) {
+      return $translate.instant(simulatorService.getStateTooltip(stateName))
+    }
   }
 })();

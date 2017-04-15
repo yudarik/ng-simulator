@@ -114,7 +114,7 @@
                 initState(stateName);
                 stateBasedMenuItems[stateName].disabled = status;
             }
-            if (tooltip && stateName) {
+            if (tooltip && stateName && status) {
                 stateBasedMenuItems[stateName].tooltip = tooltip;
             }
         }

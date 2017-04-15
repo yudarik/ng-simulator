@@ -84,7 +84,6 @@
                     }
                 },
                 title: 'EXAMS.TYPES.POST_CREDIT_PRACTICE',
-                tooltip: 'EXAMS.TOOLTIPS.POSTCREDIT_DISABLED',
                 sidebarMeta: {
                     order: 300
                 }

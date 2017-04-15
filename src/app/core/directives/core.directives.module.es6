@@ -23,7 +23,7 @@
             }
         };
     }])
-    .directive('hideDisableMenuItem', function(simulatorService, $timeout, $translate){
+    .directive('hideDisableMenuItem', function(simulatorService, $timeout, $translate, $compile,$interpolate){
 
         return {
             restrict: 'A',
@@ -40,7 +40,6 @@
 
                 if (stateName && stateName !== '' && simulatorService.isStateDisabled(stateName)) {
                     attrs.$updateClass('disabled', attrs.class);
-                    attrs.uibTooltip = $translate.instant(simulatorService.getStateTooltip(stateName));
                 }
             }
         }
