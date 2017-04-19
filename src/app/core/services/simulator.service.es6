@@ -58,15 +58,8 @@
                 setHiddenState('exams.predefined', !simulator_config.predefinedExamsEnabled);
                 setHiddenState('manuals', !simulator_config.trainingDocumentsEnabled);
 
-
-                if (user.role === "Candidate") {
-                    ['exams.distribution-full', 'exams.weak-areas','exams.repeated-practice'].forEach(state => {
-                        disableState(state, 'EXAMS.TOOLTIPS.NOT_AVAILABLE_IN_DEMO');
-                    });
-                }
                 setStateStatus('exams.post-credit', quota.leftPostCreditQuestionsQuota <= 0, 'EXAMS.TOOLTIPS.NO_MORE_POST_CREDITS');
                 setStateStatus('exams.post-credit', !user.postCreditModeNow, 'EXAMS.TOOLTIPS.POSTCREDIT_DISABLED');
-
 
                 setStateStatus('exams.distribution-general', quota.leftNewQuestionsQuota <= 0, 'EXAMS.TOOLTIPS.NO_MORE_CREDITS');
                 setStateStatus('exams.repeated-practice', quota.leftPostCreditQuestionsQuota <= 0, 'EXAMS.TOOLTIPS.NO_MORE_POST_CREDITS');
@@ -80,6 +73,12 @@
                     enableState('exams.weak-areas');
                 } else {
                     disableState('exams.weak-areas', 'EXAMS.TOOLTIPS.NO_WEAK_AREAS_PRACTICE_AVAILABLE');
+                }
+
+                if (user.role === "Candidate") {
+                    ['exams.distribution-full', 'exams.weak-areas','exams.repeated-practice'].forEach(state => {
+                        disableState(state, 'EXAMS.TOOLTIPS.NOT_AVAILABLE_IN_DEMO');
+                    });
                 }
 
                 return $q.when('done');

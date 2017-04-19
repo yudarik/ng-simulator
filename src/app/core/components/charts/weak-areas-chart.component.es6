@@ -18,7 +18,7 @@
                                     </div>
                                 </div>
                             </div>`,
-            controller: function() {
+            controller: function($translate) {
 
                 let chartColors = ['#FFFF00', '#a52a2a', '#00ffff', '#ff0000', '#808080', '#FFD700', '#008000', '#ffa500', '#0000ff', '#FF00FF'];
 
@@ -56,7 +56,7 @@
                             "minimum": 0,
                             "totalText": "",
                             "unit": "%",
-                            "title": "Expertise Level",
+                            "title": $translate.instant("STATS.DASHBOARD.CHARTS.WEAK_AREAS.X_AXIS_LABEL"),
                             "titleFontSize": 14
                         }
                     ],
@@ -90,14 +90,12 @@
                         }
                     }), "Expertise Level", "desc");
 
-                    chart.valueAxes[0].maximum = this.getMax();
-
                     let amChart = AmCharts.makeChart('weakAreasChart', chart);
 
                 };
 
                 this.getLevelById = (id) => {
-                    return parseInt(this.config.questionsPercentagePerCategoryId[id] * 100);
+                    return parseInt((1 - this.config.questionsPercentagePerCategoryId[id]) * 100);
                 };
 
                 this.getMax = () => {

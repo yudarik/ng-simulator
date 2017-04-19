@@ -80,15 +80,22 @@
       }
     }
 
+    ul.nav {
+      & > li {
+        display: inline-block;
+      }
+    }
+
     .invisible {
       visibility: hidden;
     }
 
-    .nav, .finish {
+    .nav,
+    .finish {
         margin-bottom: 15px;
 
       .export {
-        margin-top: 10px;
+        margin-bottom: 10px;
       }
       button.finishExam {
         margin-bottom: 10px!important;
@@ -161,7 +168,7 @@
             margin-bottom: 0!important;
           }
           &.export {
-            margin-top: 0;
+            margin-bottom: 0;
             width: auto;
             display: none;
           }

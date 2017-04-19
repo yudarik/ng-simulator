@@ -13,7 +13,7 @@
                                ng-model="category.questionDistribution"
                                ng-change="distribution.adjustCategory(category, '{{category.questionDistribution}}')"
                                min="0"
-                               max="{{::distribution.maxCategoryDistribution}}"
+
                                name="category_{{category.id}}"
                                ng-disabled="::distribution.isReadOnly()">
                         <div ng-messages="examDistribution['category_'+category.id].$error">

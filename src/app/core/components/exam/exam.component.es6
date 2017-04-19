@@ -21,8 +21,11 @@
                        </div>
                        <exam-remote practice-id="$ctrl.config.practiceID" remote-map="$ctrl.questions" is-solution="$ctrl.isSolution" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()" on-return="$ctrl.return()"></exam-remote>
                        <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>`,
-            controller: function ($scope, $uibModal, $interval, $state, examService, simulatorService, baSidebarService, simulator_config) {
+            controller: function ($rootScope, $uibModal, $interval, $state, $translate, examService, simulatorService, baSidebarService, simulator_config) {
                 'ngInject';
+
+                var $scope = $rootScope.$new();
+
                 this.timeframe = (this.config && this.config.timePerQuestion)? this.config.timePerQuestion * this.config.questions.length : undefined;
                 this.isSolution = !(this.timeframe);
                 this.questions = (this.config)? this.config.questions : [];
@@ -80,6 +83,110 @@
                     event.preventDefault();
                 };
 
+                this.init = () => {
+
+                    if (!Array.isArray(this.questions) || !this.questions.length) {
+                        alert($translate.instant('EXAMS.TOOLTIPS.PRACTICE_ERROR_NO_QUESTIONS'));
+
+                        if ($rootScope.previousState) {
+                            return $state.go(simulator_config.defaultState, {}, {emergencyExit: true});
+                        }
+                    }
+
+                    if (!baSidebarService.isMenuCollapsed()) {
+                        baSidebarService.toggleMenuCollapsed();
+                    }
+
+                    var answerArray = [];
+
+                    for (var i=1; i <= simulator_config.answersPerQuestionNumber; i++) {
+                        answerArray.push(`ans${i}`);
+                    }
+
+                    _.forEach(this.questions, (question, index) => {
+
+                        _.assign(question, {
+                            index: index,
+                            active: false,
+                            answerOptions: []
+                        });
+
+                        _.forEach(_.pick(question, answerArray), (value, key) => {
+                            if (value) {
+                                question.answerOptions.push({
+                                    key: parseInt(key.replace('ans','')),
+                                    value: value
+                                });
+                            }
+                        });
+                    });
+
+                    ping = $interval(()=>{
+                        simulatorService.ping();
+                    }, 30000);
+
+                    this.totalTimeFrame = angular.copy(this.timeframe);
+                    this.questionInDisplay = this.questions[0];
+                    this.questionInDisplay.active = true;
+
+                    this.prevBtn = $('#remote-prev');
+                    this.nextBtn = $('#remote-next');
+
+                    $scope.$on('timeOver', this.finishExam);
+                    $scope.$on('$destroy', ()=>{
+                        $interval.cancel(ping);
+                        $(document).off('keydown', keydownEventHandler)
+                    });
+                };
+                this.init();
+
+                this.switchQuestion = (question) => {
+
+                    if (!question) {
+                        return;
+                    }
+
+                    this.questionInDisplay.active = !this.questionInDisplay.active;
+                    this.questionInDisplay = question;
+                    this.questionInDisplay.active = !this.questionInDisplay.active;
+                };
+
+                this.move = (count) => {
+                    this.switchQuestion(_.find(this.questions, {index: this.questionInDisplay.index + count}));
+                };
+
+                this.finishExam = () => {
+
+                    console.log('FinishExam reached');
+
+                    if (this.timeframe > 10) {
+                        timeframeModal($uibModal).then(()=>{
+                            submitExam();
+                        }, ()=> {
+                            //dismiss
+                        });
+                    } else {
+                        submitExam();
+                    }
+                };
+
+                this.return = () => {
+
+                    if (this.isSolution) {
+                        examService.getPracticeInfo(this.config.practiceID).then(solution => {
+                            $state.go('exams.practice-summary', {examSummary: solution});
+                        });
+                    } else {
+                        $state.go(simulator_config.defaultState);
+                    }
+                };
+
+                this.numPadKeys = (keyNumber) => {
+                    $scope.$broadcast('numKeyPadSelect', {answer: keyNumber - 48});
+                };
+
+                $(document).keydown(keydownEventHandler);
+
                 function getUserAnswer(question) {
                     var chosenAns = (typeof question.chosenAns !== 'undefined')? question.chosenAns : getRandomAnswer(question);
                     return parseInt(chosenAns);
@@ -117,104 +224,6 @@
 
                     return modalInstance.result;
                 }
-
-                this.init = () =>{
-
-                    if (!this.questions.length) return;
-
-
-                    if (!baSidebarService.isMenuCollapsed()) {
-                        baSidebarService.toggleMenuCollapsed();
-                    }
-
-                    var answerArray = [];
-
-                    for (var i=1; i <= simulator_config.answersPerQuestionNumber; i++) {
-                        answerArray.push(`ans${i}`);
-                    }
-
-                    _.forEach(this.questions, (question, index) => {
-
-                        _.assign(question, {
-                            index: index,
-                            active: false,
-                            answerOptions: []
-                        });
-
-                        _.forEach(_.pick(question, answerArray), (value, key) => {
-                            if (value) {
-                                question.answerOptions.push({
-                                    key: parseInt(key.replace('ans','')),
-                                    value: value
-                                });
-                            }
-                        });
-                    });
-
-                    ping = $interval(()=>{
-                        simulatorService.ping();
-                    }, 30000);
-                };
-                this.init();
-
-                this.totalTimeFrame = angular.copy(this.timeframe);
-                this.questionInDisplay = this.questions[0];
-                this.questionInDisplay.active = true;
-
-                this.switchQuestion = (question) => {
-
-                    if (!question) {
-                        return;
-                    }
-
-                    this.questionInDisplay.active = !this.questionInDisplay.active;
-                    this.questionInDisplay = question;
-                    this.questionInDisplay.active = !this.questionInDisplay.active;
-                };
-
-                this.move = (count) =>{
-                    this.switchQuestion(_.find(this.questions, {index: this.questionInDisplay.index + count}));
-                };
-
-                this.finishExam = () => {
-
-                    console.log('FinishExam reached');
-
-                    if (this.timeframe > 10) {
-                        timeframeModal($uibModal).then(()=>{
-                            submitExam();
-                        }, ()=> {
-                            //dismiss
-                        });
-                    } else {
-                        submitExam();
-                    }
-                };
-
-                this.return = ()=>{
-
-                    if (this.isSolution) {
-                        examService.getPracticeInfo(this.config.practiceID).then(solution => {
-                            $state.go('exams.practice-summary', {examSummary: solution});
-                        });
-                    } else {
-                        $state.go(simulator_config.defaultState);
-                    }
-                };
-
-                this.prevBtn = $('#remote-prev');
-                this.nextBtn = $('#remote-next');
-                this.numPadKeys = (keyNumber) => {
-                    $scope.$broadcast('numKeyPadSelect', {answer: keyNumber - 48});
-                };
-
-                $(document).keydown(keydownEventHandler);
-
-                $scope.$on('timeOver', this.finishExam);
-                $scope.$on('$destroy', ()=>{
-                    $interval.cancel(ping);
-                    $(document).off('keydown', keydownEventHandler)
-                });
             }
         });
 

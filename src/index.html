@@ -28,7 +28,7 @@
 
   <!-- Load Bootstrap RTL theme from RawGit -->
 </head>
-<body ng-class="{'signin': !currentUser, 'flip': appLayout === 'rtl'}" dir="{{appLayout}}">
+<body ng-class="{'signin': !currentUser, 'flip': appLayout === 'rtl'}" dir="{{appLayout}}" ng-cloak translate-cloak>
 <div class="body-bg"></div>
 <main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
   <toaster-container></toaster-container>

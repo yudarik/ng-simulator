@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    function practiceSummaryCtrl(summary, simulator_config) {
+    function practiceSummaryCtrl(summary, simulator_config, userType) {
 
         this.simulator_config = simulator_config;
         this.passingGrade = this.simulator_config.passingGrade;
@@ -57,10 +57,10 @@
             if (num <= this.passingGrade + warningArea) return 'label-warning';
             if (num <= 100) return 'label-success';
             else return 'label-default';
-        }
+        };
 
         this.repeatePracticeDisabled = () => {
-            return this.summary.practiceType === 'PREDEFINED_EXAM';
+            return this.summary.practiceType === 'PREDEFINED_EXAM' || userType === 'Candidate';
         }
     }
 

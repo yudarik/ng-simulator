@@ -52,20 +52,24 @@
         };
         this.adjustCategory = function (category, oldVal) {
 
-            if (typeof category.questionDistribution === 'undefined') {
+            if (_.isNil(category.questionDistribution)) {
                 category.questionDistribution = parseInt(oldVal);
             }
 
             category.userAdjusted = true;
 
-            if (category.questionDistribution > _this.maxCategoryDistribution) {
-                category.questionDistribution = _this.maxCategoryDistribution;
-            }
+            /* if (category.questionDistribution > this.examParams.totalQuestion) {
+                 category.questionDistribution = this.examParams.totalQuestion;
+             }*/
 
-            if (category.questionDistribution > oldVal) {
-                _this.examParams.totalQuestion += category.questionDistribution - oldVal;
-            } else if (_this.examParams.totalQuestion > 0) {
-                _this.examParams.totalQuestion -= oldVal - category.questionDistribution;
+            if (category.questionDistribution > parseInt(oldVal)) {
+                if (_this.canRiseTotalBy(category.questionDistribution - parseInt(oldVal))) {
+                    _this.examParams.totalQuestion += category.questionDistribution - parseInt(oldVal);
+                } else {
+                    category.questionDistribution = parseInt(oldVal);
+                }
+            } else if (_this.examParams.totalQuestion - Math.abs(parseInt(oldVal) - category.questionDistribution) > 0) {
+                _this.examParams.totalQuestion -= Math.abs(parseInt(oldVal) - category.questionDistribution);
             }
         };
 
@@ -110,9 +114,13 @@
             return distMap;
         }
 
+        function isPracticeTypeRegular() {
+            return practiceType === 'PRACTICE' || practiceType === 'WEAK_AREAS_PRACTICE' || practiceType === 'DEMO';
+        }
+
         this.startExam = function () {
 
-            this.examParams.questionDistribution = practiceType === 'PRACTICE' || practiceType === 'WEAK_AREAS_PRACTICE' ? _.zipObject(_.map(this.config.categories, 'id'), _.map(this.config.categories, 'questionDistribution')) : [];
+            this.examParams.questionDistribution = isPracticeTypeRegular() ? _.zipObject(_.map(this.config.categories, 'id'), _.map(this.config.categories, 'questionDistribution')) : [];
 
             if (practiceType === 'POST_CREDIT_PRACTICE') {
                 this.examParams.questionNumber = this.examParams.totalQuestion;
@@ -131,9 +139,12 @@
         this.isReadOnly = function () {
             return _.isNil(this.totalLeftQuota);
         };
+        this.canRiseTotalBy = function (amount) {
+            return _this.examParams.totalQuestion + amount <= _this.getTotalQuota();
+        };
 
         this.config = {};
-        this.config.categories = practiceType === 'PRACTICE' || practiceType === 'WEAK_AREAS_PRACTICE' ? this.initQuestionDistribution() : [];
+        this.config.categories = isPracticeTypeRegular() ? this.initQuestionDistribution() : [];
     }
 
     angular.module('Simulator.pages.exams.distribution').controller('distributionCtrl', distributionCtrl);

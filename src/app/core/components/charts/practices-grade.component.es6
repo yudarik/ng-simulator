@@ -37,6 +37,8 @@
                     repeatedPostCreditPractice: $translate.instant('EXAMS.TYPES.REPEATED_POST_CREDIT_PRACTICE'),
                     weakAreasPractice: $translate.instant('EXAMS.TYPES.WEAK_AREAS_PRACTICE'),
                     repeatedWeakAreasPractice: $translate.instant('EXAMS.TYPES.REPEATED_WEAK_AREAS_PRACTICE'),
+                    demoPractice: $translate.instant('EXAMS.TYPES.DEMO'),
+                    demoPredefinedPractice: $translate.instant('EXAMS.TYPES.DEMO_PREDEFINED_EXAM')
                 };
                 this.translate = translate;
 
@@ -238,6 +240,18 @@
                             "fillColors": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
                             "lineColor": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
                             "title": translate.repeatedWeakAreasPractice
+                        },{
+                            "id": "Demo Practice [for legend]",
+                            "legendColor": chartColors.DEMO,
+                            "fillColors": chartColors.DEMO,
+                            "lineColor": chartColors.DEMO,
+                            "title": translate.demoPractice
+                        },{
+                            "id": "Demo Predefined Practice [for legend]",
+                            "legendColor": chartColors.DEMO_PREDEFINED_EXAM,
+                            "fillColors": chartColors.DEMO_PREDEFINED_EXAM,
+                            "lineColor": chartColors.DEMO_PREDEFINED_EXAM,
+                            "title": translate.demoPredefinedPractice
                         }
                     ],
                     "guides": [],

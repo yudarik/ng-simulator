@@ -11,10 +11,10 @@
     angular.module('Simulator.pages.exams.practice', ['Simulator.components']).config(routeConfig).run(function ($rootScope, $uibModal, $state) {
 
         function registerStateChangeListener() {
-            var onRouteChangeOff = $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            var onRouteChangeOff = $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
                 console.log(fromState.name + ' > ' + toState.name);
 
-                if (fromState.name === 'exams.practice' && toState.name !== 'exams.practice-summary') {
+                if (fromState.name === 'exams.practice' && toState.name !== 'exams.practice-summary' && !options.emergencyExit) {
                     event.preventDefault();
 
                     redirectModal().then(function () {
@@ -63,10 +63,8 @@
                 examParams: {},
                 practiceType: 'PRACTICE'
             },
-            template: '<exam config="practice.examConfig" tabindex="1"></exam>',
-            controller: 'practiceCtrl as practice',
+            template: '<exam config="$resolve.examConfig" tabindex="1"></exam>',
             resolve: {
-
                 examConfig: ["$state", "$stateParams", "$q", "examService", function ($state, $stateParams, $q, examService) {
 
                     return examService.getExam($stateParams.practiceType, $stateParams.examParams).then(function (res) {
@@ -95,16 +93,12 @@
             params: {
                 practiceSummary: {}
             },
-            template: '<exam config="solutionCtrl.examConfig"></exam>',
+            template: '<exam config="$resolve.practiceSummary"></exam>',
             resolve: {
                 practiceSummary: ["$stateParams", function ($stateParams) {
                     return $stateParams.practiceSummary;
                 }]
             },
-            controller: ["practiceSummary", function (practiceSummary) {
-                this.examConfig = practiceSummary;
-            }],
-            controllerAs: 'solutionCtrl',
             title: 'EXAMS.TYPES.PRACTICE_SOLUTION'
         }).state('exams.weak-areas', {
             url: '/weak-areas',

@@ -13,10 +13,12 @@
             config: '<'
         },
         template: '<div class="panel question-area col-xs-12"\n                            ng-class="{\'solution\':$ctrl.isSolution}"\n                            ng-show="$ctrl.questionInDisplay">\n                        <div class="panel-heading" ng-if="$ctrl.config.predefinedExamDisplayName"><h3>{{::$ctrl.config.predefinedExamDisplayName}}</h3></div>\n                           <div class="panel-body">\n                               <exam-question question="$ctrl.questionInDisplay"></exam-question>\n                           </div>\n                       </div>\n                       <exam-remote practice-id="$ctrl.config.practiceID" remote-map="$ctrl.questions" is-solution="$ctrl.isSolution" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()" on-return="$ctrl.return()"></exam-remote>\n                       <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>',
-        controller: ["$scope", "$uibModal", "$interval", "$state", "examService", "simulatorService", "baSidebarService", "simulator_config", function ($scope, $uibModal, $interval, $state, examService, simulatorService, baSidebarService, simulator_config) {
+        controller: ["$rootScope", "$uibModal", "$interval", "$state", "$translate", "examService", "simulatorService", "baSidebarService", "simulator_config", function ($rootScope, $uibModal, $interval, $state, $translate, examService, simulatorService, baSidebarService, simulator_config) {
             'ngInject';
 
             var _this = this;
+
+            var $scope = $rootScope.$new();
 
             this.timeframe = this.config && this.config.timePerQuestion ? this.config.timePerQuestion * this.config.questions.length : undefined;
             this.isSolution = !this.timeframe;
@@ -76,39 +78,15 @@
                 event.preventDefault();
             };
 
-            function getUserAnswer(question) {
-                var chosenAns = typeof question.chosenAns !== 'undefined' ? question.chosenAns : getRandomAnswer(question);
-                return parseInt(chosenAns);
-            }
-
-            function getRandomAnswer(question) {
-                var random = Math.floor(Math.random() * question.answerOptions.length);
-                return question.answerOptions[random].key;
-            }
-
-            function timeframeModal($uibModal) {
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    template: '<div class="panel"><div class="panel-body">\n                            <h3 class="text-center">{{::"EXAMS.EXAM_FINISH_ARE_YOU_SURE"|translate}}</h3>\n                            <br/>\n                            <br/>\n                            <p class="text-center ">\n                            <button class="btn btn-success btn-space" ng-click="ok()">{{::\'GENERAL.OK\'|translate}}</button>\n                            <button class="btn btn-default" ng-click="cancel()">{{::\'GENERAL.CANCEL\'|translate}}</button>\n                            </p>\n                            </div></div>',
-                    controller: function controller($uibModalInstance, $scope) {
-
-                        $scope.ok = function () {
-                            $uibModalInstance.close();
-                        };
-
-                        $scope.cancel = function () {
-                            $uibModalInstance.dismiss('cancel');
-                        };
-                    },
-                    size: 'small'
-                });
-
-                return modalInstance.result;
-            }
-
             this.init = function () {
 
-                if (!_this.questions.length) return;
+                if (!Array.isArray(_this.questions) || !_this.questions.length) {
+                    alert($translate.instant('EXAMS.TOOLTIPS.PRACTICE_ERROR_NO_QUESTIONS'));
+
+                    if ($rootScope.previousState) {
+                        return $state.go(simulator_config.defaultState, {}, { emergencyExit: true });
+                    }
+                }
 
                 if (!baSidebarService.isMenuCollapsed()) {
                     baSidebarService.toggleMenuCollapsed();
@@ -141,12 +119,21 @@
                 ping = $interval(function () {
                     simulatorService.ping();
                 }, 30000);
+
+                _this.totalTimeFrame = angular.copy(_this.timeframe);
+                _this.questionInDisplay = _this.questions[0];
+                _this.questionInDisplay.active = true;
+
+                _this.prevBtn = $('#remote-prev');
+                _this.nextBtn = $('#remote-next');
+
+                $scope.$on('timeOver', _this.finishExam);
+                $scope.$on('$destroy', function () {
+                    $interval.cancel(ping);
+                    $(document).off('keydown', keydownEventHandler);
+                });
             };
             this.init();
-
-            this.totalTimeFrame = angular.copy(this.timeframe);
-            this.questionInDisplay = this.questions[0];
-            this.questionInDisplay.active = true;
 
             this.switchQuestion = function (question) {
 
@@ -189,19 +176,41 @@
                 }
             };
 
-            this.prevBtn = $('#remote-prev');
-            this.nextBtn = $('#remote-next');
             this.numPadKeys = function (keyNumber) {
                 $scope.$broadcast('numKeyPadSelect', { answer: keyNumber - 48 });
             };
 
             $(document).keydown(keydownEventHandler);
 
-            $scope.$on('timeOver', this.finishExam);
-            $scope.$on('$destroy', function () {
-                $interval.cancel(ping);
-                $(document).off('keydown', keydownEventHandler);
-            });
+            function getUserAnswer(question) {
+                var chosenAns = typeof question.chosenAns !== 'undefined' ? question.chosenAns : getRandomAnswer(question);
+                return parseInt(chosenAns);
+            }
+
+            function getRandomAnswer(question) {
+                var random = Math.floor(Math.random() * question.answerOptions.length);
+                return question.answerOptions[random].key;
+            }
+
+            function timeframeModal($uibModal) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    template: '<div class="panel"><div class="panel-body">\n                            <h3 class="text-center">{{::"EXAMS.EXAM_FINISH_ARE_YOU_SURE"|translate}}</h3>\n                            <br/>\n                            <br/>\n                            <p class="text-center ">\n                            <button class="btn btn-success btn-space" ng-click="ok()">{{::\'GENERAL.OK\'|translate}}</button>\n                            <button class="btn btn-default" ng-click="cancel()">{{::\'GENERAL.CANCEL\'|translate}}</button>\n                            </p>\n                            </div></div>',
+                    controller: function controller($uibModalInstance, $scope) {
+
+                        $scope.ok = function () {
+                            $uibModalInstance.close();
+                        };
+
+                        $scope.cancel = function () {
+                            $uibModalInstance.dismiss('cancel');
+                        };
+                    },
+                    size: 'small'
+                });
+
+                return modalInstance.result;
+            }
         }]
     });
 })();

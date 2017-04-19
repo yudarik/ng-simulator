@@ -51,6 +51,8 @@
       "REPEATED_POST_CREDIT_PRACTICE": "#EE82EE",
       "WEAK_AREAS_PRACTICE": "#0000FF",
       "REPEATED_WEAK_AREAS_PRACTICE": "#ADD8E6",
+      "DEMO": "#452d80",
+      "DEMO_PREDEFINED_EXAM": "#2e7080"
   };
 
   angular.module('BlurAdmin.theme')

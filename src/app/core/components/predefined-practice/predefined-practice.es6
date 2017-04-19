@@ -79,11 +79,14 @@
                 };
                 this.navigate = (exam) => {
                     if (this.isExamAvailable(exam)) {
-                        $state.go('exams.practice', {'practiceType': 'PREDEFINED_EXAM', examParams: exam});
+                        $state.go('exams.practice', {'practiceType': this.getPracticeType(), examParams: exam});
                     } else {
                         $window.open(this.getPayPalUrl(), '_blank')
                     }
 
+                };
+                this.getPracticeType = () => {
+                    return (this.user.role === 'Candidate')? 'DEMO_PREDEFINED_EXAM' : 'PREDEFINED_EXAM';
                 };
                 this.isExamAvailable = (exam) => {
                     return exam.available;

@@ -7,8 +7,8 @@
 (function () {
     'use strict';
 
-    practiceSummaryCtrl.$inject = ["summary", "simulator_config"];
-    function practiceSummaryCtrl(summary, simulator_config) {
+    practiceSummaryCtrl.$inject = ["summary", "simulator_config", "userType"];
+    function practiceSummaryCtrl(summary, simulator_config, userType) {
         var _this = this;
 
         this.simulator_config = simulator_config;
@@ -62,7 +62,7 @@
         };
 
         this.repeatePracticeDisabled = function () {
-            return _this.summary.practiceType === 'PREDEFINED_EXAM';
+            return _this.summary.practiceType === 'PREDEFINED_EXAM' || userType === 'Candidate';
         };
     }
 

@@ -49,7 +49,7 @@
                     'Content-Type': 'application/json'
                 })
                 //.setBaseUrl('rest'); // Production Build
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
+                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams6/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
                 //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
@@ -108,6 +108,28 @@
                 if (toState.name === 'signin' && fromState.name === 'signout') {
                     $timeout(function() {
                         document.location.reload();
+                    });
+                } else {
+                    $rootScope.currentState = {toState, toParams};
+                    $rootScope.previousState = {fromState, fromParams};
+                }
+            });
+
+            let deregisterTranslateChangeSuccess = $rootScope.$on('$translateChangeSuccess', function(event, translationResp){
+                deregisterTranslateChangeSuccess();
+
+                if (!$state.current.abstract) {
+                    $state.reload($state.current.name);
+                } else {
+                    let deregisterStateChangeListener = $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+                        if (toState.name === 'signin' && fromState.name === '') {
+
+                            deregisterStateChangeListener();
+
+                            $timeout(function() {
+                                $state.reload($state.current.name);
+                            });
+                        }
                     });
                 }
             });

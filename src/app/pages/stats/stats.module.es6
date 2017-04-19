@@ -27,8 +27,8 @@
                 },
                 controllerAs: 'dashboard',
                 resolve: {
-                    userType: (userAuthService) => {
-                        userAuthService.getUserType();
+                    userType: function (userAuthService) {
+                        return userAuthService.getUserType();
                     }
                 },
                 title: 'STATS.DASHBOARD.TITLE',

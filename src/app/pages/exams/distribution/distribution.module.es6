@@ -28,10 +28,15 @@
                     distributionType: function() {
                         return 'general-practice'
                     },
-                    practiceType: function($stateParams, $state) {
+                    practiceType: function($stateParams, $state, userAuthService) {
                         $state.get('exams.distribution-general').title = 'EXAMS.TYPES.'+$stateParams.practiceType;
 
-                        return $stateParams.practiceType;
+                        return userAuthService.getUserType().then(type => {
+                            if (type === 'Candidate') {
+                                return 'DEMO';
+                            }
+                            return $stateParams.practiceType;
+                        });
                     }/*,
                     totalQuota: function(customerService) {
                         return customerService.getQuota().then(quota=>{

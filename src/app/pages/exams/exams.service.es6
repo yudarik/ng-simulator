@@ -43,6 +43,7 @@
                     break;
                 case 'PRACTICE':
                 case 'WEAK_AREAS_PRACTICE':
+                case 'DEMO':
                     api = 'practiceToPerform';
                     break;
                 case 'REPEATED':

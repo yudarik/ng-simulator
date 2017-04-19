@@ -24,6 +24,9 @@
                             $state.go(simulator_config.defaultState);
                         }
                         return $stateParams.examSummary;
+                    },
+                    userType: function(userAuthService) {
+                        return userAuthService.getUserType();
                     }
                 },
                 title: 'EXAMS.TYPES.PRACTICE_SUMMARY'
