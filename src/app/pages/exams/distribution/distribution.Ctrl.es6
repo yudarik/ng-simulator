@@ -6,14 +6,14 @@
     'use strict';
 
     function distributionCtrl($state, dist, distributionType, practiceType) {
-
+        this.dist = dist;
         this.distributionType = distributionType;
         this.practiceType = practiceType;
         this.totalLeftQuota = (practiceType === 'POST_CREDIT_PRACTICE')?
             dist.leftPostCreditQuestionsQuota : dist.leftNewQuestionsQuota;
 
         this.examParams = {
-            totalQuestion: (this.totalLeftQuota && this.totalLeftQuota >= dist.questionsInExam)? dist.questionsInExam : this.totalLeftQuota,
+            totalQuestion: (this.totalLeftQuota && this.totalLeftQuota >= getQuestionsInExam(this))? getQuestionsInExam(this) : this.totalLeftQuota,
             questionDistribution: [],
             difficulty: 'MEDIUM',
             timeFrame: 'NORMAL'
@@ -116,6 +116,10 @@
             return (practiceType === 'PRACTICE' || practiceType === 'WEAK_AREAS_PRACTICE' || practiceType === 'DEMO');
         }
 
+        function getQuestionsInExam(that) {
+            return (that.practiceType === 'DEMO')? that.dist.questionsInDemo : that.dist.questionsInExam;
+        }
+
         this.startExam = function() {
 
             this.examParams.questionDistribution = isPracticeTypeRegular()? _.zipObject(
@@ -138,7 +142,7 @@
             return (this.totalLeftQuota)? this.totalLeftQuota : 0;
         };
         this.isReadOnly = function() {
-            return _.isNil(this.totalLeftQuota);
+            return _.isNil(this.totalLeftQuota) || this.practiceType === "DEMO";
         };
         this.canRiseTotalBy = (amount) => {
             return this.examParams.totalQuestion + amount <= this.getTotalQuota();
