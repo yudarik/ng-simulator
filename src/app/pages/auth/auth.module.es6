@@ -28,9 +28,9 @@
                 },
                 controller: function ($rootScope, $state, userAuthService, simulator_config) {
 
-                    $rootScope.currentUser = null;
+                    userAuthService.clearCache();
 
-                    userAuthService.getUser().then((user) => {
+                    userAuthService.getUser().then(() => {
                         $state.go(simulator_config.defaultState);
                     }).catch(err => {
                         $state.go('signin');

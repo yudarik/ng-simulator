@@ -57,8 +57,10 @@
 
             RestangularProvider.setErrorInterceptor(
                 (response) => {
-                    if ( response.status === 401/* || response.status === 403*/) {
+                    if ( response.status === 401) {
                         window.location = '#/signin';
+                    } else if (response.status === 440) {
+                        $window.location.reload();
                     }
                     else {
                         // Some other unknown Error.
