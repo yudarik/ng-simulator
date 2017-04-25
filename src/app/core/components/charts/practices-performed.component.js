@@ -10,7 +10,8 @@
     angular.module('Simulator.components.charts').component('practicesPerformed', {
         bindings: {
             titleLabel: '<',
-            titleTooltip: '<'
+            titleTooltip: '<',
+            userType: '<'
         },
         template: '<h4 class="text-center" \n                            uib-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>\n                        <div id="practiceTypeGrades" class="amChart"></div>',
         controller: ["$translate", "baConfig", "customerService", "examService", function practicesPerformedCtrl($translate, baConfig, customerService, examService) {
@@ -21,6 +22,11 @@
             var layoutColors = baConfig.colors;
 
             var chartColors = layoutColors.dashboard;
+
+            var practiceTypesToDisplay = {
+                Customer: ['PRACTICE', 'PREDEFINED_EXAM', 'WEAK_AREAS_PRACTICE', 'EXAM'],
+                Candidate: ['DEMO', 'DEMO_PREDEFINED_EXAM']
+            };
 
             var chartConf = {
                 titles: [
@@ -84,6 +90,7 @@
                     enabled: true
                 }
             };
+
             this.getQuestionsSum = function (allPractices) {
                 return _.sumBy(allPractices, 'questionNumber');
             };
@@ -93,7 +100,7 @@
                 return examService.getStats().then(function (quota) {
 
                     var grouped = _.groupBy(quota, 'practiceType');
-                    var practiceTypesPerformed = _.keys(grouped);
+                    var practiceTypesPerformed = _.intersection(_.keys(grouped), practiceTypesToDisplay[_this.userType]);
 
                     return practiceTypesPerformed.map(function (key, index) {
                         if (grouped[key].length > 0) {

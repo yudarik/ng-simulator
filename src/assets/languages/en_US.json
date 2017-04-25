@@ -21,7 +21,8 @@
     "ERROR": {
       "INVALID.CREDENTIALS": "Incorrect user name and/or password",
       "ACCOUNT.EXPIRED": "The account is expired. Please contact the office for more details.",
-      "PASSWORD_VALIDATION_FAILED": "Password is incorrect"
+      "PASSWORD_VALIDATION_FAILED": "Password is incorrect",
+      "EMAIL": "Invalid username (email)"
     },
     "WELCOME": {
       "MESSAGE": {
@@ -113,7 +114,8 @@
       "NO_MORE_POST_CREDITS": "לא נותר מספיק קרדיט לביצוע תרגול זה ולכן הוא אינו זמין",
       "NO_PREDEFINED_EXAMS_AVAILABLE": "אין מבחני הסמכה",
       "NO_PREDEFINED_EXAMS_AVAILABLE_QUOTA": "לא נותר קרדיט באף אחד ממבחני ההסמכה",
-      "NO_WEAK_AREAS_PRACTICE_AVAILABLE": "no more new questions credit left or not enough practice was done to start suggesting"
+      "NO_WEAK_AREAS_PRACTICE_AVAILABLE": "no more new questions credit left or not enough practice was done to start suggesting",
+      "PRACTICE_ERROR_NO_QUESTIONS": "התרגול אינו זמין בגלל תקלה בשרת, נסה שוב מאוחר יותר או פנה למנהל המערכת"
     },
     "PREDEFINED": {
       "NUMOFQUEST": "Number of Questions",

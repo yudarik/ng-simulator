@@ -11,7 +11,7 @@
                 titleLabel: '<',
                 titleTooltip: '<'
             },
-            template: `<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
+            template: `<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}" tooltip-placement="bottom">{{::$ctrl.titleLabel}}</h4>
                         <div id="questionsQuotaChart" class="amChart"></div>
                        `,
             controller: function userQuotaCtrl($translate, customerService, simulator_config) {
@@ -62,7 +62,12 @@
                     "categoryField": "category1",
                     "categoryAxis": {
                         "axisAlpha": 0,
-                        "labelOffset": 100,
+                        "labelOffset": 30,
+                        "autoRotateCount": 2,
+                        "autoRotateAngle": 15,
+                        "labelRotation": 15,
+                        "centerRotatedLabels": true,
+                        "equalSpacing": true,
                         "gridAlpha": 0
                     },
                     "export": {

@@ -4,13 +4,17 @@
 <div class="panel practice-summary">
     <div class="panel-body">
         <div class="row">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-md-4">
                 <label class="control-label">{{::'EXAMS.SUMMARY.ID'|translate}}:</label>
                 <span>{{::practiceSummary.summary.practiceID}}</span>
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-md-4">
                 <label class="control-label">{{::'EXAMS.SUMMARY.DATE'|translate}}:</label>
                 <span>{{::practiceSummary.summary.date|date: 'dd/MM/yyyy HH:mm'}}</span>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <label class="control-label">{{::'EXAMS.SUMMARY.PRACTICE_TYPE'|translate}}:</label>
+                <span>{{::'EXAMS.TYPES.'+practiceSummary.summary.practiceType|translate}}</span>
             </div>
 
         </div>

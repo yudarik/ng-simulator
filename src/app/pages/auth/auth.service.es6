@@ -112,9 +112,9 @@
             }
 
             function getQuota() {
-                if (userQuota) {
+                /*if (userQuota) { //Cache disabled by request in sim-20
                     return $q.when(userQuota);
-                }
+                }*/
                 if (getUserQuotaInProgress) {
                     return $q.when(getUserQuota);
                 }

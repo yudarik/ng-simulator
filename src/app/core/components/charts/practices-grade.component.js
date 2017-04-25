@@ -10,7 +10,8 @@
     angular.module('Simulator.components.charts').component('practicesGrade', {
         bindings: {
             titleLabel: '<',
-            titleTooltip: '<'
+            titleTooltip: '<',
+            userType: '<'
         },
         template: '<h4 class="text-center" uib-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>\n                       <h6 class="text-center" style="color:#0000FF">{{::$ctrl.translate.clickActionLabel}}</h6>\n                        <div id="practicesGradeChart" class="amChart flip float-left"></div>',
         controller: /** @ngInject */
@@ -45,6 +46,90 @@
             var layoutColors = baConfig.colors;
 
             var chartColors = layoutColors.dashboard;
+
+            var practiceTypesToDisplay = {
+                Customer: [{
+                    "clustered": false,
+                    "id": "General Practice [for legend]",
+                    "fillColors": chartColors.PRACTICE,
+                    "legendColor": chartColors.PRACTICE,
+                    "stackable": false,
+                    "title": translate.generalPractice
+                }, {
+                    "fillColors": chartColors.REPEATED_PRACTICE,
+                    "id": "Repeated General Practice [for legend]",
+                    "legendAlpha": 1,
+                    "legendColor": chartColors.REPEATED_PRACTICE,
+                    "legendPeriodValueText": "",
+                    "legendValueText": "",
+                    "lineColor": chartColors.REPEATED_PRACTICE,
+                    "markerType": "square",
+                    "title": translate.repeatedGeneralPractice
+                }, {
+                    "id": "Exam [for legend]",
+                    "fillColors": chartColors.EXAM,
+                    "legendColor": chartColors.EXAM,
+                    "title": translate.exam
+                }, {
+                    "id": "Repeated Exam [for legend]",
+                    "legendColor": chartColors.REPEATED_EXAM,
+                    "fillColors": chartColors.REPEATED_EXAM,
+                    "lineColor": chartColors.REPEATED_EXAM,
+                    "title": translate.repeatedExam
+                }, {
+
+                    "fixedColumnWidth": -1,
+                    "id": "Predefined Exam [for legend]",
+                    "fillColors": chartColors.PREDEFINED_EXAM,
+                    "legendColor": chartColors.PREDEFINED_EXAM,
+                    "lineColor": chartColors.PREDEFINED_EXAM,
+                    "lineThickness": 0,
+                    "title": translate.predefinedExam
+                },
+                /*{
+                 "fillColors": chartColors.REPEATED_PREDEFINED_EXAM,
+                 "id": "Repeated Predefined Exam [for legend]",
+                 "legendColor": chartColors.REPEATED_PREDEFINED_EXAM,
+                 "title": translate.repeatedPredefinedExam
+                 },*/
+                {
+                    "fillColors": chartColors.POST_CREDIT_PRACTICE,
+                    "legendColor": chartColors.POST_CREDIT_PRACTICE,
+                    "id": "Post Credit Practice [for legend]",
+                    "title": translate.postCreditPractice
+                }, {
+                    "fillColors": chartColors.REPEATED_POST_CREDIT_PRACTICE,
+                    "fixedColumnWidth": -1,
+                    "id": "Repeated Post Credit Practice [for legend]",
+                    "legendColor": chartColors.REPEATED_POST_CREDIT_PRACTICE,
+                    "title": translate.repeatedPostCreditPractice
+                }, {
+                    "fillColors": chartColors.WEAK_AREAS_PRACTICE,
+                    "fixedColumnWidth": -1,
+                    "id": "Weak Areas Practice [for legend]",
+                    "legendColor": chartColors.WEAK_AREAS_PRACTICE,
+                    "title": translate.weakAreasPractice
+                }, {
+                    "id": "Repeated Suggested Practice [for legend]",
+                    "legendColor": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
+                    "fillColors": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
+                    "lineColor": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
+                    "title": translate.repeatedWeakAreasPractice
+                }],
+                Candidate: [{
+                    "id": "Demo Practice [for legend]",
+                    "legendColor": chartColors.DEMO,
+                    "fillColors": chartColors.DEMO,
+                    "lineColor": chartColors.DEMO,
+                    "title": translate.demoPractice
+                }, {
+                    "id": "Demo Predefined Practice [for legend]",
+                    "legendColor": chartColors.DEMO_PREDEFINED_EXAM,
+                    "fillColors": chartColors.DEMO_PREDEFINED_EXAM,
+                    "lineColor": chartColors.DEMO_PREDEFINED_EXAM,
+                    "title": translate.demoPredefinedPractice
+                }]
+            };
 
             var chartConf = {
                 "type": "serial",
@@ -154,85 +239,6 @@
                     "title": translate.minimumPassingGrade + ': 60',
                     "type": "smoothedLine",
                     "valueField": "Minimum Passing Grade"
-                }, {
-                    "clustered": false,
-                    "id": "General Practice [for legend]",
-                    "fillColors": chartColors.PRACTICE,
-                    "legendColor": chartColors.PRACTICE,
-                    "stackable": false,
-                    "title": translate.generalPractice
-                }, {
-                    "fillColors": chartColors.REPEATED_PRACTICE,
-                    "id": "Repeated General Practice [for legend]",
-                    "legendAlpha": 1,
-                    "legendColor": chartColors.REPEATED_PRACTICE,
-                    "legendPeriodValueText": "",
-                    "legendValueText": "",
-                    "lineColor": chartColors.REPEATED_PRACTICE,
-                    "markerType": "square",
-                    "title": translate.repeatedGeneralPractice
-                }, {
-                    "id": "Exam [for legend]",
-                    "fillColors": chartColors.EXAM,
-                    "legendColor": chartColors.EXAM,
-                    "title": translate.exam
-                }, {
-                    "id": "Repeated Exam [for legend]",
-                    "legendColor": chartColors.REPEATED_EXAM,
-                    "fillColors": chartColors.REPEATED_EXAM,
-                    "lineColor": chartColors.REPEATED_EXAM,
-                    "title": translate.repeatedExam
-                }, {
-
-                    "fixedColumnWidth": -1,
-                    "id": "Predefined Exam [for legend]",
-                    "fillColors": chartColors.PREDEFINED_EXAM,
-                    "legendColor": chartColors.PREDEFINED_EXAM,
-                    "lineColor": chartColors.PREDEFINED_EXAM,
-                    "lineThickness": 0,
-                    "title": translate.predefinedExam
-                },
-                /*{
-                    "fillColors": chartColors.REPEATED_PREDEFINED_EXAM,
-                    "id": "Repeated Predefined Exam [for legend]",
-                    "legendColor": chartColors.REPEATED_PREDEFINED_EXAM,
-                    "title": translate.repeatedPredefinedExam
-                },*/
-                {
-                    "fillColors": chartColors.POST_CREDIT_PRACTICE,
-                    "legendColor": chartColors.POST_CREDIT_PRACTICE,
-                    "id": "Post Credit Practice [for legend]",
-                    "title": translate.postCreditPractice
-                }, {
-                    "fillColors": chartColors.REPEATED_POST_CREDIT_PRACTICE,
-                    "fixedColumnWidth": -1,
-                    "id": "Repeated Post Credit Practice [for legend]",
-                    "legendColor": chartColors.REPEATED_POST_CREDIT_PRACTICE,
-                    "title": translate.repeatedPostCreditPractice
-                }, {
-                    "fillColors": chartColors.WEAK_AREAS_PRACTICE,
-                    "fixedColumnWidth": -1,
-                    "id": "Weak Areas Practice [for legend]",
-                    "legendColor": chartColors.WEAK_AREAS_PRACTICE,
-                    "title": translate.weakAreasPractice
-                }, {
-                    "id": "Repeated Suggested Practice [for legend]",
-                    "legendColor": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
-                    "fillColors": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
-                    "lineColor": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
-                    "title": translate.repeatedWeakAreasPractice
-                }, {
-                    "id": "Demo Practice [for legend]",
-                    "legendColor": chartColors.DEMO,
-                    "fillColors": chartColors.DEMO,
-                    "lineColor": chartColors.DEMO,
-                    "title": translate.demoPractice
-                }, {
-                    "id": "Demo Predefined Practice [for legend]",
-                    "legendColor": chartColors.DEMO_PREDEFINED_EXAM,
-                    "fillColors": chartColors.DEMO_PREDEFINED_EXAM,
-                    "lineColor": chartColors.DEMO_PREDEFINED_EXAM,
-                    "title": translate.demoPredefinedPractice
                 }],
                 "guides": [],
                 "valueAxes": [{
@@ -293,6 +299,8 @@
                 examService.getStats().then(function (practices) {
 
                     _this.allPractices = practices;
+
+                    chartConf.graphs = chartConf.graphs.concat(practiceTypesToDisplay[_this.userType]);
 
                     chartConf.maxSelectedSeries = practices.length;
                     chartConf.dataProvider = practices.map(function (practice) {

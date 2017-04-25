@@ -9,7 +9,8 @@
         .component('practicesPerformed', {
             bindings: {
                 titleLabel: '<',
-                titleTooltip: '<'
+                titleTooltip: '<',
+                userType: '<'
             },
             template: `<h4 class="text-center" 
                             uib-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
@@ -20,6 +21,11 @@
                 var layoutColors = baConfig.colors;
 
                 var chartColors = layoutColors.dashboard;
+
+                var practiceTypesToDisplay = {
+                    Customer: ['PRACTICE', 'PREDEFINED_EXAM', 'WEAK_AREAS_PRACTICE', 'EXAM'],
+                    Candidate: ['DEMO', 'DEMO_PREDEFINED_EXAM']
+                };
 
                 var chartConf = {
                     titles: [
@@ -87,6 +93,7 @@
                         enabled: true
                     }
                 };
+
                 this.getQuestionsSum = (allPractices) => {
                     return _.sumBy(allPractices, 'questionNumber');
                 };
@@ -96,7 +103,7 @@
                     return examService.getStats().then((quota) => {
 
                         var grouped = _.groupBy(quota, 'practiceType');
-                        var practiceTypesPerformed = _.keys(grouped);
+                        var practiceTypesPerformed = _.intersection(_.keys(grouped), practiceTypesToDisplay[this.userType]);
 
                         return practiceTypesPerformed.map((key,index) => {
                             if (grouped[key].length > 0) {

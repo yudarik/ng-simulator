@@ -21,7 +21,11 @@
 
         this.maxCategoryDistribution = this.examParams.totalQuestion;
 
-        this.initQuestionDistribution = function() {
+        this.initQuestionDistribution = function(oldVal) {
+
+            if (_.isNil(this.examParams.totalQuestion)) {
+                this.examParams.totalQuestion = parseInt(oldVal);
+            }
 
             var total = this.examParams.totalQuestion;
             var currentTotalAmount = 0;

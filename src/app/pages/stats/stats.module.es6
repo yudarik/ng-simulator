@@ -24,6 +24,7 @@
                     }
 
                     this.isCandidate = (userType === "Candidate");
+                    this.userType = userType;
                 },
                 controllerAs: 'dashboard',
                 resolve: {

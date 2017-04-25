@@ -76,7 +76,8 @@
       "TABLE_TITLE": "פירוט התרגול לפי קטגוריות",
       "PRACTICE_FAILED": "נכשל",
       "PRACTICE_PASSED": "עובר",
-      "PRACTICE_SUCCESS": "מצויין"
+      "PRACTICE_SUCCESS": "מצויין",
+      "PRACTICE_TYPE": "סוג תרגול"
     },
     "DISTRIBUTION": {
       "TITLE": "חלוקת שאלות לפי קטגוריות:",
