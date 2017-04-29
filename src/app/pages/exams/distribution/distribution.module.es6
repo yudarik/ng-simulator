@@ -19,8 +19,9 @@
                     distribution: null,
                     practiceType: 'PRACTICE'
                 },
-                templateUrl: 'app/pages/exams/distribution/distribution.html',
-                controller: 'distributionCtrl as distribution',
+                template: `<distribution dist="$resolve.dist" 
+                                        distribution-type="$resolve.distributionType"
+                                        practice-type="$resolve.practiceType"></distribution>`,
                 resolve: {
                     dist: function($stateParams, examService) {
                         return $stateParams.distribution || examService.getDistribution();
@@ -53,9 +54,9 @@
             })
             .state('exams.distribution-full', {
                 url: '/full-exam-distribution',
-                //parent: 'exams',
-                templateUrl: 'app/pages/exams/distribution/distribution.html',
-                controller: 'distributionCtrl as distribution',
+                template: `<distribution dist="$resolve.dist" 
+                                        distribution-type="$resolve.distributionType"
+                                        practice-type="$resolve.practiceType"></distribution>`,
                 resolve: {
                     dist: function($stateParams, examService) {
                         return $stateParams.distribution || examService.getDistribution();
@@ -75,8 +76,9 @@
             .state('exams.post-credit', {
                 url: '/post-credit-distribution',
                 parent: 'exams',
-                templateUrl: 'app/pages/exams/distribution/distribution.html',
-                controller: 'distributionCtrl as distribution',
+                template: `<distribution dist="$resolve.dist" 
+                                        distribution-type="$resolve.distributionType"
+                                        practice-type="$resolve.practiceType"></distribution>`,
                 resolve: {
                     dist: function($stateParams, examService) {
                         return $stateParams.distribution || examService.getDistribution();

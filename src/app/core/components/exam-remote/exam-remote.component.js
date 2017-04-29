@@ -39,7 +39,7 @@
 
             this.submit = function () {
 
-                console.log('Finish clicked');
+                //console.log('Finish clicked');
                 return _this.onFinish();
                 //$scope.$emit('finish-exam');
             };

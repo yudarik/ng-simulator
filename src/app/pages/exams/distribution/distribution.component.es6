@@ -5,12 +5,13 @@
 (function () {
     'use strict';
 
-    function distributionCtrl($state, dist, distributionType, practiceType) {
-        this.dist = dist;
+    function distributionCtrl($state) {
+        /*this.dist = dist;
         this.distributionType = distributionType;
-        this.practiceType = practiceType;
-        this.totalLeftQuota = (practiceType === 'POST_CREDIT_PRACTICE')?
-            dist.leftPostCreditQuestionsQuota : dist.leftNewQuestionsQuota;
+        this.practiceType = practiceType;*/
+
+        this.totalLeftQuota = (this.practiceType === 'POST_CREDIT_PRACTICE')?
+            this.dist.leftPostCreditQuestionsQuota : this.dist.leftNewQuestionsQuota;
 
         this.examParams = {
             totalQuestion: (this.totalLeftQuota && this.totalLeftQuota >= getQuestionsInExam(this))? getQuestionsInExam(this) : this.totalLeftQuota,
@@ -30,13 +31,13 @@
             var total = this.examParams.totalQuestion;
             var currentTotalAmount = 0;
 
-            var distMap = _.map(dist.categories, (category, index) => {
+            var distMap = _.map(this.dist.categories, (category, index) => {
 
                 if (category.userAdjusted) {
                     return category;
                 }
 
-                var amount = Math.floor(total * dist.questionsPercentagePerCategoryId[category.id]);
+                var amount = Math.floor(total * this.dist.questionsPercentagePerCategoryId[category.id]);
 
                 currentTotalAmount += amount;
 
@@ -51,6 +52,7 @@
 
             return distMap;
         };
+
         this.adjustCategory = (category, oldVal) => {
 
             if (_.isNil(category.questionDistribution)) {
@@ -116,8 +118,8 @@
             return distMap;
         }
 
-        function isPracticeTypeRegular() {
-            return (practiceType === 'PRACTICE' || practiceType === 'WEAK_AREAS_PRACTICE' || practiceType === 'DEMO');
+        function isPracticeTypeRegular(that) {
+            return (that.practiceType === 'PRACTICE' || that.practiceType === 'WEAK_AREAS_PRACTICE' || that.practiceType === 'DEMO');
         }
 
         function getQuestionsInExam(that) {
@@ -126,12 +128,12 @@
 
         this.startExam = function() {
 
-            this.examParams.questionDistribution = isPracticeTypeRegular()? _.zipObject(
+            this.examParams.questionDistribution = isPracticeTypeRegular(this)? _.zipObject(
                 _.map(this.config.categories, 'id'),
                 _.map(this.config.categories, 'questionDistribution')
             ) : [];
 
-            if (practiceType === 'POST_CREDIT_PRACTICE') {
+            if (this.practiceType === 'POST_CREDIT_PRACTICE') {
                 this.examParams.questionNumber = this.examParams.totalQuestion;
 
                 delete this.examParams.difficulty;
@@ -139,7 +141,7 @@
                 delete this.examParams.totalQuestion;
             }
 
-            $state.go('exams.practice', {examParams: this.examParams, practiceType: practiceType});
+            $state.go('exams.practice', {examParams: this.examParams, practiceType: this.practiceType});
         };
 
         this.getTotalQuota = function () {
@@ -153,9 +155,18 @@
         };
 
         this.config = {};
-        this.config.categories = isPracticeTypeRegular()? this.initQuestionDistribution() : [];
+        this.config.categories = isPracticeTypeRegular(this)? this.initQuestionDistribution() : [];
     }
 
     angular.module('Simulator.pages.exams.distribution')
-        .controller('distributionCtrl', distributionCtrl);
+        .component('distribution', {
+            bindings: {
+                dist: '<',
+                distributionType: '<',
+                practiceType: '<'
+            },
+            templateUrl: 'app/pages/exams/distribution/distribution.html',
+            controller: distributionCtrl,
+            controllerAs: 'distribution'
+        });
 })();

@@ -10,14 +10,17 @@
                 config: '<',
                 titleLabel: '<'
             },
-            template: `<div class="panel col-md-12" dir="ltr">
-                                <div class="panel-body">
-                                    <div id="weakAreasChart" class="amCharts" style="height:500px;width:100%; background-color: #FFFFFF;"></div>
-                                    <div class="col-md-12">
-                                        <a class="btn btn-default" ui-sref="exams.distribution-general({distribution: weakAreas.practiceConfig, practiceType: 'WEAK_AREAS_PRACTICE'})">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>
-                                    </div>
+            template: `<div ng-show="!$ctrl.showDistribution" class="panel col-md-12" dir="ltr">
+                            <div class="panel-body">
+                                <div id="weakAreasChart" class="amCharts" style="height:500px;width:100%; background-color: #FFFFFF;"></div>
+                                <div class="col-md-12">
+                                    <a class="btn btn-default" ng-click="$ctrl.showDistribution = true;">{{::\'EXAMS.BUTTONS.CONTINUE\'|translate}}</a>
                                 </div>
-                            </div>`,
+                            </div>
+                        </div>
+                        <distribution ng-if="$ctrl.showDistribution" dist="$ctrl.config" 
+                                      distribution-type="'general-practice'"
+                                      practice-type="'WEAK_AREAS_PRACTICE'"></distribution>`,
             controller: function($translate) {
 
                 let chartColors = ['#FFFF00', '#a52a2a', '#00ffff', '#ff0000', '#808080', '#FFD700', '#008000', '#ffa500', '#0000ff', '#FF00FF'];
@@ -79,6 +82,8 @@
                         "method": handleRender
                     }],
                 };
+
+                this.showDistribution = false;
 
                 this.$onInit = () => {
 

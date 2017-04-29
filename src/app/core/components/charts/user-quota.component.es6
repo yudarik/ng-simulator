@@ -14,7 +14,7 @@
             template: `<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}" tooltip-placement="bottom">{{::$ctrl.titleLabel}}</h4>
                         <div id="questionsQuotaChart" class="amChart"></div>
                        `,
-            controller: function userQuotaCtrl($translate, customerService, simulator_config) {
+            controller: function userQuotaCtrl($rootScope, $translate, customerService, simulator_config) {
                 'ngInject';
 
                 var questionsQuota = {
@@ -31,7 +31,9 @@
                     "dataProvider": [],
                     "valueAxes": [ {
                         "stackType": "regular",
-                        "gridAlpha": 0
+                        "axisAlpha": 0,
+                        "gridAlpha": 0,
+                        "labelsEnabled": false
                     } ],
                     "graphs": [ {
                         "type": "column",
@@ -105,6 +107,8 @@
                         });
 
                         chart.validateData();
+
+                        $rootScope.$broadcast('rebuildStateBasedMenuItems', {quota});
                     });
                 };
 

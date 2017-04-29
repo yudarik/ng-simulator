@@ -50,6 +50,7 @@
                     api = 'repeatPractice';
                     break;
                 case 'PREDEFINED_EXAM':
+                case 'DEMO_PREDEFINED_EXAM':
                     return getPredefinedExam(params);
                     break;
                 default:
@@ -67,9 +68,6 @@
         }
 
         function submitExam(examResult) {
-
-            console.log('Submit Exam service reached');
-
 
             return practices.customPOST(examResult, 'computePracticeResult').then((res)=>{
                 $state.go('exams.practice-summary', {examSummary: res});

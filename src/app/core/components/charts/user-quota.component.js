@@ -13,7 +13,7 @@
             titleTooltip: '<'
         },
         template: '<h4 class="text-center" tooltip="{{::$ctrl.titleTooltip}}" tooltip-placement="bottom">{{::$ctrl.titleLabel}}</h4>\n                        <div id="questionsQuotaChart" class="amChart"></div>\n                       ',
-        controller: ["$translate", "customerService", "simulator_config", function userQuotaCtrl($translate, customerService, simulator_config) {
+        controller: ["$rootScope", "$translate", "customerService", "simulator_config", function userQuotaCtrl($rootScope, $translate, customerService, simulator_config) {
             'ngInject';
 
             var questionsQuota = {
@@ -30,7 +30,9 @@
                 "dataProvider": [],
                 "valueAxes": [{
                     "stackType": "regular",
-                    "gridAlpha": 0
+                    "axisAlpha": 0,
+                    "gridAlpha": 0,
+                    "labelsEnabled": false
                 }],
                 "graphs": [{
                     "type": "column",
@@ -104,6 +106,8 @@
                     });
 
                     chart.validateData();
+
+                    $rootScope.$broadcast('rebuildStateBasedMenuItems', { quota: quota });
                 });
             };
         }],

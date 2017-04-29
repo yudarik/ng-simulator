@@ -11,11 +11,13 @@
   /** @ngInject */
   function BaSidebarCtrl($scope, $translate, baSidebarService, simulatorService) {
 
-    simulatorService.setStateBasedMenuItems().then(function(){
+    $scope.init = function () {
+        simulatorService.setStateBasedMenuItems().then(function(){
 
-      $scope.menuItems = baSidebarService.getMenuItems();
-      $scope.defaultSidebarState = $scope.menuItems[0].stateRef;
-    });
+            $scope.menuItems = baSidebarService.getMenuItems();
+            $scope.defaultSidebarState = $scope.menuItems[0].stateRef;
+        });
+    };
 
     $scope.hoverItem = function ($event) {
       $scope.showHoverElem = true;
@@ -30,8 +32,14 @@
       }
     });
 
+    $scope.$on('rebuildStateBasedMenuItems', function(e, data) {
+      $scope.init();
+    });
+
     $scope.getTooltip = function(stateName) {
       return $translate.instant(simulatorService.getStateTooltip(stateName))
     }
+
+    $scope.init();
   }
 })();

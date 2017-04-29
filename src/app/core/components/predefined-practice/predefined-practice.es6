@@ -12,7 +12,7 @@
                 exams: '<',
                 user: '<'
             },
-            template: `<div class="col-xs-12 col-md-4 predefined-exam-component" ng-repeat="exam in $ctrl.exams">
+            template: `<div class="col-xs-12 col-md-4 predefined-exam-component" ng-repeat="exam in $ctrl.exams track by exam.id">
                             <div class="panel panel-success">
                                 <div class="panel-heading">
                                     <span class="text-white">{{::exam.displayName}}</span>

@@ -12,7 +12,7 @@
 
         function registerStateChangeListener() {
             var onRouteChangeOff = $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
-                console.log(fromState.name + ' > ' + toState.name);
+                //console.log(fromState.name + ' > '+ toState.name);
 
                 if (fromState.name === 'exams.practice' && toState.name !== 'exams.practice-summary' && !options.emergencyExit) {
                     event.preventDefault();

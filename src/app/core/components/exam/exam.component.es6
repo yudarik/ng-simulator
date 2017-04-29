@@ -35,7 +35,7 @@
 
                 var submitExam = () => {
 
-                    console.log('Submit Exam clicked');
+                    //console.log('Submit Exam clicked');
 
                     var questionIDtoChosenAnswerMapping = {};
 
@@ -57,7 +57,7 @@
 
                 var keydownEventHandler = (event) => {
 
-                    console.log('Key pressed');
+                    //console.log('Key pressed');
 
                     if (!event) return;
 
@@ -157,7 +157,7 @@
 
                 this.finishExam = () => {
 
-                    console.log('FinishExam reached');
+                    //console.log('FinishExam reached');
 
                     if (this.timeframe > 10) {
                         timeframeModal($uibModal).then(()=>{
