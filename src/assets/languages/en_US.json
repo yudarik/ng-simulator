@@ -161,7 +161,8 @@
           "TIME_SPENT": "Time Elapsed (mins)",
           "DATE": "Date",
           "PRACTICEID": "ID",
-          "MINIMUM_PASSING_GRADE": "Passing Grade"
+          "MINIMUM_PASSING_GRADE": "Passing Grade",
+          "NO_DATA_TO_DISPLAY": "The chart contains no data to display"
         },
         "GRADES_RADAR": {
           "TITLE": "Grade Distribution By Category",

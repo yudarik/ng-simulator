@@ -163,7 +163,8 @@
           "TIME_SPENT": "זמן לפתרון (דקות):",
           "DATE": "תאריך",
           "PRACTICEID": "מס' סידורי",
-          "MINIMUM_PASSING_GRADE": "ציון עובר מינימלי"
+          "MINIMUM_PASSING_GRADE": "ציון עובר מינימלי",
+          "NO_DATA_TO_DISPLAY": "אין כרגע נתונים לתצוגה"
         },
         "GRADES_RADAR": {
           "TITLE": "התפלגות ציונים לפי קטגוריה",

@@ -323,7 +323,6 @@
 
                 this.$onInit = () => {
                     examService.getStats().then((practices) => {
-
                         this.allPractices = practices;
 
                         chartConf.graphs = chartConf.graphs.concat(practiceTypesToDisplay[this.userType]);
@@ -341,7 +340,12 @@
                             }
                         });
 
-                        AmCharts.makeChart('practicesGradeChart', chartConf);
+                        let chart = AmCharts.makeChart('practicesGradeChart', chartConf);
+
+                        if (!practices.length) {
+                            chart.addLabel("50%", "50%", $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.NO_DATA_TO_DISPLAY'), "middle", 15);
+                            chart.validateNow();
+                        }
                     });
                 };
 

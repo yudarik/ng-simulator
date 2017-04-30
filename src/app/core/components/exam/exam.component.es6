@@ -182,7 +182,7 @@
                 };
 
                 this.numPadKeys = (keyNumber) => {
-                    $scope.$broadcast('numKeyPadSelect', {answer: keyNumber - 48});
+                    $rootScope.$broadcast('numKeyPadSelect', {answer: keyNumber - 48});
                 };
 
                 $(document).keydown(keydownEventHandler);

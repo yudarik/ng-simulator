@@ -117,8 +117,14 @@
 
             this.$onInit = function () {
                 _this.getData().then(function (data) {
+
                     chartConf.dataProvider = data;
-                    AmCharts.makeChart('practiceTypeGrades', chartConf);
+                    var chart = AmCharts.makeChart('practiceTypeGrades', chartConf);
+
+                    if (!data.length) {
+                        chart.addLabel("50%", "50%", $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.NO_DATA_TO_DISPLAY'), "middle", 15);
+                        chart.validateNow();
+                    }
                 });
             };
         }]
