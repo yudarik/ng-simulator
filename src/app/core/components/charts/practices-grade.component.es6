@@ -147,6 +147,8 @@
                     "type": "serial",
                     "zoomOutText": '',
                     "zoomOutButtonAlpha": 0,
+                    "depth3D": 2,
+                    "angle": 30,
                     "fontFamily": "'Arimo', sans-serif",
                     "fontSize": 14,
                     "categoryField": "Practice Date",
@@ -323,6 +325,7 @@
 
                 this.$onInit = () => {
                     examService.getStats().then((practices) => {
+
                         this.allPractices = practices;
 
                         chartConf.graphs = chartConf.graphs.concat(practiceTypesToDisplay[this.userType]);

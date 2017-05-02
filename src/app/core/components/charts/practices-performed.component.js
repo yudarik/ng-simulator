@@ -41,6 +41,8 @@
                 fontFamily: "'Arimo', sans-serif",
                 fontSize: 14,
                 dataProvider: [],
+                depth3D: 2,
+                angle: 30,
                 valueAxes: [{
                     axisAlpha: 0,
                     position: 'left',

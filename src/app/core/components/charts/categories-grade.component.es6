@@ -15,11 +15,13 @@
             template: `<h4 class="text-center" uib-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>
                         <div id="categoriesGradeChart" class="amChart"></div>`,
             controller: /** @ngInject */
-                function CategoriesChartsCtrl($translate, $filter, statsService, simulator_config) {
+                function CategoriesChartsCtrl($translate, $filter, baConfig, statsService, simulator_config) {
 
                 var numberFilter = $filter('number');
 
-                var chartColors = ['Yellow', 'Brown', 'Cyan', 'Red', 'Grey', 'Gold', 'Green', 'Orange', 'Blue', 'Pink'];
+                var layoutColors = baConfig.colors;
+
+                var chartColors = _.values(layoutColors.dashboard);
 
                 var translations = {
                     passing: $translate.instant('STATS.DASHBOARD.CHARTS.GRADES_RADAR.PASSING_GRADE'),
@@ -34,6 +36,8 @@
                     "dataDateFormat": "DD/MM/YYYY HH:NN:SS",
                     "maxSelectedSeries": 20,
                     "maxZoomFactor": 10,
+                    "depth3D": 2,
+                    "angle": 30,
                     "startDuration": 1,
                     "fontFamily": "'Arimo', sans-serif",
                     "fontSize": 14,
@@ -144,7 +148,12 @@
                         };
                     });
 
-                    AmCharts.makeChart('categoriesGradeChart', chartConf);
+                    let chart = AmCharts.makeChart('categoriesGradeChart', chartConf);
+
+                    if (!chartConf.dataProvider.length) {
+                        chart.addLabel("50%", "50%", $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.NO_DATA_TO_DISPLAY'), "middle", 15);
+                        chart.validateNow();
+                    }
                 };
 
                 function getGrade4Category(cat) {
