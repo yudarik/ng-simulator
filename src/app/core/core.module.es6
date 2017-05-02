@@ -2,6 +2,14 @@
  * Created by arikyudin on 06/06/16.
  */
 
+function getSimulatorBaseUrl() {
+    //return 'rest';
+    return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
+    //return 'http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest';
+    //return 'http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest';
+    //return 'http://nadlanline.dnsalias.com:8080/BiologyExams/rest';
+}
+
 (function () {
     'use strict';
     angular.module('Simulator.core', [
@@ -48,12 +56,7 @@
                 .setDefaultHeaders({
                     'Content-Type': 'application/json'
                 })
-                //.setBaseUrl('rest'); // Production Build
-                .setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExams/rest');
-                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest');
-                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest');
-                //.setBaseUrl('http://nadlanline.dnsalias.com:8080/BiologyExams/rest');
-
+                .setBaseUrl(getSimulatorBaseUrl());
 
             RestangularProvider.setErrorInterceptor(
                 (response) => {
