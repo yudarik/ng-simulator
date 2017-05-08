@@ -52,7 +52,8 @@
       "REPEATED_PREDEFINED_EXAM": "Repeated Predefined Exam",
       "SUGGESTED_PRACTICE": "Weak Areas Practice",
       "REPEATED_SUGGESTED_PRACTICE": "Repeated Weak Areas Practice",
-      "DEMO": "Demo"
+      "DEMO": "Demo",
+      "DEMO_PREDEFINED_EXAM": "Demo predefined exams"
     },
     "EXAM_FINISH_ARE_YOU_SURE": "There is still time left, are you sure that you want to finish now?",
     "EXAM_CANCEL_ARE_YOU_SURE": "Are you sure that you want to leave?",

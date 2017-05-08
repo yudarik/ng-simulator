@@ -16,7 +16,7 @@
                        <h6 class="text-center" style="color:#0000FF">{{::$ctrl.translate.clickActionLabel}}</h6>
                         <div id="practicesGradeChart" class="amChart flip float-left"></div>`,
             controller: /** @ngInject */
-                function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config, baConfig) {
+                function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config, baConfig, simulatorService) {
 
                 var translate = {
                     grade: $translate.instant('STATS.DASHBOARD.CHARTS.GENERAL.GRADE'),
@@ -50,13 +50,13 @@
                 var practiceTypesToDisplay = {
                     Customer: [
                         {
-                        "clustered": false,
-                        "id": "General Practice [for legend]",
-                        "fillColors": chartColors.PRACTICE,
-                        "legendColor": chartColors.PRACTICE,
-                        "stackable": false,
-                        "title": translate.generalPractice
-                    },
+                            "clustered": false,
+                            "id": "General Practice [for legend]",
+                            "fillColors": chartColors.PRACTICE,
+                            "legendColor": chartColors.PRACTICE,
+                            "stackable": false,
+                            "title": translate.generalPractice
+                        },
                         {
                             "fillColors": chartColors.REPEATED_PRACTICE,
                             "id": "Repeated General Practice [for legend]",
@@ -127,12 +127,12 @@
                     ],
                     Candidate: [
                         {
-                        "id": "Demo Practice [for legend]",
-                        "legendColor": chartColors.DEMO,
-                        "fillColors": chartColors.DEMO,
-                        "lineColor": chartColors.DEMO,
-                        "title": translate.demoPractice
-                    },
+                            "id": "Demo Practice [for legend]",
+                            "legendColor": chartColors.DEMO,
+                            "fillColors": chartColors.DEMO,
+                            "lineColor": chartColors.DEMO,
+                            "title": translate.demoPractice
+                        },
                         {
                             "id": "Demo Predefined Practice [for legend]",
                             "legendColor": chartColors.DEMO_PREDEFINED_EXAM,
@@ -327,6 +327,11 @@
                     examService.getStats().then((practices) => {
 
                         this.allPractices = practices;
+
+                        if (simulatorService.isStateHidden('exams.predefined') ||
+                            simulatorService.isStateDisabled('exams.predefined')) {
+                            practiceTypesToDisplay[this.userType].pop(); // remove the last legend - DEMO PREDEFINED EXAMS
+                        }
 
                         chartConf.graphs = chartConf.graphs.concat(practiceTypesToDisplay[this.userType]);
 

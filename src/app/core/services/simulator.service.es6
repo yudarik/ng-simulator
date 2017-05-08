@@ -76,7 +76,7 @@
                 }
 
                 if (user.role === "Candidate") {
-                    ['exams.distribution-full', 'exams.weak-areas','exams.repeated-practice'].forEach(state => {
+                    ['exams.distribution-full', 'exams.weak-areas','exams.repeated-practice','exams.post-credit'].forEach(state => {
                         disableState(state, 'EXAMS.TOOLTIPS.NOT_AVAILABLE_IN_DEMO');
                     });
                 }

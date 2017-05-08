@@ -4,9 +4,9 @@
 
 function getSimulatorBaseUrl() {
     //return 'rest';
-    return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
+    //return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
     //return 'http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest';
-    //return 'http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest';
+    return 'http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest';
     //return 'http://nadlanline.dnsalias.com:8080/BiologyExams/rest';
 }
 

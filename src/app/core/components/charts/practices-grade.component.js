@@ -15,7 +15,7 @@
         },
         template: '<h4 class="text-center" uib-tooltip="{{::$ctrl.titleTooltip}}">{{::$ctrl.titleLabel}}</h4>\n                       <h6 class="text-center" style="color:#0000FF">{{::$ctrl.translate.clickActionLabel}}</h6>\n                        <div id="practicesGradeChart" class="amChart flip float-left"></div>',
         controller: /** @ngInject */
-        ["$translate", "$filter", "$state", "examService", "simulator_config", "baConfig", function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config, baConfig) {
+        ["$translate", "$filter", "$state", "examService", "simulator_config", "baConfig", "simulatorService", function practicesGradeCtrl($translate, $filter, $state, examService, simulator_config, baConfig, simulatorService) {
             var _this = this;
 
             var translate = {
@@ -301,6 +301,10 @@
                 examService.getStats().then(function (practices) {
 
                     _this.allPractices = practices;
+
+                    if (_this.userType === 'Candidate' && (simulatorService.isStateHidden('exams.predefined') || simulatorService.isStateDisabled('exams.predefined'))) {
+                        practiceTypesToDisplay[_this.userType].pop(); // remove the last legend - DEMO PREDEFINED EXAMS
+                    }
 
                     chartConf.graphs = chartConf.graphs.concat(practiceTypesToDisplay[_this.userType]);
 
