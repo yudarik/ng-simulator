@@ -302,7 +302,7 @@
 
                     _this.allPractices = practices;
 
-                    if (_this.userType === 'Candidate' && (simulatorService.isStateHidden('exams.predefined') || simulatorService.isStateDisabled('exams.predefined'))) {
+                    if (simulatorService.isStateHidden('exams.predefined') || simulatorService.isStateDisabled('exams.predefined')) {
                         practiceTypesToDisplay[_this.userType].pop(); // remove the last legend - DEMO PREDEFINED EXAMS
                     }
 

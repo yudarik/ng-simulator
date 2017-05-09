@@ -19,7 +19,7 @@
                 userAuthService.resetPassword({emailAddress: this.user.email})
                     .then((response)=>{
                         if (response || response.status === 'success') {
-                            this.message = $translate.instant('AUTH.PASSWORD_RESET_EMAIL_SENT');
+                            this.message = response.description;//$translate.instant('AUTH.PASSWORD_RESET_EMAIL_SENT');
                         }
                     })
                     .catch((err)=>{
