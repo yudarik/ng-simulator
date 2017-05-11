@@ -87,10 +87,10 @@
 }
 #questionsQuotaChart {
   height: 400px;
-  width: 200%;
-  right: -55%;
+  width: 100%;
+ /* right: -55%;
 
-  @include cylinderChart();
+  @include cylinderChart();*/
 }
 #categoriesGradeChart {
   height: 500px;

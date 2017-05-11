@@ -152,7 +152,8 @@
       "EXAM": "מבחן",
       "WEAK_AREAS_PRACTICE": "תרגול בנקודות חולשה",
       "POST_CREDIT_PRACTICE": "תרגול לאחר גמר כל האשראי",
-      "GRADE": "ציון"
+      "GRADE": "ציון",
+      "QUESTIONS_AMOUNT": "כמות"
     },
     "DASHBOARD": {
       "TITLE": "סטטיסטיקת תרגולים",

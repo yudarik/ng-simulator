@@ -151,7 +151,8 @@
       "EXAM": "Exam",
       "WEAK_AREAS_PRACTICE": "Weak Areas Practice",
       "POST_CREDIT_PRACTICE": "Post Credit Practice",
-      "GRADE": "Grade"
+      "GRADE": "Grade",
+      "QUESTIONS_AMOUNT": "Amount"
     },
     "DASHBOARD": {
       "TITLE": "Practice Statistics",

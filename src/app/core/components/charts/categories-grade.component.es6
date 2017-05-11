@@ -138,15 +138,22 @@
 
                 this.init = (categoriesStats) => {
 
-                    chartConf.dataProvider = categoriesStats.map((categoryStat,index)=>{
 
-                        return {
-                            "Practice Color": chartColors[index % chartColors.length],
-                            "Category Grade": numberFilter(getGrade4Category(categoryStat), 0),
-                            "Category": _.get(categoryStat, 'category.name'),
-                            "Passing Grade": simulator_config.passingGrade
-                        };
-                    });
+                    if (_.every(categoriesStats, {totalQuestionsAskedInCategory: 0})) {
+
+                        chartConf.dataProvider = [];
+
+                    } else {
+                        chartConf.dataProvider = categoriesStats.map((categoryStat,index)=>{
+
+                            return {
+                                "Practice Color": chartColors[index % chartColors.length],
+                                "Category Grade": numberFilter(getGrade4Category(categoryStat), 0),
+                                "Category": _.get(categoryStat, 'category.name'),
+                                "Passing Grade": simulator_config.passingGrade
+                            };
+                        });
+                    }
 
                     let chart = AmCharts.makeChart('categoriesGradeChart', chartConf);
 

@@ -133,17 +133,30 @@
                 this.$onInit = () =>{
                     statsService.getRank().then((ranks) => {
 
-                        chartConf.dataProvider = ranks.map((rank,index) => {
-                            return _.assign(chartConf.dataProvider[index], {
-                                Rank: rank.averageGrade,
-                                category: rank.rank,
-                                userDetails: getName(rank),
-                                averageGrade: rank.averageGrade,
-                                dateJoined: moment(rank.dateJoined).format('DD/MM/YY'),
-                                numberOfExamsPerformed: rank.numberOfExamsPerformed
+                        if (ranks.status === 'other') {
+                            chartConf.dataProvider = [];
+
+                        } else if (ranks.content) {
+
+                            chartConf.dataProvider = ranks.content.map((rank,index) => {
+                                return _.assign(chartConf.dataProvider[index], {
+                                    Rank: rank.averageGrade,
+                                    category: rank.rank,
+                                    userDetails: getName(rank),
+                                    averageGrade: rank.averageGrade,
+                                    dateJoined: moment(rank.dateJoined).format('DD/MM/YY'),
+                                    numberOfExamsPerformed: rank.numberOfExamsPerformed
+                                });
                             });
-                        });
-                        AmCharts.makeChart('userRankChart',chartConf);
+                        }
+
+                        let chart = AmCharts.makeChart('userRankChart',chartConf);
+
+
+                        if (!chartConf.dataProvider.length && ranks.description) {
+                            chart.addLabel("50%", "50%", ranks.description, "middle", 15);
+                            chart.validateNow();
+                        }
                     });
 
                 };

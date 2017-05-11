@@ -119,17 +119,28 @@
             this.$onInit = function () {
                 statsService.getRank().then(function (ranks) {
 
-                    chartConf.dataProvider = ranks.map(function (rank, index) {
-                        return _.assign(chartConf.dataProvider[index], {
-                            Rank: rank.averageGrade,
-                            category: rank.rank,
-                            userDetails: getName(rank),
-                            averageGrade: rank.averageGrade,
-                            dateJoined: moment(rank.dateJoined).format('DD/MM/YY'),
-                            numberOfExamsPerformed: rank.numberOfExamsPerformed
+                    if (ranks.status === 'other') {
+                        chartConf.dataProvider = [];
+                    } else if (ranks.content) {
+
+                        chartConf.dataProvider = ranks.content.map(function (rank, index) {
+                            return _.assign(chartConf.dataProvider[index], {
+                                Rank: rank.averageGrade,
+                                category: rank.rank,
+                                userDetails: getName(rank),
+                                averageGrade: rank.averageGrade,
+                                dateJoined: moment(rank.dateJoined).format('DD/MM/YY'),
+                                numberOfExamsPerformed: rank.numberOfExamsPerformed
+                            });
                         });
-                    });
-                    AmCharts.makeChart('userRankChart', chartConf);
+                    }
+
+                    var chart = AmCharts.makeChart('userRankChart', chartConf);
+
+                    if (!chartConf.dataProvider.length && ranks.description) {
+                        chart.addLabel("50%", "50%", ranks.description, "middle", 15);
+                        chart.validateNow();
+                    }
                 });
             };
 
