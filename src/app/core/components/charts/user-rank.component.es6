@@ -27,7 +27,7 @@
                     "type": "serial",
                     "categoryField": "category",
                     "angle": 30,
-                    "autoMarginOffset": 0,
+                    "autoMargins": true,
                     "depth3D": 20,
                     "startDuration": 1,
                     "fontSize": 14,
@@ -49,7 +49,7 @@
                                                ${context.userDetails}<br/>
                                                ${textLabels.rank}: ${context.category}<br/>
                                                ${textLabels.joinDate}: ${context.dateJoined}<br/>
-                                               ${textLabels.averageGrade}: ${context.Rank}<br/>
+                                               ${textLabels.averageGrade}: ${context.averageGrade}<br/>
                                                ${textLabels.examsPerformed}: ${context.numberOfExamsPerformed}</p>`;
                             },
                             "bullet": "custom",
@@ -147,7 +147,7 @@
                                     dateJoined: moment(rank.dateJoined).format('DD/MM/YY'),
                                     numberOfExamsPerformed: rank.numberOfExamsPerformed
                                 });
-                            });
+                            }).sort((a,b) => a.Rank - b.Rank);
                         }
 
                         let chart = AmCharts.makeChart('userRankChart',chartConf);
@@ -155,6 +155,12 @@
 
                         if (!chartConf.dataProvider.length && ranks.description) {
                             chart.addLabel("50%", "50%", ranks.description, "middle", 15);
+                            chart.validateNow();
+                        }
+                        if (chartConf.dataProvider.length &&
+                            chartConf.dataProvider[chartConf.dataProvider.length - 1].Rank > 90) {
+
+                            chartConf.valueAxes[0].maximum = chartConf.valueAxes[0].max + 1;
                             chart.validateNow();
                         }
                     });

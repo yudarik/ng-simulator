@@ -12,10 +12,12 @@
   }
 
   #timeCylinder {
-    width: 210%;
+    /*width: 210%;
     left: -60%;
 
-    @include cylinderChart();
+    @include cylinderChart();*/
+
+    direction: ltr;
   }
   #categoriesGradeChart {
     height: 380px;
@@ -45,8 +47,8 @@
 body.flip {
   .practice-summary {
     #timeCylinder {
-      right: -60%;
-      left: auto;
+      /*right: -60%;
+      left: auto;*/
     }
   }
 }

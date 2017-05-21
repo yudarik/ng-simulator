@@ -18,72 +18,72 @@
                 var timeframe = $filter('timeframe');
 
                 var chartConf = {
-                    "theme": "light",
                     "type": "serial",
+                    "categoryField": "category",
                     "fontSize": 14,
                     "fontFamily": "'Arimo', sans-serif",
-                    "depth3D": 100,
                     "angle": 30,
-                    "autoMargins": false,
-                    "marginBottom": 100,
-                    "marginLeft": 350,
-                    "marginRight": 300,
-                    "dataProvider": [],
-                    "valueAxes": [ {
-                        "stackType": "100%",
-                        "gridAlpha": 0,
-                        "axisAlpha": 0,
-                        "labelsEnabled": false
-                    } ],
-                    "graphs": [ {
-                        "type": "column",
-                        "topRadius": 1,
-                        "columnWidth": 0.3,
-                        "showOnAxis": true,
-                        "lineThickness": 2,
-                        "lineAlpha": 0.5,
-                        "lineColor": "#FFFFFF",
-                        "fillColors": "#8d003b",
-                        "fillAlphas": 0.8,
-                        "valueField": "value1",
-                        //"balloonText": "[[category1]]: [[value1]],
-                        "balloonFunction": (graphDataItem) => {
-                            return `${graphDataItem.dataContext.category1}: ${this.toTimeString(graphDataItem.dataContext.value1)}`;
-                        }
-                    }, {
-                        "type": "column",
-                        "topRadius": 1,
-                        "columnWidth": 0.3,
-                        "showOnAxis": true,
-                        "lineThickness": 2,
-                        "lineAlpha": 0.5,
-                        "lineColor": "#cdcdcd",
-                        "fillColors": "#cdcdcd",
-                        "fillAlphas": 0.5,
-                        "valueField": "value2",
-                        //"balloonText": "[[category2]]: [[value2]],
-                        "balloonFunction": (graphDataItem) => {
-                            return `${graphDataItem.dataContext.category2}: ${this.toTimeString(graphDataItem.dataContext.value2)}`;
-                        }
-                    } ],
-
-                    "categoryField": "category1",
+                    "depth3D": 30,
+                    "startDuration": 1,
                     "categoryAxis": {
-                        "axisAlpha": 0,
-                        "labelOffset": 40,
-                        "gridAlpha": 0
+                        "gridPosition": "start"
                     },
-                    "export": {
-                        "enabled": false
-                    }
+                    "trendLines": [],
+                    "graphs": [
+                        {
+                            "balloonText": "[[title]]: [[value]]",
+                            /*"balloonFunction": (graphDataItem) => {
+                                return `${graphDataItem.dataContext.category}: ${this.toTimeString(graphDataItem.dataContext["column-1"])}`;
+                            },*/
+                            "columnWidth": 0.6,
+                            "fillAlphas": 1,
+                            "fillColors": "#008000",
+                            "id": "AmGraph-1",
+                            "lineThickness": 0,
+                            "title": $translate.instant('EXAMS.SUMMARY.TIME_ELAPSED'),
+                            "type": "column",
+                            "valueField": "column-1"
+                        },
+                        {
+                            "balloonText": "[[title]]: [[value]]",
+                            /*"balloonFunction": (graphDataItem) => {
+                                return `${graphDataItem.dataContext.category}: ${this.toTimeString(graphDataItem.dataContext["column-2"])}`;
+                            },*/
+                            "columnWidth": 0.6,
+                            "fillAlphas": 1,
+                            "fillColors": "#AAB3B3",
+                            "id": "AmGraph-2",
+                            "lineThickness": 0,
+                            "title": $translate.instant('EXAMS.SUMMARY.TOTAL_TIME'),
+                            "type": "column",
+                            "valueField": "column-2"
+                        }
+                    ],
+                    "guides": [],
+                    "valueAxes": [
+                        {
+                            "duration": "ss",
+                            "id": "ValueAxis-1",
+                            "stackType": "3d",
+                            "title": $translate.instant('EXAMS.SUMMARY.TIME')
+                        }
+                    ],
+                    "allLabels": [],
+                    "balloon": {},
+                    "legend": {
+                        "enabled": true,
+                        "useGraphSettings": true
+                    },
+                    "titles": [],
+                    "dataProvider": []
                 };
 
                 this.$onInit = () => {
                     chartConf.dataProvider.push({
-                        category1: $translate.instant('EXAMS.SUMMARY.TIME_ELAPSED'),
-                        category2: $translate.instant('EXAMS.SUMMARY.TOTAL_TIME'),
-                        value1: this.timeElapsed,
-                        value2: this.totalTime - this.timeElapsed
+                        category: $translate.instant('EXAMS.SUMMARY.TIME_ELAPSED'),
+                        //category2: $translate.instant('EXAMS.SUMMARY.TOTAL_TIME'),
+                        "column-1": this.timeElapsed,
+                        "column-2": this.totalTime - this.timeElapsed
                     });
                     AmCharts.makeChart('timeCylinder', chartConf);
                 };

@@ -76,7 +76,9 @@
       "TABLE_TITLE": "Practice Analysis by Category",
       "PRACTICE_FAILED": "Failed",
       "PRACTICE_PASSED": "Passed",
-      "PRACTICE_SUCCESS": "Success"
+      "PRACTICE_SUCCESS": "Success",
+      "PRACTICE_TYPE": "Practice types",
+      "TIME": "Time"
     },
     "DISTRIBUTION": {
       "TITLE": "Question Distribution by Category",
@@ -152,7 +154,11 @@
       "WEAK_AREAS_PRACTICE": "Weak Areas Practice",
       "POST_CREDIT_PRACTICE": "Post Credit Practice",
       "GRADE": "Grade",
-      "QUESTIONS_AMOUNT": "Amount"
+      "QUESTIONS_AMOUNT": "Amount",
+      "TOTAL_ELIGIBLE": "Total of",
+      "QUOTA_LEFT": "Quota Left of",
+      "NEW_QUESTIONS": "new questions",
+      "POST_CREDIT_QUESTIONS": "post credit questions"
     },
     "DASHBOARD": {
       "TITLE": "Practice Statistics",

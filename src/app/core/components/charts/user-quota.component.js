@@ -16,109 +16,51 @@
         controller: ["$rootScope", "$translate", "customerService", "simulator_config", function userQuotaCtrl($rootScope, $translate, customerService, simulator_config) {
             'ngInject';
 
-            /* var questionsQuota = {
-                 "theme": "light",
-                 "type": "serial",
-                 "depth3D": 100,
-                 "angle": 30,
-                 "fontSize": 14,
-                 "fontFamily": "'Arimo', sans-serif",
-                 "autoMargins": false,
-                 "marginBottom": 100,
-                 "marginLeft": 350,
-                 "marginRight": 300,
-                 "dataProvider": [],
-                 "valueAxes": [ {
-                     "stackType": "regular",
-                     "axisAlpha": 0,
-                     "gridAlpha": 0,
-                     "labelsEnabled": false
-                 } ],
-                 "graphs": [ {
-                     "type": "column",
-                     "topRadius": 1,
-                     "columnWidth": 0.3,
-                     "showOnAxis": true,
-                     "lineThickness": 2,
-                     "lineAlpha": 0.5,
-                     "lineColor": "#FFFFFF",
-                     "fillColors": "#8d003b",
-                     "fillAlphas": 0.8,
-                     "valueField": "value1",
-                     "balloonText": "[[category1]]: [[value]]"
-                 }, {
-                     "type": "column",
-                     "topRadius": 1,
-                     "columnWidth": 0.3,
-                     "showOnAxis": true,
-                     "lineThickness": 2,
-                     "lineAlpha": 0.5,
-                     "lineColor": "#cdcdcd",
-                     "fillColors": "#cdcdcd",
-                     "fillAlphas": 0.5,
-                     "valueField": "value2",
-                     "balloonText": "[[category2]]: [[value]]"
-                 } ],
-                  "categoryField": "category1",
-                 "categoryAxis": {
-                     "axisAlpha": 0,
-                     "labelOffset": 30,
-                     "autoRotateCount": 2,
-                     "autoRotateAngle": 15,
-                     "labelRotation": 15,
-                     "centerRotatedLabels": true,
-                     "equalSpacing": true,
-                     "gridAlpha": 0
-                 },
-                 "export": {
-                     "enabled": false
-                 },
-                 "titles": [
-                     /!*{
-                         "size": 15,
-                         "text": this.titleLabel,
-                         "color": "#666666"
-                     }*!/
-                 ],
-             };*/
-
             var chartConfig = {
-                "theme": "light",
                 "type": "serial",
+                "categoryField": "category",
                 "fontSize": 14,
                 "fontFamily": "'Arimo', sans-serif",
-                "dataProvider": [],
-                "valueAxes": [{
-                    "stackType": "3d",
-                    "position": "left",
-                    "title": $translate.instant('STATS.ACCOUNT.QUESTIONS_AMOUNT')
-                }],
-                "startDuration": 1,
-                "graphs": [{
-                    "balloonText": "[[category1]]: [[value]]",
-                    "fillAlphas": 0.9,
-                    "lineAlpha": 0.2,
-                    //"title": "2004",
-                    "type": "column",
-                    "valueField": "value1"
-                }, {
-                    "balloonText": "[[category2]]: [[value]]",
-                    "fillAlphas": 0.9,
-                    "lineAlpha": 0.2,
-                    //"title": "2005",
-                    "type": "column",
-                    "valueField": "value2"
-                }],
-                "plotAreaFillAlphas": 0.1,
-                "depth3D": 35,
                 "angle": 30,
-                "categoryField": "category1",
+                "depth3D": 30,
+                "startDuration": 1,
                 "categoryAxis": {
                     "gridPosition": "start"
                 },
-                "export": {
-                    "enabled": true
-                }
+                "trendLines": [],
+                "graphs": [{
+                    "balloonText": "[[title]] [[category]]:[[value]]",
+                    "fillAlphas": 1,
+                    "fillColors": "#008000",
+                    "id": "AmGraph-1",
+                    "lineThickness": 0,
+                    "title": $translate.instant("STATS.ACCOUNT.QUOTA_LEFT"),
+                    "type": "column",
+                    "valueField": "column-1"
+                }, {
+                    "balloonText": "[[title]] [[category]]:[[value]]",
+                    "fillAlphas": 1,
+                    "fillColors": "#AAB3B3",
+                    "id": "AmGraph-2",
+                    "lineThickness": 0,
+                    "title": $translate.instant("STATS.ACCOUNT.TOTAL_ELIGIBLE"),
+                    "type": "column",
+                    "valueField": "column-2"
+                }],
+                "guides": [],
+                "valueAxes": [{
+                    "id": "ValueAxis-1",
+                    "stackType": "3d",
+                    "title": $translate.instant("STATS.ACCOUNT.QUESTIONS_AMOUNT")
+                }],
+                "allLabels": [],
+                "balloon": {},
+                "legend": {
+                    "enabled": true,
+                    "useGraphSettings": true
+                },
+                "titles": [],
+                "dataProvider": []
             };
 
             this.$onInit = function () {
@@ -129,18 +71,18 @@
 
                     if (simulator_config.postCreditModeEnabled) {
                         chartConfig.dataProvider.push({
-                            category2: $translate.instant('STATS.ACCOUNT.LEFTPOSTCREDITQUESTIONSQUOTA'),
-                            category1: $translate.instant('STATS.ACCOUNT.SPENTPOSTCREDITQUESTIONSQUOTA'),
-                            value2: quota['leftPostCreditQuestionsQuota'],
-                            value1: quota['totalPostCreditQuestionsQuota'] - quota['leftPostCreditQuestionsQuota']
+                            "category": $translate.instant('STATS.ACCOUNT.POST_CREDIT_QUESTIONS'),
+                            //category2: $translate.instant('STATS.ACCOUNT.TOTALPOSTCREDITQUESTIONSQUOTA'),
+                            "column-1": quota['leftPostCreditQuestionsQuota'],
+                            "column-2": quota['totalPostCreditQuestionsQuota'] // - quota['leftPostCreditQuestionsQuota']
                         });
                     }
 
                     chartConfig.dataProvider.push({
-                        category2: $translate.instant('STATS.ACCOUNT.LEFTNEWQUESTIONSQUOTA'),
-                        category1: $translate.instant('STATS.ACCOUNT.SPENTNEWQUESTIONSQUOTA'),
-                        value2: quota['leftNewQuestionsQuota'],
-                        value1: quota['totalNewQuestionsQuota'] - quota['leftNewQuestionsQuota']
+                        "category": $translate.instant('STATS.ACCOUNT.NEW_QUESTIONS'),
+                        //category2: $translate.instant('STATS.ACCOUNT.TOTALNEWQUESTIONSQUOTA'),
+                        "column-1": quota['leftNewQuestionsQuota'],
+                        "column-2": quota['totalNewQuestionsQuota'] // - quota['leftNewQuestionsQuota']
                     });
 
                     chart.validateData();

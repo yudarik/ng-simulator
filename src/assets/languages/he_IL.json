@@ -77,7 +77,8 @@
       "PRACTICE_FAILED": "נכשל",
       "PRACTICE_PASSED": "עובר",
       "PRACTICE_SUCCESS": "מצויין",
-      "PRACTICE_TYPE": "סוג תרגול"
+      "PRACTICE_TYPE": "סוג תרגול",
+      "TIME": "זמן"
     },
     "DISTRIBUTION": {
       "TITLE": "חלוקת שאלות לפי קטגוריות:",
@@ -153,7 +154,11 @@
       "WEAK_AREAS_PRACTICE": "תרגול בנקודות חולשה",
       "POST_CREDIT_PRACTICE": "תרגול לאחר גמר כל האשראי",
       "GRADE": "ציון",
-      "QUESTIONS_AMOUNT": "כמות"
+      "QUESTIONS_AMOUNT": "כמות",
+      "TOTAL_ELIGIBLE": "סה\"כ",
+      "QUOTA_LEFT": "יתרת",
+      "NEW_QUESTIONS": "שאלות חדשות",
+      "POST_CREDIT_QUESTIONS": "שאלות לתרגול חוזר"
     },
     "DASHBOARD": {
       "TITLE": "סטטיסטיקת תרגולים",

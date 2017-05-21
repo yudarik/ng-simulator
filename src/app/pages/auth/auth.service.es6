@@ -124,13 +124,15 @@
                     })
                         .then(quota => {
                             userQuota = quota;
+                            getUserQuotaInProgress = false;
 
                             resolve(quota);
                         })
                         .catch(err => {
-                                reject(err);
-                            });
+                            getUserQuotaInProgress = false;
+                            reject(err);
                         });
+                });
 
                 getUserQuotaInProgress = true;
 

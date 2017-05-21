@@ -27,7 +27,7 @@
                 "type": "serial",
                 "categoryField": "category",
                 "angle": 30,
-                "autoMarginOffset": 0,
+                "autoMargins": true,
                 "depth3D": 20,
                 "startDuration": 1,
                 "fontSize": 14,
@@ -44,7 +44,7 @@
                 "graphs": [{
                     "balloonFunction": function balloonFunction(dataItem) {
                         var context = dataItem.dataContext;
-                        return '<p style="text-align: right">\n                                               ' + context.userDetails + '<br/>\n                                               ' + textLabels.rank + ': ' + context.category + '<br/>\n                                               ' + textLabels.joinDate + ': ' + context.dateJoined + '<br/>\n                                               ' + textLabels.averageGrade + ': ' + context.Rank + '<br/>\n                                               ' + textLabels.examsPerformed + ': ' + context.numberOfExamsPerformed + '</p>';
+                        return '<p style="text-align: right">\n                                               ' + context.userDetails + '<br/>\n                                               ' + textLabels.rank + ': ' + context.category + '<br/>\n                                               ' + textLabels.joinDate + ': ' + context.dateJoined + '<br/>\n                                               ' + textLabels.averageGrade + ': ' + context.averageGrade + '<br/>\n                                               ' + textLabels.examsPerformed + ': ' + context.numberOfExamsPerformed + '</p>';
                     },
                     "bullet": "custom",
                     "bulletBorderThickness": 0,
@@ -132,6 +132,8 @@
                                 dateJoined: moment(rank.dateJoined).format('DD/MM/YY'),
                                 numberOfExamsPerformed: rank.numberOfExamsPerformed
                             });
+                        }).sort(function (a, b) {
+                            return a.Rank - b.Rank;
                         });
                     }
 
@@ -139,6 +141,11 @@
 
                     if (!chartConf.dataProvider.length && ranks.description) {
                         chart.addLabel("50%", "50%", ranks.description, "middle", 15);
+                        chart.validateNow();
+                    }
+                    if (chartConf.dataProvider.length && chartConf.dataProvider[chartConf.dataProvider.length - 1].Rank > 90) {
+
+                        chartConf.valueAxes[0].maximum = chartConf.valueAxes[0].max + 1;
                         chart.validateNow();
                     }
                 });
