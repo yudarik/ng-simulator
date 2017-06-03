@@ -59,7 +59,7 @@
     "EXAM_CANCEL_ARE_YOU_SURE": "הינך בטוח שברצונך לבטל את התרגול/בחינה?",
     "SUMMARY": {
       "FINAL_GRADE": "ציון סופי",
-      "TOTAL_TIME": "סך הכל זמן שהוקצב לפתרון",
+      "TOTAL_TIME": "הזמן שהוקצב לפתרון",
       "TIME_ELAPSED": "הזמן שנדרש לפתרון",
       "AVERAGE_TIME_FOR_QUESTION": "זמן ממוצע לשאלה",
       "QUESTION_DISTRIBUTION": "התפלגות שאלות על פיי קטגוריות",
@@ -78,7 +78,10 @@
       "PRACTICE_PASSED": "עובר",
       "PRACTICE_SUCCESS": "מצויין",
       "PRACTICE_TYPE": "סוג תרגול",
-      "TIME": "זמן"
+      "TIME": "זמן",
+      "AVERAGE": "ממוצע",
+      "ALL_QUESTIONS": "כל השאלות",
+      "PER_QUESTION": "כל אחת מהשאלות"
     },
     "DISTRIBUTION": {
       "TITLE": "חלוקת שאלות לפי קטגוריות:",

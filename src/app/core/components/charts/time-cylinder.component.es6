@@ -9,7 +9,8 @@
         .component('timeCylinder', {
             bindings: {
                 timeElapsed: '<',
-                totalTime: '<'
+                totalTime: '<',
+                numOfQuestions: '<'
             },
             template: `<div id="timeCylinder" class="amChart"></div>`,
             controller: function timeCylinderCtrl($translate, $filter) {
@@ -31,7 +32,7 @@
                     "trendLines": [],
                     "graphs": [
                         {
-                            "balloonText": "[[title]]: [[value]]",
+                            "balloonText": "[[pretitle]] [[title]] [[category]]: [[value]]",
                             /*"balloonFunction": (graphDataItem) => {
                                 return `${graphDataItem.dataContext.category}: ${this.toTimeString(graphDataItem.dataContext["column-1"])}`;
                             },*/
@@ -45,7 +46,7 @@
                             "valueField": "column-1"
                         },
                         {
-                            "balloonText": "[[title]]: [[value]]",
+                            "balloonText": "[[pretitle]] [[title]] [[category]]: [[value]]",
                             /*"balloonFunction": (graphDataItem) => {
                                 return `${graphDataItem.dataContext.category}: ${this.toTimeString(graphDataItem.dataContext["column-2"])}`;
                             },*/
@@ -79,12 +80,17 @@
                 };
 
                 this.$onInit = () => {
-                    chartConf.dataProvider.push({
-                        category: $translate.instant('EXAMS.SUMMARY.TIME_ELAPSED'),
+                    chartConf.dataProvider = [{
+                        category: $translate.instant('EXAMS.SUMMARY.ALL_QUESTIONS'),
                         //category2: $translate.instant('EXAMS.SUMMARY.TOTAL_TIME'),
                         "column-1": this.timeElapsed,
                         "column-2": this.totalTime - this.timeElapsed
-                    });
+                    }, {
+                        category: $translate.instant('EXAMS.SUMMARY.PER_QUESTION'),
+                        pretitle: $translate.instant('EXAMS.SUMMARY.AVERAGE'),
+                        "column-1": (this.timeElapsed/this.numOfQuestions).toFixed(2),
+                        "column-2": (this.totalTime/this.numOfQuestions).toFixed(2)
+                    }];
                     AmCharts.makeChart('timeCylinder', chartConf);
                 };
 

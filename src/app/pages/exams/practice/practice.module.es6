@@ -134,8 +134,15 @@
                 url: '/repeated-practice',
                 parent: 'exams',
                 template: `<div ba-panel ba-panel-class="with-scroll" class="col-xs-12" dir="ltr">
-                               <practices-grade class="repeated-practice-view" title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"></practices-grade>
+                               <practices-grade class="repeated-practice-view" 
+                                    title-label="'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE'|translate"
+                                    user-type="$resolve.userType"></practices-grade>
                             </div>`,
+                resolve: {
+                    userType: function(userAuthService){
+                        return userAuthService.getUserType();
+                    }
+                },
                 title: 'EXAMS.TYPES.REPEATED_ALL',
                 sidebarMeta: {
                     order: 400

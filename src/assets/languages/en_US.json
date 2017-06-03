@@ -59,8 +59,8 @@
     "EXAM_CANCEL_ARE_YOU_SURE": "Are you sure that you want to leave?",
     "SUMMARY": {
       "FINAL_GRADE": "Final Grade",
-      "TOTAL_TIME": "Total Time",
-      "TIME_ELAPSED": "Elapsed Time",
+      "TOTAL_TIME": "Total Time given for",
+      "TIME_ELAPSED": "Elapsed Time for",
       "AVERAGE_TIME_FOR_QUESTION": "Average Elapsed Time Per Question",
       "QUESTION_DISTRIBUTION": "Question Distribution by Category",
       "CATEGORY": "Category",
@@ -78,7 +78,10 @@
       "PRACTICE_PASSED": "Passed",
       "PRACTICE_SUCCESS": "Success",
       "PRACTICE_TYPE": "Practice types",
-      "TIME": "Time"
+      "TIME": "Time",
+      "AVERAGE": "Average",
+      "ALL_QUESTIONS": "All questions",
+      "PER_QUESTION": "Every one of the questions"
     },
     "DISTRIBUTION": {
       "TITLE": "Question Distribution by Category",

@@ -116,7 +116,12 @@
         }).state('exams.repeated-practice', {
             url: '/repeated-practice',
             parent: 'exams',
-            template: '<div ba-panel ba-panel-class="with-scroll" class="col-xs-12" dir="ltr">\n                               <practices-grade class="repeated-practice-view" title-label="\'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE\'|translate"></practices-grade>\n                            </div>',
+            template: '<div ba-panel ba-panel-class="with-scroll" class="col-xs-12" dir="ltr">\n                               <practices-grade class="repeated-practice-view" \n                                    title-label="\'STATS.DASHBOARD.CHARTS.PRACTICES_GRADE.TITLE\'|translate"\n                                    user-type="$resolve.userType"></practices-grade>\n                            </div>',
+            resolve: {
+                userType: ["userAuthService", function (userAuthService) {
+                    return userAuthService.getUserType();
+                }]
+            },
             title: 'EXAMS.TYPES.REPEATED_ALL',
             sidebarMeta: {
                 order: 400

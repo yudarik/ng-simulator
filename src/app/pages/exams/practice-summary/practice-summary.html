@@ -15,7 +15,6 @@
             <div class="col-xs-12 col-md-4">
                 <label class="control-label">{{::'EXAMS.SUMMARY.PRACTICE_TYPE'|translate}}:</label>
                 <span>{{::'EXAMS.TYPES.'+practiceSummary.summary.practiceType|translate}}</span>
-                <span>{{::'EXAMS.TYPES.'+practiceSummary.summary.practiceType|translate}}</span>
             </div>
 
         </div>
@@ -36,8 +35,13 @@
         </div>
 
         <div class="col-xs-12 text-center charts">
-            <time-cylinder class="col-md-6" time-elapsed="practiceSummary.summary.elapsedTimeSecs" total-time="practiceSummary.summary.totalTimeSecs"></time-cylinder>
-            <exam-grade-gauge class="col-md-6" exam-grade="practiceSummary.summary.grade" title-label="::'STATS.ACCOUNT.GRADE'|translate"></exam-grade-gauge>
+            <time-cylinder class="col-md-6"
+                           time-elapsed="practiceSummary.summary.elapsedTimeSecs"
+                           total-time="practiceSummary.summary.totalTimeSecs"
+                           num-of-questions="practiceSummary.summary.questions.length"></time-cylinder>
+            <exam-grade-gauge class="col-md-6"
+                              exam-grade="practiceSummary.summary.grade"
+                              title-label="::'STATS.ACCOUNT.GRADE'|translate"></exam-grade-gauge>
         </div>
         <div class="graph vertical centered table-condensed col-xs-12">
             <categories-grade stats="practiceSummary.categoriesStats" style="height: 300px;width:100%"></categories-grade>
