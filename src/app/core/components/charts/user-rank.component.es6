@@ -136,9 +136,9 @@
                         if (ranks.status === 'other') {
                             chartConf.dataProvider = [];
 
-                        } else if (ranks.content && Array.isArray(ranks.content.ranks)) {
+                        } else if (ranks.content && Array.isArray(ranks.content)) {
 
-                            chartConf.dataProvider = ranks.content.ranks.map((rank,index) => {
+                            chartConf.dataProvider = ranks.content.map((rank,index) => {
                                 return _.assign(chartConf.dataProvider[index], {
                                     Rank: rank.averageGrade,
                                     category: rank.rank,
