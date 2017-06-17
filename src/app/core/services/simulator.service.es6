@@ -58,10 +58,12 @@
                 setHiddenState('exams.predefined', !simulator_config.predefinedExamsEnabled);
                 setHiddenState('manuals', !simulator_config.trainingDocumentsEnabled);
 
+
                 setStateStatus('exams.post-credit', quota.leftPostCreditQuestionsQuota <= 0, 'EXAMS.TOOLTIPS.NO_MORE_POST_CREDITS');
                 setStateStatus('exams.post-credit', !user.postCreditModeNow, 'EXAMS.TOOLTIPS.POSTCREDIT_DISABLED');
 
                 setStateStatus('exams.distribution-general', quota.leftNewQuestionsQuota <= 0, 'EXAMS.TOOLTIPS.NO_MORE_CREDITS');
+                setStateStatus('exams.distribution-full', quota.leftNewQuestionsQuota < simulator_config.questionsInExam, 'EXAMS.TOOLTIPS.NO_MORE_CREDITS');
                 setStateStatus('exams.repeated-practice', quota.leftPostCreditQuestionsQuota <= 0, 'EXAMS.TOOLTIPS.NO_MORE_POST_CREDITS');
 
                 setStateStatus('exams.predefined', !quota.predefinedExamWithQuotasList.length, 'EXAMS.TOOLTIPS.NO_PREDEFINED_EXAMS_AVAILABLE');

@@ -56,6 +56,7 @@
                        {
                            "id": "ValueAxis-1",
                            "stackType": "3d",
+                           "minimum": 0,
                            "title": $translate.instant("STATS.ACCOUNT.QUESTIONS_AMOUNT")
                        }
                    ],

@@ -23,6 +23,8 @@
                 examsPerformed: $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.EXAMSPERFORMED')
             };
 
+            var colors = ['#FFD700', 'Silver', '#B8860B', 'Green'];
+
             var chartConf = {
                 "type": "serial",
                 "categoryField": "category",
@@ -93,25 +95,25 @@
                     "category": "#2",
                     "Color": "Red",
                     "Rank": "3",
-                    "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Office-Customer-Male-Dark-icon.png",
+                    "Icon": "/assets/img/app/Office-Customer-Male-Light-icon.png",
                     "userDetails": "Nurit"
                 }, {
                     "category": "#1",
                     "Color": "Purple",
                     "Rank": "4",
-                    "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Office-Customer-Male-Dark-icon.png",
+                    "Icon": "/assets/img/app/Office-Customer-Male-Light-icon.png",
                     "userDetails": "Moshe"
                 }, {
                     "category": "#3",
                     "Color": "#B8860B",
                     "Rank": "2",
-                    "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Office-Customer-Male-Dark-icon.png",
+                    "Icon": "/assets/img/app/Office-Customer-Male-Light-icon.png",
                     "userDetails": "Yaakov"
                 }, {
                     "category": "#7",
                     "Color": "Green",
                     "Rank": "1",
-                    "Icon": "http://icons.iconarchive.com/icons/icons-land/vista-people/256/Occupations-Bartender-Male-Light-icon.png",
+                    "Icon": "/assets/img/app/Occupations-Bartender-Male-Light-icon.png",
                     "userDetails": "You"
                 }]
             };
@@ -121,19 +123,20 @@
 
                     if (ranks.status === 'other') {
                         chartConf.dataProvider = [];
-                    } else if (ranks.content && Array.isArray(ranks.content.ranks)) {
+                    } else if (ranks.content && Array.isArray(ranks.content)) {
 
-                        chartConf.dataProvider = ranks.content.ranks.map(function (rank, index) {
+                        chartConf.dataProvider = ranks.content.map(function (rank, index) {
                             return _.assign(chartConf.dataProvider[index], {
                                 Rank: rank.averageGrade,
                                 category: rank.rank,
                                 userDetails: getName(rank),
-                                averageGrade: rank.averageGrade,
+                                Color: colors[index],
+                                averageGrade: rank.averageGrade.toFixed(1),
                                 dateJoined: moment(rank.dateJoined).format('DD/MM/YY'),
                                 numberOfExamsPerformed: rank.numberOfExamsPerformed
                             });
                         }).sort(function (a, b) {
-                            return a.Rank - b.Rank;
+                            return b.Rank - a.Rank;
                         });
                     }
 
@@ -143,7 +146,7 @@
                         chart.addLabel("50%", "50%", ranks.description, "middle", 15);
                         chart.validateNow();
                     }
-                    if (chartConf.dataProvider.length && chartConf.dataProvider[chartConf.dataProvider.length - 1].Rank > 90) {
+                    if (chartConf.dataProvider.length && chartConf.dataProvider[0].Rank > 90) {
 
                         chartConf.valueAxes[0].maximum = chartConf.valueAxes[0].max + 1;
                         chart.validateNow();
@@ -156,7 +159,7 @@
                 var anonymous = $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.ANONYMOUS'),
                     you = $translate.instant('STATS.DASHBOARD.CHARTS.USERS_RANK.YOU');
 
-                return rank.name ? you : anonymous;
+                return rank.customerFirstName ? rank.customerFirstName : anonymous;
             }
         }]
     });

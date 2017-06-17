@@ -84,12 +84,12 @@
                         category: $translate.instant('EXAMS.SUMMARY.ALL_QUESTIONS'),
                         //category2: $translate.instant('EXAMS.SUMMARY.TOTAL_TIME'),
                         "column-1": this.timeElapsed,
-                        "column-2": this.totalTime - this.timeElapsed
+                        "column-2": this.totalTime
                     }, {
                         category: $translate.instant('EXAMS.SUMMARY.PER_QUESTION'),
                         pretitle: $translate.instant('EXAMS.SUMMARY.AVERAGE'),
-                        "column-1": (this.timeElapsed/this.numOfQuestions).toFixed(2),
-                        "column-2": (this.totalTime/this.numOfQuestions).toFixed(2)
+                        "column-1": parseInt(this.timeElapsed/this.numOfQuestions),
+                        "column-2": parseInt(this.totalTime/this.numOfQuestions)
                     }];
                     AmCharts.makeChart('timeCylinder', chartConf);
                 };
