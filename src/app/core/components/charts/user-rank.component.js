@@ -95,25 +95,25 @@
                     "category": "#2",
                     "Color": "Red",
                     "Rank": "3",
-                    "Icon": "/assets/img/app/Office-Customer-Male-Light-icon.png",
+                    "Icon": "assets/img/app/Office-Customer-Male-Light-icon.png",
                     "userDetails": "Nurit"
                 }, {
                     "category": "#1",
                     "Color": "Purple",
                     "Rank": "4",
-                    "Icon": "/assets/img/app/Office-Customer-Male-Light-icon.png",
+                    "Icon": "assets/img/app/Office-Customer-Male-Light-icon.png",
                     "userDetails": "Moshe"
                 }, {
                     "category": "#3",
                     "Color": "#B8860B",
                     "Rank": "2",
-                    "Icon": "/assets/img/app/Office-Customer-Male-Light-icon.png",
+                    "Icon": "assets/img/app/Office-Customer-Male-Light-icon.png",
                     "userDetails": "Yaakov"
                 }, {
                     "category": "#7",
                     "Color": "Green",
                     "Rank": "1",
-                    "Icon": "/assets/img/app/Occupations-Bartender-Male-Light-icon.png",
+                    "Icon": "assets/img/app/Occupations-Bartender-Male-Light-icon.png",
                     "userDetails": "You"
                 }]
             };

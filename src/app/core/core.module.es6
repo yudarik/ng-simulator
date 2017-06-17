@@ -111,9 +111,10 @@ function getSimulatorBaseUrl() {
 
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
                 if (toState.name === 'signin' && fromState.name === 'signout') {
-                    $timeout(function() {
-                        document.location.reload();
-                    });
+                    console.log('going to state signin from state signout');
+                    /*$timeout(function() {
+                        window.location.reload();
+                    });*/
                 } else {
                     $rootScope.currentState = {toState, toParams};
                     $rootScope.previousState = {fromState, fromParams};

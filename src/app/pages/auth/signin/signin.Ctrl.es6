@@ -6,7 +6,7 @@
     'use strict';
 
     angular.module('Simulator.pages.auth')
-        .controller('signinController', function($scope, $translate, simulator_config, userAuthService, $state){
+        .controller('signinController', function($scope, $translate, simulator_config, userAuthService, $state, $stateParams, $window){
 
             this.simulator_config = simulator_config;
 
@@ -49,6 +49,10 @@
                         }
                     });
             };
+
+            if ($stateParams.from && $stateParams.from === 'signout') {
+                $window.location.reload();
+            }
 
             $scope.$watchCollection('signin.user', (oldVal, newVal) => {
                 if (oldVal === newVal) {

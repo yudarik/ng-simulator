@@ -26,7 +26,7 @@
                         })
                         .catch(()=>{
                             //$window.location.reload();
-                            $state.go('signin');
+                            $state.go('signin', {from: 'signout'});
                         });
                 },
                 getUser: (resetPassword) => {
