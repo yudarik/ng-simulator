@@ -31,9 +31,9 @@
                 },
                 getUser: (resetPassword) => {
 
-                    if ($rootScope.currentUser) {
+                    /*if ($rootScope.currentUser) {
                         return $q.when($rootScope.currentUser);
-                    }
+                    }*/
 
                     if (getUserRequestInProgress) {
                         return $q.when(getUserPromise)
@@ -47,6 +47,7 @@
                                 $rootScope.currentUser = user;
                             }
                             //$rootScope.$broadcast('post-login-bean', {user});
+                            getUserRequestInProgress = false;
 
                             resolve(user);
                         }).catch(function (reason) {

@@ -63,7 +63,7 @@ function getSimulatorBaseUrl() {
                     if ( response.status === 401) {
                         window.location = '#/signin';
                     } else if (response.status === 440) {
-                        $window.location.reload();
+                        $window.location.reload(true);
                     }
                     else {
                         // Some other unknown Error.
