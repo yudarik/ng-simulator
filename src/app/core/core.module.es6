@@ -3,8 +3,8 @@
  */
 
 function getSimulatorBaseUrl() {
-    return 'rest';
-    //return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
+    //return 'rest';
+    return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
     //return 'http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest';
     //return 'http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest';
     //return 'http://nadlanline.dnsalias.com:8080/BiologyExams/rest';
@@ -60,9 +60,25 @@ function getSimulatorBaseUrl() {
 
             RestangularProvider.setErrorInterceptor(
                 (response) => {
-                    if ( response.status === 401) {
-                        window.location = '#/signin';
-                    } else if (response.status === 440) {
+                    switch(response.status) {
+                        case 401:
+                            window.location.replace('#/signin');
+                            break;
+                        case 406:
+                            window.location.replace('/#/signin?from=signout');
+                            break;
+                        case 440:
+                            $window.location.reload(true);
+                            break;
+                        default:
+                            return true;
+                    }
+                    /*if ( response.status === 401) {
+                        window.location.replace('#/signin');
+                    } else if (response.status === 406) {
+                        window.location.replace('/#/signin?from=signout');
+                    }
+                     else if (response.status === 440) {
                         $window.location.reload(true);
                     }
                     else {
@@ -70,7 +86,7 @@ function getSimulatorBaseUrl() {
                         //toaster.error('error', '',"An unknown error has occurred.<br>Details: " + response.data);
                     }
                     // Continue the promise chain.
-                    return true;
+                    return true;*/
                 }
             );
         })

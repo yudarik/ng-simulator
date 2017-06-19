@@ -54,11 +54,11 @@
                 }
             })
             .state('signin', {
-                url: '/signin',
+                url: '/signin?from',
                 parent: 'setup',
-                params: {
+                /*params: {
                     from: ''
-                },
+                },*/
                 templateUrl: 'app/pages/auth/signin/signin.html',
                 controller: 'signinController as signin'
             })

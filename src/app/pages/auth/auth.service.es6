@@ -21,13 +21,7 @@
 
                     Srv.clearCache();
 
-                    return auth.customPOST({}, 'logout')
-                        .then((res)=>{
-                        })
-                        .catch(()=>{
-                            //$window.location.reload();
-                            $state.go('signin', {from: 'signout'});
-                        });
+                    return auth.customPOST({}, 'logout');
                 },
                 getUser: (resetPassword) => {
 

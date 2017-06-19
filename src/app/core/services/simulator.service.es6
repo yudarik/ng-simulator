@@ -64,7 +64,9 @@
 
                 setStateStatus('exams.distribution-general', quota.leftNewQuestionsQuota <= 0, 'EXAMS.TOOLTIPS.NO_MORE_CREDITS');
                 setStateStatus('exams.distribution-full', quota.leftNewQuestionsQuota < simulator_config.questionsInExam, 'EXAMS.TOOLTIPS.NO_MORE_CREDITS');
+
                 setStateStatus('exams.repeated-practice', quota.leftPostCreditQuestionsQuota <= 0, 'EXAMS.TOOLTIPS.NO_MORE_POST_CREDITS');
+                setStateStatus('exams.repeated-practice', quota.leftNewQuestionsQuota === quota.totalNewQuestionsQuota, 'EXAMS.TOOLTIPS.NO_PRACTICES_PERFORMED_YET');
 
                 setStateStatus('exams.predefined', !quota.predefinedExamWithQuotasList.length, 'EXAMS.TOOLTIPS.NO_PREDEFINED_EXAMS_AVAILABLE');
                 setStateStatus('exams.predefined', _.every(quota.predefinedExamWithQuotasList, {leftQuota: 0}), 'EXAMS.TOOLTIPS.NO_PREDEFINED_EXAMS_AVAILABLE_QUOTA');
