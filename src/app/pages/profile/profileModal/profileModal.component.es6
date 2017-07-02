@@ -23,16 +23,23 @@
                         backdrop  : 'static',
                         keyboard  : false,
                         controller: function($uibModalInstance, userProfile, userType) {
+
                             this.alert;
                             this.buttons = buttons;
                             this.service = customerService;
                             this.userProfileForm = {};
-                            this.examEventOption = 'select';
-                            this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
-                                return date;//moment(date).format('DD/MM/YYYY').toString();
-                            });
                             this.user = _.clone(userProfile);
                             this.userType = userType;
+                            this.upcomingExamEventDates = [];
+
+                            if (simulator_config.upcomingExamEventDates.length) {
+                                this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
+                                    return date;//moment(date).format('DD/MM/YYYY').toString();
+                                });
+                                this.examEventOption = 'select';
+                            } else {
+                                this.examEventOption = 'other';
+                            }
 
                             this.getAlertType = ()=>{
                                 if (!this.alert) return;

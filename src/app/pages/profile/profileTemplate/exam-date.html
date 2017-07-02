@@ -1,6 +1,6 @@
 <h4 class="with-line text-left">{{::'USER.PROFILE_PAGE.UPCOMING_EXAM'|translate}}</h4>
 <div class="row">
-    <div class="col-xs-12 pull-left">
+    <div class="col-xs-12 pull-left text-left">
         <div class="form-group row clearfix">
             <label for="" class="col-sm-3 control-label">{{::'USER.PROFILE_PAGE.SELECT_EXAM_DATE'|translate}}</label>
 
@@ -8,7 +8,9 @@
                 <div class="form-group clearfix">
                     <div class="col-xs-12">
                         <label class="radio-inline custom-radio nowrap">
-                            <input type="radio" name="examEventOption" ng-model="profile.examEventOption" value="select">
+                            <input type="radio" name="examEventOption"
+                                   ng-model="profile.examEventOption" value="select"
+                                   ng-disabled="profile.upcomingExamEventDates.length === 0">
                             <span>{{::'USER.PROFILE_PAGE.SELECT_FROM_UPCOMING_EVENTS'|translate}}</span>
                         </label>
                     </div>

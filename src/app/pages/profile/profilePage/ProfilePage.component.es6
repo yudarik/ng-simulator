@@ -31,16 +31,24 @@
         /** @ngInject */
         controller: function (toaster, $uibModal, $translate, $state, $timeout, customerService, simulator_config) {
 
-          this.service = customerService;
+          this.$onInit = () => {
+              this.service = customerService;
 
-          this.userProfileForm = {};
+              this.userProfileForm = {};
 
-          this.examEventOption = 'select';
+              this.user = _.clone(this.userProfile);
 
-          this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
-            return date;//moment(date).format('DD/MM/YYYY').toString();
-          });
-          this.user = _.clone(this.userProfile);
+              this.upcomingExamEventDates = [];
+
+              if (simulator_config.upcomingExamEventDates.length) {
+                  this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
+                      return date;//moment(date).format('DD/MM/YYYY').toString();
+                  });
+                  this.examEventOption = 'select';
+              } else {
+                  this.examEventOption = 'other';
+              }
+          };
 
           this.updateProfile = () =>{
 

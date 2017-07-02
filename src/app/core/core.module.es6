@@ -3,11 +3,15 @@
  */
 
 function getSimulatorBaseUrl() {
-    //return 'rest';
-    return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
-    //return 'http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest';
-    //return 'http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest';
-    //return 'http://nadlanline.dnsalias.com:8080/BiologyExams/rest';
+
+    if (window.location.hostname.indexOf('localhost') === -1) {
+        return 'rest';
+    } else {
+        //return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
+        //return 'http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest';
+        return 'http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest';
+        //return 'http://nadlanline.dnsalias.com:8080/BiologyExams/rest';
+    }
 }
 
 (function () {
@@ -62,10 +66,11 @@ function getSimulatorBaseUrl() {
                 (response) => {
                     switch(response.status) {
                         case 401:
-                            window.location.replace('#/signin');
+                            window.location = '#/signin';
                             break;
                         case 406:
-                            window.location.replace('/#/signin?from=signout');
+                        case 302:
+                            window.location = '#/signin?from=signout';
                             break;
                         case 440:
                             $window.location.reload(true);
