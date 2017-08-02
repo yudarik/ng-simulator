@@ -16,7 +16,7 @@ angular.module('Simulator.components')
                     </div>`,
         controller: function($uibModal, $translate, simulator_config) {
 
-            this.welcomeMessage = this.config.welcomeMessage || simulator_config.welcomeMessage;
+            this.welcomeMessage = (this.config)? this.config.welcomeMessage : simulator_config.welcomeMessage;
             this.showWelcome = false;
 
             this.$onInit = () => {

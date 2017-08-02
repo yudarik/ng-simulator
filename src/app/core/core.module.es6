@@ -7,9 +7,9 @@ function getSimulatorBaseUrl() {
     if (window.location.hostname.indexOf('localhost') === -1) {
         return 'rest';
     } else {
-        //return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
+        return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
         //return 'http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest';
-        return 'http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest';
+        //return 'http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest';
         //return 'http://nadlanline.dnsalias.com:8080/BiologyExams/rest';
     }
 }

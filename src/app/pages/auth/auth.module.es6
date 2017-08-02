@@ -72,7 +72,9 @@
                 url: '/signout',
                 controller: function(userAuthService, customerService){
                     customerService.clearCache();
-                    userAuthService.signout();
+                    userAuthService.signout().catch(() => {
+                        console.log('Logout success');
+                    });
                 }
             })
             .state('forgotPassword', {

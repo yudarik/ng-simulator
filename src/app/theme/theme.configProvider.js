@@ -100,11 +100,11 @@
     };
 
     conf.changeTheme = function(theme) {
-      angular.merge(conf.theme, theme)
+      _.merge(conf.theme, theme)
     };
 
     conf.changeColors = function(colors) {
-      angular.merge(conf.colors, colors)
+      _.merge(conf.colors, colors)
     };
 
     conf.$get = function () {
