@@ -48,7 +48,7 @@ body.signin {
 
 }
 
-.auth-main {
+.auth-main, login-form {
   display: flex;
   align-items: center;
   height: 100%;
@@ -191,4 +191,11 @@ body.signin {
   }
 
 
+}
+
+.login-form-modal {
+  .modal-dialog {
+    opacity: .8;
+    width: 540px;
+  }
 }

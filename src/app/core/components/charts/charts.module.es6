@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('Simulator.components.charts', [ ])
+    angular.module('Simulator.components.charts', [])
         .config((ChartJsProvider)=>{
 
             Chart.defaults.global.defaultFontSize = 14;

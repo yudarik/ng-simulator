@@ -18,8 +18,8 @@
 
                 this.progress = 0;
 
-                if (this.totalTimeframe) {
-                    timeInterval = $interval(()=>{
+                this.startTimer = () => {
+                    timeInterval = $interval(() => {
 
                         if (this.progress < this.totalTimeframe) {
                             this.progress++;
@@ -33,8 +33,8 @@
                             });
                             $interval.cancel(timeInterval);
                         }
-                    }, 1000);
-                }
+                    } , 1000);
+                };
 
                 this.getValue = () => {
                     return 100*(this.totalTimeframe - this.progress)/this.totalTimeframe;
@@ -48,9 +48,24 @@
                     } else return 'success';
                 };
 
-                $scope.$on('$destroy', function(){
+                this.$onInit = () => {
+
+                    if (this.totalTimeframe) {
+                        this.startTimer();
+                    }
+                };
+
+                $scope.$on('$destroy', () => {
                     $interval.cancel(timeInterval);
-                })
+                });
+
+                $scope.$on('pause-exam-timer', () => {
+                    $interval.cancel(timeInterval);
+                });
+
+                $scope.$on('resume-exam-timer', () => {
+                    this.$onInit();
+                });
             },
             template: [
                 '<div class="exam-timeframe" ng-if="$ctrl.totalTimeframe">',

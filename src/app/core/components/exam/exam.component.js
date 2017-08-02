@@ -116,9 +116,7 @@
                     });
                 });
 
-                ping = $interval(function () {
-                    simulatorService.ping();
-                }, 30000);
+                _this.pingErrCounter = 0;
 
                 _this.totalTimeFrame = angular.copy(_this.timeframe);
                 _this.questionInDisplay = _this.questions[0];
@@ -132,8 +130,26 @@
                     $interval.cancel(ping);
                     $(document).off('keydown', keydownEventHandler);
                 });
+
+                _this.keepAlive();
             };
-            this.init();
+
+            this.keepAlive = function () {
+                ping = $interval(function () {
+                    simulatorService.ping().then(function () {
+                        _this.pingErrCounter = 0;
+                    }).catch(function (err) {
+
+                        _this.pingErrCounter++;
+
+                        if (_this.pingErrCounter === 3) {
+                            $interval.cancel(ping);
+                            $scope.$root.$broadcast('pause-exam-timer');
+                            return _this.displayLoginForm();
+                        }
+                    });
+                }, 10000);
+            };
 
             this.switchQuestion = function (question) {
 
@@ -211,6 +227,35 @@
 
                 return modalInstance.result;
             }
+
+            this.displayLoginForm = function () {
+                var loginModal = $uibModal.open({
+                    animation: true,
+                    backdrop: 'static',
+                    keyboard: false,
+                    template: '<login-form on-success="modal.closeModal()"></login-form>',
+                    controller: function controller($uibModalInstance, $scope) {
+
+                        $scope.closeModal = function () {
+                            $uibModalInstance.close();
+                            _this.resumeExam();
+                        };
+                    },
+                    controllerAs: 'modal',
+                    bindToController: true,
+                    size: 'small',
+                    windowClass: 'login-form-modal'
+                });
+
+                return loginModal.result;
+            };
+
+            this.resumeExam = function () {
+                $scope.$root.$broadcast('resume-exam-timer');
+                _this.keepAlive();
+            };
+
+            this.init();
         }]
     });
 })();
