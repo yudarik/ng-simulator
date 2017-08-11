@@ -48,7 +48,9 @@ body.signin {
 
 }
 
-.auth-main, login-form {
+.auth-main,
+login-form,
+exam-login-form {
   display: flex;
   align-items: center;
   height: 100%;
@@ -88,7 +90,7 @@ body.signin {
     .control-label {
       padding-top: 11px;
       color: $text-color;
-      float: left;
+      //float: left;
     }
 
     .form-group {
@@ -100,7 +102,7 @@ body.signin {
     @include placeholderStyle($text-color, 0.9);
     background-color: rgba(0, 0, 0, .4);
     border-radius: 5px;
-    color: $text-color;
+    color: $text-color!important;
   }
   .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
     @include placeholderStyle($text-color, 0.6);
@@ -195,7 +197,12 @@ body.signin {
 
 .login-form-modal {
   .modal-dialog {
-    opacity: .8;
     width: 540px;
+    position: relative;
+    top: -20%;
+
+    .auth-block {
+      background-color: #1C2B36;
+    }
   }
 }

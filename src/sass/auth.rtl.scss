@@ -1,5 +1,6 @@
 
-body.signin.flip {
+body.signin.flip,
+body.modal-open.flip {
 
   .al-main {
     margin-right: 0;
@@ -30,7 +31,11 @@ body.signin.flip {
       }
     }
     .control-label {
+      text-align: right;
       float: right;
     }
+  }
+  .form-group {
+    text-align: right;
   }
 }

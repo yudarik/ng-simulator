@@ -52,6 +52,7 @@
                         questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
                     };
 
+                    $interval.cancel(ping);
                     return examService.submitExam(practiseResult);
                 };
 
@@ -149,13 +150,13 @@
 
                                 this.pingErrCounter++;
 
-                                if (this.pingErrCounter === 3) {
+                                if (this.pingErrCounter === 4) {
                                     $interval.cancel(ping);
                                     $scope.$root.$broadcast('pause-exam-timer');
                                     return this.displayLoginForm();
                                 }
                             });
-                    }, 10000);
+                    }, 30000);
                 };
 
                 this.switchQuestion = (question) => {
@@ -189,6 +190,7 @@
                 };
 
                 this.return = () => {
+                    $interval.cancel(ping);
 
                     if (this.isSolution) {
                         examService.getPracticeInfo(this.config.practiceID).then(solution => {
@@ -248,7 +250,7 @@
                         animation: true,
                         backdrop  : 'static',
                         keyboard  : false,
-                        template: `<login-form on-success="modal.closeModal()"></login-form>`,
+                        template: `<exam-login-form on-success="modal.closeModal()"></exam-login-form>`,
                         controller: ($uibModalInstance, $scope) => {
 
                             $scope.closeModal = () => {

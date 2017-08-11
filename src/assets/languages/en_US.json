@@ -22,7 +22,8 @@
       "INVALID.CREDENTIALS": "Incorrect user name and/or password",
       "ACCOUNT.EXPIRED": "The account is expired. Please contact the office for more details.",
       "PASSWORD_VALIDATION_FAILED": "Password is incorrect",
-      "EMAIL": "Invalid username (email)"
+      "EMAIL": "Invalid username (email)",
+      "NO_CONNECTION": "No connection, or you're offline. Make sure you're connected to the internet, or try again later."
     },
     "WELCOME": {
       "MESSAGE": {
