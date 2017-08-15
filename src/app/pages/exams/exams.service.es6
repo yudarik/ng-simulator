@@ -71,9 +71,7 @@
 
             return practices.customPOST(examResult, 'computePracticeResult').then((res)=>{
                 $state.go('exams.practice-summary', {examSummary: res});
-            }, (err) => {
-                console.log(err);
-            })
+            });
         }
 
         function getStats() {

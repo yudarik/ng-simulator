@@ -29,8 +29,6 @@
 
             var submitExam = function submitExam() {
 
-                //console.log('Submit Exam clicked');
-
                 var questionIDtoChosenAnswerMapping = {};
 
                 _this.questions.forEach(function (question) {
@@ -46,8 +44,15 @@
                     questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
                 };
 
-                $interval.cancel(ping);
-                return examService.submitExam(practiseResult);
+                _this.keepAlive('cancel');
+
+                return examService.submitExam(practiseResult).catch(function (err) {
+                    if (err.status && err.status === -1) {
+                        _this.displayLoginForm().then(function (res) {
+                            submitExam();
+                        });
+                    }
+                });
             };
 
             var keydownEventHandler = function keydownEventHandler(event) {
@@ -128,14 +133,19 @@
 
                 $scope.$on('timeOver', _this.finishExam);
                 $scope.$on('$destroy', function () {
-                    $interval.cancel(ping);
+                    _this.keepAlive('cancel');
                     $(document).off('keydown', keydownEventHandler);
                 });
 
                 _this.keepAlive();
             };
 
-            this.keepAlive = function () {
+            this.keepAlive = function (cancel) {
+
+                if (cancel) {
+                    return $interval.cancel(ping);
+                }
+
                 ping = $interval(function () {
                     simulatorService.ping().then(function () {
                         _this.pingErrCounter = 0;
@@ -146,10 +156,12 @@
                         if (_this.pingErrCounter === 4) {
                             $interval.cancel(ping);
                             $scope.$root.$broadcast('pause-exam-timer');
-                            return _this.displayLoginForm();
+                            _this.displayLoginForm().then(function (res) {
+                                _this.resumeExam();
+                            });
                         }
                     });
-                }, 30000);
+                }, 3000);
             };
 
             this.switchQuestion = function (question) {
@@ -169,8 +181,6 @@
 
             this.finishExam = function () {
 
-                //console.log('FinishExam reached');
-
                 if (_this.timeframe > 10) {
                     timeframeModal($uibModal).then(function () {
                         submitExam();
@@ -183,7 +193,7 @@
             };
 
             this.return = function () {
-                $interval.cancel(ping);
+                _this.keepAlive('cancel');
 
                 if (_this.isSolution) {
                     examService.getPracticeInfo(_this.config.practiceID).then(function (solution) {
@@ -240,7 +250,6 @@
 
                         $scope.closeModal = function () {
                             $uibModalInstance.close();
-                            _this.resumeExam();
                         };
                     },
                     controllerAs: 'modal',

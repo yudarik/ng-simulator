@@ -53,6 +53,9 @@ function getSimulatorBaseUrl() {
             });
 
             $translateProvider.preferredLanguage('he_IL');
+
+            $translateProvider.useSanitizeValueStrategy('escape');
+
             //$translateProvider.use('he_IL');
 
             RestangularProvider

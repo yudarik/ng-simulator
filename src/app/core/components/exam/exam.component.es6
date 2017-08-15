@@ -35,8 +35,6 @@
 
                 var submitExam = () => {
 
-                    //console.log('Submit Exam clicked');
-
                     var questionIDtoChosenAnswerMapping = {};
 
                     this.questions.forEach(question => {
@@ -52,8 +50,16 @@
                         questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
                     };
 
-                    $interval.cancel(ping);
-                    return examService.submitExam(practiseResult);
+                    this.keepAlive('cancel');
+
+                    return examService.submitExam(practiseResult)
+                        .catch(err => {
+                            if (err.status && err.status === -1) {
+                                this.displayLoginForm().then(res => {
+                                    submitExam();
+                                })
+                            }
+                        });
                 };
 
                 var keydownEventHandler = (event) => {
@@ -133,14 +139,19 @@
 
                     $scope.$on('timeOver', this.finishExam);
                     $scope.$on('$destroy', ()=>{
-                        $interval.cancel(ping);
+                        this.keepAlive('cancel');
                         $(document).off('keydown', keydownEventHandler)
                     });
 
                     this.keepAlive();
                 };
 
-                this.keepAlive = () => {
+                this.keepAlive = (cancel) => {
+
+                    if (cancel) {
+                        return $interval.cancel(ping);
+                    }
+
                     ping = $interval(() => {
                         simulatorService.ping()
                             .then(() => {
@@ -153,7 +164,9 @@
                                 if (this.pingErrCounter === 4) {
                                     $interval.cancel(ping);
                                     $scope.$root.$broadcast('pause-exam-timer');
-                                    return this.displayLoginForm();
+                                    this.displayLoginForm().then((res) => {
+                                        this.resumeExam();
+                                    });
                                 }
                             });
                     }, 30000);
@@ -176,8 +189,6 @@
 
                 this.finishExam = () => {
 
-                    //console.log('FinishExam reached');
-
                     if (this.timeframe > 10) {
                         timeframeModal($uibModal).then(()=>{
                             submitExam();
@@ -190,7 +201,7 @@
                 };
 
                 this.return = () => {
-                    $interval.cancel(ping);
+                    this.keepAlive('cancel');
 
                     if (this.isSolution) {
                         examService.getPracticeInfo(this.config.practiceID).then(solution => {
@@ -255,7 +266,6 @@
 
                             $scope.closeModal = () => {
                                 $uibModalInstance.close();
-                                this.resumeExam();
                             }
                         },
                         controllerAs: 'modal',
