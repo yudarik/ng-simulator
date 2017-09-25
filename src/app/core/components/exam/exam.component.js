@@ -153,7 +153,7 @@
 
                         _this.pingErrCounter++;
 
-                        if (_this.pingErrCounter === 4) {
+                        if (_this.pingErrCounter > 3) {
                             $interval.cancel(ping);
                             $scope.$root.$broadcast('pause-exam-timer');
                             _this.displayLoginForm().then(function (res) {
@@ -161,7 +161,7 @@
                             });
                         }
                     });
-                }, 3000);
+                }, 10000);
             };
 
             this.switchQuestion = function (question) {

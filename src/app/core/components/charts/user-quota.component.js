@@ -34,7 +34,7 @@
                     "fillColors": "#008000",
                     "id": "AmGraph-1",
                     "lineThickness": 0,
-                    "title": $translate.instant("STATS.ACCOUNT.QUOTA_LEFT"),
+                    "title": $translate.instant("STATS.ACCOUNT.QUOTA_LEFT_LABEL"),
                     "type": "column",
                     "valueField": "column-1"
                 }, {

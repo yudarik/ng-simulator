@@ -162,6 +162,7 @@
       "QUESTIONS_AMOUNT": "כמות",
       "TOTAL_ELIGIBLE": "סה\"כ",
       "QUOTA_LEFT": "יתרת",
+      "QUOTA_LEFT_LABEL": "יתרה לתרגול",
       "NEW_QUESTIONS": "שאלות חדשות",
       "POST_CREDIT_QUESTIONS": "שאלות לתרגול חוזר"
     },

@@ -48,15 +48,15 @@ function getSimulatorBaseUrl() {
                 prefix: 'assets/languages/',
                 suffix: '.json'
             });
-            $translateProvider.registerAvailableLanguageKeys(['en_US', 'he_IL'], {
-                'iw_IL': 'he_IL'
+            $translateProvider.registerAvailableLanguageKeys(['en_us', 'he_il'], {
+                'iw_IL': 'he_il'
             });
 
-            $translateProvider.preferredLanguage('he_IL');
+            $translateProvider.preferredLanguage('he_il');
 
             $translateProvider.useSanitizeValueStrategy('escape');
 
-            //$translateProvider.use('he_IL');
+            //$translateProvider.use('he_il');
 
             RestangularProvider
                 //.setDefaultHttpFields({cache: true})

@@ -56,9 +56,9 @@
 
             var warningArea = (100 - _this.passingGrade) / 2;
 
-            if (num < _this.passingGrade) return 'label-danger';
-            if (num <= _this.passingGrade + warningArea) return 'label-warning';
-            if (num <= 100) return 'label-success';else return 'label-default';
+            if (num < _this.passingGrade) return 'text-danger';
+            if (num <= _this.passingGrade + warningArea) return 'text-warning';
+            if (num <= 100) return 'text-success';else return 'text-default';
         };
 
         this.repeatePracticeDisabled = function () {

@@ -162,6 +162,7 @@
       "QUESTIONS_AMOUNT": "Amount",
       "TOTAL_ELIGIBLE": "Total of",
       "QUOTA_LEFT": "Quota Left of",
+      "QUOTA_LEFT_LABEL": "Quota Left for practice",
       "NEW_QUESTIONS": "new questions",
       "POST_CREDIT_QUESTIONS": "post credit questions"
     },

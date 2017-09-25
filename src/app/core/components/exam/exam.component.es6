@@ -161,15 +161,16 @@
 
                                 this.pingErrCounter++;
 
-                                if (this.pingErrCounter === 4) {
+                                if (this.pingErrCounter > 3) {
                                     $interval.cancel(ping);
                                     $scope.$root.$broadcast('pause-exam-timer');
                                     this.displayLoginForm().then((res) => {
                                         this.resumeExam();
+                                        this.pingErrCounter = 0;
                                     });
                                 }
                             });
-                    }, 30000);
+                    }, 15000);
                 };
 
                 this.switchQuestion = (question) => {
