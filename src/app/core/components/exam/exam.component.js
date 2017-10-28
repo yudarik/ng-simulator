@@ -158,10 +158,11 @@
                             $scope.$root.$broadcast('pause-exam-timer');
                             _this.displayLoginForm().then(function (res) {
                                 _this.resumeExam();
+                                _this.pingErrCounter = 0;
                             });
                         }
                     });
-                }, 10000);
+                }, 15000);
             };
 
             this.switchQuestion = function (question) {

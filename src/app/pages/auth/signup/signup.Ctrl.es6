@@ -9,9 +9,11 @@
     angular.module('Simulator.pages.auth')
         .controller('signupController', function($scope, $translate, simulator_config, userAuthService, $state){
 
-            this.simulator_config = simulator_config;
-
-            this.user = {};
+            this.$onInit = () => {
+                this.simulator_config = simulator_config;
+                this.user = {};
+                this.displayLoginBtn = false;
+            };
 
             /*userAuthService.getUser().then(()=>{
                 $state.go('profile');
@@ -24,6 +26,7 @@
                 userAuthService.signup(this.user)
                     .then((response)=>{
                         if (response.status === 'success') {
+                            this.displayLoginBtn = !this.displayLoginBtn;
                             this.message = response.description;//$translate.instant('AUTH.REGISTERED_SUCCESSFULLY');
                         }
                     })
@@ -39,6 +42,10 @@
                     this.formChanged = true;
                 }
             });
+
+            this.submitBtnLabel = () => {
+                return this.$translate('AUTH.REGISTER_BTN');
+            }
         })
 
 })();
