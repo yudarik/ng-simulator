@@ -230,7 +230,8 @@
       "DOC_DESC": "Description",
       "CATEGORY": "Category",
       "TYPE": "Type",
-      "OTHER": "Other"
+      "OTHER": "Other",
+      "AVAILABLE": "Display only available manuals"
     },
     "DISPLAY":  "Display",
     "BUY_PACKAGE": "Purchase",
