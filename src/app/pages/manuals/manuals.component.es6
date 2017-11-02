@@ -17,7 +17,8 @@
 
                 this.filter = {
                     pattern: undefined,
-                    docType: undefined
+                    docType: undefined,
+                    availability: undefined
                 };
 
                 this.tableHeads = {
@@ -56,25 +57,32 @@
                 };
             },
             template: `<div class="row manuals-page">
-                            <div class="col-xs-12 col-sm-4 form-group">
-                                <input class="form-control" type="search" ng-change="$ctrl.gridRefresh()"
-                                    placeholder="{{::'MANUALS.SEARCH_PLACEHOLDER'|translate}}"
-                                    ng-model="$ctrl.filter.pattern"/>                                
-                            </div>
-                            <div class="col-xs-12 col-sm-8 text-center form-group">
-                                <!--<label class="hidden-xs">{{::'MANUALS.FILTER_BY_TYPE'|translate}}</label>-->
-                                <div class="btn-group filter-buttons">
-                                    <button class="btn btn-with-icon btn-warning" uncheckable uib-btn-radio="'AUDIO'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('AUDIO')}}"></i>{{::'MANUALS.RESOURCE_TYPES.AUDIO'|translate}}</button>                                
-                                    <button class="btn btn-with-icon btn-danger" uncheckable uib-btn-radio="'VIDEO'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('VIDEO')}}"></i>{{::'MANUALS.RESOURCE_TYPES.VIDEO'|translate}}</button>                                
-                                    <button class="btn btn-with-icon btn-success" uncheckable uib-btn-radio="'DOCUMENT'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('DOCUMENT')}}"></i>{{::'MANUALS.RESOURCE_TYPES.DOCUMENT'|translate}}</button>                                
-                                    <button class="btn btn-with-icon btn-info" uncheckable uib-btn-radio="'OTHER'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('OTHER')}}"></i>{{::'MANUALS.RESOURCE_TYPES.OTHER'|translate}}</button>                                
+                            <div class="col-xs-12">
+                                <div class="col-xs-12 col-sm-4 form-group">
+                                    <input class="form-control" type="search" ng-change="$ctrl.gridRefresh()"
+                                        placeholder="{{::'MANUALS.SEARCH_PLACEHOLDER'|translate}}"
+                                        ng-model="$ctrl.filter.pattern"/>                                
+                                </div>
+                                <div class="col-xs-12 col-sm-8 text-center form-group">
+                                    <!--<label class="hidden-xs">{{::'MANUALS.FILTER_BY_TYPE'|translate}}</label>-->
+                                    <div class="btn-group filter-buttons">
+                                        <button class="btn btn-with-icon btn-warning" uncheckable uib-btn-radio="'AUDIO'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('AUDIO')}}"></i>{{::'MANUALS.RESOURCE_TYPES.AUDIO'|translate}}</button>                                
+                                        <button class="btn btn-with-icon btn-danger" uncheckable uib-btn-radio="'VIDEO'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('VIDEO')}}"></i>{{::'MANUALS.RESOURCE_TYPES.VIDEO'|translate}}</button>                                
+                                        <button class="btn btn-with-icon btn-success" uncheckable uib-btn-radio="'DOCUMENT'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('DOCUMENT')}}"></i>{{::'MANUALS.RESOURCE_TYPES.DOCUMENT'|translate}}</button>                                
+                                        <button class="btn btn-with-icon btn-info" uncheckable uib-btn-radio="'OTHER'" ng-model="$ctrl.filter.docType" ng-click="$ctrl.gridRefresh()"><i class="pull-right fa {{$ctrl.getLinkClass('OTHER')}}"></i>{{::'MANUALS.RESOURCE_TYPES.OTHER'|translate}}</button>                                
+                                    </div>
+                                </div>
+                                <div class="cal-xs-12 col-sm-8">
+                                    <div class="checkbox">
+                                       <label><input type="checkbox" ng-model="$ctrl.filter.availability" ng-click="$ctrl.gridRefresh()" ng-false-value="null">{{::'MANUALS.RESOURCE_TYPES.AVAILABLE'|translate}}</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <hr>
                         <ul class="dynamic-grid" angular-grid="$ctrl.list" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
 
-                            <li class="grid" data-ng-repeat="manual in $ctrl.list | filter: $ctrl.filter.pattern | filter: {docType: ($ctrl.filter.docType !== null) ?$ctrl.filter.docType : ''} | orderBy: 'order'"> 
+                            <li class="grid" data-ng-repeat="manual in $ctrl.list | filter: $ctrl.filter.pattern | filter: {docType: ($ctrl.filter.docType !== null)? $ctrl.filter.docType : '', available: ($ctrl.filter.availability !== null)? $ctrl.filter.availability : ''} | orderBy: 'order'"> 
                                 <manual-item class="" item="manual" products-id="$ctrl.manuals.productsById" user="$ctrl.user"></manual-item>                         
                             </li>                            
                         </ul>`,
