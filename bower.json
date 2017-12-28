@@ -87,7 +87,7 @@
     }
   },
   "resolutions": {
-    "angular": "~1.x"
+    "angular": "1.5.8"
   },
   "devDependencies": {
     "angular-translate": "^2.11.0"
