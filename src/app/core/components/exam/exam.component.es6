@@ -26,7 +26,7 @@
 
                 var $scope = $rootScope.$new();
 
-                this.timeframe = (this.config && this.config.timePerQuestion)? this.config.timePerQuestion * this.config.questions.length : undefined;
+                this.timeframe = getTimeFrame(this.config);
                 this.isSolution = !(this.timeframe);
                 this.questions = (this.config)? this.config.questions : [];
                 this.type = (this.config)? this.config.practiceType : undefined;
@@ -255,6 +255,27 @@
                     });
 
                     return modalInstance.result;
+                }
+
+                function getTimeFrame(config) {
+                    let questionsLength = config.questions.length;
+                    let timeFrame;
+
+                    switch (config.timeFrame) {
+                        case 'UNLIMITED':
+                            timeFrame = config.timePerQuestion * questionsLength * 10;
+                            break;
+                        case 'NORMAL':
+                            timeFrame = config.timePerQuestion * questionsLength;
+                            break;
+                        case 'EXTENDED':
+                            timeFrame = config.timeWithExtensionPerQuestion * questionsLength;
+                            break;
+                        default:
+                            timeFrame = config.timePerQuestion * questionsLength;
+                    }
+
+                    return timeFrame;
                 }
 
                 this.displayLoginForm = () => {
