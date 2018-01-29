@@ -12,7 +12,7 @@
                 exams: '<',
                 user: '<'
             },
-            template: `<div class="col-xs-12 col-md-4 predefined-exam-component" ng-repeat="exam in $ctrl.exams track by exam.id">
+            template: `<div class="col-xs-12 col-md-4 predefined-exam-component" ng-repeat="exam in $ctrl.predefinedExams track by exam.id">
                             <div class="panel panel-success">
                                 <div class="panel-heading">
                                     <span class="text-white">{{::exam.displayName}}</span>
@@ -66,7 +66,7 @@
                           </div>`,
             controller: function($state, $translate, $window, simulator_config){
                 this.productsById = this.exams.productsById;
-                this.exams = _.orderBy(_.map(this.exams.predefinedExamBeans, (exam) => {
+                this.predefinedExams = _.orderBy(_.map(this.exams.predefinedExamBeans, (exam) => {
                     return _.assign(exam, {timeFrame: 'NORMAL'});
                 }), 'order');
                 this.getPackage2BuyName = (id) => {
