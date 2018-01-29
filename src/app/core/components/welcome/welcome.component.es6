@@ -12,16 +12,18 @@ angular.module('Simulator.components')
                     <button type="button" class="close" aria-label="Close" ng-click="$ctrl.showWelcome = !$ctrl.showWelcome">
                         <span aria-hidden="true">×</span>
                     </button>
-                    <span ng-bind="$ctrl.config.welcomeMessage"></span>
+                    <span ng-bind="$ctrl.welcomeMessage"></span>
                     </div>`,
         controller: function($uibModal, $translate, simulator_config) {
 
-            this.welcomeMessage = (this.config)? this.config.welcomeMessage : simulator_config.welcomeMessage;
+            this.welcomeMessage;
             this.showWelcome = false;
 
             this.$onInit = () => {
-                if (this.config.welcomeMessage !== '' &&
-                    this.config.welcomeMessage !== null) {
+
+                this.welcomeMessage = this.getWelcomeMessage();
+
+                if (this.welcomeMessage) {
 
                     if (this.user.role === 'Candidate' ||
                         (this.user.role === 'Customer' &&
@@ -31,5 +33,10 @@ angular.module('Simulator.components')
                 }
             };
 
+            this.getWelcomeMessage = () => {
+                return (this.user && this.user.welcomeMessage !== '' && !_.isNil(this.user.welcomeMessage))?
+                    this.user.welcomeMessage : (this.config  && this.config.welcomeMessage !== '' && !_.isNil(this.config.welcomeMessage))?
+                        this.config.welcomeMessage : simulator_config.welcomeMessage;
+            }
         }
     });
