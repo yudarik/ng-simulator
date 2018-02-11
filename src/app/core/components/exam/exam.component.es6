@@ -20,7 +20,7 @@
                            </div>
                        </div>
                        <exam-remote practice-id="$ctrl.config.practiceID" remote-map="$ctrl.questions" is-solution="$ctrl.isSolution" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()" on-return="$ctrl.return()"></exam-remote>
-                       <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>`,
+                       <exam-timeframe timeframe="$ctrl.timeframe" timeprogress="$ctrl.timeprogress"></exam-timeframe>`,
             controller: function ($rootScope, $uibModal, $interval, $state, $translate, examService, simulatorService, baSidebarService, simulator_config) {
                 'ngInject';
 
@@ -46,13 +46,15 @@
                         originalPracticeId: this.config.originalPracticeId,
                         predefinedExamId: this.config.predefinedExamId || 0,
                         totalTimeSecs: this.totalTimeFrame,
-                        elapsedTimeSecs: this.totalTimeFrame - this.timeframe,
+                        elapsedTimeSecs: this.timeprogress, //this.totalTimeFrame - this.timeframe,
                         questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
                     };
 
-                    this.keepAlive('cancel');
-
                     return examService.submitExam(practiseResult)
+                        .then(()=>{
+                            this.keepAlive('cancel');
+                            this.deregisterKeyDown();
+                        })
                         .catch(err => {
                             if (err.status && err.status === -1) {
                                 this.displayLoginForm().then(res => {
@@ -88,6 +90,10 @@
                         default: return;
                     }
                     event.preventDefault();
+                };
+
+                this.deregisterKeyDown = () => {
+                    $(document).off('keydown', keydownEventHandler);
                 };
 
                 this.init = () => {
@@ -131,6 +137,7 @@
                     this.pingErrCounter = 0;
 
                     this.totalTimeFrame = angular.copy(this.timeframe);
+                    this.timeprogress = 0;
                     this.questionInDisplay = this.questions[0];
                     this.questionInDisplay.active = true;
 
@@ -140,8 +147,9 @@
                     $scope.$on('timeOver', this.finishExam);
                     $scope.$on('$destroy', ()=>{
                         this.keepAlive('cancel');
-                        $(document).off('keydown', keydownEventHandler)
+                        this.deregisterKeyDown();
                     });
+                    $scope.$on('cancel-practice', () => this.deregisterKeyDown());
 
                     this.keepAlive();
                 };
@@ -161,7 +169,7 @@
 
                                 this.pingErrCounter++;
 
-                                if (this.pingErrCounter > 3) {
+                                if (this.pingErrCounter > 3 && $state.current.name !== 'signin') {
                                     $interval.cancel(ping);
                                     $scope.$root.$broadcast('pause-exam-timer');
                                     this.displayLoginForm().then((res) => {
@@ -263,7 +271,7 @@
 
                     switch (config.timeFrame) {
                         case 'UNLIMITED':
-                            timeFrame = config.timePerQuestion * questionsLength * 10;
+                            timeFrame = -1; //config.timePerQuestion * questionsLength * 10;
                             break;
                         case 'NORMAL':
                             timeFrame = config.timePerQuestion * questionsLength;

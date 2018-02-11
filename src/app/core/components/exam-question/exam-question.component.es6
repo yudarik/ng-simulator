@@ -81,7 +81,7 @@
                     this.imageLoading = true;
                 });
 
-                $scope.$on('numKeyPadSelect', (event, data)=>{
+                let numKeyPadSelectDeregister = $scope.$on('numKeyPadSelect', (event, data)=>{
 
                     if (data && data.answer <= this.question.answerOptions.length) {
 
@@ -89,6 +89,9 @@
                     }
 
                 });
+
+                $scope.$on('$destroy', () => numKeyPadSelectDeregister());
+                $scope.$on('cancel-practice', () => numKeyPadSelectDeregister());
             },
             template: `<div class="exam-question">
                           <div class="row">

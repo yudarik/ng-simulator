@@ -10,7 +10,7 @@
     routeConfig.$inject = ["$stateProvider"];
     angular.module('Simulator.pages.exams.practice', ['Simulator.components']).config(routeConfig).run(function ($rootScope, $uibModal, $state) {
 
-        function registerStateChangeListener() {
+        var registerStateChangeListener = function registerStateChangeListener() {
             var onRouteChangeOff = $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
                 //console.log(fromState.name + ' > '+ toState.name);
 
@@ -19,13 +19,20 @@
 
                     redirectModal().then(function () {
                         onRouteChangeOff();
+                        $rootScope.$broadcast('cancel-practice');
                         $state.transitionTo(toState, toParams);
                     }, function () {
                         //dismiss
                     });
+                } else if (fromState.name === 'exams.practice' && toState.name === 'exams.practice-summary') {
+                    onRouteChangeOff();
                 }
             });
-        }
+
+            $rootScope.$on('$destroy', function () {
+                return onRouteChangeOff();
+            });
+        };
         function redirectModal() {
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -44,11 +51,11 @@
 
             return modalInstance.result;
         }
-        registerStateChangeListener();
+        //registerStateChangeListener();
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
 
-            if (fromState.name === 'exams.practice') {
+            if (toState.name === 'exams.practice') {
                 registerStateChangeListener();
             }
         });
@@ -77,7 +84,7 @@
                     }).catch(function (err) {
                         if (_.get(err.data, 'description')) {
 
-                            alert(err.data.description);
+                            //alert(err.data.description);
                         }
                         return $q.reject(err);
                     });

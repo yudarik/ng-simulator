@@ -9,7 +9,7 @@
         .config(routeConfig)
         .run(($rootScope, $uibModal, $state)=>{
 
-            function registerStateChangeListener() {
+            let registerStateChangeListener = () => {
                 var onRouteChangeOff = $rootScope.$on('$stateChangeStart',
                     function(event, toState, toParams, fromState, fromParams, options){
                         //console.log(fromState.name + ' > '+ toState.name);
@@ -19,13 +19,18 @@
 
                             redirectModal().then(()=>{
                                 onRouteChangeOff();
+                                $rootScope.$broadcast('cancel-practice');
                                 $state.transitionTo(toState, toParams);
                             }, ()=>{
                                 //dismiss
                             })
+                        } else if (fromState.name === 'exams.practice' && toState.name === 'exams.practice-summary') {
+                            onRouteChangeOff();
                         }
                     });
-            }
+
+                $rootScope.$on('$destroy', () => onRouteChangeOff());
+            };
             function redirectModal() {
                 var modalInstance = $uibModal.open({
                     animation: true,
@@ -52,12 +57,12 @@
 
                 return modalInstance.result;
             }
-            registerStateChangeListener();
+            //registerStateChangeListener();
 
             $rootScope.$on('$stateChangeSuccess',
                 function(event, toState, toParams, fromState, fromParams){
 
-                    if (fromState.name === 'exams.practice') {
+                    if (toState.name === 'exams.practice') {
                         registerStateChangeListener();
                     }
                 });
@@ -89,7 +94,7 @@
                             .catch(err => {
                                 if (_.get(err.data, 'description')) {
 
-                                    alert(err.data.description);
+                                    //alert(err.data.description);
                                 }
                                 return $q.reject(err);
                             })
