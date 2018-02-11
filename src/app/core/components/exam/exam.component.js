@@ -161,7 +161,7 @@
 
                         _this.pingErrCounter++;
 
-                        if (_this.pingErrCounter > 3) {
+                        if (_this.pingErrCounter > 3 && $state.current.name !== 'signin') {
                             $interval.cancel(ping);
                             $scope.$root.$broadcast('pause-exam-timer');
                             _this.displayLoginForm().then(function (res) {
