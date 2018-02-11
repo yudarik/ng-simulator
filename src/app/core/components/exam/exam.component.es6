@@ -20,7 +20,7 @@
                            </div>
                        </div>
                        <exam-remote practice-id="$ctrl.config.practiceID" remote-map="$ctrl.questions" is-solution="$ctrl.isSolution" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()" on-return="$ctrl.return()"></exam-remote>
-                       <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>`,
+                       <exam-timeframe timeframe="$ctrl.timeframe" timeprogress="$ctrl.timeprogress"></exam-timeframe>`,
             controller: function ($rootScope, $uibModal, $interval, $state, $translate, examService, simulatorService, baSidebarService, simulator_config) {
                 'ngInject';
 
@@ -46,7 +46,7 @@
                         originalPracticeId: this.config.originalPracticeId,
                         predefinedExamId: this.config.predefinedExamId || 0,
                         totalTimeSecs: this.totalTimeFrame,
-                        elapsedTimeSecs: this.totalTimeFrame - this.timeframe,
+                        elapsedTimeSecs: this.timeprogress, //this.totalTimeFrame - this.timeframe,
                         questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
                     };
 
@@ -137,6 +137,7 @@
                     this.pingErrCounter = 0;
 
                     this.totalTimeFrame = angular.copy(this.timeframe);
+                    this.timeprogress = 0;
                     this.questionInDisplay = this.questions[0];
                     this.questionInDisplay.active = true;
 
@@ -270,7 +271,7 @@
 
                     switch (config.timeFrame) {
                         case 'UNLIMITED':
-                            timeFrame = config.timePerQuestion * questionsLength * 10;
+                            timeFrame = -1; //config.timePerQuestion * questionsLength * 10;
                             break;
                         case 'NORMAL':
                             timeFrame = config.timePerQuestion * questionsLength;

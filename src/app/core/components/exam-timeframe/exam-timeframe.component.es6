@@ -7,7 +7,8 @@
     angular.module('Simulator.components')
         .component('examTimeframe', {
             bindings: {
-                timeframe: '='
+                timeframe: '=',
+                timeprogress: '='
             },
             /** @ngInject */
             controller: function($scope, $interval) {
@@ -16,20 +17,20 @@
 
                 this.totalTimeframe = angular.copy(this.timeframe);
 
-                this.progress = 0;
+                this.timeprogress = 0;
 
                 this.startTimer = () => {
                     timeInterval = $interval(() => {
 
-                        if (this.progress < this.totalTimeframe) {
-                            this.progress++;
+                        if (this.timeprogress < this.totalTimeframe || this.totalTimeframe < 0) {
+                            this.timeprogress++;
                         }
                         if (this.timeframe > 0) {
                             this.timeframe--;
-                        } else {
+                        } else if (this.totalTimeframe > 0) {
                             $scope.$root.$broadcast('timeOver', {
                                 totalTimeSecs: this.totalTimeframe,
-                                elapsedTimeSecs: this.progress
+                                elapsedTimeSecs: this.timeprogress
                             });
                             $interval.cancel(timeInterval);
                         }
@@ -37,16 +38,27 @@
                 };
 
                 this.getValue = () => {
-                    return 100*(this.totalTimeframe - this.progress)/this.totalTimeframe;
+                    return 100*(this.totalTimeframe - this.timeprogress)/this.totalTimeframe;
                 };
 
                 this.getType = () => {
+                    if (this.totalTimeframe < 0) {
+                        return 'success'
+                    }
+                    
                     if (this.getValue() < 25) {
                         return 'danger';
                     } else if (this.getValue() < 50) {
                         return 'warning';
                     } else return 'success';
                 };
+                
+                this.getTimeValue = () => {
+                    if (this.totalTimeframe < 0) {
+                        return this.timeprogress;
+                    }
+                    return this.timeframe;
+                }
 
                 this.$onInit = () => {
 
@@ -70,7 +82,7 @@
             template: [
                 '<div class="exam-timeframe" ng-if="$ctrl.totalTimeframe">',
                 '   <div class="animate">',
-                '         <uib-progressbar class="progress-striped active" value="$ctrl.getValue()" type="{{$ctrl.getType()}}"><span class="text-danger">{{$ctrl.timeframe|timeframe}}</span></uib-progressbar>',
+                '         <uib-progressbar class="progress-striped active" value="$ctrl.getValue()" type="{{$ctrl.getType()}}"><span class="text-danger">{{$ctrl.getTimeValue()|timeframe}}</span></uib-progressbar>',
                 '   </div>',
                 '</div>'
             ].join('')

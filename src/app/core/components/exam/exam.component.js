@@ -12,7 +12,7 @@
         bindings: {
             config: '<'
         },
-        template: '<div class="panel question-area col-xs-12"\n                            ng-class="{\'solution\':$ctrl.isSolution}"\n                            ng-show="$ctrl.questionInDisplay">\n                        <div class="panel-heading" ng-if="$ctrl.config.predefinedExamDisplayName"><h3>{{::$ctrl.config.predefinedExamDisplayName}}</h3></div>\n                           <div class="panel-body">\n                               <exam-question question="$ctrl.questionInDisplay"></exam-question>\n                           </div>\n                       </div>\n                       <exam-remote practice-id="$ctrl.config.practiceID" remote-map="$ctrl.questions" is-solution="$ctrl.isSolution" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()" on-return="$ctrl.return()"></exam-remote>\n                       <exam-timeframe timeframe="$ctrl.timeframe"></exam-timeframe>',
+        template: '<div class="panel question-area col-xs-12"\n                            ng-class="{\'solution\':$ctrl.isSolution}"\n                            ng-show="$ctrl.questionInDisplay">\n                        <div class="panel-heading" ng-if="$ctrl.config.predefinedExamDisplayName"><h3>{{::$ctrl.config.predefinedExamDisplayName}}</h3></div>\n                           <div class="panel-body">\n                               <exam-question question="$ctrl.questionInDisplay"></exam-question>\n                           </div>\n                       </div>\n                       <exam-remote practice-id="$ctrl.config.practiceID" remote-map="$ctrl.questions" is-solution="$ctrl.isSolution" class="remote-component" on-switch="$ctrl.switchQuestion(question)" on-prev="$ctrl.move(-1)" on-next="$ctrl.move(1)" on-finish="$ctrl.finishExam()" on-return="$ctrl.return()"></exam-remote>\n                       <exam-timeframe timeframe="$ctrl.timeframe" timeprogress="$ctrl.timeprogress"></exam-timeframe>',
         controller: ["$rootScope", "$uibModal", "$interval", "$state", "$translate", "examService", "simulatorService", "baSidebarService", "simulator_config", function ($rootScope, $uibModal, $interval, $state, $translate, examService, simulatorService, baSidebarService, simulator_config) {
             'ngInject';
 
@@ -40,7 +40,7 @@
                     originalPracticeId: _this.config.originalPracticeId,
                     predefinedExamId: _this.config.predefinedExamId || 0,
                     totalTimeSecs: _this.totalTimeFrame,
-                    elapsedTimeSecs: _this.totalTimeFrame - _this.timeframe,
+                    elapsedTimeSecs: _this.timeprogress, //this.totalTimeFrame - this.timeframe,
                     questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
                 };
 
@@ -130,6 +130,7 @@
                 _this.pingErrCounter = 0;
 
                 _this.totalTimeFrame = angular.copy(_this.timeframe);
+                _this.timeprogress = 0;
                 _this.questionInDisplay = _this.questions[0];
                 _this.questionInDisplay.active = true;
 
@@ -255,7 +256,7 @@
 
                 switch (config.timeFrame) {
                     case 'UNLIMITED':
-                        timeFrame = config.timePerQuestion * questionsLength * 10;
+                        timeFrame = -1; //config.timePerQuestion * questionsLength * 10;
                         break;
                     case 'NORMAL':
                         timeFrame = config.timePerQuestion * questionsLength;

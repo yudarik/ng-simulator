@@ -9,7 +9,8 @@
 
     angular.module('Simulator.components').component('examTimeframe', {
         bindings: {
-            timeframe: '='
+            timeframe: '=',
+            timeprogress: '='
         },
         /** @ngInject */
         controller: ["$scope", "$interval", function ($scope, $interval) {
@@ -19,20 +20,20 @@
 
             this.totalTimeframe = angular.copy(this.timeframe);
 
-            this.progress = 0;
+            this.timeprogress = 0;
 
             this.startTimer = function () {
                 timeInterval = $interval(function () {
 
-                    if (_this.progress < _this.totalTimeframe) {
-                        _this.progress++;
+                    if (_this.timeprogress < _this.totalTimeframe || _this.totalTimeframe < 0) {
+                        _this.timeprogress++;
                     }
                     if (_this.timeframe > 0) {
                         _this.timeframe--;
-                    } else {
+                    } else if (_this.totalTimeframe > 0) {
                         $scope.$root.$broadcast('timeOver', {
                             totalTimeSecs: _this.totalTimeframe,
-                            elapsedTimeSecs: _this.progress
+                            elapsedTimeSecs: _this.timeprogress
                         });
                         $interval.cancel(timeInterval);
                     }
@@ -40,15 +41,26 @@
             };
 
             this.getValue = function () {
-                return 100 * (_this.totalTimeframe - _this.progress) / _this.totalTimeframe;
+                return 100 * (_this.totalTimeframe - _this.timeprogress) / _this.totalTimeframe;
             };
 
             this.getType = function () {
+                if (_this.totalTimeframe < 0) {
+                    return 'success';
+                }
+
                 if (_this.getValue() < 25) {
                     return 'danger';
                 } else if (_this.getValue() < 50) {
                     return 'warning';
                 } else return 'success';
+            };
+
+            this.getTimeValue = function () {
+                if (_this.totalTimeframe < 0) {
+                    return _this.timeprogress;
+                }
+                return _this.timeframe;
             };
 
             this.$onInit = function () {
@@ -70,6 +82,6 @@
                 _this.$onInit();
             });
         }],
-        template: ['<div class="exam-timeframe" ng-if="$ctrl.totalTimeframe">', '   <div class="animate">', '         <uib-progressbar class="progress-striped active" value="$ctrl.getValue()" type="{{$ctrl.getType()}}"><span class="text-danger">{{$ctrl.timeframe|timeframe}}</span></uib-progressbar>', '   </div>', '</div>'].join('')
+        template: ['<div class="exam-timeframe" ng-if="$ctrl.totalTimeframe">', '   <div class="animate">', '         <uib-progressbar class="progress-striped active" value="$ctrl.getValue()" type="{{$ctrl.getType()}}"><span class="text-danger">{{$ctrl.getTimeValue()|timeframe}}</span></uib-progressbar>', '   </div>', '</div>'].join('')
     });
 })();
