@@ -44,9 +44,10 @@
                     questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
                 };
 
-                _this.keepAlive('cancel');
-
-                return examService.submitExam(practiseResult).catch(function (err) {
+                return examService.submitExam(practiseResult).then(function () {
+                    _this.keepAlive('cancel');
+                    _this.deregisterKeyDown();
+                }).catch(function (err) {
                     if (err.status && err.status === -1) {
                         _this.displayLoginForm().then(function (res) {
                             submitExam();
@@ -82,6 +83,10 @@
                         return;
                 }
                 event.preventDefault();
+            };
+
+            this.deregisterKeyDown = function () {
+                $(document).off('keydown', keydownEventHandler);
             };
 
             this.init = function () {
@@ -134,7 +139,10 @@
                 $scope.$on('timeOver', _this.finishExam);
                 $scope.$on('$destroy', function () {
                     _this.keepAlive('cancel');
-                    $(document).off('keydown', keydownEventHandler);
+                    _this.deregisterKeyDown();
+                });
+                $scope.$on('cancel-practice', function () {
+                    return _this.deregisterKeyDown();
                 });
 
                 _this.keepAlive();
