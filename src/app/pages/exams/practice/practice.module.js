@@ -14,7 +14,12 @@
             var onRouteChangeOff = $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
                 //console.log(fromState.name + ' > '+ toState.name);
 
+                if (fromState.name === 'exams.practice' && toState.name === 'signin') {
+                    return event.preventDefault();
+                }
+
                 if (fromState.name === 'exams.practice' && toState.name !== 'exams.practice-summary' && !options.emergencyExit) {
+
                     event.preventDefault();
 
                     redirectModal().then(function () {
@@ -23,6 +28,7 @@
                         $state.transitionTo(toState, toParams);
                     }, function () {
                         //dismiss
+                        $rootScope.$broadcast('resume-keepAlive');
                     });
                 } else if (fromState.name === 'exams.practice' && toState.name === 'exams.practice-summary') {
                     onRouteChangeOff();
