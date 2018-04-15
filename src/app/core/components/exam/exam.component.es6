@@ -150,6 +150,7 @@
                         this.deregisterKeyDown();
                     });
                     $scope.$on('cancel-practice', () => this.deregisterKeyDown());
+                    $scope.$on('resume-keepAlive', () => this.keepAlive());
 
                     this.keepAlive();
                 };
@@ -172,6 +173,7 @@
                                 if (this.pingErrCounter > 3 && $state.current.name !== 'signin') {
                                     $interval.cancel(ping);
                                     $scope.$root.$broadcast('pause-exam-timer');
+                                    this.deregisterKeyDown();
                                     this.displayLoginForm().then((res) => {
                                         this.resumeExam();
                                         this.pingErrCounter = 0;
@@ -309,6 +311,7 @@
 
                 this.resumeExam = () => {
                     $scope.$root.$broadcast('resume-exam-timer');
+                    $(document).keydown(keydownEventHandler);
                     this.keepAlive();
                 };
 

@@ -68,6 +68,7 @@ function getSimulatorBaseUrl() {
 
             RestangularProvider.setErrorInterceptor(
                 (response) => {
+
                     switch(response.status) {
                         case 401:
                             window.location = '#/signin';
