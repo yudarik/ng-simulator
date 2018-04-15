@@ -20,6 +20,7 @@
     "INITIAL_PROFILE_SETUP_TITLE": "Update Profile",
     "ERROR": {
       "INVALID.CREDENTIALS": "Incorrect user name and/or password",
+      "INVALID.ROLE": "Role does not match requirements",
       "ACCOUNT.EXPIRED": "The account is expired. Please contact the office for more details.",
       "PASSWORD_VALIDATION_FAILED": "Password is incorrect",
       "EMAIL": "Invalid username (email)",
