@@ -158,6 +158,8 @@
                     return $interval.cancel(ping);
                 }
 
+                if (ping && _.get(ping, '$$state.value') !== 'canceled') return;
+
                 ping = $interval(function () {
                     simulatorService.ping().then(function () {
                         _this.pingErrCounter = 0;
