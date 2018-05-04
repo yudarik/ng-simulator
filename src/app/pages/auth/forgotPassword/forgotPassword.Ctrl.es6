@@ -9,9 +9,12 @@
     angular.module('Simulator.pages.auth')
         .controller('forgotController', function($scope, $translate, simulator_config, userAuthService){
 
+            this.$onInit = () => {
+                this.displayLoginBtn = false;
             this.simulator_config = simulator_config;
 
             this.user = {};
+            }
 
             this.submit = ()=>{
                 this.formChanged = false;
@@ -19,6 +22,7 @@
                 userAuthService.resetPassword({emailAddress: this.user.email})
                     .then((response)=>{
                         if (response || response.status === 'success') {
+                            this.displayLoginBtn = !this.displayLoginBtn;
                             this.message = response.description;//$translate.instant('AUTH.PASSWORD_RESET_EMAIL_SENT');
                         }
                     })
