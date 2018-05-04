@@ -13,7 +13,40 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
 
+  <script>
+      window['_fs_debug'] = false;
+      window['_fs_host'] = 'fullstory.com';
+      window['_fs_org'] = 'BMEM4';
+      window['_fs_namespace'] = 'FS';
+      (function(m,n,e,t,l,o,g,y){
+          if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
+          g=m[e]=function(a,b){g.q?g.q.push([a,b]):g._api(a,b);};g.q=[];
+          o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
+          y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
+          g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){g(l,v)};
+          y="rec";g.shutdown=function(i,v){g(y,!1)};g.restart=function(i,v){g(y,!0)};
+          y="consent";g[y]=function(a){g(y,!arguments.length||a)};
+          g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
+          g.clearUserCookie=function(){};
+      })(window,document,window['_fs_namespace'],'script','user');
 
+      window.onload = function() {
+          if (/MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent)) {
+              //This is internet explorer 10
+              //This is internet explorer 9 or 11
+              var h1 = document.createElement("h1");
+              var h2 = document.createElement("h1");
+              h1.setAttribute("style", "color: white; vertical-align: middle; text-align: center;direction: rtl;");
+              h2.setAttribute("style", "color: white; vertical-align: middle; text-align: center;direction: ltr;");
+              var t1 = document.createTextNode('על מנת להשתמש בסימולטור יש לגלוש בדפדפן גוגל כרום, ספארי, פיירפוקס או מיקרוסופט אדג\'');
+              var t2 = document.createTextNode('To use the Simulator, please use Google Chrome, Safari, Mozilla Firefox or Microsoft Edge');
+              h1.appendChild(t1);
+              h2.appendChild(t2);
+              document.body.appendChild(h1);
+              document.body.appendChild(h2);
+          }
+      }
+  </script>
   <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
   <!-- bower:css -->
   <!-- run `gulp inject` to automatically populate bower styles dependencies -->
