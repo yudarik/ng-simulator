@@ -3,7 +3,7 @@
  */
 (function(){
     angular.module('Simulator.pages.auth')
-        .factory('userAuthService', function($rootScope, Restangular, $q, $state){
+        .factory('userAuthService', function($rootScope, Restangular, $q){
 
             var auth = Restangular.all('/auth');
 
@@ -35,7 +35,8 @@
 
                     Restangular.setDefaultHttpFields({'withCredentials': true});
 
-                    getUserPromise = new Promise((resolve, reject) => {
+                    getUserPromise = $q((resolve, reject) => {
+
                         auth.customGET('').then(function (user) {
                             if (!resetPassword && !user.tempPassword) {
                                 $rootScope.currentUser = user;
@@ -113,7 +114,7 @@
                 if (getUserQuotaInProgress) {
                     return $q.when(getUserQuota);
                 }
-                getUserQuota = new Promise((resolve, reject) => {
+                getUserQuota = $q((resolve, reject) => {
                     return getService().then(srv => {
                         return srv.get('quota');
                     })
