@@ -117,11 +117,26 @@
                 getUserQuota = $q((resolve, reject) => {
                     return getService().then(srv => {
                         return srv.get('quota');
-                    })
-                        .then(quota => {
+                        }
+                    ).then(quota => {
                             userQuota = quota;
                             getUserQuotaInProgress = false;
 
+                        if (userQuota.totalNewQuestionsQuota === 10000) {
+                            //trick to find out if user is Candidate
+                            FS.setUserVars({
+                                "demoPracticesPerformed_int": userQuota.generalPracticesPerformed
+                            });
+                        } else {
+                            //user is Customer
+                            FS.setUserVars({
+                                "generalPracticesPerformed_int": userQuota.generalPracticesPerformed,
+                                "examsPerformed_int": userQuota.examsPerformed,
+                                "suggestedPracticesPerformed_int": userQuota.suggestedPracticesPerformed,
+                                "predefinedExamsPerformed_int": userQuota.predefinedExamsPerformed,
+                                "leftNewQuestionsQuota_int": userQuota.totalNewQuestionsQuota
+                            });
+                        }
                             resolve(quota);
                         })
                         .catch(err => {

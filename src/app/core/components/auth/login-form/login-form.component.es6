@@ -68,6 +68,28 @@
                             } else if (user.role === "Customer" || user.role === "Candidate") {
                                 $state.go(simulator_config.defaultState);
                             }
+                            if (user) {
+                                //update fullstory extra user details
+                                let displayName = user.firstName + ' ' + user.lastName;
+                                let vars;
+                                if (displayName.trim().length === 0) {
+                                    vars = {
+                                        //system fields
+                                        email: user.username,
+                                        //custom fields
+                                        userMode_str: user.role,
+                                    }
+                                } else {
+                                    vars = {
+                                        //system fields
+                                        email: user.username,
+                                        displayName: displayName,
+                                        //custom fields
+                                        userMode_str: user.role,
+                                    }
+                                }
+                                FS.identify(user.role + '_' + user.username, vars);
+                            }
                         }).catch((err)=>{
                             switch(err.status) {
                                 case 401:
