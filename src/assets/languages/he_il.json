@@ -3,7 +3,7 @@
   "AUTH": {
     "SIMULATOR_SIGNIN": "כניסה לסימולטור",
     "SIMULATOR_REGISTER": "הרשמה לסימולטור",
-    "NEW_ACCOUNT_REGISTER": "לקוח חדש? הירשם",
+    "NEW_ACCOUNT_REGISTER": "לקוח חדש? ← הירשם",
     "EXISTING_USER": "משתמש רשום? התחבר",
     "EMAIL": "שם משתמש (דוא'ל)",
     "PASSWORD": "סיסמא",

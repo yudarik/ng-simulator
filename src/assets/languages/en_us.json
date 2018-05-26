@@ -3,7 +3,7 @@
   "AUTH": {
     "SIMULATOR_SIGNIN": "Login",
     "SIMULATOR_REGISTER": "Registration",
-    "NEW_ACCOUNT_REGISTER": "New customer? Register",
+    "NEW_ACCOUNT_REGISTER": "New customer? → Register",
     "EXISTING_USER": "Existing customer? Login",
     "EMAIL": "user name (email)",
     "PASSWORD": "Password",
