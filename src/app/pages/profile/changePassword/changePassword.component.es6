@@ -46,8 +46,7 @@
                                     if (err.data) {
                                         this.alert = {
                                             type: 'danger',
-                                            msg: (err.data.description === "password validation failed")?
-                                                $translate.instant('AUTH.ERROR.PASSWORD_VALIDATION_FAILED') : err.data.description
+                                            msg: $translate.instant(err.data.description)
                                         };
                                     }
                                 })
