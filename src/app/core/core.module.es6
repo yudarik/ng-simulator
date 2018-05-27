@@ -7,7 +7,7 @@ function getSimulatorBaseUrl() {
     if (window.location.hostname.indexOf('localhost') === -1) {
         return 'rest';
     } else {
-        return 'http://nadlanline.dnsalias.com:8080/NadlanExams/rest';
+        return 'https://simulator-edu.com/NadlanExams/rest';
         //return 'http://nadlanline.dnsalias.com:8080/BrokerExams/rest';
         //return 'http://nadlanline.dnsalias.com:8080/BrokerExamsOnlyDocs/rest';
         //return 'http://nadlanline.dnsalias.com:8080/EnglishSimulator/rest';
@@ -68,8 +68,6 @@ function getSimulatorBaseUrl() {
 
             RestangularProvider.setErrorInterceptor(
                 (response) => {
-
-                    console.log('Error from API: '+JSON.stringify(response));
 
                     switch(response.status) {
                         case 401:

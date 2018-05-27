@@ -17,19 +17,25 @@
                 parent: 'auth',
                 templateUrl: 'app/pages/stats/stats.html',
                 /** @ngInject */
-                controller: function(baSidebarService, userType) {
+                controller: function (baSidebarService, user) {
 
                     if (baSidebarService.isMenuCollapsed()) {
                         baSidebarService.toggleMenuCollapsed();
                     }
 
-                    this.isCandidate = (userType === "Candidate");
-                    this.userType = userType;
+                    this.isCandidate = (user.role === "Candidate");
+                    this.userType = user.role;
+                    if (!this.isCandidate) {
+                        //reporting post credit mode is only interesting in the case of customer
+                        FS.setUserVars({
+                            "postCreditModeActive_bool": user.postCreditModeNow,
+                        });
+                    }
                 },
                 controllerAs: 'dashboard',
                 resolve: {
                     userType: function (userAuthService) {
-                        return userAuthService.getUserType();
+                        return userAuthService.getUser();
                     }
                 },
                 title: 'STATS.DASHBOARD.TITLE',
