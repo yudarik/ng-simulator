@@ -7,9 +7,13 @@
 (function () {
     'use strict';
 
-    practiceSummaryCtrl.$inject = ["summary", "simulator_config", "userType"];
-    function practiceSummaryCtrl(summary, simulator_config, userType) {
+    practiceSummaryCtrl.$inject = ["$state", "summary", "simulator_config", "userType"];
+    function practiceSummaryCtrl($state, summary, simulator_config, userType) {
         var _this = this;
+
+        if (!summary) {
+            return $state.go(simulator_config.defaultState);
+        }
 
         this.simulator_config = simulator_config;
         this.passingGrade = this.simulator_config.passingGrade;
