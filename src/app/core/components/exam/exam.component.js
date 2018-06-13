@@ -49,7 +49,7 @@
                     _this.deregisterKeyDown();
                 }).catch(function (err) {
                     if (err.status && err.status === -1) {
-                        _this.displayLoginForm(err).then(function (res) {
+                        _this.displayLoginForm().then(function (res) {
                             submitExam();
                         });
                     }
@@ -160,27 +160,24 @@
 
                 if (ping && _.get(ping, '$$state.value') !== 'canceled') return;
 
-                ping = $interval(_this.pingFunction, 15000);
-            };
-            this.pingFunction = function () {
-                simulatorService.ping().then(function () {
-                    _this.pingErrCounter = 0;
-                }).catch(function (err) {
+                ping = $interval(function () {
+                    simulatorService.ping().then(function () {
+                        _this.pingErrCounter = 0;
+                    }).catch(function (err) {
 
-                    console.log('Ping with API have been failed.');
+                        _this.pingErrCounter++;
 
-                    _this.pingErrCounter++;
-
-                    if (_this.pingErrCounter > 3 && $state.current.name !== 'signin') {
-                        $interval.cancel(ping);
-                        $scope.$root.$broadcast('pause-exam-timer');
-                        _this.deregisterKeyDown();
-                        _this.displayLoginForm(err).then(function (res) {
-                            _this.resumeExam();
-                            _this.pingErrCounter = 0;
-                        });
-                    }
-                });
+                        if (_this.pingErrCounter > 3 && $state.current.name !== 'signin') {
+                            $interval.cancel(ping);
+                            $scope.$root.$broadcast('pause-exam-timer');
+                            _this.deregisterKeyDown();
+                            _this.displayLoginForm().then(function (res) {
+                                _this.resumeExam();
+                                _this.pingErrCounter = 0;
+                            });
+                        }
+                    });
+                }, 15000);
             };
 
             this.switchQuestion = function (question) {
@@ -280,9 +277,7 @@
                 return timeFrame;
             }
 
-            this.displayLoginForm = function (err) {
-                console.log('Some error aquired, displaying login form :' + JSON.stringify(err));
-
+            this.displayLoginForm = function () {
                 var loginModal = $uibModal.open({
                     animation: true,
                     backdrop: 'static',
