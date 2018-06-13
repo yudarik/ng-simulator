@@ -36,6 +36,7 @@
                                 this.upcomingExamEventDates = simulator_config.upcomingExamEventDates.map((date)=>{
                                     return date;//moment(date).format('DD/MM/YYYY').toString();
                                 });
+                                this.user.examEventDate = this.upcomingExamEventDates[0];
                                 this.examEventOption = 'select';
                             } else {
                                 this.examEventOption = 'other';

@@ -5,7 +5,11 @@
 (function () {
     'use strict';
 
-    function practiceSummaryCtrl(summary, simulator_config, userType) {
+    function practiceSummaryCtrl($state, summary, simulator_config, userType) {
+
+        if (!summary) {
+            return $state.go(simulator_config.defaultState);
+        }
 
         this.simulator_config = simulator_config;
         this.passingGrade = this.simulator_config.passingGrade;

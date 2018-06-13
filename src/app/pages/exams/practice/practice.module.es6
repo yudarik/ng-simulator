@@ -7,7 +7,18 @@
 
     angular.module('Simulator.pages.exams.practice', ['Simulator.components'])
         .config(routeConfig)
-        .run(($rootScope, $uibModal, $state)=>{
+        .factory('beforeUnload', function ($rootScope, $window) {
+
+            // Events are broadcast outside the Scope Lifecycle
+
+            $window.onbeforeunload = function (e) {
+                e.preventDefault();
+                return "Are you sure?";
+            };
+
+            return {};
+        })
+        .run(($rootScope, $uibModal, $state, beforeUnload)=>{
 
             let registerStateChangeListener = () => {
                 var onRouteChangeOff = $rootScope.$on('$stateChangeStart',
@@ -26,6 +37,7 @@
                             event.preventDefault();
 
                             redirectModal().then(()=>{
+                                //deregister redirection prevent
                                 onRouteChangeOff();
                                 $rootScope.$broadcast('cancel-practice');
                                 $state.transitionTo(toState, toParams);
@@ -34,6 +46,7 @@
                                 $rootScope.$broadcast('resume-keepAlive');
                             })
                         } else if (fromState.name === 'exams.practice' && toState.name === 'exams.practice-summary') {
+                            //deregister redirection prevent
                             onRouteChangeOff();
                         }
                     });
@@ -89,7 +102,7 @@
                 },
                 template: '<exam config="$resolve.examConfig" tabindex="1"></exam>',
                 resolve: {
-                    examConfig: function($state, $stateParams, $q, examService) {
+                    examConfig: function($state, $stateParams, $q, $window, examService, simulator_config) {
 
                         return examService.getExam($stateParams.practiceType, $stateParams.examParams)
                             .then(res => {
@@ -98,12 +111,17 @@
                                     $state.get('exams.practice').title = 'EXAMS.TYPES.'+res.practiceType;
                                 }
 
+                                $window.localStorage.setItem('examConfig', JSON.stringify(res));
+
                                 return res;
                             })
                             .catch(err => {
                                 if (_.get(err.data, 'description')) {
-
-                                    //alert(err.data.description);
+                                    try {
+                                        return JSON.parse($window.localStorage.getItem('examConfig'));
+                                    } catch (err) {
+                                        return $state.go(simulator_config.defaultState);
+                                    }
                                 }
                                 return $q.reject(err);
                             })
