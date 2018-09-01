@@ -134,7 +134,7 @@
                                 "examsPerformed_int": userQuota.examsPerformed,
                                 "suggestedPracticesPerformed_int": userQuota.suggestedPracticesPerformed,
                                 "predefinedExamsPerformed_int": userQuota.predefinedExamsPerformed,
-                                "leftNewQuestionsQuota_int": userQuota.totalNewQuestionsQuota
+                                "leftNewQuestionsQuota_int": userQuota.leftNewQuestionsQuota
                             });
                         }
                             resolve(quota);
