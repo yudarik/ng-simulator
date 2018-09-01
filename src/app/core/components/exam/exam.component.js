@@ -30,9 +30,12 @@
             var submitExam = function submitExam() {
 
                 var questionIDtoChosenAnswerMapping = {};
+                var orderedQuestionsArray = [];
 
+                var indexCount = 0;
                 _this.questions.forEach(function (question) {
                     questionIDtoChosenAnswerMapping[question.questionID] = getUserAnswer(question);
+                    orderedQuestionsArray[indexCount++] = question.questionID;
                 });
 
                 var practiseResult = {
@@ -41,7 +44,8 @@
                     predefinedExamId: _this.config.predefinedExamId || 0,
                     totalTimeSecs: _this.totalTimeFrame,
                     elapsedTimeSecs: _this.timeprogress, //this.totalTimeFrame - this.timeframe,
-                    questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping
+                    questionIDtoChosenAnswerMapping: questionIDtoChosenAnswerMapping,
+                    orderedQuestions: orderedQuestionsArray
                 };
 
                 return examService.submitExam(practiseResult).then(function () {
