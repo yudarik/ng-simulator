@@ -105,6 +105,8 @@
     "BUTTONS": {
       "CONTINUE": "המשך",
       "FINISH": "סיים",
+      "NEXT" : "שאלה הבאה - חץ ימינה במקלדת",
+      "PREVIOUS" : "שאלה קודמת - חץ שמאלה במקלדת",
       "RETURN": "יציאה",
       "DOWNLOAD": "שמור תרגול",
       "START": "התחל תרגול",
@@ -113,7 +115,8 @@
     },
     "PRACTICE": {
       "QUESTION_LABEL": "שאלה",
-      "ANSWERS_LABEL": "תשובות"
+      "ANSWERS_LABEL": "תשובות",
+      "ANSWER_CHECKBOX": "(ניתן גם לסמן בעזרת הקשת מס׳ התשובה במקדלת)"
     },
     "TOOLTIPS": {
       "POSTCREDIT_DISABLED": "תרגול זה אינו זמין כל עוד יש בחשבונך שאלות חדשות",

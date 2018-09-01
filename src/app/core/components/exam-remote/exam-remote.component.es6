@@ -30,9 +30,9 @@
                                 </div>
                                 <div class="arrows">
                                     <ul class="nav">
-                                        <li><button id="remote-prev" class="btn btn-default pull-left" ng-click="$ctrl.onPrev()"><i class="fa fa-arrow-left" aria-invisible="true"></i></button></li>
+                                        <li><button id="remote-prev" class="btn btn-default pull-left" ng-click="$ctrl.onPrev()" tooltip="{{::'EXAMS.BUTTONS.PREVIOUS'|translate}}"><i class="fa fa-arrow-left" aria-invisible="true"></i></button></li>
                                         <li><button class="btn btn-warning invisible"><i class="fa fa-arrow-right" aria-invisible="true"></i></button></li>
-                                        <li><button id="remote-next" class="btn btn-default pull-right" ng-click="$ctrl.onNext()"><i class="fa fa-arrow-right" aria-invisible="true"></i></button></li>
+                                        <li><button id="remote-next" class="btn btn-default pull-right" ng-click="$ctrl.onNext()" tooltip="{{::'EXAMS.BUTTONS.NEXT'|translate}}"><i class="fa fa-arrow-right" aria-invisible="true"></i></button></li>
                                     </ul>
                                     <div class="finish">
                                         <a class="btn btn-success col-md-12 pull-left xs-hiden export" ng-if="$ctrl.showSavePracticeButton()" target="_blank"

@@ -105,6 +105,8 @@
     "BUTTONS": {
       "CONTINUE": "Continue",
       "FINISH": "Finish",
+      "NEXT" : "Next Question - keypad right arrow is also supported",
+      "PREVIOUS" : "Previous Question - keypad left arrow is also supported",
       "RETURN": "Exit",
       "DOWNLOAD": "Save Practice",
       "START": "Begin Practice",
@@ -113,8 +115,9 @@
     },
     "PRACTICE": {
       "QUESTION_LABEL": "Question",
-      "ANSWERS_LABEL": "Answers"
-},
+      "ANSWERS_LABEL": "Answers",
+      "ANSWER_CHECKBOX": "(You can also check directly by typing the answer number on the keyboard)"
+    },
     "TOOLTIPS": {
       "POSTCREDIT_DISABLED": "This practice type is unavailable since you still have new questions left in your quota",
       "NOT_AVAILABLE_IN_DEMO": "Not available in demo mode",
