@@ -1,4 +1,4 @@
-(function(){
+(function () {
 
     angular.module('Simulator.components.auth')
         .component('loginForm', {
@@ -6,7 +6,7 @@
             template: `<div class="auth-block panel-body">
                         <h1 ng-bind="::'AUTH.SIMULATOR_SIGNIN'|translate"></h1>
                         <a ui-sref="signup" class="auth-link" ng-bind="::'AUTH.NEW_ACCOUNT_REGISTER'|translate"></a>
-                    
+                                            
                         <form name="loginform" class="form-horizontal" ng-model="$ctrl.user" ng-submit="$ctrl.submit()" novalidate>
                           <div class="form-group">
                             <label class="col-sm-4 control-label" ng-bind="::'AUTH.EMAIL'|translate"></label>
@@ -41,20 +41,20 @@
                     
                         </form>
                       </div>`,
-            controller: function($scope, $translate, simulator_config, userAuthService, $state, $stateParams, $timeout) {
+            controller: function ($scope, $translate, simulator_config, userAuthService, $state, $stateParams, $timeout) {
                 'ngInject';
 
                 this.simulator_config = simulator_config;
 
                 this.user = {};
 
-                this.submit = ()=>{
+                this.submit = () => {
 
                     this.formChanged = false;
 
                     userAuthService.signin(this.user)
                         .then(userAuthService.getPostLogin)
-                        .then((user)=>{
+                        .then((user) => {
 
                             //return $state.go(simulator_config.defaultState);
                             //user.defaultProfile = true;
@@ -70,7 +70,13 @@
                             }
                             if (user) {
                                 //update fullstory extra user details
-                                let displayName = user.firstName + ' ' + user.lastName;
+                                let displayName;
+                                if (user.firstName != null &&
+                                    user.lastName != null) {
+                                    displayName = user.firstName + ' ' + user.lastName;
+                                } else {
+                                    displayName = '';
+                                }
                                 let vars;
                                 if (displayName.trim().length === 0) {
                                     vars = {
@@ -88,32 +94,32 @@
                                         userMode_str: user.role,
                                     }
                                 }
-                                FS.identify(user.role + '_' + user.username, vars);
+                                FS.identify(user.username, vars);
                             }
-                        }).catch((err)=>{
-                            switch(err.status) {
-                                case 401:
-                                case 403:
-                                    this.message = $translate.instant('AUTH.ERROR.'+_.get(err, 'data.errorMessage').toUpperCase());
-                                    break;
-                                case -1:
-                                    this.message = $translate.instant('AUTH.ERROR.NO_CONNECTION');
-                                    break;
-                                default:
-                                    this.message = _.get(err, 'data.errorMessage');
-                            }
-                        });
+                        }).catch((err) => {
+                        switch (err.status) {
+                            case 401:
+                            case 403:
+                                this.message = $translate.instant('AUTH.ERROR.' + _.get(err, 'data.errorMessage').toUpperCase());
+                                break;
+                            case -1:
+                                this.message = $translate.instant('AUTH.ERROR.NO_CONNECTION');
+                                break;
+                            default:
+                                this.message = _.get(err, 'data.errorMessage');
+                        }
+                    });
                 };
 
                 if ($stateParams.from && $stateParams.from === 'signout') {
                     $timeout(() => {
                         window.location.reload(true);
-                    },100);
+                    }, 100);
                 }
 
                 $scope.$watchCollection('$ctrl.user', (oldVal, newVal) => {
                     if (oldVal === newVal) {
-                        return;
+                        //do nothing
                     } else {
                         this.formChanged = true;
                     }
