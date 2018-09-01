@@ -82,22 +82,6 @@
                             "title": translate.repeatedExam
                         },
                         {
-
-                            "fixedColumnWidth": -1,
-                            "id": "Predefined Exam [for legend]",
-                            "fillColors": chartColors.PREDEFINED_EXAM,
-                            "legendColor": chartColors.PREDEFINED_EXAM,
-                            "lineColor": chartColors.PREDEFINED_EXAM,
-                            "lineThickness": 0,
-                            "title": translate.predefinedExam
-                        },
-                        /*{
-                         "fillColors": chartColors.REPEATED_PREDEFINED_EXAM,
-                         "id": "Repeated Predefined Exam [for legend]",
-                         "legendColor": chartColors.REPEATED_PREDEFINED_EXAM,
-                         "title": translate.repeatedPredefinedExam
-                         },*/
-                        {
                             "fillColors": chartColors.POST_CREDIT_PRACTICE,
                             "legendColor": chartColors.POST_CREDIT_PRACTICE,
                             "id": "Post Credit Practice [for legend]",
@@ -123,7 +107,24 @@
                             "fillColors": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
                             "lineColor": chartColors.REPEATED_WEAK_AREAS_PRACTICE,
                             "title": translate.repeatedWeakAreasPractice
+                        },
+                        {  //THIS IS IMPORTANT THAT THIS WOULD BE THE LAST LEGEND AS IT GETS REMOVED IN CASE THAT
+                            //PREDEFINED EXAMS IS NOT ENABLED FOR THIS SIMULATOR... LOOK FOR:
+                            //simulatorService.isStateHidden('exams.predefined')
+                            "fixedColumnWidth": -1,
+                            "id": "Predefined Exam [for legend]",
+                            "fillColors": chartColors.PREDEFINED_EXAM,
+                            "legendColor": chartColors.PREDEFINED_EXAM,
+                            "lineColor": chartColors.PREDEFINED_EXAM,
+                            "lineThickness": 0,
+                            "title": translate.predefinedExam
                         }
+                        /*{
+                         "fillColors": chartColors.REPEATED_PREDEFINED_EXAM,
+                         "id": "Repeated Predefined Exam [for legend]",
+                         "legendColor": chartColors.REPEATED_PREDEFINED_EXAM,
+                         "title": translate.repeatedPredefinedExam
+                         },*/
                     ],
                     Candidate: [
                         {
