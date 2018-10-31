@@ -10,10 +10,10 @@
                 manuals: '=',
                 user: '<'
             },
-            controller: function manualsCtrl ($scope, $translate, angularGridInstance) {
+            controller: function manualsCtrl($scope, $translate, angularGridInstance) {
                 'ngInject';
 
-                this.list = this.manuals.list
+                this.list = this.manuals.list;
 
                 this.filter = {
                     pattern: undefined,
@@ -29,6 +29,13 @@
                     type: $translate.instant('MANUALS.TABLE_HEADS.TYPE')
                 };
 
+                //sort by order parameter
+                this.sortByOrderIndex = function () {
+                    this.list.sort(function (a, b) {
+                        return a.order - b.order;
+                    });
+                };
+
                 this.getLinkClass = (docType) => {
                     if (!docType) return;
 
@@ -36,7 +43,7 @@
 
                     switch (docType) {
                         case 'AUDIO':
-                            type = 'fa-volume-up'
+                            type = 'fa-volume-up';
                             break;
                         case 'VIDEO':
                             type = 'fa-play';
@@ -53,8 +60,11 @@
                 };
 
                 this.gridRefresh = () => {
+                    this.sortByOrderIndex();
                     angularGridInstance.gallery.refresh();
                 };
+
+                this.sortByOrderIndex();
             },
             template: `<div class="row manuals-page">
                             <div class="col-xs-12">
@@ -80,9 +90,9 @@
                             </div>
                         </div>
                         <hr>
-                        <ul class="dynamic-grid" angular-grid="$ctrl.list" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
+                        <ul class="dynamic-grid" angular-grid="$ctrl.list" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" direction="rtol">
 
-                            <li class="grid" data-ng-repeat="manual in $ctrl.list | filter: $ctrl.filter.pattern | filter: {docType: ($ctrl.filter.docType !== null)? $ctrl.filter.docType : '', available: ($ctrl.filter.availability !== null)? $ctrl.filter.availability : ''} | orderBy: 'order'"> 
+                            <li class="grid" data-ng-repeat="manual in $ctrl.list | filter: $ctrl.filter.pattern | filter: {docType: ($ctrl.filter.docType !== null)? $ctrl.filter.docType : '', available: ($ctrl.filter.availability !== null)? $ctrl.filter.availability : ''}"> 
                                 <manual-item class="" item="manual" products-id="$ctrl.manuals.productsById" user="$ctrl.user"></manual-item>                         
                             </li>                            
                         </ul>`,
