@@ -82,7 +82,7 @@
                     return $translate.instant('MANUALS.BUY_PACKAGE');
                 }
             },
-            template: `<div class="col-xs-12 online-manual-component">
+            template: `<div class="online-manual-component">
                             <div class="panel" ng-class="$ctrl.getPanelClass($ctrl.item.docType)">
                                 <div class="panel-heading">                                    
                                     <i class="pull-right fa {{$ctrl.getLinkClass($ctrl.item.docType)}}"></i>
@@ -96,13 +96,12 @@
                                     <div ng-if="!$ctrl.item.available">
                                         <p class="control-label"><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;<span ng-bind="::'MANUALS.AVAILABLE_ON_ORDER_OF'|translate"></span></p>
                                         <ul><li class="circle" ng-repeat="package in $ctrl.item.packagesToBuy">{{$ctrl.getPackage2BuyName(package)}}</li></ul>
-                                    </div>
-                                    
-                                    <button class="btn btn-md btn-success pull-right displayDoc" 
-                                        ng-click="$ctrl.navigate()"                                        
-                                        >{{$ctrl.getButtonLabel()}}</button>                                  
+                                    </div>                
                                 </div>
                             </div>
+                            <button class="btn btn-md btn-success pull-right displayDoc" 
+                                        ng-click="$ctrl.navigate()"                                        
+                                        >{{$ctrl.getButtonLabel()}}</button>
                           </div>`
         });
 })();

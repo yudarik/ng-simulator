@@ -10,7 +10,7 @@
                 manuals: '=',
                 user: '<'
             },
-            controller: function manualsCtrl($scope, $translate, angularGridInstance) {
+            controller: function manualsCtrl($scope, $translate) {
                 'ngInject';
 
                 this.list = this.manuals.list;
@@ -29,12 +29,6 @@
                     type: $translate.instant('MANUALS.TABLE_HEADS.TYPE')
                 };
 
-                //sort by order parameter
-                this.sortByOrderIndex = function () {
-                    this.list.sort(function (a, b) {
-                        return a.order - b.order;
-                    });
-                };
 
                 this.getLinkClass = (docType) => {
                     if (!docType) return;
@@ -60,11 +54,8 @@
                 };
 
                 this.gridRefresh = () => {
-                    this.sortByOrderIndex();
-                    angularGridInstance.gallery.refresh();
                 };
 
-                this.sortByOrderIndex();
             },
             template: `<div class="row manuals-page">
                             <div class="col-xs-12">
@@ -90,9 +81,9 @@
                             </div>
                         </div>
                         <hr>
-                        <ul class="dynamic-grid" angular-grid="$ctrl.list" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" direction="rtol">
+                        <ul class="dynamic-grid" direction="rtol">
 
-                            <li class="grid" data-ng-repeat="manual in $ctrl.list | filter: $ctrl.filter.pattern | filter: {docType: ($ctrl.filter.docType !== null)? $ctrl.filter.docType : '', available: ($ctrl.filter.availability !== null)? $ctrl.filter.availability : ''}"> 
+                            <li class="grid col-md-4 col-lg-3" data-ng-repeat="manual in $ctrl.list | filter: $ctrl.filter.pattern | filter: {docType: ($ctrl.filter.docType !== null)? $ctrl.filter.docType : '', available: ($ctrl.filter.availability !== null)? $ctrl.filter.availability : ''} | orderBy: 'order'"> 
                                 <manual-item class="" item="manual" products-id="$ctrl.manuals.productsById" user="$ctrl.user"></manual-item>                         
                             </li>                            
                         </ul>`,
