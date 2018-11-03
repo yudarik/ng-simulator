@@ -87,6 +87,10 @@
             //return `http://nadlanline.dnsalias.com:8080/BiologyExams/getQuestionImage?questionID=${id}`;
         }
 
+        function getHelpImage(id) {
+            return `getHelpImage?questionID=${id}`;
+        }
+
         return {
             listCategories,
             listPredefined,
@@ -96,7 +100,8 @@
             submitExam,
             getStats,
             getPracticeInfo,
-            getQuestionImage
+            getQuestionImage,
+            getHelpImage
         };
     });
 })();

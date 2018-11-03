@@ -29,23 +29,6 @@
           g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
           g.clearUserCookie=function(){};
       })(window,document,window['_fs_namespace'],'script','user');
-
-      window.onload = function() {
-          if (/MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent)) {
-              //This is internet explorer 10
-              //This is internet explorer 9 or 11
-              var h1 = document.createElement("h1");
-              var h2 = document.createElement("h1");
-              h1.setAttribute("style", "color: white; vertical-align: middle; text-align: center;direction: rtl;");
-              h2.setAttribute("style", "color: white; vertical-align: middle; text-align: center;direction: ltr;");
-              var t1 = document.createTextNode('על מנת להשתמש בסימולטור יש לגלוש בדפדפן גוגל כרום, ספארי, פיירפוקס או מיקרוסופט אדג\'');
-              var t2 = document.createTextNode('To use the Simulator, please use Google Chrome, Safari, Mozilla Firefox or Microsoft Edge');
-              h1.appendChild(t1);
-              h2.appendChild(t2);
-              document.body.appendChild(h1);
-              document.body.appendChild(h2);
-          }
-      }
   </script>
   <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
   <!-- bower:css -->

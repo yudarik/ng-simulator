@@ -54,7 +54,7 @@
 
                     switch (docType) {
                         case 'AUDIO':
-                            type = 'fa-volume-up'
+                            type = 'fa-volume-up';
                             break;
                         case 'VIDEO':
                             type = 'fa-play';
