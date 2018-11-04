@@ -54,7 +54,7 @@
 
                     switch (docType) {
                         case 'AUDIO':
-                            type = 'fa-volume-up'
+                            type = 'fa-volume-up';
                             break;
                         case 'VIDEO':
                             type = 'fa-play';
@@ -99,9 +99,7 @@
                                     </div>                
                                 </div>
                             </div>
-                            <button class="btn btn-md btn-success pull-right displayDoc" 
-                                        ng-click="$ctrl.navigate()"                                        
-                                        >{{$ctrl.getButtonLabel()}}</button>
+                            <button class="btn btn-md btn-success pull-right displayDoc" ng-click="$ctrl.navigate()">{{$ctrl.getButtonLabel()}}</button>
                           </div>`
         });
 })();

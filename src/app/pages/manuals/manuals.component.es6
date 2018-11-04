@@ -81,9 +81,9 @@
                             </div>
                         </div>
                         <hr>
-                        <ul class="dynamic-grid" direction="rtol">
+                        <ul class="dynamic-grid">
 
-                            <li class="grid col-md-4 col-lg-3" data-ng-repeat="manual in $ctrl.list | filter: $ctrl.filter.pattern | filter: {docType: ($ctrl.filter.docType !== null)? $ctrl.filter.docType : '', available: ($ctrl.filter.availability !== null)? $ctrl.filter.availability : ''} | orderBy: 'order'"> 
+                            <li class="grid col-md-3 col-lg-4" style="width: border-box" data-ng-repeat="manual in $ctrl.list | filter: $ctrl.filter.pattern | filter: {docType: ($ctrl.filter.docType !== null)? $ctrl.filter.docType : '', available: ($ctrl.filter.availability !== null)? $ctrl.filter.availability : ''} | orderBy: 'order'"> 
                                 <manual-item class="" item="manual" products-id="$ctrl.manuals.productsById" user="$ctrl.user"></manual-item>                         
                             </li>                            
                         </ul>`,
