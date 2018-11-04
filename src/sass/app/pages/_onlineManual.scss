@@ -1,14 +1,7 @@
 .online-manual-component {
   .panel {
-    //height: 200px;
+    height: 200px;
     position: relative;
-
-    .btn.displayDoc {
-      position: relative;
-      bottom: 0;
-      left: 0;
-      //margin: 25px;
-    }
     p {
       label {
         white-space: normal;
@@ -30,7 +23,9 @@
     .panel-body {
       position: relative;
       min-height: 90px;
-      padding:10px;
+      padding: 10px;
+      max-height: 140px;
+      overflow-x: scroll;
     }
     .panel-overlay {
       position: relative;
@@ -48,7 +43,7 @@
         font-size: 16px;
         padding: 0;
         top: 45%;
-        text-align: center;;
+        text-align: center;
       }
       ul > li {
         //color: white;
@@ -58,6 +53,11 @@
         padding: 10px 15px;
       }
     }
+  }
+  .btn.displayDoc {
+    position: absolute;
+    bottom: 30px;
+    left: 22px;
   }
 }
 .manuals-page {
@@ -95,8 +95,10 @@
       }
     }
   }
+
 }
 
-ul.angular-grid > li.angular-grid-item {
+ul.dynamic-grid > li.grid {
   list-style-type: none;
+
 }

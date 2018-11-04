@@ -4,7 +4,7 @@
 
 (function () {
     'use strict';
-    angular.module('Simulator.pages.manuals', ['angularGrid'])
+    angular.module('Simulator.pages.manuals', [])
         .config(routeConfig);
 
     function routeConfig($stateProvider) {
