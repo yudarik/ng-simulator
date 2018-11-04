@@ -69,6 +69,10 @@
                     return examService.getQuestionImage(this.question.questionID);
                 };
 
+                this.getHelpImage = () => {
+                    return examService.getHelpImage(this.question.questionID);
+                };
+
                 this.onImageLoad = (event) => {
                     this.imageLoading = false;
                 };
@@ -131,6 +135,10 @@
                                             <div class="bs-callout bs-callout-warning col-md-12" ng-if="$ctrl.question.help && $ctrl.question.help.trim() !== ''">
                                                 <h4>{{$ctrl.question.help}}</h5>
                                                 <p>{{$ctrl.question.detailedHelp}}</p>
+                                                <span class="spinner-wrapper" ng-if="$ctrl.question.hasHelpImage">
+                                                    <span ng-if="$ctrl.imageLoading" class="text-left align-left"><i class="fa fa-spinner fa-spin"  style="font-size:24px"></i></span>
+                                                    <img ng-src="{{$ctrl.getHelpImage()}}" image-on-load="$ctrl.onImageLoad($event)"/>
+                                                </span>
                                             </div>
                                        </div>
                                    </form>
