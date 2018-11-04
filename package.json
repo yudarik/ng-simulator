@@ -53,5 +53,8 @@
     "postinstall": "bower install",
     "start": "gulp serve",
     "build": "gulp serve:dist"
+  },
+  "dependencies": {
+    "node-sass": "^4.9.4"
   }
 }
